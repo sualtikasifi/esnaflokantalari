@@ -35,6 +35,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -65,6 +66,10 @@ fun HomeScreen(
     onRestaurantClick: (String) -> Unit,
     onSurpriseMe: () -> Unit,
 ) {
+    // Kaydırma sırasında her karede yeniden hesaplanmasın diye önceden ayrılır.
+    val cityRows = remember(cities) { cities.chunked(2) }
+    val filledCityCount = remember(cities) { cities.count { it.hasRestaurants } }
+
     Scaffold(
         topBar = { TopAppBar(title = { Text("Esnaf Lokantaları") }) },
     ) { padding ->
@@ -138,10 +143,10 @@ fun HomeScreen(
             }
 
             item {
-                SectionHeader("Şehirler", "${cities.count { it.hasRestaurants }} ilde lokanta kayıtlı")
+                SectionHeader("Şehirler", "$filledCityCount ilde lokanta kayıtlı")
             }
 
-            items(cities.chunked(2), key = { it.first().slug }) { rowCities ->
+            items(cityRows, key = { row -> row.first().slug }) { rowCities ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()

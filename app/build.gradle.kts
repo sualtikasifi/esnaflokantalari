@@ -17,8 +17,24 @@ android {
         resourceConfigurations += listOf("tr", "en")
     }
 
+    signingConfigs {
+        // Test amaçlı imza. Google Play'e yükleyeceğin sürüm için Android
+        // Studio'dan kendi anahtarını üretip burayı onunla değiştir —
+        // ve o anahtarı kaybetme, uygulamayı bir daha güncelleyemezsin.
+        create("testRelease") {
+            val keystore = rootProject.file("test-release.keystore")
+            if (keystore.exists()) {
+                storeFile = keystore
+                storePassword = "esnaf2026"
+                keyAlias = "esnaflokantalari"
+                keyPassword = "esnaf2026"
+            }
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig = signingConfigs.getByName("testRelease")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
