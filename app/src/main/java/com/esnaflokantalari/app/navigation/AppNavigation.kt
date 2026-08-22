@@ -1,5 +1,6 @@
 package com.esnaflokantalari.app.navigation
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -9,12 +10,17 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -27,6 +33,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.esnaflokantalari.app.data.equalsTr
 import com.esnaflokantalari.app.ui.AppViewModel
+import com.esnaflokantalari.app.ui.SurpriseEvent
 import com.esnaflokantalari.app.ui.screens.CityScreen
 import com.esnaflokantalari.app.ui.screens.CitySearchScreen
 import com.esnaflokantalari.app.ui.screens.FavoritesScreen
@@ -61,6 +68,8 @@ private val bottomTabs = listOf(
 fun AppNavigation() {
     val navController: NavHostController = rememberNavController()
     val viewModel: AppViewModel = viewModel()
+    val context = LocalContext.current
+    val snackbarHostState = remember { SnackbarHostState() }
 
     val cities by viewModel.cities.collectAsState()
     val featured by viewModel.featured.collectAsState()
@@ -68,9 +77,27 @@ fun AppNavigation() {
     val favoriteIds by viewModel.favoriteIds.collectAsState()
     val suggestions by viewModel.suggestions.collectAsState()
     val dataUpdatedAt by viewModel.dataUpdatedAt.collectAsState()
+    val photos by viewModel.photos.collectAsState()
+    val surprise by viewModel.surprise.collectAsState()
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
+
+    // "Bugün ne yesem?" sonucu: konum alınınca lokantaya git, olmazsa bilgi ver.
+    LaunchedEffect(surprise) {
+        when (val event = surprise) {
+            is SurpriseEvent.Picked -> {
+                navController.navigate(Routes.restaurant(event.restaurantId))
+                snackbarHostState.showSnackbar("${event.cityName} için seçtik: afiyet olsun!")
+                viewModel.clearSurprise()
+            }
+            is SurpriseEvent.Failed -> {
+                snackbarHostState.showSnackbar(event.message)
+                viewModel.clearSurprise()
+            }
+            else -> Unit
+        }
+    }
 
     fun goToTab(route: String) {
         navController.navigate(route) {
@@ -81,6 +108,7 @@ fun AppNavigation() {
     }
 
     Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         bottomBar = {
             val onTab = bottomTabs.any { tab ->
                 currentDestination?.hierarchy?.any { it.route == tab.route } == true
@@ -110,12 +138,11 @@ fun AppNavigation() {
                     cities = cities,
                     featured = featured,
                     dataUpdatedAt = dataUpdatedAt,
+                    photos = photos,
                     onCityClick = { navController.navigate(Routes.city(it)) },
                     onSearchClick = { navController.navigate(Routes.CITY_SEARCH) },
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
-                    onSurpriseMe = {
-                        featured.randomOrNull()?.let { navController.navigate(Routes.restaurant(it.id)) }
-                    },
+                    onSurpriseMe = { viewModel.surpriseMe() },
                 )
             }
 
@@ -130,6 +157,7 @@ fun AppNavigation() {
             composable(Routes.FAVORITES) {
                 FavoritesScreen(
                     favorites = favorites,
+                    photos = photos,
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
                     onToggleFavorite = { viewModel.toggleFavoriteById(it) },
                     onExploreClick = { goToTab(Routes.HOME) },
@@ -141,12 +169,11 @@ fun AppNavigation() {
                 NearbyScreen(
                     state = nearby,
                     favoriteIds = favoriteIds,
+                    photos = photos,
                     onToggleFavorite = { viewModel.toggleFavoriteById(it) },
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
+                    onRequestNearby = { viewModel.loadNearby() },
                     onPermissionDenied = viewModel::onLocationPermissionDenied,
-                    onLocatingStarted = viewModel::onLocatingStarted,
-                    onLocationUnavailable = viewModel::onLocationUnavailable,
-                    onLocationReady = viewModel::loadNearby,
                 )
             }
 
@@ -159,6 +186,7 @@ fun AppNavigation() {
                     cityName = cityName,
                     city = viewModel.city(cityName),
                     favoriteIds = favoriteIds,
+                    photos = photos,
                     suggestionCount = suggestions.count { it.city.equalsTr(cityName) },
                     onToggleFavorite = { viewModel.toggleFavoriteById(it) },
                     onBack = { navController.popBackStack() },
@@ -194,7 +222,18 @@ fun AppNavigation() {
                     restaurant = restaurant,
                     isFavorite = favoriteIds.contains(restaurantId),
                     dataUpdatedAt = dataUpdatedAt,
+                    localPhotoPath = photos[restaurantId],
                     onToggleFavorite = { restaurant?.let(viewModel::toggleFavorite) },
+                    onPickPhoto = { uri ->
+                        viewModel.savePhoto(restaurantId, uri) { success ->
+                            Toast.makeText(
+                                context,
+                                if (success) "Fotoğraf eklendi" else "Fotoğraf eklenemedi",
+                                Toast.LENGTH_SHORT,
+                            ).show()
+                        }
+                    },
+                    onRemovePhoto = { viewModel.removePhoto(restaurantId) },
                     onBack = { navController.popBackStack() },
                 )
             }

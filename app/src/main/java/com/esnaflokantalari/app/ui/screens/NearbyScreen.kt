@@ -1,7 +1,6 @@
 package com.esnaflokantalari.app.ui.screens
 
 import android.Manifest
-import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -9,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -34,11 +34,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -46,7 +41,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import com.esnaflokantalari.app.location.LocationHelper
 import com.esnaflokantalari.app.ui.NearbyState
 import com.esnaflokantalari.app.ui.components.RestaurantCard
@@ -58,37 +52,38 @@ import com.esnaflokantalari.app.ui.theme.TerracottaContainer
 fun NearbyScreen(
     state: NearbyState,
     favoriteIds: Set<String>,
+    photos: Map<String, String>,
     onToggleFavorite: (String) -> Unit,
     onRestaurantClick: (String) -> Unit,
+    onRequestNearby: () -> Unit,
     onPermissionDenied: () -> Unit,
-    onLocatingStarted: () -> Unit,
-    onLocationUnavailable: () -> Unit,
-    onLocationReady: (Double, Double) -> Unit,
 ) {
     val context = LocalContext.current
 
-    fun hasLocationPermission() = ContextCompat.checkSelfPermission(
-        context,
-        Manifest.permission.ACCESS_COARSE_LOCATION,
-    ) == PackageManager.PERMISSION_GRANTED
-
-    var permissionGranted by remember { mutableStateOf(hasLocationPermission()) }
-    // Her artışta konum yeniden istenir — "Tekrar Dene" bu sayede çalışır.
-    var attempt by remember { mutableIntStateOf(0) }
-
     val permissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission(),
+        contract = ActivityResultContracts.RequestMultiplePermissions(),
     ) { granted ->
-        permissionGranted = granted
-        if (granted) attempt++ else onPermissionDenied()
+        if (granted.values.any { it }) onRequestNearby() else onPermissionDenied()
     }
 
-    LaunchedEffect(permissionGranted, attempt) {
-        if (!permissionGranted) return@LaunchedEffect
-        onLocatingStarted()
-        val location = LocationHelper.currentLocation(context)
-        if (location == null) onLocationUnavailable()
-        else onLocationReady(location.latitude, location.longitude)
+    fun requestLocation() {
+        if (LocationHelper.hasPermission(context)) {
+            onRequestNearby()
+        } else {
+            permissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                ),
+            )
+        }
+    }
+
+    // İzin zaten varsa ekran açılır açılmaz aramaya başla.
+    LaunchedEffect(Unit) {
+        if (LocationHelper.hasPermission(context) && state is NearbyState.NeedsPermission) {
+            onRequestNearby()
+        }
     }
 
     Scaffold(
@@ -96,44 +91,40 @@ fun NearbyScreen(
     ) { padding ->
         val contentModifier = Modifier.fillMaxSize().padding(padding)
 
-        when {
-            !permissionGranted || state is NearbyState.NeedsPermission -> {
-                InfoCard(
-                    icon = Icons.Filled.LocationOn,
-                    title = "Konum İzni Gerekli",
-                    description = "Sana en yakın esnaf lokantalarını gösterebilmemiz için konumuna ihtiyacımız var. " +
-                        "Konumun cihazından çıkmaz, hiçbir yere gönderilmez.",
-                    modifier = contentModifier,
+        when (state) {
+            is NearbyState.NeedsPermission -> InfoCard(
+                icon = Icons.Filled.LocationOn,
+                title = "Konum İzni Gerekli",
+                description = "Sana en yakın esnaf lokantalarını gösterebilmemiz için konumuna " +
+                    "ihtiyacımız var. Konumun cihazından çıkmaz, hiçbir yere gönderilmez.",
+                modifier = contentModifier,
+            ) {
+                Button(
+                    onClick = { requestLocation() },
+                    shape = RoundedCornerShape(50),
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
-                    Button(
-                        onClick = { permissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION) },
-                        shape = RoundedCornerShape(50),
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Text("Konuma İzin Ver")
-                    }
+                    Text("Konuma İzin Ver")
                 }
             }
 
-            state is NearbyState.Locating -> {
-                InfoCard(
-                    icon = Icons.Filled.Restaurant,
-                    title = "Lokantalar aranıyor...",
-                    description = "Sıcak bir çorba, taze ev yemekleri sizin için bulunuyor.",
-                    showSpinner = true,
-                    modifier = contentModifier,
-                ) {}
-            }
+            is NearbyState.Locating -> InfoCard(
+                icon = Icons.Filled.Restaurant,
+                title = "Konumun bulunuyor...",
+                description = "Sıcak bir çorba, taze ev yemekleri sizin için aranıyor.",
+                showSpinner = true,
+                modifier = contentModifier,
+            ) {}
 
-            state is NearbyState.Failed -> {
-                InfoCard(
-                    icon = Icons.Filled.LocationOn,
-                    title = "Sonuç alınamadı",
-                    description = state.message,
-                    modifier = contentModifier,
-                ) {
+            is NearbyState.Failed -> InfoCard(
+                icon = Icons.Filled.LocationOn,
+                title = "Sonuç alınamadı",
+                description = state.message,
+                modifier = contentModifier,
+            ) {
+                if (state.canRetry) {
                     Button(
-                        onClick = { attempt++ },
+                        onClick = { requestLocation() },
                         shape = RoundedCornerShape(50),
                         modifier = Modifier.fillMaxWidth(),
                     ) {
@@ -143,33 +134,36 @@ fun NearbyScreen(
                 }
             }
 
-            state is NearbyState.Ready -> {
-                Column(modifier = Modifier.padding(padding)) {
-                    androidx.compose.foundation.layout.Row(
-                        modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Text(
-                            "Sana en yakın ${state.restaurants.size} lokanta",
-                            modifier = Modifier.weight(1f),
-                        )
-                        TextButton(onClick = { attempt++ }) {
-                            Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.padding(end = 4.dp))
-                            Text("Yenile")
-                        }
+            is NearbyState.Ready -> Column(modifier = Modifier.padding(padding)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        buildString {
+                            append("Sana en yakın ${state.restaurants.size} lokanta")
+                            state.cityName?.let { append(" · $it civarı") }
+                        },
+                        modifier = Modifier.weight(1f),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                    TextButton(onClick = { requestLocation() }) {
+                        Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.padding(end = 4.dp))
+                        Text("Yenile")
                     }
-                    LazyColumn(
-                        contentPadding = PaddingValues(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
-                    ) {
-                        items(state.restaurants, key = { it.id }) { restaurant ->
-                            RestaurantCard(
-                                restaurant = restaurant,
-                                isFavorite = favoriteIds.contains(restaurant.id),
-                                onClick = { onRestaurantClick(restaurant.id) },
-                                onToggleFavorite = { onToggleFavorite(restaurant.id) },
-                            )
-                        }
+                }
+                LazyColumn(
+                    contentPadding = PaddingValues(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    items(state.restaurants, key = { it.id }) { restaurant ->
+                        RestaurantCard(
+                            restaurant = restaurant,
+                            isFavorite = favoriteIds.contains(restaurant.id),
+                            onClick = { onRestaurantClick(restaurant.id) },
+                            onToggleFavorite = { onToggleFavorite(restaurant.id) },
+                            localPhotoPath = photos[restaurant.id],
+                        )
                     }
                 }
             }

@@ -29,6 +29,7 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.Image
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -44,7 +45,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
+import com.esnaflokantalari.app.R
 import com.esnaflokantalari.app.model.City
 import com.esnaflokantalari.app.model.Restaurant
 import com.esnaflokantalari.app.ui.components.RestaurantVisual
@@ -61,6 +64,7 @@ fun HomeScreen(
     cities: List<City>,
     featured: List<Restaurant>,
     dataUpdatedAt: String,
+    photos: Map<String, String>,
     onCityClick: (String) -> Unit,
     onSearchClick: () -> Unit,
     onRestaurantClick: (String) -> Unit,
@@ -71,7 +75,20 @@ fun HomeScreen(
     val filledCityCount = remember(cities) { cities.count { it.hasRestaurants } }
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Esnaf Lokantaları") }) },
+        topBar = {
+            TopAppBar(
+                title = {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Image(
+                            painter = painterResource(R.drawable.ic_logo),
+                            contentDescription = null,
+                            modifier = Modifier.size(30.dp),
+                        )
+                        Text("Esnaf Lokantaları", modifier = Modifier.padding(start = 8.dp))
+                    }
+                },
+            )
+        },
     ) { padding ->
         LazyColumn(
             modifier = Modifier.fillMaxSize().padding(padding),
@@ -136,7 +153,9 @@ fun HomeScreen(
                         modifier = Modifier.padding(bottom = 12.dp),
                     ) {
                         items(featured, key = { it.id }) { restaurant ->
-                            FeaturedCard(restaurant) { onRestaurantClick(restaurant.id) }
+                            FeaturedCard(restaurant, photos[restaurant.id]) {
+                                onRestaurantClick(restaurant.id)
+                            }
                         }
                     }
                 }
@@ -201,7 +220,7 @@ private fun SectionHeader(title: String, subtitle: String? = null) {
 }
 
 @Composable
-private fun FeaturedCard(restaurant: Restaurant, onClick: () -> Unit) {
+private fun FeaturedCard(restaurant: Restaurant, localPhotoPath: String?, onClick: () -> Unit) {
     Card(
         onClick = onClick,
         shape = RoundedCornerShape(18.dp),
@@ -214,6 +233,7 @@ private fun FeaturedCard(restaurant: Restaurant, onClick: () -> Unit) {
                     restaurant = restaurant,
                     modifier = Modifier.fillMaxWidth().aspectRatio(1f),
                     initialsSize = 30.sp,
+                    localPhotoPath = localPhotoPath,
                 )
                 if (restaurant.hasRating) {
                     Row(

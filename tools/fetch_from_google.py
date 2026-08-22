@@ -56,12 +56,18 @@ FIELD_MASK = ",".join([
 QUERIES = [
     "esnaf lokantası {city}",
     "ev yemekleri lokantası {city}",
-    "sulu yemek {city}",
+    "sulu yemek lokantası {city}",
     "esnaf kebap salonu {city}",
+    "çorbacı {city}",
+    "en iyi lokanta {city}",
 ]
 
 MIN_RATING = 4.3
-TOP_N_PER_CITY = 10
+TOP_N_PER_CITY = 25
+
+# Her ilde en az bu kadar mekan çıkmasını hedefliyoruz. Hedefe ulaşılmazsa
+# yorum sayısı eşiği kademeli olarak gevşetilir (puan eşiği asla düşmez).
+TARGET_PER_CITY = 20
 
 # Yorum sayısı eşiği: büyük şehirlerde yüksek, küçük illerde düşük olmalı;
 # yoksa küçük iller tamamen boş kalır.
@@ -78,10 +84,10 @@ MID_CITIES = {
 
 def min_reviews_for(city: str) -> int:
     if city in BIG_CITIES:
-        return 500
+        return 300
     if city in MID_CITIES:
-        return 200
-    return 50
+        return 120
+    return 30
 
 
 # Zincirler esnaf lokantası değil — elenir.
@@ -219,6 +225,20 @@ def collect_city(city: str, api_key: str, delay: float):
                 found[place_id] = place
         time.sleep(delay)
 
+    # Hedef sayıya ulaşana kadar yorum eşiğini kademeli gevşet.
+    # Puan eşiği (4.3) hiçbir zaman düşürülmez — kalite kuralı korunur.
+    base_threshold = min_reviews_for(city)
+    for divisor in (1, 2, 4, 10):
+        threshold = max(base_threshold // divisor, 10)
+        kept = filter_places(found, city, threshold)
+        if len(kept) >= TARGET_PER_CITY:
+            break
+
+    kept.sort(key=lambda row: row["_skor"], reverse=True)
+    return kept[:TOP_N_PER_CITY]
+
+
+def filter_places(found: dict, city: str, min_reviews: int):
     kept = []
     for place in found.values():
         name = (place.get("displayName") or {}).get("text", "").strip()
@@ -232,7 +252,7 @@ def collect_city(city: str, api_key: str, delay: float):
             continue
         if rating < MIN_RATING:
             continue
-        if reviews < min_reviews_for(city):
+        if reviews < min_reviews:
             continue
         if is_chain(name):
             continue
@@ -265,8 +285,7 @@ def collect_city(city: str, api_key: str, delay: float):
             "_skor": score(rating, reviews),
         })
 
-    kept.sort(key=lambda row: row["_skor"], reverse=True)
-    return kept[:TOP_N_PER_CITY]
+    return kept
 
 
 def main() -> int:

@@ -44,6 +44,7 @@ fun RestaurantCard(
     isFavorite: Boolean,
     onClick: () -> Unit,
     onToggleFavorite: (() -> Unit)? = null,
+    localPhotoPath: String? = null,
     modifier: Modifier = Modifier,
 ) {
     Card(
@@ -59,6 +60,7 @@ fun RestaurantCard(
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(16f / 9f),
+                    localPhotoPath = localPhotoPath,
                 )
 
                 if (restaurant.hasRating) {

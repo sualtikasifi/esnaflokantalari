@@ -1,26 +1,30 @@
 #!/usr/bin/env python3
 """
-Uygulama simgelerini üretir.
+Uygulama simgelerini ve uygulama içi logoyu üretir.
 
-Android 8 öncesi cihazlar uyarlanabilir (adaptive) simgeyi okuyamaz, bu yüzden
-klasik PNG simgeler de gerekir. Bu betik ikisini de üretir.
+Kaynak: tools/data/logo.png (kare, tercihen 512x512+)
+
+Üretilenler:
+  - mipmap-*/ic_launcher.png ve ic_launcher_round.png   (Android 8 öncesi)
+  - drawable/ic_logo_foreground.png                      (uyarlanabilir simge katmanı)
+  - drawable/ic_logo.png                                 (uygulama içinde kullanılan logo)
 
 Kullanım:
     python3 tools/make_icons.py
 """
 
+import sys
 from pathlib import Path
 
 from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parent.parent
 RES = ROOT / "app" / "src" / "main" / "res"
+SOURCE = ROOT / "tools" / "data" / "logo.png"
 
-BACKGROUND = (182, 57, 44)      # Kiremit kırmızısı
-PLATE = (251, 243, 234)         # Krem
-BROTH = (224, 162, 42)          # Çorba/altın
+# Logonun krem/beyaz zemini — uyarlanabilir simgenin arka plan katmanı
+BACKGROUND = (250, 247, 240)
 
-# mipmap klasörü -> kenar uzunluğu (px)
 DENSITIES = {
     "mipmap-mdpi": 48,
     "mipmap-hdpi": 72,
@@ -30,38 +34,87 @@ DENSITIES = {
 }
 
 
-def draw_icon(size: int, rounded: bool) -> Image.Image:
+def load_logo() -> Image.Image:
+    """Logoyu yükler ve açık zeminini saydam yapar."""
+    image = Image.open(SOURCE).convert("RGBA")
+    width, height = image.size
+    pixels = image.load()
+
+    for y in range(height):
+        for x in range(width):
+            r, g, b, a = pixels[x, y]
+            # Açık gri/krem tonları saydamlaştır, çizimi koru.
+            brightness = (r + g + b) / 3
+            if brightness > 225:
+                pixels[x, y] = (r, g, b, 0)
+            elif brightness > 195:
+                # Kenar yumuşatma: yarı saydam geçiş
+                alpha = int((225 - brightness) / 30 * 255)
+                pixels[x, y] = (r, g, b, alpha)
+
+    return image.crop(image.getbbox() or (0, 0, width, height))
+
+
+def fit(logo: Image.Image, canvas: int, ratio: float) -> Image.Image:
+    """Logoyu kare tuvalin ortasına, verilen oranda yerleştirir."""
+    target = int(canvas * ratio)
+    scaled = logo.copy()
+    scaled.thumbnail((target, target), Image.LANCZOS)
+
+    layer = Image.new("RGBA", (canvas, canvas), (0, 0, 0, 0))
+    layer.paste(
+        scaled,
+        ((canvas - scaled.width) // 2, (canvas - scaled.height) // 2),
+        scaled,
+    )
+    return layer
+
+
+def launcher_icon(logo: Image.Image, size: int, rounded: bool) -> Image.Image:
     scale = 4
     canvas = size * scale
-    image = Image.new("RGBA", (canvas, canvas), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(image)
 
+    base = Image.new("RGBA", (canvas, canvas), (0, 0, 0, 0))
+    shape = Image.new("L", (canvas, canvas), 0)
+    draw = ImageDraw.Draw(shape)
     if rounded:
-        draw.ellipse([0, 0, canvas - 1, canvas - 1], fill=BACKGROUND)
+        draw.ellipse([0, 0, canvas - 1, canvas - 1], fill=255)
     else:
-        radius = int(canvas * 0.18)
-        draw.rounded_rectangle([0, 0, canvas - 1, canvas - 1], radius=radius, fill=BACKGROUND)
+        draw.rounded_rectangle([0, 0, canvas - 1, canvas - 1], radius=int(canvas * 0.22), fill=255)
 
-    # Tabak
-    pad = canvas * 0.22
-    draw.ellipse([pad, pad, canvas - pad, canvas - pad], fill=PLATE)
+    background = Image.new("RGBA", (canvas, canvas), BACKGROUND + (255,))
+    base.paste(background, (0, 0), shape)
+    base.alpha_composite(fit(logo, canvas, 0.66))
 
-    # İçindeki çorba
-    inner = canvas * 0.34
-    draw.ellipse([inner, inner, canvas - inner, canvas - inner], fill=BROTH)
-
-    return image.resize((size, size), Image.LANCZOS)
+    return base.resize((size, size), Image.LANCZOS)
 
 
 def main() -> int:
+    if not SOURCE.exists():
+        print(f"HATA: {SOURCE.relative_to(ROOT)} bulunamadı.", file=sys.stderr)
+        print("Logo dosyasını oraya koyup tekrar çalıştır.", file=sys.stderr)
+        return 1
+
+    logo = load_logo()
+    print(f"Logo yüklendi: {logo.size[0]}x{logo.size[1]}")
+
     for folder, size in DENSITIES.items():
         target = RES / folder
         target.mkdir(parents=True, exist_ok=True)
-        draw_icon(size, rounded=False).save(target / "ic_launcher.png")
-        draw_icon(size, rounded=True).save(target / "ic_launcher_round.png")
+        launcher_icon(logo, size, rounded=False).save(target / "ic_launcher.png")
+        launcher_icon(logo, size, rounded=True).save(target / "ic_launcher_round.png")
         print(f"  {folder}: {size}x{size}")
 
-    print("✓ Simgeler üretildi")
+    drawable = RES / "drawable"
+    drawable.mkdir(parents=True, exist_ok=True)
+
+    # Uyarlanabilir simge katmanı: 108dp tuvalde logo güvenli alanda (%58)
+    fit(logo, 432, 0.58).save(drawable / "ic_logo_foreground.png")
+
+    # Uygulama içinde (splash, boş durumlar) kullanılacak logo
+    fit(logo, 384, 0.94).save(drawable / "ic_logo.png")
+
+    print("✓ Simgeler ve logo üretildi")
     return 0
 
 

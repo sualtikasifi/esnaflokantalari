@@ -53,6 +53,7 @@ fun CityScreen(
     cityName: String,
     city: City?,
     favoriteIds: Set<String>,
+    photos: Map<String, String>,
     suggestionCount: Int,
     onToggleFavorite: (String) -> Unit,
     onBack: () -> Unit,
@@ -138,6 +139,7 @@ fun CityScreen(
                         isFavorite = favoriteIds.contains(restaurant.id),
                         onClick = { onRestaurantClick(restaurant.id) },
                         onToggleFavorite = { onToggleFavorite(restaurant.id) },
+                        localPhotoPath = photos[restaurant.id],
                     )
                 }
 

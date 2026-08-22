@@ -1,12 +1,16 @@
 package com.esnaflokantalari.app.ui
 
 import android.app.Application
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.esnaflokantalari.app.data.FavoritesStore
+import com.esnaflokantalari.app.data.PhotoStore
 import com.esnaflokantalari.app.data.RestaurantRepository
 import com.esnaflokantalari.app.data.Suggestion
 import com.esnaflokantalari.app.data.SuggestionsStore
+import com.esnaflokantalari.app.location.LocationHelper
+import com.esnaflokantalari.app.location.LocationResult
 import com.esnaflokantalari.app.model.City
 import com.esnaflokantalari.app.model.Restaurant
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,11 +22,17 @@ import kotlinx.coroutines.launch
 import java.util.UUID
 
 sealed interface NearbyState {
-    /** Konum izni henüz istenmedi ya da kullanıcı "daha sonra" dedi. */
     data object NeedsPermission : NearbyState
     data object Locating : NearbyState
-    data class Ready(val restaurants: List<Restaurant>) : NearbyState
-    data class Failed(val message: String) : NearbyState
+    data class Ready(val restaurants: List<Restaurant>, val cityName: String?) : NearbyState
+    data class Failed(val message: String, val canRetry: Boolean = true) : NearbyState
+}
+
+/** "Bugün ne yesem?" sonucunu ekrana taşıyan tek seferlik olay. */
+sealed interface SurpriseEvent {
+    data object Locating : SurpriseEvent
+    data class Picked(val restaurantId: String, val cityName: String) : SurpriseEvent
+    data class Failed(val message: String) : SurpriseEvent
 }
 
 class AppViewModel(application: Application) : AndroidViewModel(application) {
@@ -30,6 +40,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = RestaurantRepository(application)
     private val favoritesStore = FavoritesStore(application)
     private val suggestionsStore = SuggestionsStore(application)
+    private val photoStore = PhotoStore(application)
 
     val favorites: StateFlow<List<Restaurant>> = favoritesStore.favorites
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
@@ -39,6 +50,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     val suggestions: StateFlow<List<Suggestion>> = suggestionsStore.suggestions
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    /** restaurantId -> cihazda saklanan fotoğrafın yolu */
+    val photos: StateFlow<Map<String, String>> = photoStore.photos
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
 
     private val _cities = MutableStateFlow<List<City>>(emptyList())
     val cities: StateFlow<List<City>> = _cities.asStateFlow()
@@ -52,6 +67,9 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     private val _nearby = MutableStateFlow<NearbyState>(NearbyState.NeedsPermission)
     val nearby: StateFlow<NearbyState> = _nearby.asStateFlow()
 
+    private val _surprise = MutableStateFlow<SurpriseEvent?>(null)
+    val surprise: StateFlow<SurpriseEvent?> = _surprise.asStateFlow()
+
     init {
         viewModelScope.launch {
             val dataset = repository.dataset()
@@ -63,10 +81,6 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     fun city(cityName: String): City? = _cities.value.firstOrNull { it.name == cityName }
 
-    /**
-     * Detay ekranı için lokantayı bulur. Önce gömülü veri, sonra favoriler
-     * (aylık güncellemede listeden çıkmış bir favori de açılabilsin diye).
-     */
     fun findRestaurant(restaurantId: String): Restaurant? =
         _cities.value.asSequence()
             .flatMap { it.restaurants.asSequence() }
@@ -82,34 +96,98 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         findRestaurant(restaurantId)?.let { toggleFavorite(it) }
     }
 
+    // --- Fotoğraflar ---
+
+    fun savePhoto(restaurantId: String, source: Uri, onResult: (Boolean) -> Unit = {}) {
+        viewModelScope.launch {
+            val path = photoStore.save(restaurantId, source)
+            onResult(path != null)
+        }
+    }
+
+    fun removePhoto(restaurantId: String) {
+        viewModelScope.launch { photoStore.remove(restaurantId) }
+    }
+
     // --- Yakınımda ---
 
+    fun loadNearby() {
+        viewModelScope.launch {
+            _nearby.value = NearbyState.Locating
+            when (val result = LocationHelper.currentLocation(getApplication())) {
+                is LocationResult.PermissionMissing ->
+                    _nearby.value = NearbyState.NeedsPermission
+
+                is LocationResult.ServiceDisabled ->
+                    _nearby.value = NearbyState.Failed(
+                        "Cihazının konum servisi kapalı. Ayarlardan konumu açıp tekrar dene.",
+                    )
+
+                is LocationResult.Unavailable ->
+                    _nearby.value = NearbyState.Failed(
+                        "Konumun bulunamadı. Açık bir alanda tekrar denemeyi ya da " +
+                            "haritalar uygulamasını bir kez açmayı deneyebilirsin.",
+                    )
+
+                is LocationResult.Success -> {
+                    val results = repository.nearby(result.location.latitude, result.location.longitude)
+                    val cityName = repository.nearestCity(
+                        result.location.latitude,
+                        result.location.longitude,
+                    )?.name
+                    _nearby.value = if (results.isEmpty()) {
+                        NearbyState.Failed(
+                            "Yakınında kayıtlı bir esnaf lokantası bulunamadı. " +
+                                "Bildiğin bir yer varsa şehir sayfasından öner!",
+                        )
+                    } else {
+                        NearbyState.Ready(results, cityName)
+                    }
+                }
+            }
+        }
+    }
+
     fun onLocationPermissionDenied() {
-        _nearby.value = NearbyState.NeedsPermission
-    }
-
-    fun onLocatingStarted() {
-        _nearby.value = NearbyState.Locating
-    }
-
-    fun onLocationUnavailable() {
         _nearby.value = NearbyState.Failed(
-            "Konumun alınamadı. Konum servisinin açık olduğundan emin olup tekrar dene.",
+            "Konum izni verilmedi. Şehir listesinden gezinerek de lokantaları görebilirsin.",
+            canRetry = true,
         )
     }
 
-    fun loadNearby(latitude: Double, longitude: Double) {
+    // --- "Bugün ne yesem?" ---
+
+    /** Konumu alıp kullanıcının bulunduğu ilden rastgele bir lokanta seçer. */
+    fun surpriseMe() {
         viewModelScope.launch {
-            val results = repository.nearby(latitude, longitude)
-            _nearby.value = if (results.isEmpty()) {
-                NearbyState.Failed(
-                    "Yakınında kayıtlı bir esnaf lokantası bulunamadı. " +
-                        "Bildiğin bir yer varsa şehir sayfasından öner!",
-                )
-            } else {
-                NearbyState.Ready(results)
+            _surprise.value = SurpriseEvent.Locating
+            val result = LocationHelper.currentLocation(getApplication())
+
+            val city = (result as? LocationResult.Success)?.let {
+                repository.nearestCity(it.location.latitude, it.location.longitude)
             }
+
+            if (city == null || city.restaurants.isEmpty()) {
+                _surprise.value = SurpriseEvent.Failed(
+                    when (result) {
+                        is LocationResult.PermissionMissing ->
+                            "Sana yakın bir yer önerebilmemiz için konum izni gerekiyor."
+                        is LocationResult.ServiceDisabled ->
+                            "Konum servisin kapalı. Açıp tekrar dener misin?"
+                        else ->
+                            "Konumun alınamadı. Şehir listesinden seçerek de keşfedebilirsin."
+                    },
+                )
+                return@launch
+            }
+
+            val picked = city.restaurants.random()
+            _surprise.value = SurpriseEvent.Picked(picked.id, city.name)
         }
+    }
+
+    fun clearSurprise() {
+        _surprise.value = null
     }
 
     // --- Öneriler ---

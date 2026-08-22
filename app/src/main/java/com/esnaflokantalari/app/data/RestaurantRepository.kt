@@ -71,6 +71,26 @@ class RestaurantRepository(private val context: Context) {
             .sortedBy { it.distanceMeters ?: Double.MAX_VALUE }
             .take(limit)
 
+    /**
+     * Verilen konuma en yakın il. İlin merkezi, o ildeki lokantaların
+     * koordinat ortalamasından hesaplanır.
+     */
+    suspend fun nearestCity(latitude: Double, longitude: Double): City? =
+        dataset().cities
+            .mapNotNull { city ->
+                val points = city.restaurants.mapNotNull inner@{ restaurant ->
+                    val lat = restaurant.latitude ?: return@inner null
+                    val lng = restaurant.longitude ?: return@inner null
+                    lat to lng
+                }
+                if (points.isEmpty()) return@mapNotNull null
+                val centerLat = points.sumOf { it.first } / points.size
+                val centerLng = points.sumOf { it.second } / points.size
+                city to distanceInMeters(latitude, longitude, centerLat, centerLng)
+            }
+            .minByOrNull { it.second }
+            ?.first
+
     suspend fun searchCities(query: String): List<City> {
         val cities = cities()
         if (query.isBlank()) return cities

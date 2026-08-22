@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import java.io.File
 import com.esnaflokantalari.app.model.Restaurant
 
 /**
@@ -51,11 +52,13 @@ fun RestaurantVisual(
     modifier: Modifier = Modifier,
     initialsSize: TextUnit = 34.sp,
     iconSize: Dp = 40.dp,
+    localPhotoPath: String? = null,
 ) {
-    val photo = restaurant.photoUrl
+    // Öncelik: kullanıcının yüklediği fotoğraf, sonra veri dosyasındaki foto_url.
+    val photo = localPhotoPath ?: restaurant.photoUrl
     if (!photo.isNullOrBlank()) {
         AsyncImage(
-            model = photo,
+            model = if (localPhotoPath != null) File(localPhotoPath) else photo,
             contentDescription = restaurant.name,
             contentScale = ContentScale.Crop,
             modifier = modifier,

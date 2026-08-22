@@ -1,5 +1,10 @@
 package com.esnaflokantalari.app.ui.screens
 
+import android.net.Uri
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,10 +26,13 @@ import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Directions
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.AddAPhoto
+import androidx.compose.material.icons.filled.DeleteOutline
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -33,6 +41,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -57,7 +69,10 @@ fun RestaurantDetailScreen(
     restaurant: Restaurant?,
     isFavorite: Boolean,
     dataUpdatedAt: String,
+    localPhotoPath: String?,
     onToggleFavorite: () -> Unit,
+    onPickPhoto: (Uri) -> Unit,
+    onRemovePhoto: () -> Unit,
     onBack: () -> Unit,
 ) {
     if (restaurant == null) {
@@ -88,6 +103,16 @@ fun RestaurantDetailScreen(
 
     val context = LocalContext.current
 
+    // Android 13+ sistem fotoğraf seçicisi — galeri izni istemeye gerek yok.
+    val photoPicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+    ) { uri: Uri? ->
+        if (uri != null) {
+            onPickPhoto(uri)
+            Toast.makeText(context, "Fotoğraf ekleniyor...", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -117,11 +142,37 @@ fun RestaurantDetailScreen(
                 .padding(padding)
                 .verticalScroll(rememberScrollState()),
         ) {
-            RestaurantVisual(
-                restaurant = restaurant,
-                modifier = Modifier.fillMaxWidth().aspectRatio(16f / 9f),
-                initialsSize = 48.sp,
-            )
+            Box {
+                RestaurantVisual(
+                    restaurant = restaurant,
+                    modifier = Modifier.fillMaxWidth().aspectRatio(16f / 9f),
+                    initialsSize = 48.sp,
+                    localPhotoPath = localPhotoPath,
+                )
+
+                Row(
+                    modifier = Modifier.align(Alignment.BottomEnd).padding(12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    if (localPhotoPath != null) {
+                        FilledTonalIconButton(onClick = onRemovePhoto) {
+                            Icon(Icons.Filled.DeleteOutline, contentDescription = "Fotoğrafı kaldır")
+                        }
+                    }
+                    FilledTonalIconButton(
+                        onClick = {
+                            photoPicker.launch(
+                                PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly),
+                            )
+                        },
+                    ) {
+                        Icon(
+                            Icons.Filled.AddAPhoto,
+                            contentDescription = if (localPhotoPath == null) "Fotoğraf ekle" else "Fotoğrafı değiştir",
+                        )
+                    }
+                }
+            }
 
             Column(modifier = Modifier.padding(20.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {

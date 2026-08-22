@@ -92,8 +92,11 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.3.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1")
 
-    // Elle girilen foto_url alanları için (varsayılan olarak kullanılmaz)
+    // Lokanta fotoğraflarını göstermek için
     implementation("io.coil-kt:coil-compose:2.6.0")
+
+    // Galeriden seçilen fotoğrafın yönünü düzeltmek için
+    implementation("androidx.exifinterface:exifinterface:1.3.7")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
