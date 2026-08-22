@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -22,11 +23,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.esnaflokantalari.app.model.Restaurant
+import com.esnaflokantalari.app.ui.theme.StarGold
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -78,11 +82,20 @@ fun RestaurantDetailScreen(
             )
         },
     ) { padding ->
-        Column(modifier = Modifier.padding(padding).padding(16.dp)) {
+        Column(modifier = Modifier.padding(padding)) {
+            AsyncImage(
+                model = restaurant.coverPhotoUrl,
+                contentDescription = restaurant.name,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(16f / 9f),
+            )
+            Column(modifier = Modifier.padding(16.dp)) {
             Text(restaurant.category, fontSize = 16.sp)
             Spacer(modifier = Modifier.height(8.dp))
             Row {
-                Icon(Icons.Filled.Star, contentDescription = null)
+                Icon(Icons.Filled.Star, contentDescription = null, tint = StarGold)
                 Text(" ${restaurant.rating} · ${restaurant.reviewCount} yorum")
             }
             restaurant.distanceMeters?.let { distance ->
@@ -106,6 +119,7 @@ fun RestaurantDetailScreen(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text("Yol Tarifi Al")
+            }
             }
         }
     }

@@ -13,7 +13,11 @@ data class Restaurant(
     val latitude: Double? = null,
     val longitude: Double? = null,
     val distanceMeters: Double? = null,
-)
+) {
+    /** Gerçek fotoğrafımız olmadığında gösterilecek, id'ye göre sabit bir kapak görseli. */
+    val coverPhotoUrl: String
+        get() = "https://picsum.photos/seed/$id/600/450"
+}
 
 data class City(
     val name: String,

@@ -78,4 +78,7 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1")
+
+    // Lokanta fotoğrafları için görsel yükleme
+    implementation("io.coil-kt:coil-compose:2.6.0")
 }
