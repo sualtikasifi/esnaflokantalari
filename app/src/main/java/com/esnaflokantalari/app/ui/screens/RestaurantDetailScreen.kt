@@ -56,6 +56,7 @@ import com.esnaflokantalari.app.ui.theme.StarGold
 fun RestaurantDetailScreen(
     restaurant: Restaurant?,
     isFavorite: Boolean,
+    dataUpdatedAt: String,
     onToggleFavorite: () -> Unit,
     onBack: () -> Unit,
 ) {
@@ -155,6 +156,17 @@ fun RestaurantDetailScreen(
                             style = MaterialTheme.typography.bodyLarge,
                         )
                     }
+                    // Google Haritalar verisi gösterildiğinde atıf zorunlu.
+                    Text(
+                        if (dataUpdatedAt.isNotBlank()) {
+                            "Puan bilgisi Google Haritalar'dan · $dataUpdatedAt"
+                        } else {
+                            "Puan bilgisi Google Haritalar'dan"
+                        },
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
                 }
 
                 restaurant.distanceMeters?.let { distance ->

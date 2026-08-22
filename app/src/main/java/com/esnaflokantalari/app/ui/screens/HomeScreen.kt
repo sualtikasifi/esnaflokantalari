@@ -40,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -58,6 +59,7 @@ import java.util.Calendar
 fun HomeScreen(
     cities: List<City>,
     featured: List<Restaurant>,
+    dataUpdatedAt: String,
     onCityClick: (String) -> Unit,
     onSearchClick: () -> Unit,
     onRestaurantClick: (String) -> Unit,
@@ -151,6 +153,20 @@ fun HomeScreen(
                     }
                     if (rowCities.size == 1) Spacer(modifier = Modifier.weight(1f))
                 }
+            }
+
+            item {
+                // Google Haritalar verisi kullanıldığı için atıf zorunlu.
+                Text(
+                    buildString {
+                        append("Mekan bilgileri Google Haritalar'dan derlenmiştir.")
+                        if (dataUpdatedAt.isNotBlank()) append(" Son güncelleme: $dataUpdatedAt")
+                    },
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 20.dp),
+                )
             }
         }
     }

@@ -67,6 +67,7 @@ fun AppNavigation() {
     val favorites by viewModel.favorites.collectAsState()
     val favoriteIds by viewModel.favoriteIds.collectAsState()
     val suggestions by viewModel.suggestions.collectAsState()
+    val dataUpdatedAt by viewModel.dataUpdatedAt.collectAsState()
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
@@ -108,6 +109,7 @@ fun AppNavigation() {
                 HomeScreen(
                     cities = cities,
                     featured = featured,
+                    dataUpdatedAt = dataUpdatedAt,
                     onCityClick = { navController.navigate(Routes.city(it)) },
                     onSearchClick = { navController.navigate(Routes.CITY_SEARCH) },
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
@@ -191,6 +193,7 @@ fun AppNavigation() {
                 RestaurantDetailScreen(
                     restaurant = restaurant,
                     isFavorite = favoriteIds.contains(restaurantId),
+                    dataUpdatedAt = dataUpdatedAt,
                     onToggleFavorite = { restaurant?.let(viewModel::toggleFavorite) },
                     onBack = { navController.popBackStack() },
                 )
