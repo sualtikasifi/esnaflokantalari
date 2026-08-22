@@ -32,6 +32,10 @@ OUTPUT_CSV = ROOT / "tools" / "data" / "restaurants.csv"
 
 ENDPOINT = "https://places.googleapis.com/v1/places:searchText"
 
+
+class QuotaExceeded(Exception):
+    """Google'ın günlük istek kotası doldu — kalan iller yarın çekilmeli."""
+
 FIELD_MASK = ",".join([
     "places.id",
     "places.displayName",
@@ -97,12 +101,58 @@ EXCLUDED_TYPES = {
     "dessert_shop", "juice_shop", "tea_house",
 }
 
+# Google'ın kategorisi bunlardan biriyse esnaf lokantası saymıyoruz
+# (tatlıcı, kafe, pastane vb. `types` alanında her zaman yakalanmıyor).
+EXCLUDED_CATEGORIES = {
+    "tatlıcı", "pastane", "kafe", "kahveci", "dondurmacı",
+    "börekçi", "simitçi", "fırın", "bar", "pub",
+}
+
 PRICE_LEVELS = {
     "PRICE_LEVEL_INEXPENSIVE": 1,
     "PRICE_LEVEL_MODERATE": 2,
     "PRICE_LEVEL_EXPENSIVE": 3,
     "PRICE_LEVEL_VERY_EXPENSIVE": 4,
 }
+
+# Google'ın kategorisi çoğunlukla düz "Restoran" geliyor; uygulamadaki filtre
+# çiplerinin işe yaraması için mekan adından anlamlı etiketler türetiyoruz.
+TAG_RULES = [
+    ("Kebap", ("kebap", "kebab", "ocakbaşı", "ocakbasi")),
+    ("Çorba", ("çorba", "corba", "paça", "paca", "beyran", "işkembe", "iskembe", "kelle")),
+    ("Lahmacun & Pide", ("lahmacun", "pide", "pidecı", "pideci")),
+    ("Ciğer", ("ciğer", "ciger")),
+    ("Köfte", ("köfte", "kofte")),
+    ("Mantı", ("mantı", "manti")),
+    ("Büryan", ("büryan", "buryan")),
+    ("Döner", ("döner", "doner", "dürüm", "durum")),
+    ("Tantuni", ("tantuni",)),
+    ("Balık", ("balık", "balik")),
+    ("Kahvaltı", ("kahvaltı", "kahvalti", "serpme")),
+    ("Et", ("kasap", "et lokantası", "et restaurant", "steak")),
+    ("Sulu Yemek", ("lokanta", "sofra", "ev yemek", "sulu yemek", "aşevi", "asevi", "esnaf")),
+]
+
+
+def derive_tags(name: str, category: str) -> str:
+    """Ada ve kategoriye bakarak etiket üretir, `|` ile ayırır."""
+    haystack = f"{name} {category}".lower()
+    tags = [tag for tag, keywords in TAG_RULES if any(k in haystack for k in keywords)]
+
+    if not tags:
+        # Hiçbir kural tutmadıysa Google'ın kategorisine düş.
+        cleaned = category.strip()
+        if cleaned and cleaned.lower() != "restoran":
+            tags = [cleaned]
+        else:
+            tags = ["Lokanta"]
+
+    return "|".join(tags[:3])
+
+
+def clean_maps_url(url: str) -> str:
+    """Google'ın izleme parametrelerini (g_mp) at, sade bağlantı bırak."""
+    return url.split("&g_mp=")[0] if url else ""
 
 
 def read_cities():
@@ -133,13 +183,16 @@ def search(query: str, api_key: str):
             return json.loads(response.read().decode("utf-8")).get("places", [])
     except urllib.error.HTTPError as error:
         body = error.read().decode("utf-8", errors="replace")
-        print(f"    HATA {error.code}: {body[:300]}", file=sys.stderr)
         if error.code in (401, 403):
+            print(f"    HATA {error.code}: {body[:300]}", file=sys.stderr)
             raise SystemExit(
                 "\nAPI anahtarı reddedildi. Google Cloud Console'da:\n"
                 "  1) 'Places API (New)' etkin mi?\n"
                 "  2) Anahtarın API kısıtlamalarında 'Places API (New)' seçili mi?\n"
             )
+        if error.code == 429:
+            raise QuotaExceeded()
+        print(f"    HATA {error.code}: {body[:300]}", file=sys.stderr)
         return []
     except Exception as error:  # ağ hatası
         print(f"    HATA: {error}", file=sys.stderr)
@@ -185,16 +238,20 @@ def collect_city(city: str, api_key: str, delay: float):
             continue
         if types & EXCLUDED_TYPES:
             continue
+        category_raw = (place.get("primaryTypeDisplayName") or {}).get("text", "")
+        if category_raw.strip().lower() in EXCLUDED_CATEGORIES:
+            continue
         # Adres il adını içermiyorsa büyük ihtimalle başka ilden gelmiş.
         address = place.get("formattedAddress", "")
         if city.lower() not in address.lower():
             continue
 
+        category = (place.get("primaryTypeDisplayName") or {}).get("text", "Lokanta")
         kept.append({
             "il": city,
             "ad": name,
-            "kategori": (place.get("primaryTypeDisplayName") or {}).get("text", "Lokanta"),
-            "etiketler": "",
+            "kategori": category,
+            "etiketler": derive_tags(name, category),
             "puan": rating,
             "yorum_sayisi": reviews,
             "adres": address,
@@ -202,7 +259,7 @@ def collect_city(city: str, api_key: str, delay: float):
             "fiyat": PRICE_LEVELS.get(place.get("priceLevel", ""), ""),
             "enlem": (place.get("location") or {}).get("latitude", ""),
             "boylam": (place.get("location") or {}).get("longitude", ""),
-            "maps_url": place.get("googleMapsUri", ""),
+            "maps_url": clean_maps_url(place.get("googleMapsUri", "")),
             "foto_url": "",
             "not": "",
             "_skor": score(rating, reviews),
@@ -229,9 +286,18 @@ def main() -> int:
         return 1
 
     all_rows = []
+    remaining = []
     for index, city in enumerate(cities, start=1):
+        if remaining:
+            remaining.append(city)
+            continue
         print(f"[{index}/{len(cities)}] {city}...", flush=True)
-        rows = collect_city(city, api_key, delay=0.3)
+        try:
+            rows = collect_city(city, api_key, delay=0.3)
+        except QuotaExceeded:
+            print("\n⚠ Google'ın GÜNLÜK istek kotası doldu.", file=sys.stderr)
+            remaining.append(city)
+            continue
         print(f"    {len(rows)} lokanta seçildi")
         all_rows.extend(rows)
 
@@ -239,15 +305,42 @@ def main() -> int:
         "il", "ad", "kategori", "etiketler", "puan", "yorum_sayisi", "adres",
         "telefon", "fiyat", "enlem", "boylam", "maps_url", "foto_url", "not",
     ]
+
+    for row in all_rows:
+        row.pop("_skor", None)
+
+    # Mevcut CSV'yi koru: sadece bu çalıştırmada çekilen illerin satırları
+    # yenilenir, diğer illerin verisi olduğu gibi kalır. Böylece kota
+    # nedeniyle yarıda kalan çekimi ertesi gün tamamlayabilirsin.
+    fetched_cities = {row["il"] for row in all_rows}
+    preserved = []
+    if OUTPUT_CSV.exists():
+        with OUTPUT_CSV.open(encoding="utf-8") as handle:
+            for row in csv.DictReader(handle):
+                if row.get("il") and row["il"] not in fetched_cities:
+                    preserved.append({key: row.get(key, "") for key in columns})
+
+    merged = preserved + all_rows
+    merged.sort(key=lambda row: (row["il"], row["ad"]))
+
     with OUTPUT_CSV.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=columns)
         writer.writeheader()
-        for row in all_rows:
-            row.pop("_skor", None)
-            writer.writerow(row)
+        writer.writerows(merged)
 
-    print(f"\n✓ {OUTPUT_CSV.relative_to(ROOT)} yazıldı — {len(all_rows)} lokanta")
-    print("Şimdi: python3 tools/build_dataset.py")
+    print(f"\n✓ {OUTPUT_CSV.relative_to(ROOT)} yazıldı")
+    print(f"  bu çalıştırmada: {len(all_rows)} lokanta ({len(fetched_cities)} il)")
+    if preserved:
+        print(f"  korunan önceki veri: {len(preserved)} lokanta")
+    print(f"  toplam: {len(merged)} lokanta")
+
+    if remaining:
+        print(f"\n⚠ {len(remaining)} il kota nedeniyle çekilemedi.")
+        print("Kota yarın sıfırlanır. Sadece kalanları çekmek için:\n")
+        print("  python3 tools/fetch_from_google.py " + " ".join(f'"{c}"' for c in remaining))
+        print("\n(Mevcut veriler korunur, üzerine yazılmaz.)")
+
+    print("\nŞimdi: python3 tools/build_dataset.py")
     return 0
 
 
