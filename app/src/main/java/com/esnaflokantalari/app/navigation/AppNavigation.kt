@@ -94,6 +94,7 @@ fun AppNavigation() {
                 HomeScreen(
                     onCityClick = { cityName -> navController.navigate(Routes.city(cityName)) },
                     onSearchClick = { navController.navigate(Routes.CITY_SEARCH) },
+                    onRestaurantClick = { id -> navController.navigate(Routes.restaurant(id)) },
                 )
             }
             composable(Routes.CITY_SEARCH) {
