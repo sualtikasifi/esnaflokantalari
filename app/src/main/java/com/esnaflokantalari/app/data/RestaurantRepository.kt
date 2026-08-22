@@ -2,8 +2,13 @@ package com.esnaflokantalari.app.data
 
 import com.esnaflokantalari.app.BuildConfig
 import com.esnaflokantalari.app.model.Restaurant
+import com.esnaflokantalari.app.network.Circle
+import com.esnaflokantalari.app.network.CenterLatLng
+import com.esnaflokantalari.app.network.LocationRestriction
 import com.esnaflokantalari.app.network.NetworkModule
-import com.esnaflokantalari.app.network.PlaceResult
+import com.esnaflokantalari.app.network.Place
+import com.esnaflokantalari.app.network.SearchNearbyRequest
+import com.esnaflokantalari.app.network.SearchTextRequest
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
@@ -27,11 +32,11 @@ object RestaurantRepository {
         }
 
         return try {
-            val response = NetworkModule.placesApi.textSearch(
-                query = "en iyi esnaf lokantası $cityName",
+            val response = NetworkModule.placesApi.searchText(
                 apiKey = BuildConfig.MAPS_API_KEY,
+                request = SearchTextRequest(textQuery = "en iyi esnaf lokantası $cityName"),
             )
-            val restaurants = response.results.map { it.toRestaurant(cityName) }
+            val restaurants = response.places.map { it.toRestaurant(cityName) }
             if (restaurants.isEmpty()) {
                 RestaurantResult.Success(SampleData.restaurantsForCity(cityName), isSampleData = true)
             } else {
@@ -42,18 +47,21 @@ object RestaurantRepository {
         }
     }
 
-    suspend fun nearbyRestaurants(latitude: Double, longitude: Double, radiusMeters: Int = 3000): RestaurantResult {
+    suspend fun nearbyRestaurants(latitude: Double, longitude: Double, radiusMeters: Double = 3000.0): RestaurantResult {
         if (!NetworkModule.hasApiKey) {
             return RestaurantResult.Error("Google Haritalar bağlantısı henüz kurulmadı. README'deki kurulum adımlarını takip et.")
         }
 
         return try {
-            val response = NetworkModule.placesApi.nearbySearch(
-                location = "$latitude,$longitude",
-                radiusMeters = radiusMeters,
+            val response = NetworkModule.placesApi.searchNearby(
                 apiKey = BuildConfig.MAPS_API_KEY,
+                request = SearchNearbyRequest(
+                    locationRestriction = LocationRestriction(
+                        circle = Circle(center = CenterLatLng(latitude, longitude), radius = radiusMeters),
+                    ),
+                ),
             )
-            val restaurants = response.results
+            val restaurants = response.places
                 .map { it.toRestaurant(city = "") }
                 .map { restaurant ->
                     val distance = restaurant.latitude?.let { lat ->
@@ -71,23 +79,18 @@ object RestaurantRepository {
         }
     }
 
-    private fun PlaceResult.toRestaurant(city: String): Restaurant {
-        val lat = geometry?.location?.lat
-        val lng = geometry?.location?.lng
+    private fun Place.toRestaurant(city: String): Restaurant {
         return Restaurant(
-            id = place_id,
-            name = name,
+            id = id,
+            name = displayName?.text ?: "İsimsiz Lokanta",
             city = city,
-            category = types.firstOrNull { it != "restaurant" && it != "food" && it != "point_of_interest" }
-                ?.replace('_', ' ')
-                ?.replaceFirstChar { it.uppercase() }
-                ?: "Lokanta",
+            category = primaryTypeDisplayName?.text ?: "Lokanta",
             rating = rating ?: 0.0,
-            reviewCount = user_ratings_total ?: 0,
-            address = formatted_address ?: vicinity ?: "",
-            mapsUrl = "https://www.google.com/maps/place/?q=place_id:$place_id",
-            latitude = lat,
-            longitude = lng,
+            reviewCount = userRatingCount ?: 0,
+            address = formattedAddress ?: "",
+            mapsUrl = "https://www.google.com/maps/place/?q=place_id:$id",
+            latitude = location?.latitude,
+            longitude = location?.longitude,
         )
     }
 

@@ -25,7 +25,7 @@ object NetworkModule {
 
     val placesApi: PlacesApiService by lazy {
         Retrofit.Builder()
-            .baseUrl("https://maps.googleapis.com/")
+            .baseUrl("https://places.googleapis.com/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

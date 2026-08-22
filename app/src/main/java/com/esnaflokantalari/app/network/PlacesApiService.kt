@@ -1,53 +1,69 @@
 package com.esnaflokantalari.app.network
 
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Body
+import retrofit2.http.Header
+import retrofit2.http.Headers
+import retrofit2.http.POST
 
 /**
- * Google Places API (Text Search / Nearby Search, "Legacy" uçları).
- * https://developers.google.com/maps/documentation/places/web-service
+ * Places API (New).
+ * https://developers.google.com/maps/documentation/places/web-service/text-search
+ * https://developers.google.com/maps/documentation/places/web-service/nearby-search
  */
 interface PlacesApiService {
 
-    @GET("maps/api/place/textsearch/json")
-    suspend fun textSearch(
-        @Query("query") query: String,
-        @Query("type") type: String = "restaurant",
-        @Query("language") language: String = "tr",
-        @Query("key") apiKey: String,
-    ): PlacesTextSearchResponse
+    @Headers(
+        "Content-Type: application/json",
+        "X-Goog-FieldMask: places.id,places.displayName,places.rating,places.userRatingCount,places.formattedAddress,places.location,places.primaryTypeDisplayName",
+    )
+    @POST("v1/places:searchText")
+    suspend fun searchText(
+        @Header("X-Goog-Api-Key") apiKey: String,
+        @Body request: SearchTextRequest,
+    ): PlacesSearchResponse
 
-    @GET("maps/api/place/nearbysearch/json")
-    suspend fun nearbySearch(
-        @Query("location") location: String,
-        @Query("radius") radiusMeters: Int = 3000,
-        @Query("type") type: String = "restaurant",
-        @Query("language") language: String = "tr",
-        @Query("key") apiKey: String,
-    ): PlacesTextSearchResponse
+    @Headers(
+        "Content-Type: application/json",
+        "X-Goog-FieldMask: places.id,places.displayName,places.rating,places.userRatingCount,places.formattedAddress,places.location,places.primaryTypeDisplayName",
+    )
+    @POST("v1/places:searchNearby")
+    suspend fun searchNearby(
+        @Header("X-Goog-Api-Key") apiKey: String,
+        @Body request: SearchNearbyRequest,
+    ): PlacesSearchResponse
 }
 
-data class PlacesTextSearchResponse(
-    val results: List<PlaceResult> = emptyList(),
-    val status: String = "",
+data class SearchTextRequest(
+    val textQuery: String,
+    val languageCode: String = "tr",
+    val includedType: String = "restaurant",
 )
 
-data class PlaceResult(
-    val place_id: String,
-    val name: String,
+data class SearchNearbyRequest(
+    val locationRestriction: LocationRestriction,
+    val includedTypes: List<String> = listOf("restaurant"),
+    val languageCode: String = "tr",
+    val maxResultCount: Int = 20,
+)
+
+data class LocationRestriction(val circle: Circle)
+data class Circle(val center: CenterLatLng, val radius: Double)
+data class CenterLatLng(val latitude: Double, val longitude: Double)
+
+data class PlacesSearchResponse(
+    val places: List<Place> = emptyList(),
+)
+
+data class Place(
+    val id: String,
+    val displayName: LocalizedText? = null,
     val rating: Double? = null,
-    val user_ratings_total: Int? = null,
-    val formatted_address: String? = null,
-    val vicinity: String? = null,
-    val types: List<String> = emptyList(),
-    val geometry: Geometry? = null,
+    val userRatingCount: Int? = null,
+    val formattedAddress: String? = null,
+    val location: LatLngDto? = null,
+    val primaryTypeDisplayName: LocalizedText? = null,
 )
 
-data class Geometry(
-    val location: LatLngDto,
-)
+data class LocalizedText(val text: String, val languageCode: String? = null)
 
-data class LatLngDto(
-    val lat: Double,
-    val lng: Double,
-)
+data class LatLngDto(val latitude: Double, val longitude: Double)
