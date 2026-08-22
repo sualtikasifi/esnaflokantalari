@@ -32,11 +32,19 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -147,10 +155,7 @@ fun NearbyScreen(
                         modifier = Modifier.weight(1f),
                         style = MaterialTheme.typography.bodyMedium,
                     )
-                    TextButton(onClick = { requestLocation() }) {
-                        Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.padding(end = 4.dp))
-                        Text("Yenile")
-                    }
+                    RefreshButton(isRefreshing = state.refreshing, onClick = { requestLocation() })
                 }
                 LazyColumn(
                     contentPadding = PaddingValues(16.dp),
@@ -168,6 +173,35 @@ fun NearbyScreen(
                 }
             }
         }
+    }
+}
+
+/**
+ * Yenile düğmesi. Konum aranırken ikon sürekli döner, böylece kullanıcı
+ * işlemin sürdüğünü görür; ayrıca tekrar basılması engellenir.
+ */
+@Composable
+private fun RefreshButton(isRefreshing: Boolean, onClick: () -> Unit) {
+    val transition = rememberInfiniteTransition(label = "refresh")
+    val angle by transition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 900, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart,
+        ),
+        label = "refreshAngle",
+    )
+
+    TextButton(onClick = onClick, enabled = !isRefreshing) {
+        Icon(
+            Icons.Filled.Refresh,
+            contentDescription = null,
+            modifier = Modifier
+                .padding(end = 4.dp)
+                .rotate(if (isRefreshing) angle else 0f),
+        )
+        Text(if (isRefreshing) "Aranıyor..." else "Yenile")
     }
 }
 

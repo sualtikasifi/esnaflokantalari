@@ -24,7 +24,11 @@ import java.util.UUID
 sealed interface NearbyState {
     data object NeedsPermission : NearbyState
     data object Locating : NearbyState
-    data class Ready(val restaurants: List<Restaurant>, val cityName: String?) : NearbyState
+    data class Ready(
+        val restaurants: List<Restaurant>,
+        val cityName: String?,
+        val refreshing: Boolean = false,
+    ) : NearbyState
     data class Failed(val message: String, val canRetry: Boolean = true) : NearbyState
 }
 
@@ -113,7 +117,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     fun loadNearby() {
         viewModelScope.launch {
-            _nearby.value = NearbyState.Locating
+            // Elimizde sonuç varsa listeyi ekranda tut, sadece "yenileniyor"
+            // durumuna geç — böylece ekran boşalmıyor.
+            val previous = _nearby.value as? NearbyState.Ready
+            _nearby.value = previous?.copy(refreshing = true) ?: NearbyState.Locating
             when (val result = LocationHelper.currentLocation(getApplication())) {
                 is LocationResult.PermissionMissing ->
                     _nearby.value = NearbyState.NeedsPermission
@@ -141,7 +148,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                                 "Bildiğin bir yer varsa şehir sayfasından öner!",
                         )
                     } else {
-                        NearbyState.Ready(results, cityName)
+                        NearbyState.Ready(results, cityName, refreshing = false)
                     }
                 }
             }

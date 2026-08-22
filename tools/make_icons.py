@@ -58,8 +58,14 @@ def load_logo() -> Image.Image:
 def fit(logo: Image.Image, canvas: int, ratio: float) -> Image.Image:
     """Logoyu kare tuvalin ortasına, verilen oranda yerleştirir."""
     target = int(canvas * ratio)
-    scaled = logo.copy()
-    scaled.thumbnail((target, target), Image.LANCZOS)
+
+    # thumbnail() küçültür ama büyütmez; logo küçük kaldığında simge de küçük
+    # kalıyordu. Bu yüzden en uzun kenarı hedefe oturtup elle ölçekliyoruz.
+    factor = target / max(logo.width, logo.height)
+    scaled = logo.resize(
+        (max(int(logo.width * factor), 1), max(int(logo.height * factor), 1)),
+        Image.LANCZOS,
+    )
 
     layer = Image.new("RGBA", (canvas, canvas), (0, 0, 0, 0))
     layer.paste(
@@ -108,11 +114,17 @@ def main() -> int:
     drawable = RES / "drawable"
     drawable.mkdir(parents=True, exist_ok=True)
 
-    # Uyarlanabilir simge katmanı: 108dp tuvalde logo güvenli alanda (%58)
-    fit(logo, 432, 0.58).save(drawable / "ic_logo_foreground.png")
+    # Uyarlanabilir simge katmanı.
+    # Android 108dp tuvalin dış kenarlarını kırpar; güvenli alan içteki 72dp'dir.
+    # Launcher'lar ayrıca kendi maskesini uyguladığı için %48'de tutuyoruz —
+    # aksi halde simge ekranda taşmış gibi görünüyor.
+    fit(logo, 432, 0.48).save(drawable / "ic_logo_foreground.png")
 
-    # Uygulama içinde (splash, boş durumlar) kullanılacak logo
-    fit(logo, 384, 0.94).save(drawable / "ic_logo.png")
+    # Açılış (splash) ekranı ikonu: 288dp tuval, içteki 192dp görünür alan.
+    fit(logo, 768, 0.50).save(drawable / "ic_splash_logo.png")
+
+    # Uygulama içinde (başlık, boş durumlar) kullanılacak sade logo
+    fit(logo, 384, 0.96).save(drawable / "ic_logo.png")
 
     print("✓ Simgeler ve logo üretildi")
     return 0

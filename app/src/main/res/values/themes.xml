@@ -1,8 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <!--
+      Açılış ekranı. Android 12+ SplashScreen API'sini kullanır; alt sürümlerde
+      core-splashscreen kütüphanesi aynı görünümü taklit eder.
+    -->
     <style name="Theme.EsnafLokantalari" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/ic_launcher_background</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
+        <item name="android:windowSplashScreenBrandingImage" tools:targetApi="s">
+            @drawable/ic_branding
+        </item>
         <item name="postSplashScreenTheme">@style/Theme.EsnafLokantalari.Main</item>
     </style>
 
@@ -10,6 +17,7 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowBackground">@color/app_background</item>
     </style>
 
 </resources>

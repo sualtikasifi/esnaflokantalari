@@ -65,9 +65,8 @@ private val bottomTabs = listOf(
 )
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(viewModel: AppViewModel = viewModel()) {
     val navController: NavHostController = rememberNavController()
-    val viewModel: AppViewModel = viewModel()
     val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
 

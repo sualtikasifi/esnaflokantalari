@@ -10,3 +10,6 @@
 .cxx
 local.properties
 test-release.keystore
+keystore.properties
+*.keystore
+*.jks

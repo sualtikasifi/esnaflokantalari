@@ -102,8 +102,53 @@ Android Studio ile açmak için: klasörü "Open" ile aç, ▶️ butonuna bas.
 - Min Android 7.0 (API 24) · Hedef Android 15 (API 35)
 - Yayın sürümü R8 ile küçültülür (~1,5 MB)
 
-## Yayınlamadan önce
+## Google Play'e yayınlama
 
-`app/build.gradle.kts` içine imzalama ayarı eklenmeli — Google Play'e
-yüklemek için imzalı bir `.aab` gerekiyor. Android Studio'da
-**Build → Generate Signed Bundle** ile yapılabilir.
+### 1. İmza anahtarını oluştur (bir kez)
+
+⚠️ **Bu anahtarı kaybedersen uygulamayı bir daha güncelleyemezsin.** Yedeğini
+güvenli bir yerde (parola yöneticisi, bulut yedeği) sakla.
+
+```bash
+keytool -genkeypair -v \
+  -keystore esnaflokantalari-release.keystore \
+  -alias esnaflokantalari \
+  -keyalg RSA -keysize 2048 -validity 10000
+```
+
+Komut sana bir parola soracak ve birkaç bilgi isteyecek. Ardından
+`keystore.properties.example` dosyasını `keystore.properties` olarak kopyalayıp
+parolaları yaz. Bu dosya `.gitignore`'da, GitHub'a gitmez.
+
+### 2. Yükleme paketini üret
+
+```bash
+./gradlew bundleRelease
+```
+
+Çıktı: `app/build/outputs/bundle/release/app-release.aab` — Play Console'a
+yüklenecek dosya budur (APK değil).
+
+### 3. Play Console'da yapılacaklar
+
+`store/` klasöründe hazır olanlar:
+
+| Dosya | Ne için |
+|---|---|
+| `icon-512.png` | Uygulama simgesi (zorunlu) |
+| `feature-graphic.png` | Öne çıkan görsel (zorunlu) |
+| `magaza-metinleri.md` | Başlık, açıklamalar, form cevapları |
+| `gizlilik-politikasi.md` | Gizlilik politikası metni |
+
+Senin yapman gerekenler:
+
+1. [Play Console](https://play.google.com/console) hesabı aç (tek seferlik 25 USD)
+2. Gizlilik politikasını bir web adresinde yayımla (yöntem `magaza-metinleri.md` içinde)
+3. Telefonundan en az 2 ekran görüntüsü al
+4. `magaza-metinleri.md` içindeki metinleri ve form cevaplarını kopyala
+5. `.aab` dosyasını yükle
+
+### Sürüm numarası
+
+Her yeni yüklemede `app/build.gradle.kts` içindeki `versionCode` bir artmalı
+(1, 2, 3...). `versionName` kullanıcıya görünen sürümdür ("1.0.0", "1.1.0").

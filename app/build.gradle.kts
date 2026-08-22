@@ -1,7 +1,21 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
+
+/**
+ * Yayın imzası bilgileri repoya girmez. Kök dizindeki `keystore.properties`
+ * dosyasından okunur (bkz. keystore.properties.example).
+ * Dosya yoksa test anahtarına düşer, böylece derleme her zaman çalışır.
+ */
+val keystoreProperties = Properties().apply {
+    val file = rootProject.file("keystore.properties")
+    if (file.exists()) load(file.inputStream())
+}
+val hasReleaseKeystore = keystoreProperties.getProperty("storeFile")
+    ?.let { rootProject.file(it).exists() } == true
 
 android {
     namespace = "com.esnaflokantalari.app"
@@ -11,16 +25,23 @@ android {
         applicationId = "com.esnaflokantalari.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 2
-        versionName = "0.2.0"
+        versionCode = 3
+        versionName = "1.0.0"
 
         resourceConfigurations += listOf("tr", "en")
     }
 
     signingConfigs {
-        // Test amaçlı imza. Google Play'e yükleyeceğin sürüm için Android
-        // Studio'dan kendi anahtarını üretip burayı onunla değiştir —
-        // ve o anahtarı kaybetme, uygulamayı bir daha güncelleyemezsin.
+        // Google Play'e yüklenecek gerçek imza.
+        create("release") {
+            if (hasReleaseKeystore) {
+                storeFile = rootProject.file(keystoreProperties.getProperty("storeFile"))
+                storePassword = keystoreProperties.getProperty("storePassword")
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+            }
+        }
+        // Elde gerçek anahtar yokken test derlemesi yapabilmek için.
         create("testRelease") {
             val keystore = rootProject.file("test-release.keystore")
             if (keystore.exists()) {
@@ -34,7 +55,9 @@ android {
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("testRelease")
+            signingConfig = signingConfigs.getByName(
+                if (hasReleaseKeystore) "release" else "testRelease",
+            )
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

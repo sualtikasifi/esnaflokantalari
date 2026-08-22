@@ -1,0 +1,5 @@
+<resources>
+    <!-- Karanlık modda açılış ekranı da koyu olsun -->
+    <color name="splash_background">#1B1512</color>
+    <color name="app_background">#1B1512</color>
+</resources>
