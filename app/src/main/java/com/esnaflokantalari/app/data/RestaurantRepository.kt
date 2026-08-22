@@ -1,97 +1,132 @@
 package com.esnaflokantalari.app.data
 
-import com.esnaflokantalari.app.BuildConfig
+import android.content.Context
+import com.esnaflokantalari.app.model.City
 import com.esnaflokantalari.app.model.Restaurant
-import com.esnaflokantalari.app.network.Circle
-import com.esnaflokantalari.app.network.CenterLatLng
-import com.esnaflokantalari.app.network.LocationRestriction
-import com.esnaflokantalari.app.network.NetworkModule
-import com.esnaflokantalari.app.network.Place
-import com.esnaflokantalari.app.network.SearchNearbyRequest
-import com.esnaflokantalari.app.network.SearchTextRequest
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONObject
+import java.util.Locale
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
-sealed class RestaurantResult {
-    data class Success(val restaurants: List<Restaurant>, val isSampleData: Boolean) : RestaurantResult()
-    data class Error(val message: String) : RestaurantResult()
-}
-
 /**
- * Restoran verisi kaynağı. API anahtarı yoksa veya istek başarısız olursa
- * uygulamanın örnek (mock) verisine geri döner, böylece uygulama her zaman
- * bir şeyler gösterebilir.
+ * Tüm lokanta verisi uygulamanın içine gömülü `assets/restaurants.json`
+ * dosyasından okunur. Hiçbir ağ isteği yapılmaz, API anahtarı gerekmez,
+ * uygulama internetsiz de tam çalışır.
+ *
+ * Veriyi güncellemek için: tools/data/restaurants.csv dosyasını düzenle,
+ * `python3 tools/build_dataset.py` çalıştır, uygulamayı yeniden derle.
  */
-object RestaurantRepository {
+class RestaurantRepository(private val context: Context) {
 
-    suspend fun restaurantsForCity(cityName: String): RestaurantResult {
-        if (!NetworkModule.hasApiKey) {
-            return RestaurantResult.Success(SampleData.restaurantsForCity(cityName), isSampleData = true)
-        }
+    @Volatile
+    private var cache: Dataset? = null
 
-        return try {
-            val response = NetworkModule.placesApi.searchText(
-                apiKey = BuildConfig.MAPS_API_KEY,
-                request = SearchTextRequest(textQuery = "en iyi esnaf lokantası $cityName"),
-            )
-            val restaurants = response.places.map { it.toRestaurant(cityName) }
-            if (restaurants.isEmpty()) {
-                RestaurantResult.Success(SampleData.restaurantsForCity(cityName), isSampleData = true)
-            } else {
-                RestaurantResult.Success(restaurants, isSampleData = false)
+    data class Dataset(
+        val updatedAt: String,
+        val cities: List<City>,
+    ) {
+        val allRestaurants: List<Restaurant> = cities.flatMap { it.restaurants }
+    }
+
+    suspend fun dataset(): Dataset {
+        cache?.let { return it }
+        return withContext(Dispatchers.IO) {
+            synchronized(this@RestaurantRepository) {
+                cache ?: parse().also { cache = it }
             }
-        } catch (e: Exception) {
-            RestaurantResult.Success(SampleData.restaurantsForCity(cityName), isSampleData = true)
         }
     }
 
-    suspend fun nearbyRestaurants(latitude: Double, longitude: Double, radiusMeters: Double = 3000.0): RestaurantResult {
-        if (!NetworkModule.hasApiKey) {
-            return RestaurantResult.Error("Google Haritalar bağlantısı henüz kurulmadı. README'deki kurulum adımlarını takip et.")
-        }
+    suspend fun cities(): List<City> = dataset().cities
 
-        return try {
-            val response = NetworkModule.placesApi.searchNearby(
-                apiKey = BuildConfig.MAPS_API_KEY,
-                request = SearchNearbyRequest(
-                    locationRestriction = LocationRestriction(
-                        circle = Circle(center = CenterLatLng(latitude, longitude), radius = radiusMeters),
-                    ),
-                ),
+    suspend fun city(name: String): City? =
+        dataset().cities.firstOrNull { it.name.equalsTr(name) }
+
+    suspend fun restaurant(id: String): Restaurant? =
+        dataset().allRestaurants.firstOrNull { it.id == id }
+
+    /** Puanı en yüksek, yorumu en çok lokantalar — ana sayfa vitrini için. */
+    suspend fun featured(limit: Int = 10): List<Restaurant> =
+        dataset().allRestaurants
+            .filter { it.hasRating }
+            .sortedWith(
+                compareByDescending<Restaurant> { it.rating ?: 0.0 }
+                    .thenByDescending { it.reviewCount ?: 0 },
             )
-            val restaurants = response.places
-                .map { it.toRestaurant(city = "") }
-                .map { restaurant ->
-                    val distance = restaurant.latitude?.let { lat ->
-                        restaurant.longitude?.let { lng ->
-                            distanceInMeters(latitude, longitude, lat, lng)
-                        }
-                    }
-                    restaurant.copy(distanceMeters = distance)
-                }
-                .sortedBy { it.distanceMeters ?: Double.MAX_VALUE }
+            .take(limit)
 
-            RestaurantResult.Success(restaurants, isSampleData = false)
-        } catch (e: Exception) {
-            RestaurantResult.Error("Yakındaki lokantalar alınamadı: ${e.message}")
-        }
+    /** Verilen konuma en yakın lokantalar. Koordinatı olmayanlar elenir. */
+    suspend fun nearby(latitude: Double, longitude: Double, limit: Int = 30): List<Restaurant> =
+        dataset().allRestaurants
+            .mapNotNull { restaurant ->
+                val lat = restaurant.latitude ?: return@mapNotNull null
+                val lng = restaurant.longitude ?: return@mapNotNull null
+                restaurant.copy(distanceMeters = distanceInMeters(latitude, longitude, lat, lng))
+            }
+            .sortedBy { it.distanceMeters ?: Double.MAX_VALUE }
+            .take(limit)
+
+    suspend fun searchCities(query: String): List<City> {
+        val cities = cities()
+        if (query.isBlank()) return cities
+        return cities.filter { it.name.containsTr(query) }
     }
 
-    private fun Place.toRestaurant(city: String): Restaurant {
-        return Restaurant(
-            id = id,
-            name = displayName?.text ?: "İsimsiz Lokanta",
-            city = city,
-            category = primaryTypeDisplayName?.text ?: "Lokanta",
-            rating = rating ?: 0.0,
-            reviewCount = userRatingCount ?: 0,
-            address = formattedAddress ?: "",
-            mapsUrl = "https://www.google.com/maps/place/?q=place_id:$id",
-            latitude = location?.latitude,
-            longitude = location?.longitude,
-        )
+    private fun parse(): Dataset {
+        val json = context.assets.open(ASSET_NAME).bufferedReader().use { it.readText() }
+        val root = JSONObject(json)
+        val cityArray = root.optJSONArray("cities") ?: JSONArray()
+
+        val cities = buildList {
+            for (i in 0 until cityArray.length()) {
+                val cityJson = cityArray.getJSONObject(i)
+                val cityName = cityJson.getString("name")
+                add(
+                    City(
+                        name = cityName,
+                        slug = cityJson.optString("slug"),
+                        plate = cityJson.optIntOrNull("plate"),
+                        tagline = cityJson.optString("tagline"),
+                        restaurants = cityJson.optJSONArray("restaurants").toRestaurants(cityName),
+                    ),
+                )
+            }
+        }
+
+        return Dataset(updatedAt = root.optString("updatedAt"), cities = cities)
+    }
+
+    private fun JSONArray?.toRestaurants(cityName: String): List<Restaurant> {
+        if (this == null) return emptyList()
+        return buildList {
+            for (i in 0 until length()) {
+                val item = getJSONObject(i)
+                add(
+                    Restaurant(
+                        id = item.getString("id"),
+                        name = item.getString("name"),
+                        city = cityName,
+                        category = item.optString("category", "Lokanta"),
+                        tags = item.optJSONArray("tags").toStringList(),
+                        rating = item.optDoubleOrNull("rating"),
+                        reviewCount = item.optIntOrNull("reviewCount"),
+                        address = item.optString("address"),
+                        phone = item.optStringOrNull("phone"),
+                        priceLevel = item.optIntOrNull("priceLevel"),
+                        latitude = item.optDoubleOrNull("latitude"),
+                        longitude = item.optDoubleOrNull("longitude"),
+                        mapsUrl = item.optStringOrNull("mapsUrl"),
+                        photoUrl = item.optStringOrNull("photoUrl"),
+                        note = item.optStringOrNull("note"),
+                    ),
+                )
+            }
+        }
     }
 
     private fun distanceInMeters(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
@@ -101,7 +136,37 @@ object RestaurantRepository {
         val a = sin(dLat / 2) * sin(dLat / 2) +
             cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) *
             sin(dLon / 2) * sin(dLon / 2)
-        val c = 2 * atan2(sqrt(a), sqrt(1 - a))
-        return earthRadius * c
+        return earthRadius * 2 * atan2(sqrt(a), sqrt(1 - a))
+    }
+
+    private companion object {
+        const val ASSET_NAME = "restaurants.json"
+    }
+}
+
+private val TURKISH = Locale("tr", "TR")
+
+/** Türkçe'ye duyarlı küçük harfe çevirme — "İSTANBUL" → "istanbul". */
+internal fun String.lowercaseTr(): String = lowercase(TURKISH)
+
+internal fun String.equalsTr(other: String): Boolean = lowercaseTr() == other.lowercaseTr()
+
+internal fun String.containsTr(other: String): Boolean = lowercaseTr().contains(other.lowercaseTr())
+
+private fun JSONObject.optStringOrNull(key: String): String? =
+    if (isNull(key)) null else optString(key).takeIf { it.isNotBlank() }
+
+private fun JSONObject.optIntOrNull(key: String): Int? =
+    if (isNull(key)) null else optInt(key).takeIf { has(key) }
+
+private fun JSONObject.optDoubleOrNull(key: String): Double? =
+    if (isNull(key)) null else optDouble(key).takeIf { !it.isNaN() }
+
+private fun JSONArray?.toStringList(): List<String> {
+    if (this == null) return emptyList()
+    return buildList {
+        for (i in 0 until length()) {
+            optString(i).takeIf { it.isNotBlank() }?.let { add(it) }
+        }
     }
 }

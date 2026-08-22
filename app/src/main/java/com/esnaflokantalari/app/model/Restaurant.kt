@@ -1,25 +1,43 @@
 package com.esnaflokantalari.app.model
 
+import android.net.Uri
+
 data class Restaurant(
     val id: String,
     val name: String,
     val city: String,
     val category: String,
-    val rating: Double,
-    val reviewCount: Int,
-    val address: String,
-    val mapsUrl: String,
-    val dailySpecial: String? = null,
+    val tags: List<String> = emptyList(),
+    val rating: Double? = null,
+    val reviewCount: Int? = null,
+    val address: String = "",
+    val phone: String? = null,
+    val priceLevel: Int? = null,
     val latitude: Double? = null,
     val longitude: Double? = null,
+    val mapsUrl: String? = null,
+    val photoUrl: String? = null,
+    val note: String? = null,
     val distanceMeters: Double? = null,
 ) {
-    /** Gerçek fotoğrafımız olmadığında gösterilecek, id'ye göre sabit bir kapak görseli. */
-    val coverPhotoUrl: String
-        get() = "https://picsum.photos/seed/$id/600/450"
-}
+    /** Puanı olmayan mekanlar için "-" göstermek yerine bu kontrol kullanılır. */
+    val hasRating: Boolean get() = (rating ?: 0.0) > 0.0
 
-data class City(
-    val name: String,
-    val slug: String,
-)
+    /** Kartlarda gösterilecek etiketler; hiç etiket yoksa kategoriye düşer. */
+    val displayTags: List<String>
+        get() = tags.ifEmpty { listOf(category) }
+
+    /** ₺ / ₺₺ / ₺₺₺ gösterimi. */
+    val priceLabel: String?
+        get() = priceLevel?.takeIf { it in 1..4 }?.let { "₺".repeat(it) }
+
+    /**
+     * Haritada açmak için kullanılacak adres. Koordinat varsa onu, yoksa
+     * ad + adres araması kullanır — böylece maps_url girilmemiş olsa da çalışır.
+     */
+    fun mapsQuery(): String = when {
+        !mapsUrl.isNullOrBlank() -> mapsUrl
+        latitude != null && longitude != null -> "geo:$latitude,$longitude?q=$latitude,$longitude(${Uri.encode(name)})"
+        else -> "geo:0,0?q=${Uri.encode("$name $address")}"
+    }
+}

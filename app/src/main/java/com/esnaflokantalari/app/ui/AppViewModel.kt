@@ -5,62 +5,136 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.esnaflokantalari.app.data.FavoritesStore
 import com.esnaflokantalari.app.data.RestaurantRepository
-import com.esnaflokantalari.app.data.RestaurantResult
+import com.esnaflokantalari.app.data.Suggestion
+import com.esnaflokantalari.app.data.SuggestionsStore
+import com.esnaflokantalari.app.model.City
 import com.esnaflokantalari.app.model.Restaurant
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.util.UUID
 
-sealed class LoadState {
-    data object Loading : LoadState()
-    data class Loaded(val restaurants: List<Restaurant>, val isSampleData: Boolean) : LoadState()
-    data class Failed(val message: String) : LoadState()
+sealed interface NearbyState {
+    /** Konum izni henüz istenmedi ya da kullanıcı "daha sonra" dedi. */
+    data object NeedsPermission : NearbyState
+    data object Locating : NearbyState
+    data class Ready(val restaurants: List<Restaurant>) : NearbyState
+    data class Failed(val message: String) : NearbyState
 }
 
 class AppViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val repository = RestaurantRepository(application)
     private val favoritesStore = FavoritesStore(application)
+    private val suggestionsStore = SuggestionsStore(application)
+
+    val favorites: StateFlow<List<Restaurant>> = favoritesStore.favorites
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     val favoriteIds: StateFlow<Set<String>> = favoritesStore.favoriteIds
-        .stateIn(viewModelScope, kotlinx.coroutines.flow.SharingStarted.Eagerly, emptySet())
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
 
-    private val cityStates = mutableMapOf<String, MutableStateFlow<LoadState>>()
-    private val nearbyState = MutableStateFlow<LoadState>(LoadState.Loading)
+    val suggestions: StateFlow<List<Suggestion>> = suggestionsStore.suggestions
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
-    fun toggleFavorite(restaurantId: String) {
-        viewModelScope.launch { favoritesStore.toggle(restaurantId) }
-    }
+    private val _cities = MutableStateFlow<List<City>>(emptyList())
+    val cities: StateFlow<List<City>> = _cities.asStateFlow()
 
-    fun cityState(cityName: String): StateFlow<LoadState> {
-        return cityStates.getOrPut(cityName) {
-            val flow = MutableStateFlow<LoadState>(LoadState.Loading)
-            viewModelScope.launch {
-                when (val result = RestaurantRepository.restaurantsForCity(cityName)) {
-                    is RestaurantResult.Success -> flow.value = LoadState.Loaded(result.restaurants, result.isSampleData)
-                    is RestaurantResult.Error -> flow.value = LoadState.Failed(result.message)
-                }
-            }
-            flow
+    private val _featured = MutableStateFlow<List<Restaurant>>(emptyList())
+    val featured: StateFlow<List<Restaurant>> = _featured.asStateFlow()
+
+    private val _dataUpdatedAt = MutableStateFlow("")
+    val dataUpdatedAt: StateFlow<String> = _dataUpdatedAt.asStateFlow()
+
+    private val _nearby = MutableStateFlow<NearbyState>(NearbyState.NeedsPermission)
+    val nearby: StateFlow<NearbyState> = _nearby.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            val dataset = repository.dataset()
+            _cities.value = dataset.cities
+            _dataUpdatedAt.value = dataset.updatedAt
+            _featured.value = repository.featured()
         }
     }
 
-    fun nearbyState(): StateFlow<LoadState> = nearbyState
+    fun city(cityName: String): City? = _cities.value.firstOrNull { it.name == cityName }
+
+    /**
+     * Detay ekranı için lokantayı bulur. Önce gömülü veri, sonra favoriler
+     * (aylık güncellemede listeden çıkmış bir favori de açılabilsin diye).
+     */
+    fun findRestaurant(restaurantId: String): Restaurant? =
+        _cities.value.asSequence()
+            .flatMap { it.restaurants.asSequence() }
+            .firstOrNull { it.id == restaurantId }
+            ?: favorites.value.firstOrNull { it.id == restaurantId }
+            ?: (nearby.value as? NearbyState.Ready)?.restaurants?.firstOrNull { it.id == restaurantId }
+
+    fun toggleFavorite(restaurant: Restaurant) {
+        viewModelScope.launch { favoritesStore.toggle(restaurant) }
+    }
+
+    fun toggleFavoriteById(restaurantId: String) {
+        findRestaurant(restaurantId)?.let { toggleFavorite(it) }
+    }
+
+    // --- Yakınımda ---
+
+    fun onLocationPermissionDenied() {
+        _nearby.value = NearbyState.NeedsPermission
+    }
+
+    fun onLocatingStarted() {
+        _nearby.value = NearbyState.Locating
+    }
+
+    fun onLocationUnavailable() {
+        _nearby.value = NearbyState.Failed(
+            "Konumun alınamadı. Konum servisinin açık olduğundan emin olup tekrar dene.",
+        )
+    }
 
     fun loadNearby(latitude: Double, longitude: Double) {
-        nearbyState.value = LoadState.Loading
         viewModelScope.launch {
-            when (val result = RestaurantRepository.nearbyRestaurants(latitude, longitude)) {
-                is RestaurantResult.Success -> nearbyState.value = LoadState.Loaded(result.restaurants, result.isSampleData)
-                is RestaurantResult.Error -> nearbyState.value = LoadState.Failed(result.message)
+            val results = repository.nearby(latitude, longitude)
+            _nearby.value = if (results.isEmpty()) {
+                NearbyState.Failed(
+                    "Yakınında kayıtlı bir esnaf lokantası bulunamadı. " +
+                        "Bildiğin bir yer varsa şehir sayfasından öner!",
+                )
+            } else {
+                NearbyState.Ready(results)
             }
         }
     }
 
-    fun findRestaurant(restaurantId: String): Restaurant? {
-        val fromCities = cityStates.values.mapNotNull { (it.value as? LoadState.Loaded)?.restaurants }.flatten()
-        val fromNearby = (nearbyState.value as? LoadState.Loaded)?.restaurants ?: emptyList()
-        return (fromCities + fromNearby).firstOrNull { it.id == restaurantId }
-            ?: com.esnaflokantalari.app.data.SampleData.restaurants.firstOrNull { it.id == restaurantId }
+    // --- Öneriler ---
+
+    fun addSuggestion(city: String, name: String, category: String, address: String, note: String) {
+        viewModelScope.launch {
+            suggestionsStore.add(
+                Suggestion(
+                    id = UUID.randomUUID().toString(),
+                    city = city,
+                    name = name.trim(),
+                    category = category.trim().ifBlank { "Lokanta" },
+                    address = address.trim(),
+                    note = note.trim(),
+                    createdAt = System.currentTimeMillis(),
+                ),
+            )
+        }
+    }
+
+    fun removeSuggestion(id: String) {
+        viewModelScope.launch { suggestionsStore.remove(id) }
+    }
+
+    fun markSuggestionSent(id: String) {
+        viewModelScope.launch { suggestionsStore.markSent(id) }
     }
 }

@@ -1,7 +1,6 @@
 package com.esnaflokantalari.app.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -26,11 +26,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.esnaflokantalari.app.model.Restaurant
+import com.esnaflokantalari.app.ui.formatCount
+import com.esnaflokantalari.app.ui.formatDistance
+import com.esnaflokantalari.app.ui.formatRating
 import com.esnaflokantalari.app.ui.theme.ChipBackground
 import com.esnaflokantalari.app.ui.theme.StarGold
 import com.esnaflokantalari.app.ui.theme.Terracotta
@@ -51,41 +54,51 @@ fun RestaurantCard(
     ) {
         Column {
             Box {
-                AsyncImage(
-                    model = restaurant.coverPhotoUrl,
-                    contentDescription = restaurant.name,
-                    contentScale = ContentScale.Crop,
+                RestaurantVisual(
+                    restaurant = restaurant,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .aspectRatio(4f / 3f),
+                        .aspectRatio(16f / 9f),
                 )
-                Row(
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(10.dp)
-                        .clip(RoundedCornerShape(50))
-                        .background(androidx.compose.ui.graphics.Color.White.copy(alpha = 0.92f))
-                        .padding(horizontal = 10.dp, vertical = 5.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Icon(Icons.Filled.Star, contentDescription = null, tint = StarGold, modifier = Modifier.padding(end = 4.dp))
-                    Text(
-                        if (restaurant.rating > 0) "%.1f".format(restaurant.rating) else "-",
-                        fontWeight = FontWeight.Bold,
-                    )
+
+                if (restaurant.hasRating) {
+                    Row(
+                        modifier = Modifier
+                            .align(Alignment.BottomStart)
+                            .padding(10.dp)
+                            .clip(RoundedCornerShape(50))
+                            .background(Color.White.copy(alpha = 0.94f))
+                            .padding(horizontal = 10.dp, vertical = 5.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(
+                            Icons.Filled.Star,
+                            contentDescription = "Puan",
+                            tint = StarGold,
+                            modifier = Modifier.size(16.dp),
+                        )
+                        Text(
+                            restaurant.rating!!.formatRating(),
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF241A15),
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.padding(start = 4.dp),
+                        )
+                    }
                 }
+
                 if (onToggleFavorite != null) {
                     IconButton(
                         onClick = onToggleFavorite,
                         modifier = Modifier
-                            .align(Alignment.TopStart)
-                            .padding(6.dp)
+                            .align(Alignment.TopEnd)
+                            .padding(8.dp)
                             .clip(CircleShape)
-                            .background(androidx.compose.ui.graphics.Color.White.copy(alpha = 0.92f)),
+                            .background(Color.White.copy(alpha = 0.94f)),
                     ) {
                         Icon(
                             if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                            contentDescription = "Favori",
+                            contentDescription = if (isFavorite) "Favorilerden çıkar" else "Favorilere ekle",
                             tint = Terracotta,
                         )
                     }
@@ -93,13 +106,31 @@ fun RestaurantCard(
             }
 
             Column(modifier = Modifier.padding(16.dp)) {
-                Text(restaurant.name, style = MaterialTheme.typography.titleMedium)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        restaurant.name,
+                        style = MaterialTheme.typography.titleMedium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f, fill = false),
+                    )
+                    restaurant.priceLabel?.let { price ->
+                        Text(
+                            price,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.padding(start = 8.dp),
+                        )
+                    }
+                }
+
                 Row(
                     modifier = Modifier.padding(top = 8.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    CategoryChip(restaurant.category)
+                    restaurant.displayTags.take(2).forEach { tag -> TagChip(tag) }
                 }
+
                 Row(
                     modifier = Modifier.padding(top = 10.dp),
                     verticalAlignment = Alignment.CenterVertically,
@@ -108,19 +139,31 @@ fun RestaurantCard(
                         Icons.Filled.LocationOn,
                         contentDescription = null,
                         tint = Terracotta,
-                        modifier = Modifier.padding(end = 4.dp),
+                        modifier = Modifier.size(16.dp),
                     )
-                    val locationText = restaurant.distanceMeters?.let { "%.1f km uzaklıkta".format(it / 1000) }
-                        ?: "${restaurant.reviewCount} yorum"
-                    Text(locationText, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(
+                        restaurant.subtitleText(),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        style = MaterialTheme.typography.bodyMedium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.padding(start = 4.dp),
+                    )
                 }
             }
         }
     }
 }
 
+private fun Restaurant.subtitleText(): String = when {
+    distanceMeters != null -> "${distanceMeters.formatDistance()} uzaklıkta"
+    (reviewCount ?: 0) > 0 -> "${reviewCount!!.formatCount()} yorum"
+    address.isNotBlank() -> address
+    else -> city
+}
+
 @Composable
-private fun CategoryChip(label: String) {
+private fun TagChip(label: String) {
     Text(
         label,
         modifier = Modifier
@@ -128,5 +171,6 @@ private fun CategoryChip(label: String) {
             .background(ChipBackground)
             .padding(horizontal = 12.dp, vertical = 6.dp),
         style = MaterialTheme.typography.labelLarge,
+        maxLines = 1,
     )
 }

@@ -1,0 +1,671 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-22",
+  "minRating": 4.3,
+  "cities": [
+    {
+      "name": "Adana",
+      "slug": "adana",
+      "plate": 1,
+      "tagline": "Sıcacık kebapları ve zengin sofralarıyla",
+      "restaurants": [
+        {
+          "id": "adana-kaya-kebap",
+          "name": "Kaya Kebap",
+          "category": "Kebap Restoranı",
+          "tags": [
+            "Kebap",
+            "Yöresel"
+          ],
+          "rating": 4.9,
+          "reviewCount": 18823,
+          "address": "Seyhan, Adana",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": null,
+          "longitude": null,
+          "mapsUrl": null,
+          "photoUrl": null,
+          "note": "Adana'nın en çok yorum alan kebapçısı"
+        },
+        {
+          "id": "adana-istah-kebap-1950",
+          "name": "İştah Kebap 1950",
+          "category": "Lokanta",
+          "tags": [
+            "Kebap",
+            "Ev Yemekleri"
+          ],
+          "rating": 4.6,
+          "reviewCount": 9021,
+          "address": "Çukurova, Adana",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": null,
+          "longitude": null,
+          "mapsUrl": null,
+          "photoUrl": null,
+          "note": "1950'den beri hizmette"
+        },
+        {
+          "id": "adana-kazim-bufe",
+          "name": "Kazım Büfe",
+          "category": "Lokanta",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 3120,
+          "address": "Yüreğir, Adana",
+          "phone": null,
+          "priceLevel": 1,
+          "latitude": null,
+          "longitude": null,
+          "mapsUrl": null,
+          "photoUrl": null,
+          "note": null
+        }
+      ]
+    },
+    {
+      "name": "Adıyaman",
+      "slug": "adiyaman",
+      "plate": 2,
+      "tagline": "Çiğ köftesi ve tarihi lezzet durakları",
+      "restaurants": []
+    },
+    {
+      "name": "Afyonkarahisar",
+      "slug": "afyonkarahisar",
+      "plate": 3,
+      "tagline": "Sucuğu ve kaymağıyla meşhur",
+      "restaurants": []
+    },
+    {
+      "name": "Ağrı",
+      "slug": "agri",
+      "plate": 4,
+      "tagline": "Doğu'nun sade ve doyurucu sofraları",
+      "restaurants": []
+    },
+    {
+      "name": "Amasya",
+      "slug": "amasya",
+      "plate": 5,
+      "tagline": "Bamyası ve ev yemekleriyle",
+      "restaurants": []
+    },
+    {
+      "name": "Ankara",
+      "slug": "ankara",
+      "plate": 6,
+      "tagline": "Beypazarı güveci ve Ankara tavasıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Antalya",
+      "slug": "antalya",
+      "plate": 7,
+      "tagline": "Piyazı ve şiş köftesiyle",
+      "restaurants": []
+    },
+    {
+      "name": "Artvin",
+      "slug": "artvin",
+      "plate": 8,
+      "tagline": "Muhlaması ve Karadeniz tatlarıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Aydın",
+      "slug": "aydin",
+      "plate": 9,
+      "tagline": "Zeytinyağlıları ve çöp şişiyle",
+      "restaurants": []
+    },
+    {
+      "name": "Balıkesir",
+      "slug": "balikesir",
+      "plate": 10,
+      "tagline": "Höşmerimi ve kuzu etiyle",
+      "restaurants": []
+    },
+    {
+      "name": "Bilecik",
+      "slug": "bilecik",
+      "plate": 11,
+      "tagline": "Papaz köftesi ve yöresel sofralar",
+      "restaurants": []
+    },
+    {
+      "name": "Bingöl",
+      "slug": "bingol",
+      "plate": 12,
+      "tagline": "Doğu mutfağının sade lezzetleri",
+      "restaurants": []
+    },
+    {
+      "name": "Bitlis",
+      "slug": "bitlis",
+      "plate": 13,
+      "tagline": "Büryan kebabının memleketi",
+      "restaurants": []
+    },
+    {
+      "name": "Bolu",
+      "slug": "bolu",
+      "plate": 14,
+      "tagline": "Türk mutfağının aşçı ocağı",
+      "restaurants": []
+    },
+    {
+      "name": "Burdur",
+      "slug": "burdur",
+      "plate": 15,
+      "tagline": "Şiş köftesi ve testi kebabıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Bursa",
+      "slug": "bursa",
+      "plate": 16,
+      "tagline": "İskender ve İnegöl köftesiyle",
+      "restaurants": []
+    },
+    {
+      "name": "Çanakkale",
+      "slug": "canakkale",
+      "plate": 17,
+      "tagline": "Peynir helvası ve deniz mahsulleriyle",
+      "restaurants": []
+    },
+    {
+      "name": "Çankırı",
+      "slug": "cankiri",
+      "plate": 18,
+      "tagline": "Tuzlu sofralar ve ev yemekleri",
+      "restaurants": []
+    },
+    {
+      "name": "Çorum",
+      "slug": "corum",
+      "plate": 19,
+      "tagline": "Leblebisi ve mantısıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Denizli",
+      "slug": "denizli",
+      "plate": 20,
+      "tagline": "Kebabı ve tandırıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Diyarbakır",
+      "slug": "diyarbakir",
+      "plate": 21,
+      "tagline": "Kaburga dolması ve ciğerciyle",
+      "restaurants": []
+    },
+    {
+      "name": "Edirne",
+      "slug": "edirne",
+      "plate": 22,
+      "tagline": "Tava ciğerinin başkenti",
+      "restaurants": []
+    },
+    {
+      "name": "Elazığ",
+      "slug": "elazig",
+      "plate": 23,
+      "tagline": "Harput köftesi ve içli köftesiyle",
+      "restaurants": []
+    },
+    {
+      "name": "Erzincan",
+      "slug": "erzincan",
+      "plate": 24,
+      "tagline": "Tulum peyniri ve yöresel sofralar",
+      "restaurants": []
+    },
+    {
+      "name": "Erzurum",
+      "slug": "erzurum",
+      "plate": 25,
+      "tagline": "Cağ kebabının memleketi",
+      "restaurants": []
+    },
+    {
+      "name": "Eskişehir",
+      "slug": "eskisehir",
+      "plate": 26,
+      "tagline": "Çibörek ve met helvasıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Gaziantep",
+      "slug": "gaziantep",
+      "plate": 27,
+      "tagline": "Türkiye'nin gastronomi başkenti",
+      "restaurants": [
+        {
+          "id": "gaziantep-imam-cagdas",
+          "name": "İmam Çağdaş",
+          "category": "Kebapçı & Baklavacı",
+          "tags": [
+            "Kebap",
+            "Baklava"
+          ],
+          "rating": null,
+          "reviewCount": null,
+          "address": "Şahinbey, Gaziantep",
+          "phone": null,
+          "priceLevel": 3,
+          "latitude": null,
+          "longitude": null,
+          "mapsUrl": null,
+          "photoUrl": null,
+          "note": "Antep'in en bilinen adreslerinden"
+        }
+      ]
+    },
+    {
+      "name": "Giresun",
+      "slug": "giresun",
+      "plate": 28,
+      "tagline": "Karadeniz'in balık ve pidesiyle",
+      "restaurants": []
+    },
+    {
+      "name": "Gümüşhane",
+      "slug": "gumushane",
+      "plate": 29,
+      "tagline": "Pestili ve dağ sofralarıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Hakkari",
+      "slug": "hakkari",
+      "plate": 30,
+      "tagline": "Doğu'nun otlu yemekleriyle",
+      "restaurants": []
+    },
+    {
+      "name": "Hatay",
+      "slug": "hatay",
+      "plate": 31,
+      "tagline": "Künefesi ve tepsi kebabıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Isparta",
+      "slug": "isparta",
+      "plate": 32,
+      "tagline": "Gül diyarının ev yemekleri",
+      "restaurants": []
+    },
+    {
+      "name": "Mersin",
+      "slug": "mersin",
+      "plate": 33,
+      "tagline": "Tantunisi ve cezeryesiyle",
+      "restaurants": []
+    },
+    {
+      "name": "İstanbul",
+      "slug": "istanbul",
+      "plate": 34,
+      "tagline": "Her mahallesinde başka bir lezzet",
+      "restaurants": [
+        {
+          "id": "istanbul-siirt-seref-buryan",
+          "name": "Siirt Şeref Büryan",
+          "category": "Büryan Kebapçısı",
+          "tags": [
+            "Büryan",
+            "Yöresel"
+          ],
+          "rating": null,
+          "reviewCount": null,
+          "address": "Fatih, İstanbul",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": null,
+          "longitude": null,
+          "mapsUrl": null,
+          "photoUrl": null,
+          "note": "Kadınlar Pazarı'nın klasiği"
+        }
+      ]
+    },
+    {
+      "name": "İzmir",
+      "slug": "izmir",
+      "plate": 35,
+      "tagline": "Boyoz ve ege otlarıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Kars",
+      "slug": "kars",
+      "plate": 36,
+      "tagline": "Kaz eti ve gravyer peyniriyle",
+      "restaurants": []
+    },
+    {
+      "name": "Kastamonu",
+      "slug": "kastamonu",
+      "plate": 37,
+      "tagline": "Etli ekmeği ve pastırmasıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Kayseri",
+      "slug": "kayseri",
+      "plate": 38,
+      "tagline": "Mantısı ve pastırmasıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Kırklareli",
+      "slug": "kirklareli",
+      "plate": 39,
+      "tagline": "Hardaliyesi ve Trakya sofraları",
+      "restaurants": []
+    },
+    {
+      "name": "Kırşehir",
+      "slug": "kirsehir",
+      "plate": 40,
+      "tagline": "Ev yemekleri ve yöresel tatlar",
+      "restaurants": []
+    },
+    {
+      "name": "Kocaeli",
+      "slug": "kocaeli",
+      "plate": 41,
+      "tagline": "Pişmaniyesi ve esnaf lokantalarıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Konya",
+      "slug": "konya",
+      "plate": 42,
+      "tagline": "Etli ekmek ve fırın kebabıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Kütahya",
+      "slug": "kutahya",
+      "plate": 43,
+      "tagline": "Gömlek çorbası ve ev yemekleri",
+      "restaurants": []
+    },
+    {
+      "name": "Malatya",
+      "slug": "malatya",
+      "plate": 44,
+      "tagline": "Kayısısı ve kağıt kebabıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Manisa",
+      "slug": "manisa",
+      "plate": 45,
+      "tagline": "Mesir tatlısı ve kebabıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Kahramanmaraş",
+      "slug": "kahramanmaras",
+      "plate": 46,
+      "tagline": "Dondurması ve tarhana çorbasıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Mardin",
+      "slug": "mardin",
+      "plate": 47,
+      "tagline": "İkbebet ve taş sofralarıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Muğla",
+      "slug": "mugla",
+      "plate": 48,
+      "tagline": "Zeytinyağlıları ve deniz mahsulleriyle",
+      "restaurants": []
+    },
+    {
+      "name": "Muş",
+      "slug": "mus",
+      "plate": 49,
+      "tagline": "Doğu'nun sade ve bereketli sofraları",
+      "restaurants": []
+    },
+    {
+      "name": "Nevşehir",
+      "slug": "nevsehir",
+      "plate": 50,
+      "tagline": "Testi kebabı ve Kapadokya tatlarıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Niğde",
+      "slug": "nigde",
+      "plate": 51,
+      "tagline": "Gölleme ve yöresel ev yemekleriyle",
+      "restaurants": []
+    },
+    {
+      "name": "Ordu",
+      "slug": "ordu",
+      "plate": 52,
+      "tagline": "Karadeniz pidesi ve balıklarıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Rize",
+      "slug": "rize",
+      "plate": 53,
+      "tagline": "Muhlama ve hamsisiyle",
+      "restaurants": []
+    },
+    {
+      "name": "Sakarya",
+      "slug": "sakarya",
+      "plate": 54,
+      "tagline": "Islama köftesinin memleketi",
+      "restaurants": []
+    },
+    {
+      "name": "Samsun",
+      "slug": "samsun",
+      "plate": 55,
+      "tagline": "Pidesi ve Karadeniz sofralarıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Siirt",
+      "slug": "siirt",
+      "plate": 56,
+      "tagline": "Büryanı ve perde pilavıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Sinop",
+      "slug": "sinop",
+      "plate": 57,
+      "tagline": "Mantısı ve balık lokantalarıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Sivas",
+      "slug": "sivas",
+      "plate": 58,
+      "tagline": "Kelle söğüşü ve etli mantısıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Tekirdağ",
+      "slug": "tekirdag",
+      "plate": 59,
+      "tagline": "Köftesi ve Trakya sofralarıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Tokat",
+      "slug": "tokat",
+      "plate": 60,
+      "tagline": "Kebabı ve bez sarmasıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Trabzon",
+      "slug": "trabzon",
+      "plate": 61,
+      "tagline": "Akçaabat köftesi ve hamsisiyle",
+      "restaurants": []
+    },
+    {
+      "name": "Tunceli",
+      "slug": "tunceli",
+      "plate": 62,
+      "tagline": "Dağ otları ve sade sofralarıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Şanlıurfa",
+      "slug": "sanliurfa",
+      "plate": 63,
+      "tagline": "Çiğ köftesi ve şıllık tatlısıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Uşak",
+      "slug": "usak",
+      "plate": 64,
+      "tagline": "Tarhanası ve ev yemekleriyle",
+      "restaurants": []
+    },
+    {
+      "name": "Van",
+      "slug": "van",
+      "plate": 65,
+      "tagline": "Kahvaltısı ve otlu peyniriyle",
+      "restaurants": []
+    },
+    {
+      "name": "Yozgat",
+      "slug": "yozgat",
+      "plate": 66,
+      "tagline": "Testi kebabı ve arabaşısıyla",
+      "restaurants": []
+    },
+    {
+      "name": "Zonguldak",
+      "slug": "zonguldak",
+      "plate": 67,
+      "tagline": "Karadeniz'in maden şehri sofraları",
+      "restaurants": []
+    },
+    {
+      "name": "Aksaray",
+      "slug": "aksaray",
+      "plate": 68,
+      "tagline": "Tava ciğeri ve yöresel tatlar",
+      "restaurants": []
+    },
+    {
+      "name": "Bayburt",
+      "slug": "bayburt",
+      "plate": 69,
+      "tagline": "Lor dolması ve dağ sofraları",
+      "restaurants": []
+    },
+    {
+      "name": "Karaman",
+      "slug": "karaman",
+      "plate": 70,
+      "tagline": "Divle tulumu ve ev yemekleriyle",
+      "restaurants": []
+    },
+    {
+      "name": "Kırıkkale",
+      "slug": "kirikkale",
+      "plate": 71,
+      "tagline": "Esnaf lokantaları ve ev yemekleri",
+      "restaurants": []
+    },
+    {
+      "name": "Batman",
+      "slug": "batman",
+      "plate": 72,
+      "tagline": "Büryanı ve yöresel sofraları",
+      "restaurants": []
+    },
+    {
+      "name": "Şırnak",
+      "slug": "sirnak",
+      "plate": 73,
+      "tagline": "Doğu mutfağının sade tatları",
+      "restaurants": []
+    },
+    {
+      "name": "Bartın",
+      "slug": "bartin",
+      "plate": 74,
+      "tagline": "Karadeniz'in sakin sofraları",
+      "restaurants": []
+    },
+    {
+      "name": "Ardahan",
+      "slug": "ardahan",
+      "plate": 75,
+      "tagline": "Kaşarı ve kaz etiyle",
+      "restaurants": []
+    },
+    {
+      "name": "Iğdır",
+      "slug": "igdir",
+      "plate": 76,
+      "tagline": "Sınır lezzetleri ve ev yemekleri",
+      "restaurants": []
+    },
+    {
+      "name": "Yalova",
+      "slug": "yalova",
+      "plate": 77,
+      "tagline": "Marmara sofraları ve balıkçıları",
+      "restaurants": []
+    },
+    {
+      "name": "Karabük",
+      "slug": "karabuk",
+      "plate": 78,
+      "tagline": "Safranbolu tatlıları ve ev yemekleri",
+      "restaurants": []
+    },
+    {
+      "name": "Kilis",
+      "slug": "kilis",
+      "plate": 79,
+      "tagline": "Katmeri ve Antep etkili mutfağı",
+      "restaurants": []
+    },
+    {
+      "name": "Osmaniye",
+      "slug": "osmaniye",
+      "plate": 80,
+      "tagline": "Kebabı ve yöresel sofraları",
+      "restaurants": []
+    },
+    {
+      "name": "Düzce",
+      "slug": "duzce",
+      "plate": 81,
+      "tagline": "Mantısı ve Karadeniz tatlarıyla",
+      "restaurants": []
+    }
+  ]
+}
