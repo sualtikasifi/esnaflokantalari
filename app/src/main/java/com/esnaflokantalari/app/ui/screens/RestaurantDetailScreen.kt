@@ -1,5 +1,7 @@
 package com.esnaflokantalari.app.ui.screens
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,16 +21,40 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.esnaflokantalari.app.data.FavoritesStore
-import com.esnaflokantalari.app.data.SampleData
+import com.esnaflokantalari.app.model.Restaurant
 
 @Composable
-fun RestaurantDetailScreen(restaurantId: String, onBack: () -> Unit) {
-    val restaurant = SampleData.restaurants.firstOrNull { it.id == restaurantId } ?: return
-    val isFavorite = FavoritesStore.isFavorite(restaurantId)
+fun RestaurantDetailScreen(
+    restaurant: Restaurant?,
+    isFavorite: Boolean,
+    onToggleFavorite: () -> Unit,
+    onBack: () -> Unit,
+) {
+    if (restaurant == null) {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("Lokanta") },
+                    navigationIcon = {
+                        IconButton(onClick = onBack) {
+                            Icon(Icons.Filled.ArrowBack, contentDescription = "Geri")
+                        }
+                    },
+                )
+            },
+        ) { padding ->
+            Column(modifier = Modifier.padding(padding).padding(16.dp)) {
+                Text("Bu lokanta bulunamadı.")
+            }
+        }
+        return
+    }
+
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -40,7 +66,7 @@ fun RestaurantDetailScreen(restaurantId: String, onBack: () -> Unit) {
                     }
                 },
                 actions = {
-                    IconButton(onClick = { FavoritesStore.toggle(restaurantId) }) {
+                    IconButton(onClick = onToggleFavorite) {
                         Icon(
                             if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                             contentDescription = "Favori",
@@ -57,6 +83,10 @@ fun RestaurantDetailScreen(restaurantId: String, onBack: () -> Unit) {
                 Icon(Icons.Filled.Star, contentDescription = null)
                 Text(" ${restaurant.rating} · ${restaurant.reviewCount} yorum")
             }
+            restaurant.distanceMeters?.let { distance ->
+                Spacer(modifier = Modifier.height(4.dp))
+                Text("Yaklaşık ${(distance / 1000).let { "%.1f".format(it) }} km uzaklıkta")
+            }
             Spacer(modifier = Modifier.height(16.dp))
             Text("Adres", fontWeight = FontWeight.Bold)
             Text(restaurant.address)
@@ -66,7 +96,13 @@ fun RestaurantDetailScreen(restaurantId: String, onBack: () -> Unit) {
                 Text(it)
             }
             Spacer(modifier = Modifier.height(24.dp))
-            Button(onClick = {}, modifier = Modifier.fillMaxWidth()) {
+            Button(
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(restaurant.mapsUrl))
+                    context.startActivity(intent)
+                },
+                modifier = Modifier.fillMaxWidth(),
+            ) {
                 Text("Yol Tarifi Al")
             }
         }

@@ -19,14 +19,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.esnaflokantalari.app.data.FavoritesStore
-import com.esnaflokantalari.app.data.SampleData
+import com.esnaflokantalari.app.model.Restaurant
 
 @Composable
-fun FavoritesScreen(onBack: () -> Unit, onRestaurantClick: (String) -> Unit) {
-    val favorites = SampleData.restaurants.filter { FavoritesStore.favoriteIds.contains(it.id) }
-
+fun FavoritesScreen(
+    favorites: List<Restaurant>,
+    onBack: () -> Unit,
+    onRestaurantClick: (String) -> Unit,
+) {
     Scaffold(
         topBar = {
             TopAppBar(

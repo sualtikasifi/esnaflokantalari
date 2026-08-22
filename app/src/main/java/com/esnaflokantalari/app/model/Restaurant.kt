@@ -10,6 +10,9 @@ data class Restaurant(
     val address: String,
     val mapsUrl: String,
     val dailySpecial: String? = null,
+    val latitude: Double? = null,
+    val longitude: Double? = null,
+    val distanceMeters: Double? = null,
 )
 
 data class City(

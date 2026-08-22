@@ -2,33 +2,55 @@
 
 [esnaflokantalari.com](https://esnaflokantalari.com/) sitesinden ilham alan, Android için geliştirilen mobil uygulama.
 
-## Bu uygulama sitesinden farkı ne olacak?
+## Bu uygulamanın siteden farkı ne olacak?
 
-- **Sadece il başına 3 mekan değil**, daha geniş ve filtrelenebilir bir liste
-- **Favorilere ekleme** — beğendiğin lokantaları kaydet
-- **Zengin lokanta profili** — kategori, adres, puan, günün önerisi gibi bilgiler
-- İleride: gerçek konum bazlı arama, foto galerisi, bildirimler
+- **Sadece il başına 3 mekan değil**, gerçek zamanlı Google Haritalar verisiyle daha geniş bir liste
+- **Yakınımdaki Lokantalar** — telefonun konumuna göre en yakın esnaf lokantalarını gösterir
+- **Favorilere ekleme** — beğendiğin lokantalar telefonuna kalıcı olarak kaydedilir (uygulamayı kapatsan bile silinmez)
+- **Zengin lokanta profili** — kategori, adres, puan, mesafe, yol tarifi butonu
+- İleride: foto galerisi, bildirimler, daha gelişmiş filtreleme
 
 ## Şu anki durum
 
-Bu ilk sürüm, **örnek (mock) verilerle** çalışan bir iskelet uygulamadır:
+- Ana sayfa → şehir listesi, favoriler, "yakınımda" girişleri
+- Şehir sayfası → Google Haritalar'dan çekilen lokantalar (API anahtarı yoksa örnek veriyle çalışır)
+- Yakınımdaki Lokantalar → konum izni isteyip GPS'e göre en yakın lokantaları listeler
+- Lokanta detay sayfası → puan, adres, mesafe, favori ekle/çıkar, "Yol Tarifi Al" butonu (Google Haritalar'ı açar)
+- Favorilerim sayfası → kalıcı olarak saklanan favoriler
 
-- Ana sayfa → şehir listesi
-- Şehir sayfası → o şehirdeki lokantalar
-- Lokanta detay sayfası → puan, adres, favori ekle/çıkar
-- Favorilerim sayfası
+## Kurulum
 
-Gerçek restoran verileri (Google Haritalar'dan) henüz bağlı değil — bu bir sonraki adım.
+### 1. Android Studio'yu indir
+
+[developer.android.com/studio](https://developer.android.com/studio) adresinden indirip kur, sonra bu klasörü "Open" ile aç.
+
+### 2. Google API anahtarı al (gerçek lokanta verisi için)
+
+Bu adım olmadan da uygulama çalışır, ama örnek (sahte) verilerle gösterim yapar. Gerçek Google Haritalar verisini görmek için:
+
+1. [Google Cloud Console](https://console.cloud.google.com/) üzerinde ücretsiz bir proje oluştur.
+2. **Places API** servisini etkinleştir (Google küçük bir ücretsiz kullanım kotası sunar, kredi kartı istenir ama başlangıç kotasında ücret alınmaz).
+3. **API anahtarı (API key)** oluştur — bu, uygulamanın Google'a "ben yetkiliyim" demesini sağlayan bir şifre gibidir.
+4. Proje klasöründeki `local.properties.example` dosyasını `local.properties` olarak kopyala.
+5. İçine oluşturduğun anahtarı şu şekilde yapıştır:
+   ```
+   MAPS_API_KEY=senin-anahtarin
+   ```
+6. `local.properties` dosyası `.gitignore` içinde olduğu için GitHub'a asla yüklenmez — anahtarın güvende kalır.
+
+### 3. Çalıştır
+
+Android Studio'nun üstündeki ▶️ (Run) butonuna basarak bir emülatörde veya telefonunda çalıştırabilirsin.
 
 ## Teknik detaylar
 
 - Dil: Kotlin
 - Arayüz: Jetpack Compose (Material 3)
+- Ağ katmanı: Retrofit + Google Places API
+- Kalıcı depolama: Jetpack DataStore (favoriler için)
+- Konum: Google Play Services Location (Fused Location Provider)
 - Minimum Android sürümü: Android 7.0 (API 24)
 
-## Nasıl açılır
+## Tasarım
 
-1. [Android Studio](https://developer.android.com/studio) indir ve kur.
-2. Bu klasörü Android Studio ile aç ("Open" seçeneği).
-3. Android Studio gerekli bileşenleri otomatik indirecektir.
-4. Üstteki ▶️ (Run) butonuna basarak bir emülatörde veya telefonunda çalıştırabilirsin.
+Google Stitch veya benzeri bir araçla hazırlanan tasarımlar bu uygulamaya birebir uygulanabilir — ekran görüntülerini veya export edilen dosyaları paylaşman yeterli.

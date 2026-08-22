@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationCity
+import androidx.compose.material.icons.filled.NearMe
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -21,7 +22,11 @@ import androidx.compose.ui.unit.dp
 import com.esnaflokantalari.app.data.SampleData
 
 @Composable
-fun HomeScreen(onCityClick: (String) -> Unit, onFavoritesClick: () -> Unit) {
+fun HomeScreen(
+    onCityClick: (String) -> Unit,
+    onFavoritesClick: () -> Unit,
+    onNearbyClick: () -> Unit,
+) {
     Scaffold(
         topBar = { TopAppBar(title = { Text("Esnaf Lokantaları") }) },
     ) { padding ->
@@ -30,6 +35,20 @@ fun HomeScreen(onCityClick: (String) -> Unit, onFavoritesClick: () -> Unit) {
                 verticalArrangement = Arrangement.spacedBy(4.dp),
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(12.dp),
             ) {
+                item {
+                    Card(
+                        modifier = Modifier
+                            .padding(bottom = 8.dp)
+                            .clickable { onNearbyClick() },
+                    ) {
+                        ListItem(
+                            leadingContent = { Icon(Icons.Filled.NearMe, contentDescription = null) },
+                            headlineContent = { Text("Yakınımdaki Lokantalar") },
+                            supportingContent = { Text("Konumuna göre en yakın esnaf lokantaları") },
+                            modifier = Modifier.padding(4.dp),
+                        )
+                    }
+                }
                 item {
                     Card(
                         modifier = Modifier

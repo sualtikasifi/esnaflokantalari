@@ -1,0 +1,5 @@
+# Bu dosyayı "local.properties" olarak kopyala (o dosya git'e eklenmez, gizli kalır).
+# Android Studio zaten sdk.dir satırını otomatik ekler, sen sadece MAPS_API_KEY satırını ekle.
+
+sdk.dir=/path/to/android/sdk
+MAPS_API_KEY=BURAYA_GOOGLE_API_ANAHTARINI_YAPISTIR
