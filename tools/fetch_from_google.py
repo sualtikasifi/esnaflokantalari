@@ -99,6 +99,13 @@ CHAIN_KEYWORDS = [
     "burger king", "carl's jr", "tostçu", "waffle",
 ]
 
+# Google'ın kategorisi "Restoran" dese bile adında bunlar geçen yerler
+# esnaf lokantası değil.
+EXCLUDED_NAME_WORDS = [
+    "kafe", "cafe", "coffee", "pastane", "patisserie", "tatlıcı",
+    "dondurma", "kokteyl", "cocktail", "bistro", "lounge", "pub",
+]
+
 # Bu türler birincil tür olarak gelirse esnaf lokantası saymıyoruz.
 EXCLUDED_TYPES = {
     "cafe", "coffee_shop", "bar", "bakery", "fast_food_restaurant",
@@ -255,6 +262,8 @@ def filter_places(found: dict, city: str, min_reviews: int):
         if reviews < min_reviews:
             continue
         if is_chain(name):
+            continue
+        if any(word in name.lower() for word in EXCLUDED_NAME_WORDS):
             continue
         if types & EXCLUDED_TYPES:
             continue
