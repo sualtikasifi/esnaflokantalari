@@ -1,10 +1,10 @@
-# Gizlilik Politikası — Esnaf Lokantaları
+# Gizlilik Politikası — Gurme
 
 **Son güncelleme:** 22 Ağustos 2026
 
 ## Kısaca
 
-Esnaf Lokantaları uygulaması **hiçbir kişisel veri toplamaz, saklamaz veya
+Gurme uygulaması **hiçbir kişisel veri toplamaz, saklamaz veya
 paylaşmaz.** Uygulamanın sunucusu yoktur. Girdiğiniz veya uygulamanın eriştiği
 her şey yalnızca kendi cihazınızda kalır.
 

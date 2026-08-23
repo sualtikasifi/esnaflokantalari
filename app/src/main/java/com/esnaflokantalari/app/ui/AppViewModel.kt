@@ -63,9 +63,6 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     private val _cities = MutableStateFlow<List<City>>(emptyList())
     val cities: StateFlow<List<City>> = _cities.asStateFlow()
 
-    private val _featured = MutableStateFlow<List<Restaurant>>(emptyList())
-    val featured: StateFlow<List<Restaurant>> = _featured.asStateFlow()
-
     /** Uygulamaya gömülü fotoğrafı olan lokantaların kimlikleri. */
     private val _bundledPhotoIds = MutableStateFlow<Set<String>>(emptySet())
     val bundledPhotoIds: StateFlow<Set<String>> = _bundledPhotoIds.asStateFlow()
@@ -84,7 +81,6 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             val dataset = repository.dataset()
             _cities.value = dataset.cities
             _dataUpdatedAt.value = dataset.updatedAt
-            _featured.value = repository.featured()
             _bundledPhotoIds.value = repository.bundledPhotoIds()
         }
     }

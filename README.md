@@ -1,4 +1,4 @@
-# Esnaf Lokantaları (Android)
+# Gurme (Android)
 
 Türkiye'nin 81 ilindeki esnaf lokantalarını gösteren, **tamamen ücretsiz ve
 internetsiz çalışan** Android uygulaması.

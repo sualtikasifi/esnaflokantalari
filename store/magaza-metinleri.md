@@ -7,10 +7,10 @@ Play Console'a kopyala-yapıştır için hazır metinler.
 ## Uygulama adı (en fazla 30 karakter)
 
 ```
-Esnaf Lokantaları
+Gurme
 ```
 
-*(17 karakter)*
+*(5 karakter)*
 
 ---
 
@@ -27,7 +27,7 @@ Esnaf Lokantaları
 ## Tam açıklama (en fazla 4000 karakter)
 
 ```
-Gittiğin şehirde nerede yemek yiyeceğini bilmiyor musun? Esnaf Lokantaları,
+Gittiğin şehirde nerede yemek yiyeceğini bilmiyor musun? Gurme,
 Türkiye'nin 81 ilindeki gerçek esnaf lokantalarını cebine getiriyor.
 
 Turistik tuzaklar yok, zincir restoranlar yok. Sadece halkın gittiği,
@@ -156,7 +156,7 @@ Play Console en az **2 telefon ekran görüntüsü** ister (önerilen: 4-8 adet)
 Bunları senin çekmen gerekiyor — telefonunda uygulamayı açıp güç + ses kısma
 tuşlarına birlikte bas. Önerilen ekranlar:
 
-1. Ana sayfa (öne çıkan lokantalar görünürken)
+1. Ana sayfa (şehir listesi görünürken)
 2. Bir şehir sayfası (Gaziantep veya Adana iyi durur)
 3. Lokanta detay sayfası
 4. Yakınımdaki lokantalar

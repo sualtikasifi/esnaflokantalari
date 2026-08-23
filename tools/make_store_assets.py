@@ -82,8 +82,7 @@ def make_feature_graphic(logo: Image.Image) -> Image.Image:
     body = font(BODY_FONT_CANDIDATES, 30)
 
     text_x = 400
-    draw.text((text_x, 190), "ESNAF", font=title, fill=DARK)
-    draw.text((text_x, 258), "LOKANTALARI", font=title, fill=GOLD)
+    draw.text((text_x, 220), "GURME", font=title, fill=GOLD)
     draw.text((text_x, 340), "81 ilde gerçek esnaf lezzetleri", font=body, fill=DARK)
     draw.text((text_x, 380), "İnternetsiz çalışır · Ücretsiz", font=body, fill=(120, 105, 92))
 

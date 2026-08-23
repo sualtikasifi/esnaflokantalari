@@ -62,7 +62,7 @@ fun Context.shareRestaurant(restaurant: Restaurant) {
         if (restaurant.city.isNotBlank()) append(" — ${restaurant.city}")
         if (restaurant.address.isNotBlank()) append("\n${restaurant.address}")
         restaurant.rating?.let { append("\n⭐ ${it.formatRating()}") }
-        append("\n\nEsnaf Lokantaları uygulamasından paylaşıldı.")
+        append("\n\nGurme uygulamasından paylaşıldı.")
     }
     val intent = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
@@ -85,7 +85,7 @@ fun Context.shareExport(archive: File) {
     val intent = Intent(Intent.ACTION_SEND).apply {
         type = "application/zip"
         putExtra(Intent.EXTRA_STREAM, uri)
-        putExtra(Intent.EXTRA_SUBJECT, "Esnaf Lokantaları — lokanta fotoğrafları")
+        putExtra(Intent.EXTRA_SUBJECT, "Gurme — lokanta fotoğrafları")
         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
     }
     try {

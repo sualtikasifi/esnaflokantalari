@@ -1,82 +1,82 @@
-plaka,il,slug,tanitim
-1,Adana,adana,Sıcacık kebapları ve zengin sofralarıyla
-2,Adıyaman,adiyaman,Çiğ köftesi ve tarihi lezzet durakları
-3,Afyonkarahisar,afyonkarahisar,Sucuğu ve kaymağıyla meşhur
-4,Ağrı,agri,Doğu'nun sade ve doyurucu sofraları
-5,Amasya,amasya,Bamyası ve ev yemekleriyle
-6,Ankara,ankara,Beypazarı güveci ve Ankara tavasıyla
-7,Antalya,antalya,Piyazı ve şiş köftesiyle
-8,Artvin,artvin,Muhlaması ve Karadeniz tatlarıyla
-9,Aydın,aydin,Zeytinyağlıları ve çöp şişiyle
-10,Balıkesir,balikesir,Höşmerimi ve kuzu etiyle
-11,Bilecik,bilecik,Papaz köftesi ve yöresel sofralar
-12,Bingöl,bingol,Doğu mutfağının sade lezzetleri
-13,Bitlis,bitlis,Büryan kebabının memleketi
-14,Bolu,bolu,Türk mutfağının aşçı ocağı
-15,Burdur,burdur,Şiş köftesi ve testi kebabıyla
-16,Bursa,bursa,İskender ve İnegöl köftesiyle
-17,Çanakkale,canakkale,Peynir helvası ve deniz mahsulleriyle
-18,Çankırı,cankiri,Tuzlu sofralar ve ev yemekleri
-19,Çorum,corum,Leblebisi ve mantısıyla
-20,Denizli,denizli,Kebabı ve tandırıyla
-21,Diyarbakır,diyarbakir,Kaburga dolması ve ciğerciyle
-22,Edirne,edirne,Tava ciğerinin başkenti
-23,Elazığ,elazig,Harput köftesi ve içli köftesiyle
-24,Erzincan,erzincan,Tulum peyniri ve yöresel sofralar
-25,Erzurum,erzurum,Cağ kebabının memleketi
-26,Eskişehir,eskisehir,Çibörek ve met helvasıyla
-27,Gaziantep,gaziantep,Türkiye'nin gastronomi başkenti
-28,Giresun,giresun,Karadeniz'in balık ve pidesiyle
-29,Gümüşhane,gumushane,Pestili ve dağ sofralarıyla
-30,Hakkari,hakkari,Doğu'nun otlu yemekleriyle
-31,Hatay,hatay,Künefesi ve tepsi kebabıyla
-32,Isparta,isparta,Gül diyarının ev yemekleri
-33,Mersin,mersin,Tantunisi ve cezeryesiyle
-34,İstanbul,istanbul,Her mahallesinde başka bir lezzet
-35,İzmir,izmir,Boyoz ve ege otlarıyla
-36,Kars,kars,Kaz eti ve gravyer peyniriyle
-37,Kastamonu,kastamonu,Etli ekmeği ve pastırmasıyla
-38,Kayseri,kayseri,Mantısı ve pastırmasıyla
-39,Kırklareli,kirklareli,Hardaliyesi ve Trakya sofraları
-40,Kırşehir,kirsehir,Ev yemekleri ve yöresel tatlar
-41,Kocaeli,kocaeli,Pişmaniyesi ve esnaf lokantalarıyla
-42,Konya,konya,Etli ekmek ve fırın kebabıyla
-43,Kütahya,kutahya,Gömlek çorbası ve ev yemekleri
-44,Malatya,malatya,Kayısısı ve kağıt kebabıyla
-45,Manisa,manisa,Mesir tatlısı ve kebabıyla
-46,Kahramanmaraş,kahramanmaras,Dondurması ve tarhana çorbasıyla
-47,Mardin,mardin,İkbebet ve taş sofralarıyla
-48,Muğla,mugla,Zeytinyağlıları ve deniz mahsulleriyle
-49,Muş,mus,Doğu'nun sade ve bereketli sofraları
-50,Nevşehir,nevsehir,Testi kebabı ve Kapadokya tatlarıyla
-51,Niğde,nigde,Gölleme ve yöresel ev yemekleriyle
-52,Ordu,ordu,Karadeniz pidesi ve balıklarıyla
-53,Rize,rize,Muhlama ve hamsisiyle
-54,Sakarya,sakarya,Islama köftesinin memleketi
-55,Samsun,samsun,Pidesi ve Karadeniz sofralarıyla
-56,Siirt,siirt,Büryanı ve perde pilavıyla
-57,Sinop,sinop,Mantısı ve balık lokantalarıyla
-58,Sivas,sivas,Kelle söğüşü ve etli mantısıyla
-59,Tekirdağ,tekirdag,Köftesi ve Trakya sofralarıyla
-60,Tokat,tokat,Kebabı ve bez sarmasıyla
-61,Trabzon,trabzon,Akçaabat köftesi ve hamsisiyle
-62,Tunceli,tunceli,Dağ otları ve sade sofralarıyla
-63,Şanlıurfa,sanliurfa,Çiğ köftesi ve şıllık tatlısıyla
-64,Uşak,usak,Tarhanası ve ev yemekleriyle
-65,Van,van,Kahvaltısı ve otlu peyniriyle
-66,Yozgat,yozgat,Testi kebabı ve arabaşısıyla
-67,Zonguldak,zonguldak,Karadeniz'in maden şehri sofraları
-68,Aksaray,aksaray,Tava ciğeri ve yöresel tatlar
-69,Bayburt,bayburt,Lor dolması ve dağ sofraları
-70,Karaman,karaman,Divle tulumu ve ev yemekleriyle
-71,Kırıkkale,kirikkale,Esnaf lokantaları ve ev yemekleri
-72,Batman,batman,Büryanı ve yöresel sofraları
-73,Şırnak,sirnak,Doğu mutfağının sade tatları
-74,Bartın,bartin,Karadeniz'in sakin sofraları
-75,Ardahan,ardahan,Kaşarı ve kaz etiyle
-76,Iğdır,igdir,Sınır lezzetleri ve ev yemekleri
-77,Yalova,yalova,Marmara sofraları ve balıkçıları
-78,Karabük,karabuk,Safranbolu tatlıları ve ev yemekleri
-79,Kilis,kilis,Katmeri ve Antep etkili mutfağı
-80,Osmaniye,osmaniye,Kebabı ve yöresel sofraları
-81,Düzce,duzce,Mantısı ve Karadeniz tatlarıyla
+plaka,il,slug,nufus,tanitim
+1,Adana,adana,2263373,Sıcacık kebapları ve zengin sofralarıyla
+2,Adıyaman,adiyaman,632148,Çiğ köftesi ve tarihi lezzet durakları
+3,Afyonkarahisar,afyonkarahisar,744179,Sucuğu ve kaymağıyla meşhur
+4,Ağrı,agri,524069,Doğu'nun sade ve doyurucu sofraları
+5,Amasya,amasya,335331,Bamyası ve ev yemekleriyle
+6,Ankara,ankara,5747325,Beypazarı güveci ve Ankara tavasıyla
+7,Antalya,antalya,2619832,Piyazı ve şiş köftesiyle
+8,Artvin,artvin,169543,Muhlaması ve Karadeniz tatlarıyla
+9,Aydın,aydin,1134031,Zeytinyağlıları ve çöp şişiyle
+10,Balıkesir,balikesir,1250610,Höşmerimi ve kuzu etiyle
+11,Bilecik,bilecik,228334,Papaz köftesi ve yöresel sofralar
+12,Bingöl,bingol,283112,Doğu mutfağının sade lezzetleri
+13,Bitlis,bitlis,352277,Büryan kebabının memleketi
+14,Bolu,bolu,320014,Türk mutfağının aşçı ocağı
+15,Burdur,burdur,273716,Şiş köftesi ve testi kebabıyla
+16,Bursa,bursa,3147818,İskender ve İnegöl köftesiyle
+17,Çanakkale,canakkale,557276,Peynir helvası ve deniz mahsulleriyle
+18,Çankırı,cankiri,196515,Tuzlu sofralar ve ev yemekleri
+19,Çorum,corum,526282,Leblebisi ve mantısıyla
+20,Denizli,denizli,1051056,Kebabı ve tandırıyla
+21,Diyarbakır,diyarbakir,1791373,Kaburga dolması ve ciğerciyle
+22,Edirne,edirne,412115,Tava ciğerinin başkenti
+23,Elazığ,elazig,588088,Harput köftesi ve içli köftesiyle
+24,Erzincan,erzincan,237351,Tulum peyniri ve yöresel sofralar
+25,Erzurum,erzurum,756893,Cağ kebabının memleketi
+26,Eskişehir,eskisehir,898369,Çibörek ve met helvasıyla
+27,Gaziantep,gaziantep,2130432,Türkiye'nin gastronomi başkenti
+28,Giresun,giresun,450154,Karadeniz'in balık ve pidesiyle
+29,Gümüşhane,gumushane,150119,Pestili ve dağ sofralarıyla
+30,Hakkari,hakkari,278218,Doğu'nun otlu yemekleriyle
+31,Hatay,hatay,1670712,Künefesi ve tepsi kebabıyla
+32,Isparta,isparta,445678,Gül diyarının ev yemekleri
+33,Mersin,mersin,1891145,Tantunisi ve cezeryesiyle
+34,İstanbul,istanbul,15840900,Her mahallesinde başka bir lezzet
+35,İzmir,izmir,4425789,Boyoz ve ege otlarıyla
+36,Kars,kars,281077,Kaz eti ve gravyer peyniriyle
+37,Kastamonu,kastamonu,375592,Etli ekmeği ve pastırmasıyla
+38,Kayseri,kayseri,1434357,Mantısı ve pastırmasıyla
+39,Kırklareli,kirklareli,366363,Hardaliyesi ve Trakya sofraları
+40,Kırşehir,kirsehir,242944,Ev yemekleri ve yöresel tatlar
+41,Kocaeli,kocaeli,2033441,Pişmaniyesi ve esnaf lokantalarıyla
+42,Konya,konya,2277017,Etli ekmek ve fırın kebabıyla
+43,Kütahya,kutahya,578640,Gömlek çorbası ve ev yemekleri
+44,Malatya,malatya,808692,Kayısısı ve kağıt kebabıyla
+45,Manisa,manisa,1456626,Mesir tatlısı ve kebabıyla
+46,Kahramanmaraş,kahramanmaras,1171298,Dondurması ve tarhana çorbasıyla
+47,Mardin,mardin,862757,İkbebet ve taş sofralarıyla
+48,Muğla,mugla,1021141,Zeytinyağlıları ve deniz mahsulleriyle
+49,Muş,mus,405228,Doğu'nun sade ve bereketli sofraları
+50,Nevşehir,nevsehir,308003,Testi kebabı ve Kapadokya tatlarıyla
+51,Niğde,nigde,363725,Gölleme ve yöresel ev yemekleriyle
+52,Ordu,ordu,760872,Karadeniz pidesi ve balıklarıyla
+53,Rize,rize,345662,Muhlama ve hamsisiyle
+54,Sakarya,sakarya,1060876,Islama köftesinin memleketi
+55,Samsun,samsun,1371274,Pidesi ve Karadeniz sofralarıyla
+56,Siirt,siirt,331980,Büryanı ve perde pilavıyla
+57,Sinop,sinop,218408,Mantısı ve balık lokantalarıyla
+58,Sivas,sivas,636121,Kelle söğüşü ve etli mantısıyla
+59,Tekirdağ,tekirdag,1113400,Köftesi ve Trakya sofralarıyla
+60,Tokat,tokat,602567,Kebabı ve bez sarmasıyla
+61,Trabzon,trabzon,816684,Akçaabat köftesi ve hamsisiyle
+62,Tunceli,tunceli,83645,Dağ otları ve sade sofralarıyla
+63,Şanlıurfa,sanliurfa,2143020,Çiğ köftesi ve şıllık tatlısıyla
+64,Uşak,usak,373183,Tarhanası ve ev yemekleriyle
+65,Van,van,1141015,Kahvaltısı ve otlu peyniriyle
+66,Yozgat,yozgat,418500,Testi kebabı ve arabaşısıyla
+67,Zonguldak,zonguldak,589684,Karadeniz'in maden şehri sofraları
+68,Aksaray,aksaray,429069,Tava ciğeri ve yöresel tatlar
+69,Bayburt,bayburt,84843,Lor dolması ve dağ sofraları
+70,Karaman,karaman,258838,Divle tulumu ve ev yemekleriyle
+71,Kırıkkale,kirikkale,275968,Esnaf lokantaları ve ev yemekleri
+72,Batman,batman,626319,Büryanı ve yöresel sofraları
+73,Şırnak,sirnak,546589,Doğu mutfağının sade tatları
+74,Bartın,bartin,201711,Karadeniz'in sakin sofraları
+75,Ardahan,ardahan,94932,Kaşarı ve kaz etiyle
+76,Iğdır,igdir,203159,Sınır lezzetleri ve ev yemekleri
+77,Yalova,yalova,291001,Marmara sofraları ve balıkçıları
+78,Karabük,karabuk,249287,Safranbolu tatlıları ve ev yemekleri
+79,Kilis,kilis,145826,Katmeri ve Antep etkili mutfağı
+80,Osmaniye,osmaniye,553012,Kebabı ve yöresel sofraları
+81,Düzce,duzce,400976,Mantısı ve Karadeniz tatlarıyla

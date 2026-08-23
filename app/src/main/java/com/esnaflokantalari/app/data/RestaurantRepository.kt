@@ -64,16 +64,6 @@ class RestaurantRepository(private val context: Context) {
     suspend fun restaurant(id: String): Restaurant? =
         dataset().allRestaurants.firstOrNull { it.id == id }
 
-    /** Puanı en yüksek, yorumu en çok lokantalar — ana sayfa vitrini için. */
-    suspend fun featured(limit: Int = 10): List<Restaurant> =
-        dataset().allRestaurants
-            .filter { it.hasRating }
-            .sortedWith(
-                compareByDescending<Restaurant> { it.rating ?: 0.0 }
-                    .thenByDescending { it.reviewCount ?: 0 },
-            )
-            .take(limit)
-
     /** Verilen konuma en yakın lokantalar. Koordinatı olmayanlar elenir. */
     suspend fun nearby(latitude: Double, longitude: Double, limit: Int = 30): List<Restaurant> =
         dataset().allRestaurants
@@ -125,6 +115,7 @@ class RestaurantRepository(private val context: Context) {
                         name = cityName,
                         slug = cityJson.optString("slug"),
                         plate = cityJson.optIntOrNull("plate"),
+                        population = cityJson.optIntOrNull("population"),
                         tagline = cityJson.optString("tagline"),
                         restaurants = cityJson.optJSONArray("restaurants").toRestaurants(cityName),
                     ),

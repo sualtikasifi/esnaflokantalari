@@ -73,7 +73,6 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
     val snackbarHostState = remember { SnackbarHostState() }
 
     val cities by viewModel.cities.collectAsState()
-    val featured by viewModel.featured.collectAsState()
     val favorites by viewModel.favorites.collectAsState()
     val favoriteIds by viewModel.favoriteIds.collectAsState()
     val suggestions by viewModel.suggestions.collectAsState()
@@ -138,15 +137,11 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
             composable(Routes.HOME) {
                 HomeScreen(
                     cities = cities,
-                    featured = featured,
                     dataUpdatedAt = dataUpdatedAt,
-                    photos = photos,
-                    bundledPhotoIds = bundledPhotoIds,
                     photoCount = photos.size,
                     appVersion = BuildConfig.VERSION_NAME,
                     onCityClick = { navController.navigate(Routes.city(it)) },
                     onSearchClick = { navController.navigate(Routes.CITY_SEARCH) },
-                    onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
                     onSurpriseMe = { viewModel.surpriseMe() },
                     onExportPhotos = {
                         viewModel.exportPhotos { archive ->

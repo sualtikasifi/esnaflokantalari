@@ -1,5 +1,6 @@
 package com.esnaflokantalari.app.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -8,33 +9,28 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Casino
-import androidx.compose.material.icons.filled.LocationCity
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.LocationCity
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.foundation.Image
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -49,20 +45,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.sp
 import com.esnaflokantalari.app.R
 import com.esnaflokantalari.app.model.City
-import com.esnaflokantalari.app.model.Restaurant
-import com.esnaflokantalari.app.ui.components.RestaurantVisual
-import com.esnaflokantalari.app.ui.formatRating
 import com.esnaflokantalari.app.ui.theme.ChipBackground
-import com.esnaflokantalari.app.ui.theme.StarGold
 import com.esnaflokantalari.app.ui.theme.Terracotta
 import com.esnaflokantalari.app.ui.theme.TerracottaContainer
 import java.util.Calendar
@@ -71,20 +61,18 @@ import java.util.Calendar
 @Composable
 fun HomeScreen(
     cities: List<City>,
-    featured: List<Restaurant>,
     dataUpdatedAt: String,
-    photos: Map<String, String>,
-    bundledPhotoIds: Set<String>,
     photoCount: Int,
     appVersion: String,
     onCityClick: (String) -> Unit,
     onSearchClick: () -> Unit,
-    onRestaurantClick: (String) -> Unit,
     onSurpriseMe: () -> Unit,
     onExportPhotos: () -> Unit,
 ) {
     var menuOpen by remember { mutableStateOf(false) }
     // Kaydırma sırasında her karede yeniden hesaplanmasın diye önceden ayrılır.
+    // Şehirler assets/restaurants.json içinde zaten nüfusa göre büyükten
+    // küçüğe sıralı geliyor (bkz. tools/build_dataset.py).
     val cityRows = remember(cities) { cities.chunked(2) }
     val filledCityCount = remember(cities) { cities.count { it.hasRestaurants } }
 
@@ -98,7 +86,7 @@ fun HomeScreen(
                             contentDescription = null,
                             modifier = Modifier.size(30.dp),
                         )
-                        Text("Esnaf Lokantaları", modifier = Modifier.padding(start = 8.dp))
+                        Text("Gurme", modifier = Modifier.padding(start = 8.dp))
                     }
                 },
                 actions = {
@@ -144,7 +132,7 @@ fun HomeScreen(
             contentPadding = PaddingValues(bottom = 24.dp),
         ) {
             item {
-                Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)) {
+                Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 4.dp, bottom = 12.dp)) {
                     Text(greetingMessage(), style = MaterialTheme.typography.headlineSmall)
                     Text(
                         "Türkiye'nin dört bir yanından esnaf lokantaları",
@@ -153,60 +141,37 @@ fun HomeScreen(
                     )
 
                     Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 16.dp)
-                            .clip(RoundedCornerShape(50))
-                            .background(ChipBackground)
-                            .clickable { onSearchClick() }
-                            .padding(horizontal = 16.dp, vertical = 14.dp),
+                        modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Icon(Icons.Filled.Search, contentDescription = null, tint = Terracotta)
-                        Text(
-                            "Şehir ara (81 il)",
-                            modifier = Modifier.padding(start = 10.dp),
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
-
-                    if (featured.isNotEmpty()) {
                         Row(
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 10.dp)
+                                .weight(1f)
+                                .height(52.dp)
                                 .clip(RoundedCornerShape(50))
-                                .background(TerracottaContainer)
-                                .clickable { onSurpriseMe() }
-                                .padding(horizontal = 16.dp, vertical = 14.dp),
+                                .background(ChipBackground)
+                                .clickable { onSearchClick() }
+                                .padding(horizontal = 16.dp),
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center,
                         ) {
-                            Icon(Icons.Filled.Casino, contentDescription = null, tint = Terracotta)
+                            Icon(Icons.Filled.Search, contentDescription = null, tint = Terracotta)
                             Text(
-                                "Bugün ne yesem? Bana bir yer seç",
+                                "Şehir ara (81 il)",
                                 modifier = Modifier.padding(start = 10.dp),
-                                fontWeight = FontWeight.SemiBold,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
                         }
-                    }
-                }
-            }
 
-            if (featured.isNotEmpty()) {
-                item {
-                    SectionHeader("Öne Çıkanlar", "En yüksek puanlı esnaf lokantaları")
-                    LazyRow(
-                        contentPadding = PaddingValues(horizontal = 20.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        modifier = Modifier.padding(bottom = 12.dp),
-                    ) {
-                        items(featured, key = { it.id }) { restaurant ->
-                            FeaturedCard(
-                                restaurant = restaurant,
-                                localPhotoPath = photos[restaurant.id],
-                                hasBundledPhoto = restaurant.id in bundledPhotoIds,
-                            ) { onRestaurantClick(restaurant.id) }
+                        Box(
+                            modifier = Modifier
+                                .padding(start = 10.dp)
+                                .size(52.dp)
+                                .clip(RoundedCornerShape(16.dp))
+                                .background(TerracottaContainer)
+                                .clickable { onSurpriseMe() },
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Icon(Icons.Filled.Casino, contentDescription = "Bugün ne yesem?", tint = Terracotta)
                         }
                     }
                 }
@@ -266,72 +231,6 @@ private fun SectionHeader(title: String, subtitle: String? = null) {
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodyMedium,
             )
-        }
-    }
-}
-
-@Composable
-private fun FeaturedCard(
-    restaurant: Restaurant,
-    localPhotoPath: String?,
-    hasBundledPhoto: Boolean,
-    onClick: () -> Unit,
-) {
-    Card(
-        onClick = onClick,
-        shape = RoundedCornerShape(18.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        modifier = Modifier.width(170.dp),
-    ) {
-        Column {
-            Box {
-                RestaurantVisual(
-                    restaurant = restaurant,
-                    modifier = Modifier.fillMaxWidth().aspectRatio(1f),
-                    initialsSize = 30.sp,
-                    localPhotoPath = localPhotoPath,
-                    hasBundledPhoto = hasBundledPhoto,
-                )
-                if (restaurant.hasRating) {
-                    Row(
-                        modifier = Modifier
-                            .align(Alignment.BottomStart)
-                            .padding(8.dp)
-                            .clip(RoundedCornerShape(50))
-                            .background(Color.White.copy(alpha = 0.94f))
-                            .padding(horizontal = 8.dp, vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Icon(
-                            Icons.Filled.Star,
-                            contentDescription = null,
-                            tint = StarGold,
-                            modifier = Modifier.size(14.dp),
-                        )
-                        Text(
-                            restaurant.rating!!.formatRating(),
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF241A15),
-                            style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.padding(start = 3.dp),
-                        )
-                    }
-                }
-            }
-            Column(modifier = Modifier.padding(10.dp)) {
-                Text(
-                    restaurant.name,
-                    fontWeight = FontWeight.SemiBold,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
-                Text(
-                    restaurant.city,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    style = MaterialTheme.typography.bodyMedium,
-                    maxLines = 1,
-                )
-            }
         }
     }
 }

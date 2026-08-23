@@ -14,7 +14,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 RES = ROOT / "app" / "src" / "main" / "res"
 
-TEXT = "ESNAF LOKANTALARI"
+TEXT = "GURME"
 GOLD = (176, 141, 70, 255)
 
 FONT_CANDIDATES = [

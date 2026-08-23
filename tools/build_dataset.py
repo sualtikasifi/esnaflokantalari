@@ -77,6 +77,7 @@ def read_cities():
                 "name": name,
                 "slug": (row.get("slug") or "").strip() or slugify(name),
                 "plate": parse_int(row.get("plaka")),
+                "population": parse_int(row.get("nufus")),
                 "tagline": (row.get("tanitim") or "").strip(),
                 "restaurants": [],
             })
@@ -146,6 +147,9 @@ def main() -> int:
             key=lambda r: (r["rating"] or 0, r["reviewCount"] or 0),
             reverse=True,
         )
+
+    # Ana sayfada şehirler nüfusa göre büyükten küçüğe listelenir.
+    cities.sort(key=lambda c: c["population"] or 0, reverse=True)
 
     payload = {
         "version": 1,

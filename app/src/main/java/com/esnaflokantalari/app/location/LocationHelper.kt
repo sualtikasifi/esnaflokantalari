@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.os.SystemClock
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -22,15 +23,19 @@ sealed interface LocationResult {
 
 object LocationHelper {
 
-    private const val FRESH_FIX_TIMEOUT_MS = 15_000L
+    private const val FRESH_FIX_TIMEOUT_MS = 8_000L
+
+    /** Bu süreden eski bir "son bilinen konum" güvenilir sayılmaz, tazesi beklenir. */
+    private const val MAX_LAST_LOCATION_AGE_MS = 2 * 60 * 1000L
 
     /**
-     * Konumu üç aşamada dener:
-     *   1. Son bilinen konum (anında döner)
-     *   2. Taze konum ölçümü (zaman aşımlı)
-     *   3. Sistem konum sağlayıcısının son kaydı
-     *
-     * Tek bir yönteme güvenmek cihazlarda sık sık boş dönüyordu.
+     * Konumu şu sırayla dener:
+     *   1. Taze konum ölçümü (yüksek doğruluk, zaman aşımlı) — kullanıcı yer
+     *      değiştirmiş olabileceği için bu ÖNCE denenir, sonuç anında görülsün diye.
+     *   2. Taze ölçüm zaman aşımına uğrarsa, yeterince yakın zamanlı "son bilinen
+     *      konum" kabul edilir (2 dakikadan eskiyse reddedilir — aksi halde
+     *      kullanıcı taşındıktan sonra bile eski konum gösterilmeye devam eder).
+     *   3. Sistem konum sağlayıcısının kaydı (son çare).
      */
     @SuppressLint("MissingPermission")
     suspend fun currentLocation(context: Context): LocationResult {
@@ -39,16 +44,18 @@ object LocationHelper {
 
         val client = LocationServices.getFusedLocationProviderClient(context)
 
-        runCatching { client.lastLocation.await() }
-            .getOrNull()
-            ?.let { return LocationResult.Success(LatLng(it.latitude, it.longitude)) }
-
         val fresh = withTimeoutOrNull(FRESH_FIX_TIMEOUT_MS) {
             runCatching {
-                client.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY, null).await()
+                client.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null).await()
             }.getOrNull()
         }
         if (fresh != null) return LocationResult.Success(LatLng(fresh.latitude, fresh.longitude))
+
+        val last = runCatching { client.lastLocation.await() }.getOrNull()
+        val lastAgeMs = last?.let { SystemClock.elapsedRealtime() - it.elapsedRealtimeNanos / 1_000_000 }
+        if (last != null && lastAgeMs != null && lastAgeMs <= MAX_LAST_LOCATION_AGE_MS) {
+            return LocationResult.Success(LatLng(last.latitude, last.longitude))
+        }
 
         systemLastKnown(context)?.let { return LocationResult.Success(it) }
 
