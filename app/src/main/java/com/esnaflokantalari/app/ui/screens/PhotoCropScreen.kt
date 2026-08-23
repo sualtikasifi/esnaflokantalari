@@ -5,7 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
@@ -42,13 +41,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.exifinterface.media.ExifInterface
@@ -71,7 +68,6 @@ fun PhotoCropScreen(
     onConfirm: (Bitmap) -> Unit,
 ) {
     val context = LocalContext.current
-    val density = LocalDensity.current
     val sourceBitmap by produceState<Bitmap?>(initialValue = null, imageUri) {
         value = decodeRotated(context, imageUri)
     }
@@ -105,12 +101,15 @@ fun PhotoCropScreen(
             var scale by remember { mutableFloatStateOf(1f) }
             var offset by remember { mutableStateOf(Offset.Zero) }
 
+            // Küçük bir pay (1.005) eklenir: tam sınırda sıfır kaydırma payı
+            // kalırsa (kayan nokta yuvarlaması yüzünden) görsel bir kenarda
+            // ince bir boşluk bırakabiliyor ve o eksende kaydırma kilitleniyordu.
             val baseScale = remember(bitmap, frameSize) {
                 if (frameSize.width == 0 || frameSize.height == 0) 1f
                 else maxOf(
                     frameSize.width.toFloat() / bitmap.width,
                     frameSize.height.toFloat() / bitmap.height,
-                )
+                ) * 1.005f
             }
 
             // Çerçeve ilk ölçüldüğünde görseli ortala; taşan kenarlar eşit dağılsın.
@@ -166,21 +165,18 @@ fun PhotoCropScreen(
                     },
             ) {
                 val effectiveScale = baseScale * scale
-                val widthDp = with(density) { bitmap.width.toDp() }
-                val heightDp = with(density) { bitmap.height.toDp() }
-                Image(
-                    bitmap = bitmap.asImageBitmap(),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .requiredSize(widthDp, heightDp)
-                        .graphicsLayer {
-                            scaleX = effectiveScale
-                            scaleY = effectiveScale
-                            translationX = offset.x
-                            translationY = offset.y
-                            transformOrigin = TransformOrigin(0f, 0f)
-                        },
-                )
+                val imageBitmap = remember(bitmap) { bitmap.asImageBitmap() }
+                Canvas(modifier = Modifier.fillMaxSize()) {
+                    val dstSize = IntSize(
+                        (bitmap.width * effectiveScale).roundToInt(),
+                        (bitmap.height * effectiveScale).roundToInt(),
+                    )
+                    drawImage(
+                        image = imageBitmap,
+                        dstOffset = IntOffset(offset.x.roundToInt(), offset.y.roundToInt()),
+                        dstSize = dstSize,
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.weight(1f))
