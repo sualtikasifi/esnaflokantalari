@@ -4,7 +4,6 @@ import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
@@ -24,14 +23,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.esnaflokantalari.app.ui.components.SurpriseLoadingOverlay
-import com.esnaflokantalari.app.ui.components.SurpriseResultToast
 import kotlinx.coroutines.delay
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -95,26 +91,28 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
     val currentDestination = backStackEntry?.destination
 
     // "Bugün ne yesem?" sonucu: konum alınınca lokantaya git, olmazsa bilgi ver.
-    var resultToast by remember { mutableStateOf<Pair<String, Boolean>?>(null) }
+    // Başarı mesajı artık üstte kaplama olarak değil, lokanta detay sayfasında
+    // telefon numarasının altında gösteriliyor — bkz. RestaurantDetailScreen.
+    var surpriseMessage by remember { mutableStateOf<String?>(null) }
     LaunchedEffect(surprise) {
         when (val event = surprise) {
             is SurpriseEvent.Picked -> {
                 navController.navigate(Routes.restaurant(event.restaurantId))
-                resultToast = "${event.cityName} için seçtik: afiyet olsun!" to false
+                surpriseMessage = "${event.cityName} için seçtik: afiyet olsun!"
                 viewModel.clearSurprise()
             }
             is SurpriseEvent.Failed -> {
-                resultToast = event.message to true
+                Toast.makeText(context, event.message, Toast.LENGTH_LONG).show()
                 viewModel.clearSurprise()
             }
             else -> Unit
         }
     }
     // Birkaç saniye görünüp kendiliğinden solarak kaybolur.
-    LaunchedEffect(resultToast) {
-        if (resultToast != null) {
+    LaunchedEffect(surpriseMessage) {
+        if (surpriseMessage != null) {
             delay(2600)
-            resultToast = null
+            surpriseMessage = null
         }
     }
 
@@ -261,6 +259,7 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     isFavorite = favoriteIds.contains(restaurantId),
                     dataUpdatedAt = dataUpdatedAt,
                     localPhotoPath = photos[restaurantId],
+                    surpriseMessage = surpriseMessage,
                     onToggleFavorite = { restaurant?.let(viewModel::toggleFavorite) },
                     onPickPhoto = { uri ->
                         viewModel.savePhoto(restaurantId, uri) { success ->
@@ -283,17 +282,6 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
             exit = fadeOut(),
         ) {
             SurpriseLoadingOverlay()
-        }
-
-        AnimatedVisibility(
-            visible = resultToast != null,
-            enter = fadeIn() + slideInVertically { -it / 2 },
-            exit = fadeOut(),
-            modifier = Modifier.align(Alignment.TopCenter).padding(top = 16.dp),
-        ) {
-            resultToast?.let { (message, isError) ->
-                SurpriseResultToast(message = message, isError = isError)
-            }
         }
         }
     }

@@ -92,25 +92,24 @@ fun SurpriseLoadingOverlay(modifier: Modifier = Modifier) {
     }
 }
 
-/** "Bugün ne yesem?" sonucunu gösteren, birkaç saniye sonra kendiliğinden solan kart. */
+/** "Bugün ne yesem?" ile seçilen lokantada gösterilen, kısa süre sonra kendiliğinden solan kart. */
 @Composable
-fun SurpriseResultToast(message: String, isError: Boolean, modifier: Modifier = Modifier) {
+fun SurpriseResultToast(message: String, modifier: Modifier = Modifier) {
     Card(
-        modifier = modifier.padding(horizontal = 20.dp),
+        modifier = modifier,
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+        colors = CardDefaults.cardColors(containerColor = TerracottaContainer),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
             modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            if (!isError) {
-                Icon(Icons.Filled.Restaurant, contentDescription = null, tint = Terracotta)
-            }
+            Icon(Icons.Filled.Restaurant, contentDescription = null, tint = Terracotta)
             Text(
                 message,
                 style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(start = if (isError) 0.dp else 10.dp),
+                modifier = Modifier.padding(start = 10.dp),
             )
         }
     }

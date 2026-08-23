@@ -5,6 +5,9 @@ import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -54,6 +57,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.esnaflokantalari.app.model.Restaurant
 import com.esnaflokantalari.app.ui.components.RestaurantVisual
+import com.esnaflokantalari.app.ui.components.SurpriseResultToast
 import com.esnaflokantalari.app.ui.dial
 import com.esnaflokantalari.app.ui.formatCount
 import com.esnaflokantalari.app.ui.formatDistance
@@ -70,6 +74,7 @@ fun RestaurantDetailScreen(
     isFavorite: Boolean,
     dataUpdatedAt: String,
     localPhotoPath: String?,
+    surpriseMessage: String? = null,
     onToggleFavorite: () -> Unit,
     onPickPhoto: (Uri) -> Unit,
     onRemovePhoto: () -> Unit,
@@ -276,6 +281,15 @@ fun RestaurantDetailScreen(
                     ) {
                         Icon(Icons.Filled.Call, contentDescription = null, modifier = Modifier.padding(end = 8.dp))
                         Text("Ara: $phone")
+                    }
+                }
+
+                AnimatedVisibility(visible = surpriseMessage != null, enter = fadeIn(), exit = fadeOut()) {
+                    surpriseMessage?.let { message ->
+                        SurpriseResultToast(
+                            message = message,
+                            modifier = Modifier.fillMaxWidth().padding(top = 14.dp),
+                        )
                     }
                 }
 
