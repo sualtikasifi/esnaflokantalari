@@ -134,11 +134,23 @@ def main() -> int:
     by_name = {c["name"]: c for c in cities}
 
     unknown = set()
+    used_ids: dict[str, int] = {}
     for row in read_restaurants():
         city = by_name.get(row["city"])
         if city is None:
             unknown.add(row["city"])
             continue
+
+        # Aynı şehirde aynı isimde birden fazla şube olabilir (ör. iki
+        # "Balkan Lokantası"). Kimlikler çakışırsa LazyColumn'un benzersiz
+        # anahtar gereksinimi çöküşe yol açıyordu — bu yüzden çakışan
+        # kimliklere -2, -3 ... eki eklenir.
+        base_id = row["data"]["id"]
+        count = used_ids.get(base_id, 0)
+        used_ids[base_id] = count + 1
+        if count > 0:
+            row["data"]["id"] = f"{base_id}-{count + 1}"
+
         city["restaurants"].append(row["data"])
 
     for city in cities:
