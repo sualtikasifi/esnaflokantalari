@@ -16,7 +16,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
@@ -53,6 +53,8 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.exifinterface.media.ExifInterface
 import kotlin.math.roundToInt
+
+private const val CROP_DECODE_MAX_EDGE_PX = 2200
 
 /**
  * Galeriden seçilen (kırpılmamış) ekran görüntüsünü, kart oranına (16:9)
@@ -170,7 +172,7 @@ fun PhotoCropScreen(
                     bitmap = bitmap.asImageBitmap(),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(widthDp, heightDp)
+                        .requiredSize(widthDp, heightDp)
                         .graphicsLayer {
                             scaleX = effectiveScale
                             scaleY = effectiveScale
@@ -215,8 +217,21 @@ private fun cropBitmap(source: Bitmap, offset: Offset, effectiveScale: Float, fr
 }
 
 private fun decodeRotated(context: Context, uri: Uri): Bitmap? {
+    val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+    runCatching {
+        context.contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, bounds) }
+    }
+
+    var sampleSize = 1
+    val longestEdge = maxOf(bounds.outWidth, bounds.outHeight)
+    while (longestEdge > 0 && longestEdge / (sampleSize * 2) >= CROP_DECODE_MAX_EDGE_PX) {
+        sampleSize *= 2
+    }
+
     val bitmap = runCatching {
-        context.contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it) }
+        context.contentResolver.openInputStream(uri)?.use {
+            BitmapFactory.decodeStream(it, null, BitmapFactory.Options().apply { inSampleSize = sampleSize })
+        }
     }.getOrNull() ?: return null
 
     val orientation = runCatching {
