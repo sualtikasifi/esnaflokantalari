@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.io.File
 import java.util.UUID
 
 sealed interface NearbyState {
@@ -65,6 +66,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     private val _featured = MutableStateFlow<List<Restaurant>>(emptyList())
     val featured: StateFlow<List<Restaurant>> = _featured.asStateFlow()
 
+    /** Uygulamaya gömülü fotoğrafı olan lokantaların kimlikleri. */
+    private val _bundledPhotoIds = MutableStateFlow<Set<String>>(emptySet())
+    val bundledPhotoIds: StateFlow<Set<String>> = _bundledPhotoIds.asStateFlow()
+
     private val _dataUpdatedAt = MutableStateFlow("")
     val dataUpdatedAt: StateFlow<String> = _dataUpdatedAt.asStateFlow()
 
@@ -80,6 +85,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             _cities.value = dataset.cities
             _dataUpdatedAt.value = dataset.updatedAt
             _featured.value = repository.featured()
+            _bundledPhotoIds.value = repository.bundledPhotoIds()
         }
     }
 
@@ -111,6 +117,15 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     fun removePhoto(restaurantId: String) {
         viewModelScope.launch { photoStore.remove(restaurantId) }
+    }
+
+    /**
+     * Cihazdaki tüm fotoğrafları zip'e toplar ve dosyayı geri verir.
+     * Fotoğraflar sadece bu telefonda saklandığı için, herkese göstermek
+     * istediğinde bu arşivi dışa aktarman gerekiyor.
+     */
+    fun exportPhotos(onResult: (File?) -> Unit) {
+        viewModelScope.launch { onResult(photoStore.exportAll()) }
     }
 
     // --- Yakınımda ---

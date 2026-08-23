@@ -53,12 +53,19 @@ fun RestaurantVisual(
     initialsSize: TextUnit = 34.sp,
     iconSize: Dp = 40.dp,
     localPhotoPath: String? = null,
+    hasBundledPhoto: Boolean = false,
 ) {
-    // Öncelik: kullanıcının yüklediği fotoğraf, sonra veri dosyasındaki foto_url.
-    val photo = localPhotoPath ?: restaurant.photoUrl
-    if (!photo.isNullOrBlank()) {
+    // Öncelik sırası: cihazda çekilen fotoğraf -> uygulamaya gömülü fotoğraf
+    // -> veri dosyasındaki foto_url -> üretilen renkli kapak.
+    val model: Any? = when {
+        localPhotoPath != null -> File(localPhotoPath)
+        hasBundledPhoto -> "file:///android_asset/photos/${restaurant.id}.jpg"
+        !restaurant.photoUrl.isNullOrBlank() -> restaurant.photoUrl
+        else -> null
+    }
+    if (model != null) {
         AsyncImage(
-            model = if (localPhotoPath != null) File(localPhotoPath) else photo,
+            model = model,
             contentDescription = restaurant.name,
             contentScale = ContentScale.Crop,
             modifier = modifier,

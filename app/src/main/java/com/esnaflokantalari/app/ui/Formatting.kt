@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import com.esnaflokantalari.app.model.Restaurant
+import java.io.File
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -71,5 +73,24 @@ fun Context.shareRestaurant(restaurant: Restaurant) {
         startActivity(Intent.createChooser(intent, "Paylaş"))
     } catch (e: ActivityNotFoundException) {
         Toast.makeText(this, "Paylaşılacak uygulama bulunamadı.", Toast.LENGTH_SHORT).show()
+    }
+}
+
+/**
+ * Dışa aktarılan fotoğraf arşivini paylaşım menüsüyle gönderir.
+ * (E-posta, Drive, WhatsApp — kullanıcı nereye göndereceğini kendi seçer.)
+ */
+fun Context.shareExport(archive: File) {
+    val uri = FileProvider.getUriForFile(this, "$packageName.fileprovider", archive)
+    val intent = Intent(Intent.ACTION_SEND).apply {
+        type = "application/zip"
+        putExtra(Intent.EXTRA_STREAM, uri)
+        putExtra(Intent.EXTRA_SUBJECT, "Esnaf Lokantaları — lokanta fotoğrafları")
+        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    }
+    try {
+        startActivity(Intent.createChooser(intent, "Fotoğrafları gönder"))
+    } catch (e: ActivityNotFoundException) {
+        Toast.makeText(this, "Gönderim için uygulama bulunamadı.", Toast.LENGTH_SHORT).show()
     }
 }

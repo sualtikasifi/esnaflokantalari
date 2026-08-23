@@ -14,6 +14,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
 
 private val Context.photosDataStore by preferencesDataStore(name = "restaurant_photos")
 private val PHOTO_KEY = stringSetPreferencesKey("restaurant_photo_paths")
@@ -77,6 +79,41 @@ class PhotoStore(private val context: Context) {
                     .toSet()
             }
         }
+    }
+
+    /**
+     * Cihazdaki tüm lokanta fotoğraflarını tek bir zip dosyasına toplar.
+     *
+     * Fotoğraflar sadece bu telefonda saklandığı için, diğer kullanıcıların da
+     * görmesi isteniyorsa bu arşivi dışa aktarıp uygulamanın `assets/photos/`
+     * klasörüne koymak gerekiyor. Dosya adları lokanta kimliğidir.
+     */
+    suspend fun exportAll(): File? = withContext(Dispatchers.IO) {
+        val files = photoDir.listFiles()?.filter { it.extension == "jpg" }.orEmpty()
+        if (files.isEmpty()) return@withContext null
+
+        val exportDir = File(context.cacheDir, "exports").apply {
+            mkdirs()
+            listFiles()?.forEach { it.delete() }
+        }
+        val archive = File(exportDir, "esnaflokantalari-fotograflar.zip")
+
+        runCatching {
+            ZipOutputStream(archive.outputStream().buffered()).use { zip ->
+                files.forEach { file ->
+                    zip.putNextEntry(ZipEntry(file.name))
+                    file.inputStream().use { it.copyTo(zip) }
+                    zip.closeEntry()
+                }
+            }
+        }.onFailure { return@withContext null }
+
+        archive
+    }
+
+    /** Cihazda kaç fotoğraf var. */
+    suspend fun count(): Int = withContext(Dispatchers.IO) {
+        photoDir.listFiles()?.count { it.extension == "jpg" } ?: 0
     }
 
     /** Fotoğrafı belleğe sığacak şekilde, kaliteyi koruyarak ölçekleyerek okur. */

@@ -34,6 +34,7 @@ import androidx.navigation.navArgument
 import com.esnaflokantalari.app.data.equalsTr
 import com.esnaflokantalari.app.ui.AppViewModel
 import com.esnaflokantalari.app.ui.SurpriseEvent
+import com.esnaflokantalari.app.ui.shareExport
 import com.esnaflokantalari.app.ui.screens.CityScreen
 import com.esnaflokantalari.app.ui.screens.CitySearchScreen
 import com.esnaflokantalari.app.ui.screens.FavoritesScreen
@@ -78,6 +79,7 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
     val dataUpdatedAt by viewModel.dataUpdatedAt.collectAsState()
     val photos by viewModel.photos.collectAsState()
     val surprise by viewModel.surprise.collectAsState()
+    val bundledPhotoIds by viewModel.bundledPhotoIds.collectAsState()
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
@@ -138,10 +140,25 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     featured = featured,
                     dataUpdatedAt = dataUpdatedAt,
                     photos = photos,
+                    bundledPhotoIds = bundledPhotoIds,
+                    photoCount = photos.size,
                     onCityClick = { navController.navigate(Routes.city(it)) },
                     onSearchClick = { navController.navigate(Routes.CITY_SEARCH) },
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
                     onSurpriseMe = { viewModel.surpriseMe() },
+                    onExportPhotos = {
+                        viewModel.exportPhotos { archive ->
+                            if (archive != null) {
+                                context.shareExport(archive)
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Dışa aktarılacak fotoğraf bulunamadı.",
+                                    Toast.LENGTH_SHORT,
+                                ).show()
+                            }
+                        }
+                    },
                 )
             }
 
@@ -157,6 +174,7 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                 FavoritesScreen(
                     favorites = favorites,
                     photos = photos,
+                    bundledPhotoIds = bundledPhotoIds,
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
                     onToggleFavorite = { viewModel.toggleFavoriteById(it) },
                     onExploreClick = { goToTab(Routes.HOME) },
@@ -169,6 +187,7 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     state = nearby,
                     favoriteIds = favoriteIds,
                     photos = photos,
+                    bundledPhotoIds = bundledPhotoIds,
                     onToggleFavorite = { viewModel.toggleFavoriteById(it) },
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
                     onRequestNearby = { viewModel.loadNearby() },
@@ -186,6 +205,7 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     city = viewModel.city(cityName),
                     favoriteIds = favoriteIds,
                     photos = photos,
+                    bundledPhotoIds = bundledPhotoIds,
                     suggestionCount = suggestions.count { it.city.equalsTr(cityName) },
                     onToggleFavorite = { viewModel.toggleFavoriteById(it) },
                     onBack = { navController.popBackStack() },

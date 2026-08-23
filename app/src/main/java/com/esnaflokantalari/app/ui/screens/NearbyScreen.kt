@@ -61,6 +61,7 @@ fun NearbyScreen(
     state: NearbyState,
     favoriteIds: Set<String>,
     photos: Map<String, String>,
+    bundledPhotoIds: Set<String>,
     onToggleFavorite: (String) -> Unit,
     onRestaurantClick: (String) -> Unit,
     onRequestNearby: () -> Unit,
@@ -168,6 +169,7 @@ fun NearbyScreen(
                             onClick = { onRestaurantClick(restaurant.id) },
                             onToggleFavorite = { onToggleFavorite(restaurant.id) },
                             localPhotoPath = photos[restaurant.id],
+                            hasBundledPhoto = restaurant.id in bundledPhotoIds,
                         )
                     }
                 }

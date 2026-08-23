@@ -36,6 +36,33 @@ Her şehir sayfasının sağ üstündeki **+** ikonuyla kullanıcı lokanta öne
 2. Kullanıcı **Gönder** ikonuna basınca WhatsApp / e-posta / mesaj ile sana ulaşır
 3. Sen ayda bir gelen önerileri CSV'ye ekleyip yeni sürüm yayınlarsın
 
+## Lokanta fotoğrafları
+
+Fotoğrafların iki kaynağı var:
+
+| Kaynak | Nerede saklanır | Kim görür |
+|---|---|---|
+| Uygulamadan eklenen | Sadece o telefonda | Yalnızca o kullanıcı |
+| `assets/photos/` içine gömülen | Uygulamanın içinde | **Herkes** |
+
+### Kendi çektiğin fotoğrafları herkese göstermek
+
+1. **Telefonda:** Lokanta detayına gir, görselin sağ alt köşesindeki kamera
+   ikonuyla galeriden fotoğraf seç. (İstediğin kadar lokantaya ekle.)
+2. **Dışa aktar:** Ana sayfada sağ üstteki ⋮ menüsünden
+   **"Fotoğrafları dışa aktar"** → paylaşım menüsünden kendine gönder
+   (e-posta, Drive, WhatsApp fark etmez). Tek bir `.zip` dosyası gelir.
+3. **Bilgisayarda:** Zip'i aç, içindeki `.jpg` dosyalarını
+   `app/src/main/assets/photos/` klasörüne kopyala.
+   Dosya adları lokanta kimliğidir (`adana-kaya-kebap.jpg` gibi) — değiştirme.
+4. Uygulamayı yeniden derle. Artık o fotoğraflar herkeste görünür.
+
+Öncelik sırası: kullanıcının kendi eklediği fotoğraf → gömülü fotoğraf →
+üretilen renkli kapak.
+
+⚠️ Fotoğraflar APK boyutunu büyütür. Her fotoğraf ~200-400 KB; 50 fotoğraf
+uygulamayı ~15-20 MB büyütür. En çok gidilen mekanlarla başlamak mantıklı.
+
 ## Veriyi güncelleme (ayda bir yapacağın iş)
 
 Tek yapman gereken bir tabloyu düzenlemek:
