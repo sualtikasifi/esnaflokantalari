@@ -1,5 +1,6 @@
 package com.esnaflokantalari.app.ui.screens
 
+import android.graphics.Bitmap
 import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -76,7 +77,7 @@ fun RestaurantDetailScreen(
     localPhotoPath: String?,
     surpriseMessage: String? = null,
     onToggleFavorite: () -> Unit,
-    onPickPhoto: (Uri) -> Unit,
+    onPickPhoto: (Bitmap) -> Unit,
     onRemovePhoto: () -> Unit,
     onBack: () -> Unit,
 ) {
@@ -107,15 +108,28 @@ fun RestaurantDetailScreen(
     }
 
     val context = LocalContext.current
+    var pendingCropUri by remember { mutableStateOf<Uri?>(null) }
 
     // Android 13+ sistem fotoğraf seçicisi — galeri izni istemeye gerek yok.
     val photoPicker = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
     ) { uri: Uri? ->
         if (uri != null) {
-            onPickPhoto(uri)
-            Toast.makeText(context, "Fotoğraf ekleniyor...", Toast.LENGTH_SHORT).show()
+            pendingCropUri = uri
         }
+    }
+
+    pendingCropUri?.let { uri ->
+        PhotoCropScreen(
+            imageUri = uri,
+            onCancel = { pendingCropUri = null },
+            onConfirm = { bitmap ->
+                onPickPhoto(bitmap)
+                pendingCropUri = null
+                Toast.makeText(context, "Fotoğraf ekleniyor...", Toast.LENGTH_SHORT).show()
+            },
+        )
+        return
     }
 
     Scaffold(

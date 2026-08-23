@@ -261,8 +261,8 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     localPhotoPath = photos[restaurantId],
                     surpriseMessage = surpriseMessage,
                     onToggleFavorite = { restaurant?.let(viewModel::toggleFavorite) },
-                    onPickPhoto = { uri ->
-                        viewModel.savePhoto(restaurantId, uri) { success ->
+                    onPickPhoto = { bitmap ->
+                        viewModel.savePhotoBitmap(restaurantId, bitmap) { success ->
                             Toast.makeText(
                                 context,
                                 if (success) "Fotoğraf eklendi" else "Fotoğraf eklenemedi",

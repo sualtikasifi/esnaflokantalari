@@ -49,24 +49,50 @@ class PhotoStore(private val context: Context) {
     suspend fun save(restaurantId: String, source: Uri): String? = withContext(Dispatchers.IO) {
         val bitmap = decodeScaled(source) ?: return@withContext null
         val rotated = applyExifRotation(source, bitmap)
+        val path = writeBitmap(restaurantId, rotated)
+        rotated.recycle()
+        if (rotated !== bitmap) bitmap.recycle()
+        path?.also { rememberPath(restaurantId, it) }
+    }
 
+    /**
+     * Kullanıcının uygulama içinde kırptığı görseli kaydeder — kırpma
+     * ekranından gelen bitmap zaten doğru yönde, sadece boyut sınırı uygulanır.
+     */
+    suspend fun saveBitmap(restaurantId: String, bitmap: Bitmap): String? = withContext(Dispatchers.IO) {
+        val longestEdge = maxOf(bitmap.width, bitmap.height)
+        val scaled = if (longestEdge > MAX_EDGE_PX) {
+            val ratio = MAX_EDGE_PX.toFloat() / longestEdge
+            Bitmap.createScaledBitmap(
+                bitmap,
+                (bitmap.width * ratio).toInt().coerceAtLeast(1),
+                (bitmap.height * ratio).toInt().coerceAtLeast(1),
+                true,
+            )
+        } else {
+            bitmap
+        }
+        val path = writeBitmap(restaurantId, scaled)
+        if (scaled !== bitmap) scaled.recycle()
+        path?.also { rememberPath(restaurantId, it) }
+    }
+
+    private fun writeBitmap(restaurantId: String, bitmap: Bitmap): String? {
         val target = File(photoDir, "$restaurantId.jpg")
         runCatching {
             target.outputStream().use { output ->
-                rotated.compress(Bitmap.CompressFormat.JPEG, JPEG_QUALITY, output)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, JPEG_QUALITY, output)
             }
-        }.onFailure { return@withContext null }
+        }.onFailure { return null }
+        return target.absolutePath
+    }
 
-        rotated.recycle()
-        if (rotated !== bitmap) bitmap.recycle()
-
+    private suspend fun rememberPath(restaurantId: String, path: String) {
         context.photosDataStore.edit { preferences ->
             val current = preferences[PHOTO_KEY] ?: emptySet()
             val withoutOld = current.filterNot { it.substringBefore(SEPARATOR) == restaurantId }
-            preferences[PHOTO_KEY] = (withoutOld + "$restaurantId$SEPARATOR${target.absolutePath}").toSet()
+            preferences[PHOTO_KEY] = (withoutOld + "$restaurantId$SEPARATOR$path").toSet()
         }
-
-        target.absolutePath
     }
 
     suspend fun remove(restaurantId: String) {

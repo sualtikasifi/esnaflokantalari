@@ -111,6 +111,14 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    /** Kırpma ekranından gelen görseli kaydeder. */
+    fun savePhotoBitmap(restaurantId: String, bitmap: android.graphics.Bitmap, onResult: (Boolean) -> Unit = {}) {
+        viewModelScope.launch {
+            val path = photoStore.saveBitmap(restaurantId, bitmap)
+            onResult(path != null)
+        }
+    }
+
     fun removePhoto(restaurantId: String) {
         viewModelScope.launch { photoStore.remove(restaurantId) }
     }
