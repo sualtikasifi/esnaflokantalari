@@ -31,6 +31,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.esnaflokantalari.app.BuildConfig
 import com.esnaflokantalari.app.data.equalsTr
 import com.esnaflokantalari.app.ui.AppViewModel
 import com.esnaflokantalari.app.ui.SurpriseEvent
@@ -142,6 +143,7 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     photos = photos,
                     bundledPhotoIds = bundledPhotoIds,
                     photoCount = photos.size,
+                    appVersion = BuildConfig.VERSION_NAME,
                     onCityClick = { navController.navigate(Routes.city(it)) },
                     onSearchClick = { navController.navigate(Routes.CITY_SEARCH) },
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },

@@ -24,6 +24,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Casino
 import androidx.compose.material.icons.filled.LocationCity
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.Search
@@ -75,6 +76,7 @@ fun HomeScreen(
     photos: Map<String, String>,
     bundledPhotoIds: Set<String>,
     photoCount: Int,
+    appVersion: String,
     onCityClick: (String) -> Unit,
     onSearchClick: () -> Unit,
     onRestaurantClick: (String) -> Unit,
@@ -100,22 +102,38 @@ fun HomeScreen(
                     }
                 },
                 actions = {
-                    if (photoCount > 0) {
-                        IconButton(onClick = { menuOpen = true }) {
-                            Icon(Icons.Filled.MoreVert, contentDescription = "Menü")
-                        }
-                        DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
-                            DropdownMenuItem(
-                                leadingIcon = {
-                                    Icon(Icons.Filled.PhotoLibrary, contentDescription = null)
-                                },
-                                text = { Text("Fotoğrafları dışa aktar ($photoCount)") },
-                                onClick = {
-                                    menuOpen = false
-                                    onExportPhotos()
-                                },
-                            )
-                        }
+                    // Menü her zaman görünür: gizli bir menü bulunamaz.
+                    IconButton(onClick = { menuOpen = true }) {
+                        Icon(Icons.Filled.MoreVert, contentDescription = "Menü")
+                    }
+                    DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
+                        DropdownMenuItem(
+                            leadingIcon = {
+                                Icon(Icons.Filled.PhotoLibrary, contentDescription = null)
+                            },
+                            text = {
+                                Text(
+                                    if (photoCount > 0) {
+                                        "Fotoğrafları dışa aktar ($photoCount)"
+                                    } else {
+                                        "Fotoğrafları dışa aktar"
+                                    },
+                                )
+                            },
+                            // Fotoğraf yokken tıklanamaz ama görünür kalır,
+                            // böylece özelliğin var olduğu belli olur.
+                            enabled = photoCount > 0,
+                            onClick = {
+                                menuOpen = false
+                                onExportPhotos()
+                            },
+                        )
+                        DropdownMenuItem(
+                            leadingIcon = { Icon(Icons.Filled.Info, contentDescription = null) },
+                            text = { Text("Sürüm $appVersion") },
+                            enabled = false,
+                            onClick = {},
+                        )
                     }
                 },
             )
