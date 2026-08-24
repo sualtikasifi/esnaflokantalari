@@ -199,6 +199,16 @@ fun HomeScreen(
                 }
             }
 
+            if (photoMissingCount > 0) {
+                item {
+                    PhotoQueuePromptCard(
+                        missingCount = photoMissingCount,
+                        onClick = onOpenPhotoQueue,
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 6.dp),
+                    )
+                }
+            }
+
             item {
                 SectionHeader("Şehirler", "$filledCityCount ilde lokanta kayıtlı")
             }
@@ -252,6 +262,37 @@ private fun SectionHeader(title: String, subtitle: String? = null) {
                 it,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodyMedium,
+            )
+        }
+    }
+}
+
+@Composable
+private fun PhotoQueuePromptCard(missingCount: Int, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    Card(
+        onClick = onClick,
+        modifier = modifier,
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = TerracottaContainer),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(Icons.Filled.AddAPhoto, contentDescription = null, tint = Terracotta)
+            Column(modifier = Modifier.weight(1f).padding(start = 12.dp)) {
+                Text("Fotoğraf ekle", fontWeight = FontWeight.SemiBold)
+                Text(
+                    "$missingCount lokantada fotoğraf eksik — sırayla ekle",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            Icon(
+                Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
     }
