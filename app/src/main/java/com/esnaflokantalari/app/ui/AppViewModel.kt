@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.io.File
@@ -75,6 +76,17 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _surprise = MutableStateFlow<SurpriseEvent?>(null)
     val surprise: StateFlow<SurpriseEvent?> = _surprise.asStateFlow()
+
+    /**
+     * Fotoğrafı olmayan lokantalar, il->ad sırasıyla. Bir fotoğraf kaydedilince
+     * (yerel ya da gömülü) bu listeden otomatik düşer — kuyruk ekranı bu sayede
+     * kendiliğinden bir sonraki lokantaya geçer.
+     */
+    val missingPhotoRestaurants: StateFlow<List<Restaurant>> =
+        combine(cities, photos, bundledPhotoIds) { cityList, photoMap, bundled ->
+            cityList.flatMap { it.restaurants }
+                .filter { it.id !in photoMap && it.id !in bundled }
+        }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     init {
         viewModelScope.launch {

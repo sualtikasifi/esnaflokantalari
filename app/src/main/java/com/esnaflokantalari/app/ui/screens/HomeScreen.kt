@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.AddAPhoto
 import androidx.compose.material.icons.filled.Casino
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationCity
@@ -63,11 +64,13 @@ fun HomeScreen(
     cities: List<City>,
     dataUpdatedAt: String,
     photoCount: Int,
+    photoMissingCount: Int,
     appVersion: String,
     onCityClick: (String) -> Unit,
     onSearchClick: () -> Unit,
     onSurpriseMe: () -> Unit,
     onExportPhotos: () -> Unit,
+    onOpenPhotoQueue: () -> Unit,
 ) {
     var menuOpen by remember { mutableStateOf(false) }
     // Kaydırma sırasında her karede yeniden hesaplanmasın diye önceden ayrılır.
@@ -95,6 +98,25 @@ fun HomeScreen(
                         Icon(Icons.Filled.MoreVert, contentDescription = "Menü")
                     }
                     DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
+                        DropdownMenuItem(
+                            leadingIcon = {
+                                Icon(Icons.Filled.AddAPhoto, contentDescription = null)
+                            },
+                            text = {
+                                Text(
+                                    if (photoMissingCount > 0) {
+                                        "Fotoğraf ekle ($photoMissingCount eksik)"
+                                    } else {
+                                        "Fotoğraf ekle"
+                                    },
+                                )
+                            },
+                            enabled = photoMissingCount > 0,
+                            onClick = {
+                                menuOpen = false
+                                onOpenPhotoQueue()
+                            },
+                        )
                         DropdownMenuItem(
                             leadingIcon = {
                                 Icon(Icons.Filled.PhotoLibrary, contentDescription = null)

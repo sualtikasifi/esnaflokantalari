@@ -48,6 +48,7 @@ import com.esnaflokantalari.app.ui.screens.CitySearchScreen
 import com.esnaflokantalari.app.ui.screens.FavoritesScreen
 import com.esnaflokantalari.app.ui.screens.HomeScreen
 import com.esnaflokantalari.app.ui.screens.NearbyScreen
+import com.esnaflokantalari.app.ui.screens.PhotoQueueScreen
 import com.esnaflokantalari.app.ui.screens.RestaurantDetailScreen
 import com.esnaflokantalari.app.ui.screens.SuggestScreen
 
@@ -56,6 +57,7 @@ private object Routes {
     const val FAVORITES = "favorites"
     const val NEARBY = "nearby"
     const val CITY_SEARCH = "city_search"
+    const val PHOTO_QUEUE = "photo_queue"
     const val CITY = "city/{cityName}"
     const val SUGGEST = "suggest/{cityName}"
     const val RESTAURANT = "restaurant/{restaurantId}"
@@ -86,6 +88,7 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
     val photos by viewModel.photos.collectAsState()
     val surprise by viewModel.surprise.collectAsState()
     val bundledPhotoIds by viewModel.bundledPhotoIds.collectAsState()
+    val missingPhotoRestaurants by viewModel.missingPhotoRestaurants.collectAsState()
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
@@ -159,6 +162,7 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     cities = cities,
                     dataUpdatedAt = dataUpdatedAt,
                     photoCount = photos.size,
+                    photoMissingCount = missingPhotoRestaurants.size,
                     appVersion = BuildConfig.VERSION_NAME,
                     onCityClick = { navController.navigate(Routes.city(it)) },
                     onSearchClick = { navController.navigate(Routes.CITY_SEARCH) },
@@ -176,6 +180,17 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                             }
                         }
                     },
+                    onOpenPhotoQueue = { navController.navigate(Routes.PHOTO_QUEUE) },
+                )
+            }
+
+            composable(Routes.PHOTO_QUEUE) {
+                PhotoQueueScreen(
+                    restaurants = missingPhotoRestaurants,
+                    onPickPhoto = { restaurantId, bitmap ->
+                        viewModel.savePhotoBitmap(restaurantId, bitmap)
+                    },
+                    onBack = { navController.popBackStack() },
                 )
             }
 
