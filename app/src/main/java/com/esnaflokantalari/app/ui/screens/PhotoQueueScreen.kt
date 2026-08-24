@@ -18,6 +18,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AddAPhoto
 import androidx.compose.material.icons.filled.Celebration
+import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.SkipNext
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -41,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.esnaflokantalari.app.model.Restaurant
 import com.esnaflokantalari.app.ui.components.RestaurantVisual
+import com.esnaflokantalari.app.ui.openInMaps
 
 /**
  * Fotoğrafı eksik lokantaları sırayla gösterip tek tıkla fotoğraf eklemeyi
@@ -147,6 +149,14 @@ fun PhotoQueueScreen(
                     modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(10.dp),
                 ) {
+                    OutlinedButton(
+                        onClick = { context.openInMaps(current) },
+                        shape = RoundedCornerShape(50),
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Icon(Icons.Filled.Map, contentDescription = null, modifier = Modifier.padding(end = 8.dp))
+                        Text("Haritada Gör")
+                    }
                     Button(
                         onClick = {
                             photoPicker.launch(
