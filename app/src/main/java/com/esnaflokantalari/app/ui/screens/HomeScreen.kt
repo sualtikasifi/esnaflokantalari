@@ -9,12 +9,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,8 +28,10 @@ import androidx.compose.material.icons.filled.Casino
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationCity
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.NearMe
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
@@ -34,10 +39,11 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,6 +52,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -53,10 +61,20 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.esnaflokantalari.app.R
 import com.esnaflokantalari.app.model.City
+import com.esnaflokantalari.app.model.Restaurant
+import com.esnaflokantalari.app.ui.components.RestaurantVisual
+import com.esnaflokantalari.app.ui.formatCount
+import com.esnaflokantalari.app.ui.formatRating
 import com.esnaflokantalari.app.ui.theme.ChipBackground
+import com.esnaflokantalari.app.ui.theme.StarGold
 import com.esnaflokantalari.app.ui.theme.Terracotta
 import com.esnaflokantalari.app.ui.theme.TerracottaContainer
 import java.util.Calendar
+
+/** Ana sayfadaki "canın ne çekiyor" çipleri — tools/build_dataset.py'deki TAG_RULES ile eşleşir. */
+val FOOD_CATEGORIES = listOf("Kebap", "Çorba", "Sulu Yemek", "Lahmacun & Pide", "Mantı", "Kahvaltı", "Döner", "Balık")
+
+private const val MAX_FEATURED = 12
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -65,23 +83,55 @@ fun HomeScreen(
     dataUpdatedAt: String,
     photoCount: Int,
     photoMissingCount: Int,
+    photos: Map<String, String>,
+    bundledPhotoIds: Set<String>,
+    lastKnownCityName: String?,
     appVersion: String,
     onCityClick: (String) -> Unit,
     onSearchClick: () -> Unit,
     onSurpriseMe: () -> Unit,
     onExportPhotos: () -> Unit,
     onOpenPhotoQueue: () -> Unit,
+    onRestaurantClick: (String) -> Unit,
+    onTagClick: (String) -> Unit,
+    onNearbyClick: () -> Unit,
 ) {
     var menuOpen by remember { mutableStateOf(false) }
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+
     // Kaydırma sırasında her karede yeniden hesaplanmasın diye önceden ayrılır.
     // Şehirler assets/restaurants.json içinde zaten nüfusa göre büyükten
     // küçüğe sıralı geliyor (bkz. tools/build_dataset.py).
     val cityRows = remember(cities) { cities.chunked(2) }
     val filledCityCount = remember(cities) { cities.count { it.hasRestaurants } }
+    val totalRestaurantCount = remember(cities) { cities.sumOf { it.restaurants.size } }
+
+    // Vitrin: gerçek fotoğrafı olan, en yüksek puanlı lokantalar önce.
+    val featured = remember(cities, photos, bundledPhotoIds) {
+        cities.asSequence()
+            .flatMap { it.restaurants.asSequence() }
+            .filter { it.id in photos || it.id in bundledPhotoIds }
+            .sortedWith(
+                compareByDescending<Restaurant> { it.rating ?: 0.0 }
+                    .thenByDescending { it.reviewCount ?: 0 },
+            )
+            .take(MAX_FEATURED)
+            .toList()
+    }
+
+    val nearbyPreview = remember(cities, lastKnownCityName) {
+        lastKnownCityName
+            ?.let { name -> cities.firstOrNull { it.name == name } }
+            ?.restaurants
+            ?.take(6)
+            .orEmpty()
+    }
 
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            TopAppBar(
+            LargeTopAppBar(
+                scrollBehavior = scrollBehavior,
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Image(
@@ -157,7 +207,7 @@ fun HomeScreen(
                 Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 4.dp, bottom = 12.dp)) {
                     Text(greetingMessage(), style = MaterialTheme.typography.headlineSmall)
                     Text(
-                        "Türkiye'nin dört bir yanından esnaf lokantaları",
+                        "$totalRestaurantCount lokanta · 81 il",
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(top = 4.dp),
                     )
@@ -178,22 +228,96 @@ fun HomeScreen(
                         ) {
                             Icon(Icons.Filled.Search, contentDescription = null, tint = Terracotta)
                             Text(
-                                "Şehir ara (81 il)",
+                                "Şehir veya lokanta ara",
                                 modifier = Modifier.padding(start = 10.dp),
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
                             )
                         }
 
-                        Box(
+                        Row(
                             modifier = Modifier
                                 .padding(start = 10.dp)
-                                .size(52.dp)
-                                .clip(RoundedCornerShape(16.dp))
+                                .height(52.dp)
+                                .clip(RoundedCornerShape(50))
                                 .background(TerracottaContainer)
-                                .clickable { onSurpriseMe() },
-                            contentAlignment = Alignment.Center,
+                                .clickable { onSurpriseMe() }
+                                .padding(horizontal = 16.dp),
+                            verticalAlignment = Alignment.CenterVertically,
                         ) {
-                            Icon(Icons.Filled.Casino, contentDescription = "Bugün ne yesem?", tint = Terracotta)
+                            Icon(Icons.Filled.Casino, contentDescription = null, tint = Terracotta)
+                            Text(
+                                "Bugün ne yesem?",
+                                modifier = Modifier.padding(start = 8.dp),
+                                color = Terracotta,
+                                fontWeight = FontWeight.SemiBold,
+                                maxLines = 1,
+                            )
+                        }
+                    }
+                }
+            }
+
+            if (featured.isNotEmpty()) {
+                item { SectionHeader("Bu akşam nereye?", "En yüksek puanlı, fotoğraflı lokantalar") }
+                item {
+                    LazyRow(
+                        contentPadding = PaddingValues(horizontal = 20.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    ) {
+                        items(featured, key = { it.id }) { restaurant ->
+                            FeaturedCard(
+                                restaurant = restaurant,
+                                localPhotoPath = photos[restaurant.id],
+                                hasBundledPhoto = restaurant.id in bundledPhotoIds,
+                                onClick = { onRestaurantClick(restaurant.id) },
+                            )
+                        }
+                    }
+                }
+            }
+
+            item { SectionHeader("Canın ne çekiyor?") }
+            item {
+                LazyRow(
+                    contentPadding = PaddingValues(horizontal = 20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    items(FOOD_CATEGORIES) { tag ->
+                        Text(
+                            tag,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(50))
+                                .background(ChipBackground)
+                                .clickable { onTagClick(tag) }
+                                .padding(horizontal = 16.dp, vertical = 10.dp),
+                            style = MaterialTheme.typography.labelLarge,
+                        )
+                    }
+                }
+            }
+
+            if (nearbyPreview.isNotEmpty()) {
+                item {
+                    SectionHeader(
+                        "$lastKnownCityName civarında",
+                        "Son bilinen konumundaki lokantalar",
+                        onSeeAll = onNearbyClick,
+                    )
+                }
+                item {
+                    LazyRow(
+                        contentPadding = PaddingValues(horizontal = 20.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    ) {
+                        items(nearbyPreview, key = { it.id }) { restaurant ->
+                            FeaturedCard(
+                                restaurant = restaurant,
+                                localPhotoPath = photos[restaurant.id],
+                                hasBundledPhoto = restaurant.id in bundledPhotoIds,
+                                onClick = { onRestaurantClick(restaurant.id) },
+                            )
                         }
                     }
                 }
@@ -254,15 +378,100 @@ private fun greetingMessage(): String =
     }
 
 @Composable
-private fun SectionHeader(title: String, subtitle: String? = null) {
-    Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)) {
-        Text(title, style = MaterialTheme.typography.titleLarge)
-        subtitle?.let {
-            Text(
-                it,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                style = MaterialTheme.typography.bodyMedium,
-            )
+private fun SectionHeader(title: String, subtitle: String? = null, onSeeAll: (() -> Unit)? = null) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
+            Text(title, style = MaterialTheme.typography.titleLarge)
+            subtitle?.let {
+                Text(
+                    it,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+        }
+        if (onSeeAll != null) {
+            Row(
+                modifier = Modifier.clickable { onSeeAll() },
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Icon(Icons.Filled.NearMe, contentDescription = null, tint = Terracotta, modifier = Modifier.size(18.dp))
+                Text(
+                    "Tümü",
+                    color = Terracotta,
+                    style = MaterialTheme.typography.labelLarge,
+                    modifier = Modifier.padding(start = 4.dp),
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun FeaturedCard(
+    restaurant: Restaurant,
+    localPhotoPath: String?,
+    hasBundledPhoto: Boolean,
+    onClick: () -> Unit,
+) {
+    Card(
+        onClick = onClick,
+        modifier = Modifier.width(200.dp),
+        shape = RoundedCornerShape(18.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+    ) {
+        Column {
+            Box {
+                RestaurantVisual(
+                    restaurant = restaurant,
+                    modifier = Modifier.fillMaxWidth().aspectRatio(4f / 3f),
+                    localPhotoPath = localPhotoPath,
+                    hasBundledPhoto = hasBundledPhoto,
+                )
+                if (restaurant.hasRating) {
+                    Row(
+                        modifier = Modifier
+                            .align(Alignment.BottomStart)
+                            .padding(8.dp)
+                            .clip(RoundedCornerShape(50))
+                            .background(Color.White.copy(alpha = 0.94f))
+                            .padding(horizontal = 8.dp, vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(Icons.Filled.Star, contentDescription = null, tint = StarGold, modifier = Modifier.size(14.dp))
+                        Text(
+                            restaurant.rating!!.formatRating(),
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF241A15),
+                            style = MaterialTheme.typography.labelMedium,
+                            modifier = Modifier.padding(start = 3.dp),
+                        )
+                    }
+                }
+            }
+            Column(modifier = Modifier.padding(10.dp)) {
+                Text(
+                    restaurant.name,
+                    fontWeight = FontWeight.SemiBold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+                Text(
+                    buildString {
+                        append(restaurant.city)
+                        restaurant.reviewCount?.takeIf { it > 0 }?.let { append(" · ${it.formatCount()} yorum") }
+                    },
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(top = 2.dp),
+                )
+            }
         }
     }
 }

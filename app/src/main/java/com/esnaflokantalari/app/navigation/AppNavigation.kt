@@ -1,5 +1,6 @@
 package com.esnaflokantalari.app.navigation
 
+import android.net.Uri
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -51,6 +52,7 @@ import com.esnaflokantalari.app.ui.screens.NearbyScreen
 import com.esnaflokantalari.app.ui.screens.PhotoQueueScreen
 import com.esnaflokantalari.app.ui.screens.RestaurantDetailScreen
 import com.esnaflokantalari.app.ui.screens.SuggestScreen
+import com.esnaflokantalari.app.ui.screens.TagResultsScreen
 
 private object Routes {
     const val HOME = "home"
@@ -61,10 +63,12 @@ private object Routes {
     const val CITY = "city/{cityName}"
     const val SUGGEST = "suggest/{cityName}"
     const val RESTAURANT = "restaurant/{restaurantId}"
+    const val TAG = "tag/{tagName}"
 
     fun city(cityName: String) = "city/$cityName"
     fun suggest(cityName: String) = "suggest/$cityName"
     fun restaurant(restaurantId: String) = "restaurant/$restaurantId"
+    fun tag(tagName: String) = "tag/${Uri.encode(tagName)}"
 }
 
 private data class BottomTab(val route: String, val label: String, val icon: ImageVector)
@@ -89,6 +93,7 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
     val surprise by viewModel.surprise.collectAsState()
     val bundledPhotoIds by viewModel.bundledPhotoIds.collectAsState()
     val missingPhotoRestaurants by viewModel.missingPhotoRestaurants.collectAsState()
+    val lastKnownCityName by viewModel.lastKnownCityName.collectAsState()
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
@@ -163,6 +168,9 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     dataUpdatedAt = dataUpdatedAt,
                     photoCount = photos.size,
                     photoMissingCount = missingPhotoRestaurants.size,
+                    photos = photos,
+                    bundledPhotoIds = bundledPhotoIds,
+                    lastKnownCityName = lastKnownCityName,
                     appVersion = BuildConfig.VERSION_NAME,
                     onCityClick = { navController.navigate(Routes.city(it)) },
                     onSearchClick = { navController.navigate(Routes.CITY_SEARCH) },
@@ -181,6 +189,9 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                         }
                     },
                     onOpenPhotoQueue = { navController.navigate(Routes.PHOTO_QUEUE) },
+                    onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
+                    onTagClick = { navController.navigate(Routes.tag(it)) },
+                    onNearbyClick = { goToTab(Routes.NEARBY) },
                 )
             }
 
@@ -199,6 +210,24 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     cities = cities,
                     onBack = { navController.popBackStack() },
                     onCityClick = { navController.navigate(Routes.city(it)) },
+                    onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
+                )
+            }
+
+            composable(
+                route = Routes.TAG,
+                arguments = listOf(navArgument("tagName") { type = NavType.StringType }),
+            ) { entry ->
+                val tagName = Uri.decode(entry.arguments?.getString("tagName").orEmpty())
+                TagResultsScreen(
+                    tag = tagName,
+                    restaurants = cities.flatMap { it.restaurants }.filter { tagName in it.displayTags },
+                    favoriteIds = favoriteIds,
+                    photos = photos,
+                    bundledPhotoIds = bundledPhotoIds,
+                    onToggleFavorite = { viewModel.toggleFavoriteById(it) },
+                    onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
+                    onBack = { navController.popBackStack() },
                 )
             }
 

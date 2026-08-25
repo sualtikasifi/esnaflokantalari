@@ -65,6 +65,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     val photos: StateFlow<Map<String, String>> = photoStore.photos
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
 
+    /** En son GPS ile doğrulanan il — ana sayfadaki "civarında" önizlemesi için. */
+    val lastKnownCityName: StateFlow<String?> = lastCityStore.cityName
+        .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
     private val _cities = MutableStateFlow<List<City>>(emptyList())
     val cities: StateFlow<List<City>> = _cities.asStateFlow()
 

@@ -38,11 +38,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.material.icons.filled.Restaurant
 import com.esnaflokantalari.app.data.containsTr
 import com.esnaflokantalari.app.model.City
+import com.esnaflokantalari.app.model.Restaurant
 import com.esnaflokantalari.app.ui.theme.ChipBackground
 import com.esnaflokantalari.app.ui.theme.Terracotta
 import com.esnaflokantalari.app.ui.theme.TerracottaContainer
+
+private const val MAX_RESTAURANT_RESULTS = 30
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,17 +54,30 @@ fun CitySearchScreen(
     cities: List<City>,
     onBack: () -> Unit,
     onCityClick: (String) -> Unit,
+    onRestaurantClick: (String) -> Unit,
 ) {
     var query by remember { mutableStateOf("") }
     // Türkçe'ye duyarlı arama: "istanbul" da "İstanbul"u bulur.
-    val results = remember(query, cities) {
+    val matchedCities = remember(query, cities) {
         if (query.isBlank()) cities else cities.filter { it.name.containsTr(query.trim()) }
+    }
+    val matchedRestaurants = remember(query, cities) {
+        val trimmed = query.trim()
+        if (trimmed.isBlank()) {
+            emptyList()
+        } else {
+            cities.asSequence()
+                .flatMap { it.restaurants.asSequence() }
+                .filter { it.name.containsTr(trimmed) }
+                .take(MAX_RESTAURANT_RESULTS)
+                .toList()
+        }
     }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Şehir Ara") },
+                title = { Text("Ara") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Geri")
@@ -73,7 +90,7 @@ fun CitySearchScreen(
             OutlinedTextField(
                 value = query,
                 onValueChange = { query = it },
-                placeholder = { Text("Şehir adı yaz") },
+                placeholder = { Text("Şehir veya lokanta ara") },
                 leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
                 trailingIcon = {
                     if (query.isNotEmpty()) {
@@ -87,13 +104,13 @@ fun CitySearchScreen(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
             )
 
-            if (results.isEmpty()) {
+            if (matchedCities.isEmpty() && matchedRestaurants.isEmpty()) {
                 Column(
                     modifier = Modifier.fillMaxSize().padding(32.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
-                        "\"$query\" için şehir bulunamadı.",
+                        "\"$query\" için sonuç bulunamadı.",
                         textAlign = TextAlign.Center,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -102,41 +119,79 @@ fun CitySearchScreen(
             }
 
             LazyColumn(contentPadding = PaddingValues(bottom = 16.dp)) {
-                items(results, key = { it.slug }) { city ->
-                    ListItem(
-                        modifier = Modifier.clickable { onCityClick(city.name) },
-                        leadingContent = {
-                            Box(
-                                modifier = Modifier
-                                    .size(40.dp)
-                                    .clip(CircleShape)
-                                    .background(if (city.hasRestaurants) TerracottaContainer else ChipBackground),
-                                contentAlignment = Alignment.Center,
-                            ) {
-                                Icon(
-                                    Icons.Filled.LocationCity,
-                                    contentDescription = null,
-                                    tint = if (city.hasRestaurants) Terracotta else MaterialTheme.colorScheme.onSurfaceVariant,
+                if (matchedRestaurants.isNotEmpty()) {
+                    item { SectionLabel("Lokantalar") }
+                    items(matchedRestaurants, key = { "r-${it.id}" }) { restaurant ->
+                        ListItem(
+                            modifier = Modifier.clickable { onRestaurantClick(restaurant.id) },
+                            leadingContent = {
+                                Box(
+                                    modifier = Modifier
+                                        .size(40.dp)
+                                        .clip(CircleShape)
+                                        .background(TerracottaContainer),
+                                    contentAlignment = Alignment.Center,
+                                ) {
+                                    Icon(Icons.Filled.Restaurant, contentDescription = null, tint = Terracotta)
+                                }
+                            },
+                            headlineContent = { Text(restaurant.name, maxLines = 1) },
+                            supportingContent = { Text(restaurant.city, maxLines = 1) },
+                            trailingContent = {
+                                Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null)
+                            },
+                        )
+                    }
+                }
+
+                if (matchedCities.isNotEmpty()) {
+                    if (matchedRestaurants.isNotEmpty()) item { SectionLabel("Şehirler") }
+                    items(matchedCities, key = { "c-${it.slug}" }) { city ->
+                        ListItem(
+                            modifier = Modifier.clickable { onCityClick(city.name) },
+                            leadingContent = {
+                                Box(
+                                    modifier = Modifier
+                                        .size(40.dp)
+                                        .clip(CircleShape)
+                                        .background(if (city.hasRestaurants) TerracottaContainer else ChipBackground),
+                                    contentAlignment = Alignment.Center,
+                                ) {
+                                    Icon(
+                                        Icons.Filled.LocationCity,
+                                        contentDescription = null,
+                                        tint = if (city.hasRestaurants) Terracotta else MaterialTheme.colorScheme.onSurfaceVariant,
+                                    )
+                                }
+                            },
+                            headlineContent = { Text(city.name) },
+                            supportingContent = {
+                                Text(
+                                    when {
+                                        city.hasRestaurants -> "${city.restaurants.size} lokanta · ${city.tagline}"
+                                        city.tagline.isNotBlank() -> city.tagline
+                                        else -> "Öneri bekliyor"
+                                    },
+                                    maxLines = 1,
                                 )
-                            }
-                        },
-                        headlineContent = { Text(city.name) },
-                        supportingContent = {
-                            Text(
-                                when {
-                                    city.hasRestaurants -> "${city.restaurants.size} lokanta · ${city.tagline}"
-                                    city.tagline.isNotBlank() -> city.tagline
-                                    else -> "Öneri bekliyor"
-                                },
-                                maxLines = 1,
-                            )
-                        },
-                        trailingContent = {
-                            Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null)
-                        },
-                    )
+                            },
+                            trailingContent = {
+                                Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null)
+                            },
+                        )
+                    }
                 }
             }
         }
     }
+}
+
+@Composable
+private fun SectionLabel(text: String) {
+    Text(
+        text,
+        style = MaterialTheme.typography.labelLarge,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+    )
 }
