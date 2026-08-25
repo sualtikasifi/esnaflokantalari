@@ -65,6 +65,14 @@ QUERIES = [
 MIN_RATING = 4.3
 TOP_N_PER_CITY = 25
 
+# Kalabalık + turistik iller: kullanıcı kitlesi büyük ölçüde buralarda
+# yaşıyor, o yüzden bu illerde daha geniş bir seçim havuzu tutuyoruz.
+PRIORITY_CITIES = {
+    "İstanbul", "Ankara", "İzmir", "Bursa", "Antalya", "Adana", "Konya",
+    "Gaziantep", "Muğla", "Nevşehir", "Trabzon", "Mersin", "Kayseri",
+}
+PRIORITY_TOP_N = 50
+
 # Her ilde en az bu kadar mekan çıkmasını hedefliyoruz. Hedefe ulaşılmazsa
 # yorum sayısı eşiği kademeli olarak gevşetilir (puan eşiği asla düşmez).
 TARGET_PER_CITY = 20
@@ -80,6 +88,10 @@ MID_CITIES = {
     "Şanlıurfa", "Malatya", "Trabzon", "Erzurum", "Van", "Kocaeli",
     "Sakarya", "Hatay", "Manisa", "Balıkesir", "Kahramanmaraş", "Aydın",
 }
+
+
+def top_n_for(city: str) -> int:
+    return PRIORITY_TOP_N if city in PRIORITY_CITIES else TOP_N_PER_CITY
 
 
 def min_reviews_for(city: str) -> int:
@@ -234,15 +246,16 @@ def collect_city(city: str, api_key: str, delay: float):
 
     # Hedef sayıya ulaşana kadar yorum eşiğini kademeli gevşet.
     # Puan eşiği (4.3) hiçbir zaman düşürülmez — kalite kuralı korunur.
+    target = top_n_for(city)
     base_threshold = min_reviews_for(city)
     for divisor in (1, 2, 4, 10):
         threshold = max(base_threshold // divisor, 10)
         kept = filter_places(found, city, threshold)
-        if len(kept) >= TARGET_PER_CITY:
+        if len(kept) >= target:
             break
 
     kept.sort(key=lambda row: row["_skor"], reverse=True)
-    return kept[:TOP_N_PER_CITY]
+    return kept[:target]
 
 
 def filter_places(found: dict, city: str, min_reviews: int):
