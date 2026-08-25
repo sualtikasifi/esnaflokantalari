@@ -213,48 +213,44 @@ fun HomeScreen(
                     )
 
                     Row(
-                        modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp)
+                            .height(52.dp)
+                            .clip(RoundedCornerShape(50))
+                            .background(ChipBackground)
+                            .clickable { onSearchClick() }
+                            .padding(horizontal = 16.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Row(
-                            modifier = Modifier
-                                .weight(1f)
-                                .height(52.dp)
-                                .clip(RoundedCornerShape(50))
-                                .background(ChipBackground)
-                                .clickable { onSearchClick() }
-                                .padding(horizontal = 16.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Icon(Icons.Filled.Search, contentDescription = null, tint = Terracotta)
-                            Text(
-                                "Şehir veya lokanta ara",
-                                modifier = Modifier.padding(start = 10.dp),
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                            )
-                        }
+                        Icon(Icons.Filled.Search, contentDescription = null, tint = Terracotta)
+                        Text(
+                            "Şehir veya lokanta ara",
+                            modifier = Modifier.padding(start = 10.dp),
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                    }
 
-                        Row(
-                            modifier = Modifier
-                                .padding(start = 10.dp)
-                                .height(52.dp)
-                                .clip(RoundedCornerShape(50))
-                                .background(TerracottaContainer)
-                                .clickable { onSurpriseMe() }
-                                .padding(horizontal = 16.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Icon(Icons.Filled.Casino, contentDescription = null, tint = Terracotta)
-                            Text(
-                                "Bugün ne yesem?",
-                                modifier = Modifier.padding(start = 8.dp),
-                                color = Terracotta,
-                                fontWeight = FontWeight.SemiBold,
-                                maxLines = 1,
-                            )
-                        }
+                    Row(
+                        modifier = Modifier
+                            .padding(top = 10.dp)
+                            .height(48.dp)
+                            .clip(RoundedCornerShape(50))
+                            .background(TerracottaContainer)
+                            .clickable { onSurpriseMe() }
+                            .padding(horizontal = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(Icons.Filled.Casino, contentDescription = null, tint = Terracotta)
+                        Text(
+                            "Bugün ne yesem?",
+                            modifier = Modifier.padding(start = 8.dp),
+                            color = Terracotta,
+                            fontWeight = FontWeight.SemiBold,
+                            maxLines = 1,
+                        )
                     }
                 }
             }
