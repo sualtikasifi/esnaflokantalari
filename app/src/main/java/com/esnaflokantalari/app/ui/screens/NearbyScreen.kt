@@ -65,6 +65,7 @@ fun NearbyScreen(
     onToggleFavorite: (String) -> Unit,
     onRestaurantClick: (String) -> Unit,
     onRequestNearby: () -> Unit,
+    onRefresh: () -> Unit,
     onPermissionDenied: () -> Unit,
 ) {
     val context = LocalContext.current
@@ -75,9 +76,9 @@ fun NearbyScreen(
         if (granted.values.any { it }) onRequestNearby() else onPermissionDenied()
     }
 
-    fun requestLocation() {
+    fun requestLocation(refresh: Boolean) {
         if (LocationHelper.hasPermission(context)) {
-            onRequestNearby()
+            if (refresh) onRefresh() else onRequestNearby()
         } else {
             permissionLauncher.launch(
                 arrayOf(
@@ -109,7 +110,7 @@ fun NearbyScreen(
                 modifier = contentModifier,
             ) {
                 Button(
-                    onClick = { requestLocation() },
+                    onClick = { requestLocation(refresh = false) },
                     shape = RoundedCornerShape(50),
                     modifier = Modifier.fillMaxWidth(),
                 ) {
@@ -133,7 +134,7 @@ fun NearbyScreen(
             ) {
                 if (state.canRetry) {
                     Button(
-                        onClick = { requestLocation() },
+                        onClick = { requestLocation(refresh = true) },
                         shape = RoundedCornerShape(50),
                         modifier = Modifier.fillMaxWidth(),
                     ) {
@@ -150,13 +151,18 @@ fun NearbyScreen(
                 ) {
                     Text(
                         buildString {
-                            append("Sana en yakın ${state.restaurants.size} lokanta")
-                            state.cityName?.let { append(" · $it civarı") }
+                            if (state.isCached) {
+                                append("${state.cityName ?: "Son bilinen ilin"} önerileri")
+                                append(" · son bilinen konumun")
+                            } else {
+                                append("Sana en yakın ${state.restaurants.size} lokanta")
+                                state.cityName?.let { append(" · $it civarı") }
+                            }
                         },
                         modifier = Modifier.weight(1f),
                         style = MaterialTheme.typography.bodyMedium,
                     )
-                    RefreshButton(isRefreshing = state.refreshing, onClick = { requestLocation() })
+                    RefreshButton(isRefreshing = state.refreshing, onClick = { requestLocation(refresh = true) })
                 }
                 LazyColumn(
                     contentPadding = PaddingValues(16.dp),

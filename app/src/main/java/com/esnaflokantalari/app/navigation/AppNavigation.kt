@@ -223,6 +223,7 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     onToggleFavorite = { viewModel.toggleFavoriteById(it) },
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
                     onRequestNearby = { viewModel.loadNearby() },
+                    onRefresh = { viewModel.refreshNearby() },
                     onPermissionDenied = viewModel::onLocationPermissionDenied,
                 )
             }

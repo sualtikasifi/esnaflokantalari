@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.esnaflokantalari.app.data.FavoritesStore
+import com.esnaflokantalari.app.data.LastCityStore
 import com.esnaflokantalari.app.data.PhotoStore
 import com.esnaflokantalari.app.data.RestaurantRepository
 import com.esnaflokantalari.app.data.Suggestion
@@ -30,6 +31,8 @@ sealed interface NearbyState {
         val restaurants: List<Restaurant>,
         val cityName: String?,
         val refreshing: Boolean = false,
+        /** GPS ile şimdi değil, önceki bir ziyarette doğrulanan ile göre. */
+        val isCached: Boolean = false,
     ) : NearbyState
     data class Failed(val message: String, val canRetry: Boolean = true) : NearbyState
 }
@@ -47,6 +50,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     private val favoritesStore = FavoritesStore(application)
     private val suggestionsStore = SuggestionsStore(application)
     private val photoStore = PhotoStore(application)
+    private val lastCityStore = LastCityStore(application)
 
     val favorites: StateFlow<List<Restaurant>> = favoritesStore.favorites
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
@@ -146,41 +150,71 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     // --- Yakınımda ---
 
+    /**
+     * Ekrana ilk girişte çağrılır. Daha önce doğrulanmış bir il varsa GPS
+     * beklemeden hemen o ile ait önerileri gösterir — konum her açılışta
+     * yeniden aranmaz, kullanıcı "Yenile"ye basana kadar aynı ile devam edilir.
+     */
     fun loadNearby() {
         viewModelScope.launch {
-            // Elimizde sonuç varsa listeyi ekranda tut, sadece "yenileniyor"
-            // durumuna geç — böylece ekran boşalmıyor.
+            val cachedCity = lastCityStore.get()?.let { repository.city(it) }
+            if (cachedCity != null && cachedCity.restaurants.isNotEmpty()) {
+                _nearby.value = NearbyState.Ready(
+                    restaurants = cachedCity.restaurants,
+                    cityName = cachedCity.name,
+                    refreshing = false,
+                    isCached = true,
+                )
+                return@launch
+            }
+            _nearby.value = NearbyState.Locating
+            fetchLiveNearby(fallback = null)
+        }
+    }
+
+    /** "Yenile" butonu: her zaman gerçek bir GPS okuması yapar, il önbelleğini günceller. */
+    fun refreshNearby() {
+        viewModelScope.launch {
             val previous = _nearby.value as? NearbyState.Ready
             _nearby.value = previous?.copy(refreshing = true) ?: NearbyState.Locating
-            when (val result = LocationHelper.currentLocation(getApplication())) {
-                is LocationResult.PermissionMissing ->
-                    _nearby.value = NearbyState.NeedsPermission
+            fetchLiveNearby(fallback = previous)
+        }
+    }
 
-                is LocationResult.ServiceDisabled ->
-                    _nearby.value = NearbyState.Failed(
-                        "Cihazının konum servisi kapalı. Ayarlardan konumu açıp tekrar dene.",
+    /**
+     * GPS'ten canlı konum okur. Başarısız olursa, elde zaten gösterilen bir
+     * liste varsa (ekran boşalmasın diye) onu korur; yoksa hata durumuna geçer.
+     */
+    private suspend fun fetchLiveNearby(fallback: NearbyState.Ready?) {
+        when (val result = LocationHelper.currentLocation(getApplication())) {
+            is LocationResult.PermissionMissing ->
+                _nearby.value = fallback?.copy(refreshing = false) ?: NearbyState.NeedsPermission
+
+            is LocationResult.ServiceDisabled ->
+                _nearby.value = fallback?.copy(refreshing = false) ?: NearbyState.Failed(
+                    "Cihazının konum servisi kapalı. Ayarlardan konumu açıp tekrar dene.",
+                )
+
+            is LocationResult.Unavailable ->
+                _nearby.value = fallback?.copy(refreshing = false) ?: NearbyState.Failed(
+                    "Konumun bulunamadı. Açık bir alanda tekrar denemeyi ya da " +
+                        "haritalar uygulamasını bir kez açmayı deneyebilirsin.",
+                )
+
+            is LocationResult.Success -> {
+                val results = repository.nearby(result.location.latitude, result.location.longitude)
+                val cityName = repository.nearestCity(
+                    result.location.latitude,
+                    result.location.longitude,
+                )?.name
+                _nearby.value = if (results.isEmpty()) {
+                    fallback?.copy(refreshing = false) ?: NearbyState.Failed(
+                        "Yakınında kayıtlı bir esnaf lokantası bulunamadı. " +
+                            "Bildiğin bir yer varsa şehir sayfasından öner!",
                     )
-
-                is LocationResult.Unavailable ->
-                    _nearby.value = NearbyState.Failed(
-                        "Konumun bulunamadı. Açık bir alanda tekrar denemeyi ya da " +
-                            "haritalar uygulamasını bir kez açmayı deneyebilirsin.",
-                    )
-
-                is LocationResult.Success -> {
-                    val results = repository.nearby(result.location.latitude, result.location.longitude)
-                    val cityName = repository.nearestCity(
-                        result.location.latitude,
-                        result.location.longitude,
-                    )?.name
-                    _nearby.value = if (results.isEmpty()) {
-                        NearbyState.Failed(
-                            "Yakınında kayıtlı bir esnaf lokantası bulunamadı. " +
-                                "Bildiğin bir yer varsa şehir sayfasından öner!",
-                        )
-                    } else {
-                        NearbyState.Ready(results, cityName, refreshing = false)
-                    }
+                } else {
+                    cityName?.let { lastCityStore.save(it) }
+                    NearbyState.Ready(results, cityName, refreshing = false, isCached = false)
                 }
             }
         }
@@ -195,9 +229,21 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     // --- "Bugün ne yesem?" ---
 
-    /** Konumu alıp kullanıcının bulunduğu ilden rastgele bir lokanta seçer. */
+    /**
+     * Daha önce doğrulanmış bir il varsa GPS beklemeden o ilden rastgele bir
+     * lokanta seçer — "Yakınımda" sayfasında en son doğrulanan il neredeyse,
+     * zar da aynı ilden önermeye devam eder. Hiç il bilinmiyorsa konumu alıp
+     * ili belirler ve bir sonraki seferler için hatırlar.
+     */
     fun surpriseMe() {
         viewModelScope.launch {
+            val cachedCity = lastCityStore.get()?.let { repository.city(it) }
+            if (cachedCity != null && cachedCity.restaurants.isNotEmpty()) {
+                val picked = cachedCity.restaurants.random()
+                _surprise.value = SurpriseEvent.Picked(picked.id, cachedCity.name)
+                return@launch
+            }
+
             _surprise.value = SurpriseEvent.Locating
             val result = LocationHelper.currentLocation(getApplication())
 
@@ -219,6 +265,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                 return@launch
             }
 
+            lastCityStore.save(city.name)
             val picked = city.restaurants.random()
             _surprise.value = SurpriseEvent.Picked(picked.id, city.name)
         }
