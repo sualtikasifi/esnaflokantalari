@@ -11,6 +11,42 @@
       "tagline": "Her mahallesinde başka bir lezzet",
       "restaurants": [
         {
+          "id": "istanbul-mutlu-nun-mutfagi",
+          "name": "Mutlu'nun Mutfağı",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 5.0,
+          "reviewCount": 395,
+          "address": "Merkez, Ceylan Sk. No:14, 34406 Kağıthane/İstanbul",
+          "phone": "+90 543 223 20 29",
+          "priceLevel": 2,
+          "latitude": 41.0850268,
+          "longitude": 28.9657146,
+          "mapsUrl": "https://maps.google.com/?cid=1396216662396640638",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-aydin-ev-yemekleri-bufe",
+          "name": "Aydın Ev Yemekleri & Büfe",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 5.0,
+          "reviewCount": 158,
+          "address": "Yakuplu, 59. Sk. No: 76, 34524, 34000 Beylikdüzü/İstanbul",
+          "phone": "+90 544 937 84 29",
+          "priceLevel": 2,
+          "latitude": 41.005265,
+          "longitude": 28.667204899999998,
+          "mapsUrl": "https://maps.google.com/?cid=8239080218793668527",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-kazan-37",
           "name": "Kazan 37",
           "category": "Restoran",
@@ -119,6 +155,42 @@
           "note": null
         },
         {
+          "id": "istanbul-nevale-mutfak",
+          "name": "Nevale Mutfak",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.9,
+          "reviewCount": 779,
+          "address": "Türkali, Mecit Ali Sk. No:12/A, 34357 Beşiktaş/İstanbul",
+          "phone": "+90 552 390 68 57",
+          "priceLevel": 2,
+          "latitude": 41.0453453,
+          "longitude": 29.003648999999996,
+          "mapsUrl": "https://maps.google.com/?cid=10405207729595792259",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-doga-restaurant-alev-hanim-in-mutfagi",
+          "name": "Doğa Restaurant - Alev Hanım'ın Mutfağı",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.9,
+          "reviewCount": 476,
+          "address": "Kaleiçi, Martı Sk. 6-8, 34540 Çatalca/İstanbul",
+          "phone": "+90 531 721 98 71",
+          "priceLevel": 2,
+          "latitude": 41.1461317,
+          "longitude": 28.460936999999998,
+          "mapsUrl": "https://maps.google.com/?cid=16864103571794774621",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-cihangir-ev-yemekleri-pide",
           "name": "Cihangir Ev Yemekleri Pide",
           "category": "Restoran",
@@ -138,6 +210,189 @@
           "note": null
         },
         {
+          "id": "istanbul-teras-et-lokantasi",
+          "name": "Teras Et Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.9,
+          "reviewCount": 326,
+          "address": "Mehmet Nesih Özmen, Fatih Cd. ADEM BEY İŞ MRK, 34173 Güngören/İstanbul",
+          "phone": "+90 212 677 93 33",
+          "priceLevel": 2,
+          "latitude": 41.0092493,
+          "longitude": 28.887963600000003,
+          "mapsUrl": "https://maps.google.com/?cid=17874865404079601210",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-kazan-sariyer",
+          "name": "Kazan Sarıyer",
+          "category": "Türk restoranı",
+          "tags": [
+            "Türk restoranı"
+          ],
+          "rating": 4.9,
+          "reviewCount": 269,
+          "address": "Sarıyer, Yeni Mahalle Cd No:26, 34450 Sarıyer/İstanbul",
+          "phone": "+90 212 242 43 55",
+          "priceLevel": 2,
+          "latitude": 41.168916599999996,
+          "longitude": 29.057626300000003,
+          "mapsUrl": "https://maps.google.com/?cid=16763121177650612532",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-yemekhane",
+          "name": "Yemekhane",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.9,
+          "reviewCount": 234,
+          "address": "Hürriyet, Cengiz Topel Cd. No 79/81 C, 34250 Gaziosmanpaşa/İstanbul",
+          "phone": "+90 532 359 57 61",
+          "priceLevel": 2,
+          "latitude": 41.0674558,
+          "longitude": 28.9048673,
+          "mapsUrl": "https://maps.google.com/?cid=5798418720558414599",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-kose-kavurma",
+          "name": "Köşe Kavurma",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.9,
+          "reviewCount": 225,
+          "address": "Abdurrahman Nafiz Gürman Mah. Şair Ahmet Kutsi Tecer Cad. B Blok, Abdurrahman Nafiz Gürman, Arin Apt. No:58: C, 34160 Güngören/İstanbul",
+          "phone": "+90 505 403 10 54",
+          "priceLevel": 2,
+          "latitude": 41.0086722,
+          "longitude": 28.887337300000002,
+          "mapsUrl": "https://maps.google.com/?cid=17197046886985989773",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-eymen-ev-yemekleri",
+          "name": "EYMEN EV YEMEKLERİ",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.9,
+          "reviewCount": 178,
+          "address": "Gümüşpınar Mahallesi Atatürk Caddesi & Atatürk Cd, Gümüşpınar, Ceviz Ağacı Sk. No:3 D:E, 34880 Kartal/İstanbul",
+          "phone": "+90 554 665 05 70",
+          "priceLevel": 2,
+          "latitude": 40.915233699999995,
+          "longitude": 29.203338199999997,
+          "mapsUrl": "https://maps.google.com/?cid=10232496454404512424",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-cix-makarna",
+          "name": "Cix makarna",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.9,
+          "reviewCount": 125,
+          "address": "Oruçreis, 543. Sk. 1BB b1 blok, 34235 Esenler/İstanbul",
+          "phone": "+90 530 727 66 80",
+          "priceLevel": 1,
+          "latitude": 41.0658026,
+          "longitude": 28.856808599999997,
+          "mapsUrl": "https://maps.google.com/?cid=13301196347333872108",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-yagmurun-ev-yemekleri",
+          "name": "Yağmurun ev yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.9,
+          "reviewCount": 124,
+          "address": "Kavacık, Yeni Sk. No:8 D:1, 34810 Beykoz/İstanbul",
+          "phone": "+90 530 280 52 23",
+          "priceLevel": 2,
+          "latitude": 41.0925859,
+          "longitude": 29.0916483,
+          "mapsUrl": "https://maps.google.com/?cid=9308335941345668819",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-sile-lokantasi",
+          "name": "Şile Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.9,
+          "reviewCount": 121,
+          "address": "Çavuş, Cumhuriyet Cd. 93B, 34980 Şile/İstanbul",
+          "phone": "+90 535 475 58 30",
+          "priceLevel": 2,
+          "latitude": 41.1702478,
+          "longitude": 29.6093618,
+          "mapsUrl": "https://maps.google.com/?cid=1694256676285670115",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-chef-muradiyenin-leziz-ev-yemekleri",
+          "name": "Chef Muradiye’nin Leziz ev yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.9,
+          "reviewCount": 101,
+          "address": "Cevizli mah.Mustafa Kemal cad, Cevizli, Enderun Sk. No11/B, 34865 Kartal/İstanbul",
+          "phone": "+90 216 457 00 69",
+          "priceLevel": 2,
+          "latitude": 40.912324999999996,
+          "longitude": 29.178311299999997,
+          "mapsUrl": "https://maps.google.com/?cid=1330507601343780848",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-senin-mutfak-doner-manti-ev-yemekleri",
+          "name": "Senin Mutfak döner, mantı & Ev Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Mantı",
+            "Döner",
+            "Sulu Yemek"
+          ],
+          "rating": 4.9,
+          "reviewCount": 80,
+          "address": "Abdurrahmangazi, Atayolu Cd. no:153/A, 34785 Sancaktepe/İstanbul",
+          "phone": "+90 501 012 23 25",
+          "priceLevel": 2,
+          "latitude": 40.996764,
+          "longitude": 29.250352,
+          "mapsUrl": "https://maps.google.com/?cid=12547178405972741761",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-hanzade-bosphorus-restaurant",
           "name": "Hanzade Bosphorus Restaurant",
           "category": "Türk restoranı",
@@ -152,6 +407,24 @@
           "latitude": 41.0146464,
           "longitude": 28.976796,
           "mapsUrl": "https://maps.google.com/?cid=5978094899726607972",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-balikci-suleyman",
+          "name": "Balıkçı Süleyman",
+          "category": "Restoran",
+          "tags": [
+            "Balık"
+          ],
+          "rating": 4.8,
+          "reviewCount": 7583,
+          "address": "Mahallesi, Maden, Şht. Recep Koç Cd. 30/A, 34970 Adalar/İstanbul",
+          "phone": "+90 216 382 46 31",
+          "priceLevel": 2,
+          "latitude": 40.8744142,
+          "longitude": 29.1302046,
+          "mapsUrl": "https://maps.google.com/?cid=17628683660724507913",
           "photoUrl": null,
           "note": null
         },
@@ -210,6 +483,24 @@
           "note": null
         },
         {
+          "id": "istanbul-munis-sokak-lezzetleri",
+          "name": "Munis Sokak Lezzetleri",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 2939,
+          "address": "Heybeliada, Ayyıldız Cd. No:4 ( İş bankası karşısı, 34973 Adalar/İstanbul",
+          "phone": "+90 216 351 15 52",
+          "priceLevel": 2,
+          "latitude": 40.876736799999996,
+          "longitude": 29.100920000000002,
+          "mapsUrl": "https://maps.google.com/?cid=7196577393998813988",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-gulhane-sark-sofrasi",
           "name": "Gülhane Şark Sofrası",
           "category": "Türk restoranı",
@@ -242,6 +533,24 @@
           "latitude": 41.0083342,
           "longitude": 28.976249199999994,
           "mapsUrl": "https://maps.google.com/?cid=6918638242561340524",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-cuvalcioglu-restaurant",
+          "name": "ÇUVALCIOĞLU RESTAURANT",
+          "category": "Türk restoranı",
+          "tags": [
+            "Türk restoranı"
+          ],
+          "rating": 4.8,
+          "reviewCount": 1100,
+          "address": "Abdurrahmangazi, Belediye Cd. No:1 D:C, 34920 Sultanbeyli/İstanbul",
+          "phone": "+90 216 498 61 10",
+          "priceLevel": 2,
+          "latitude": 40.9704471,
+          "longitude": 29.2598647,
+          "mapsUrl": "https://maps.google.com/?cid=14687683164155705337",
           "photoUrl": null,
           "note": null
         },
@@ -282,6 +591,60 @@
           "note": null
         },
         {
+          "id": "istanbul-koclar-aspava",
+          "name": "Koçlar Aspava",
+          "category": "Kebap Restoranı",
+          "tags": [
+            "Kebap"
+          ],
+          "rating": 4.8,
+          "reviewCount": 693,
+          "address": "Hasanpaşa, Fatih Blv. No:49, 34920 Sultanbeyli/İstanbul",
+          "phone": "+90 216 610 00 12",
+          "priceLevel": 2,
+          "latitude": 40.968605,
+          "longitude": 29.253741499999997,
+          "mapsUrl": "https://maps.google.com/?cid=8776825395301098",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-kavurmask-sultangazi-kavurma",
+          "name": "Kavurmaşk - Sultangazi Kavurma",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 657,
+          "address": "75. Yıl, Cumhuriyet Cd. No:67, 34260 Sultangazi/İstanbul",
+          "phone": "+90 547 180 90 90",
+          "priceLevel": 2,
+          "latitude": 41.092921,
+          "longitude": 28.906569899999997,
+          "mapsUrl": "https://maps.google.com/?cid=7153161061813196124",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-corbaci-cagan-ay",
+          "name": "Çorbacı Çağan Ay",
+          "category": "Restoran",
+          "tags": [
+            "Çorba"
+          ],
+          "rating": 4.8,
+          "reviewCount": 616,
+          "address": "Atatürk, Ataşehir Blv. Ata 3/2 Blok No:10 S, 34758 Ataşehir/İstanbul",
+          "phone": "+90 216 755 04 44",
+          "priceLevel": 2,
+          "latitude": 40.9927165,
+          "longitude": 29.121508,
+          "mapsUrl": "https://maps.google.com/?cid=17419756718491704119",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-durumcu-esnaf-kosuyolu",
           "name": "Dürümcü Esnaf Koşuyolu",
           "category": "Kebap Restoranı",
@@ -302,6 +665,169 @@
           "note": null
         },
         {
+          "id": "istanbul-pare-butik-mutfak",
+          "name": "Pare Butik Mutfak",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 496,
+          "address": "Balibey, Atatürk Cd. No:8/B, 34980 Şile/İstanbul",
+          "phone": "+90 501 125 09 23",
+          "priceLevel": 2,
+          "latitude": 41.176331,
+          "longitude": 29.6176371,
+          "mapsUrl": "https://maps.google.com/?cid=17662507312701413033",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-sembol-ocakbasi-cekmekoy",
+          "name": "Sembol Ocakbaşı Çekmeköy",
+          "category": "Restoran",
+          "tags": [
+            "Kebap"
+          ],
+          "rating": 4.8,
+          "reviewCount": 456,
+          "address": "Merkez, Gözde Sk No:1 Lens, 34794 Çekmeköy/İstanbul",
+          "phone": "+90 533 927 23 63",
+          "priceLevel": 3,
+          "latitude": 41.0375843,
+          "longitude": 29.151494999999993,
+          "mapsUrl": "https://maps.google.com/?cid=7894799889957238567",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-koy-konagi-restourant-cekmekoy",
+          "name": "Köy Konağı Restourant Çekmeköy",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 407,
+          "address": "Merkez Mahallesi, Üsküdar Caddesi, Merkez, Esra Sk. No:7, 34794 Çekmeköy/İstanbul",
+          "phone": "+90 532 200 57 89",
+          "priceLevel": 2,
+          "latitude": 41.0375545,
+          "longitude": 29.1686618,
+          "mapsUrl": "https://maps.google.com/?cid=2254669636725044114",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-sultan-selim-restorani",
+          "name": "Adile Sultan Ev Yemekleri- Sultan Selim Restoranı",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 389,
+          "address": "Sultan Selim, Şahinler Cd. No:8, 34415 Kağıthane/İstanbul",
+          "phone": "+90 212 912 92 25",
+          "priceLevel": 2,
+          "latitude": 41.092335899999995,
+          "longitude": 29.001734000000003,
+          "mapsUrl": "https://maps.google.com/?cid=395975460208752627",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-donerci-emin-usta",
+          "name": "DÖNERCİ EMİN USTA",
+          "category": "Restoran",
+          "tags": [
+            "Döner"
+          ],
+          "rating": 4.8,
+          "reviewCount": 313,
+          "address": "Eyüp Sultan, Yakacık Cad. No:3, 34885 Sancaktepe/İstanbul",
+          "phone": "+90 551 478 01 47",
+          "priceLevel": 2,
+          "latitude": 40.9775676,
+          "longitude": 29.220432100000004,
+          "mapsUrl": "https://maps.google.com/?cid=14548649088102551844",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-firat-et-lokantasi",
+          "name": "Fırat et lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 282,
+          "address": "Akören, 34570 Silivri/İstanbul",
+          "phone": "+90 212 729 05 19",
+          "priceLevel": 2,
+          "latitude": 41.1950413,
+          "longitude": 28.328433099999998,
+          "mapsUrl": "https://maps.google.com/?cid=1751238055181362064",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-esma-nin-mutfagi-ev-yemekleri",
+          "name": "Esma'nın Mutfağı - Ev Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 281,
+          "address": "Hacı Kasım, Üsküdar Cd. No:15/C, 34980 Şile/İstanbul",
+          "phone": "+90 552 696 30 98",
+          "priceLevel": 2,
+          "latitude": 41.17814690000001,
+          "longitude": 29.610892,
+          "mapsUrl": "https://maps.google.com/?cid=12490380059427009390",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-kirimli-ci-borek-manti-evi",
+          "name": "Kırımlı Çi Börek Mantı Evi",
+          "category": "Restoran",
+          "tags": [
+            "Mantı"
+          ],
+          "rating": 4.8,
+          "reviewCount": 233,
+          "address": "Piri Mehmet Paşa, Atatürk Cd., 34570 Silivri/İstanbul",
+          "phone": "+90 547 727 10 00",
+          "priceLevel": 2,
+          "latitude": 41.0744477,
+          "longitude": 28.243347900000003,
+          "mapsUrl": "https://maps.google.com/?cid=13102727055416778714",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-bahcesehir-paket-servis-noktasi",
+          "name": "Adile Sultan Ev Yemekleri - Bahçeşehir Paket Servis Noktası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 226,
+          "address": "Aşık Veysel, Talat Paşa Cd No:28 D:2, 34513 Esenyurt/İstanbul",
+          "phone": "+90 212 672 09 32",
+          "priceLevel": 2,
+          "latitude": 41.0581724,
+          "longitude": 28.671893899999997,
+          "mapsUrl": "https://maps.google.com/?cid=17040248434158296356",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-sebit-kayseri-mutfagi",
           "name": "Şebit Kayseri Mutfağı",
           "category": "Restoran",
@@ -316,6 +842,169 @@
           "latitude": 40.9997743,
           "longitude": 28.7996332,
           "mapsUrl": "https://maps.google.com/?cid=18212017225814453531",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-kucuk-saray-lokantasi",
+          "name": "Küçük Saray Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 193,
+          "address": "İslambey, Lokmacı İbrahim Sk., 34050 Eyüpsultan/İstanbul",
+          "phone": "+90 212 581 28 40",
+          "priceLevel": 2,
+          "latitude": 41.047265499999995,
+          "longitude": 28.932950599999998,
+          "mapsUrl": "https://maps.google.com/?cid=11697168192431078226",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-pendik-fevzi-cakmak-restorani",
+          "name": "Adile Sultan Ev Yemekleri - Pendik Fevzi Çakmak Restoranı",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 189,
+          "address": "Fevzi Çakmak, Yazmaci Sokağı No:7/A, 34899 Pendik/İstanbul",
+          "phone": "+90 216 912 42 25",
+          "priceLevel": 2,
+          "latitude": 40.8862425,
+          "longitude": 29.2595414,
+          "mapsUrl": "https://maps.google.com/?cid=2078187048614074059",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-lezzet-duragi-eyup-sultan",
+          "name": "Lezzet Durağı Eyüp Sultan",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 177,
+          "address": "İslambey mahallesi fahri korutük caddesi, İslambey, Tülbentçi Muhittin Sk. 23A, 34050 Eyüpsultan/İstanbul",
+          "phone": "+90 543 215 50 69",
+          "priceLevel": 2,
+          "latitude": 41.0483015,
+          "longitude": 28.9317301,
+          "mapsUrl": "https://maps.google.com/?cid=15998711266986745565",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-tadinda-turk-mutfagi",
+          "name": "Tadında Türk Mutfağı",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 173,
+          "address": "DORA EVLERI ABLOK, Adnan Kahveci, Buse Sk. NO:5 A D:9NOLU DÜKKAN, 34528 Beylikdüzü/İstanbul",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 41.0046894,
+          "longitude": 28.6348342,
+          "mapsUrl": "https://maps.google.com/?cid=3523288650644780119",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-dolmus-restoran-ev-yemekleri-pilav",
+          "name": "DOLMUŞ RESTORAN EV YEMEKLERİ & PİLAV",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 167,
+          "address": "Atalar, Ergenekon Sk. No:10, 34862 Kartal/İstanbul",
+          "phone": "+90 536 640 68 66",
+          "priceLevel": 2,
+          "latitude": 40.9026157,
+          "longitude": 29.166695100000002,
+          "mapsUrl": "https://maps.google.com/?cid=7660535842030835647",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-ipek-ev-yemekleri",
+          "name": "İpek Ev Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 132,
+          "address": "Çınardere, Akan Sokağı No:12, 34896 Pendik/İstanbul",
+          "phone": "+90 216 379 46 28",
+          "priceLevel": 2,
+          "latitude": 40.890785199999996,
+          "longitude": 29.236061499999998,
+          "mapsUrl": "https://maps.google.com/?cid=483704619729585270",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-pinarli-bol-kepce-lokantasi-sezayi-usta",
+          "name": "Pınarlı Bol Kepçe Lokantası SEZAYİ USTA",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 132,
+          "address": "Uğur Mumcu, K Cd. 67/1, 34265 Sultangazi/İstanbul",
+          "phone": "+90 212 475 94 70",
+          "priceLevel": 2,
+          "latitude": 41.0997012,
+          "longitude": 28.8638292,
+          "mapsUrl": "https://maps.google.com/?cid=8183588122434670219",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-tekstilkent-restorani-ekspres",
+          "name": "Adile Sultan Ev Yemekleri- Tekstilkent Restoranı (Ekspres)",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 120,
+          "address": "Oruçreis, 543. Sk., 34235 Esenler/İstanbul",
+          "phone": "+90 212 912 92 31",
+          "priceLevel": 2,
+          "latitude": 41.065070899999995,
+          "longitude": 28.858559099999997,
+          "mapsUrl": "https://maps.google.com/?cid=15833864194841325738",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-hayela-ev-yemekleri-ve-doner",
+          "name": "HAYELA Ev Yemekleri Ve Döner",
+          "category": "Restoran",
+          "tags": [
+            "Döner",
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 119,
+          "address": "Bahçelievler, İzzettin Çalışlar Cd. 44B, 34180 Bahçelievler/İstanbul",
+          "phone": "+90 212 556 61 53",
+          "priceLevel": 2,
+          "latitude": 41.0002533,
+          "longitude": 28.870237699999997,
+          "mapsUrl": "https://maps.google.com/?cid=17552911239150404172",
           "photoUrl": null,
           "note": null
         },
@@ -340,6 +1029,241 @@
           "note": null
         },
         {
+          "id": "istanbul-my-cuisine-istanbul",
+          "name": "My Cuisine İstanbul",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 114,
+          "address": "Sinanoba, Ertekin Cd. no:12 a3-46, 34500 Büyükçekmece/İstanbul",
+          "phone": "+90 507 364 25 91",
+          "priceLevel": 2,
+          "latitude": 40.996525399999996,
+          "longitude": 28.5380793,
+          "mapsUrl": "https://maps.google.com/?cid=7533500389965327235",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-mimaroba-restorani-ekspres",
+          "name": "Adile Sultan Ev Yemekleri- Mimaroba Restoranı (Ekspres)",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 110,
+          "address": "Sinanoba, Mimaroba Konakları, Fatih, 1 Caddesi No:22-24AA, 34535 Büyükçekmece/İstanbul",
+          "phone": "+90 212 912 92 23",
+          "priceLevel": 2,
+          "latitude": 41.0044381,
+          "longitude": 28.5318789,
+          "mapsUrl": "https://maps.google.com/?cid=3375691151762409096",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-pendik-kurtkoy-restorani-ekspres",
+          "name": "Adile Sultan Ev Yemekleri- Pendik Kurtköy Restoranı (Ekspres)",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 98,
+          "address": "Kurtköy, Yeşilırmak Cd. 42/c D:c, 34912 Pendik/İstanbul",
+          "phone": "+90 216 912 42 18",
+          "priceLevel": 2,
+          "latitude": 40.918155899999995,
+          "longitude": 29.2989147,
+          "mapsUrl": "https://maps.google.com/?cid=10770120086239959480",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-alibeykoy-restorani",
+          "name": "Adile Sultan Ev Yemekleri - Alibeyköy Restoranı",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 97,
+          "address": "Karadolap, Saya Yolu Cd. 3/A, 34065 Eyüpsultan/İstanbul Sevinç evleri sitesi. C blok 3/3A, Karadolap, 34065 Eyüpsultan/İstanbul",
+          "phone": "+90 212 912 92 35",
+          "priceLevel": 2,
+          "latitude": 41.0762439,
+          "longitude": 28.9381894,
+          "mapsUrl": "https://maps.google.com/?cid=3871382375827531579",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-altaycesme-restorani",
+          "name": "Adile Sultan Ev Yemekleri - Altayçeşme Restoranı",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 80,
+          "address": "Altayçeşme, Bağdat Cad. no:381, 34843 Maltepe/İstanbul",
+          "phone": "+90 216 912 42 32",
+          "priceLevel": 2,
+          "latitude": 40.927572399999995,
+          "longitude": 29.129699499999997,
+          "mapsUrl": "https://maps.google.com/?cid=17466511978925417092",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-avcilar-paket-servis-noktasi",
+          "name": "Adile Sultan Ev Yemekleri - Avcılar Paket Servis Noktası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 65,
+          "address": "Merkez mah. Burnaz Caddesi, Merkez, Engin Sk. no:31, 34310 Avcılar/İstanbul",
+          "phone": "+90 212 912 92 05",
+          "priceLevel": 2,
+          "latitude": 40.9860125,
+          "longitude": 28.718331400000004,
+          "mapsUrl": "https://maps.google.com/?cid=8746322651445865873",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-safihan-kahvalti-ve-ev-yemekleri",
+          "name": "Safihan Kahvaltı ve Ev Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Kahvaltı",
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 62,
+          "address": "Güngören, Turgut Özal Cd. No:45/A, 34788 Çekmeköy/İstanbul",
+          "phone": "+90 216 429 23 29",
+          "priceLevel": 2,
+          "latitude": 41.0274481,
+          "longitude": 29.2212948,
+          "mapsUrl": "https://maps.google.com/?cid=8349751782127069798",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-bakirkoy-restorani-ekspres",
+          "name": "Adile Sultan Ev Yemekleri- Bakırköy Restoranı (Ekspres)",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 54,
+          "address": "Kartaltepe, Aydın Yuva Sok. No:13B, 34145 Bakırköy/İstanbul",
+          "phone": "+90 212 912 92 07",
+          "priceLevel": 2,
+          "latitude": 40.9944695,
+          "longitude": 28.873219799999998,
+          "mapsUrl": "https://maps.google.com/?cid=15290531897215543500",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-lezzethane-ev-yemekleri",
+          "name": "Lezzethane Ev Yemekleri",
+          "category": "Aile restoranı",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 54,
+          "address": "Saadetdere, Turgut Özal, 55. Sk. No:4/B, 34513 Esenyurt/İstanbul",
+          "phone": "+90 535 736 49 55",
+          "priceLevel": 2,
+          "latitude": 41.005116,
+          "longitude": 28.6973779,
+          "mapsUrl": "https://maps.google.com/?cid=16270641618551670419",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-yeni-hayat-lokantasi",
+          "name": "Yeni Hayat Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 36,
+          "address": "Mimar Sinan, Atatürk Cd. No:55, 34220 Esenler/İstanbul",
+          "phone": "+90 212 508 19 73",
+          "priceLevel": null,
+          "latitude": 41.034149,
+          "longitude": 28.888985299999998,
+          "mapsUrl": "https://maps.google.com/?cid=311678421745678428",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-ada-saray-restaurant",
+          "name": "Ada Saray Restaurant",
+          "category": "Türk restoranı",
+          "tags": [
+            "Türk restoranı"
+          ],
+          "rating": 4.7,
+          "reviewCount": 3719,
+          "address": "Maden mahlesi, Şht. Recep Koç Cd. no:23 Büyükada, 34000 Adalar/İstanbul",
+          "phone": "+90 216 382 57 06",
+          "priceLevel": 2,
+          "latitude": 40.8746564,
+          "longitude": 29.1298985,
+          "mapsUrl": "https://maps.google.com/?cid=8229767021689334096",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-the-hunger-istanbul-tuzla-viaport-marina",
+          "name": "The Hunger İstanbul Tuzla Viaport Marina",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 3003,
+          "address": "Cami Mah. Balıkçılar Cad. No:20L, Cami, D:202, 34940 Tuzla/İstanbul",
+          "phone": "+90 216 560 06 66",
+          "priceLevel": 2,
+          "latitude": 40.817511599999996,
+          "longitude": 29.320112199999993,
+          "mapsUrl": "https://maps.google.com/?cid=3422655195520799984",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-barba-yani-restaurant",
+          "name": "Barba Yani Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 2768,
+          "address": "Burgazada, Yalı Cd. 8/A, 34975 Burgazada / Adalar/Adalar/İstanbul",
+          "phone": "+90 537 989 46 33",
+          "priceLevel": 4,
+          "latitude": 40.8807597,
+          "longitude": 29.0695704,
+          "mapsUrl": "https://maps.google.com/?cid=11766196185114829171",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-kebapci-esnaf-dudullu",
           "name": "Kebapçı Esnaf Dudullu",
           "category": "Restoran",
@@ -359,6 +1283,78 @@
           "note": null
         },
         {
+          "id": "istanbul-sef-erdal-sularoglu",
+          "name": "Şef Erdal Sularoğlu",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 629,
+          "address": "Orhantepe, Ali Sultan Sk. No.:20, 34865 Kartal/İstanbul",
+          "phone": "+90 216 441 15 00",
+          "priceLevel": 2,
+          "latitude": 40.909943999999996,
+          "longitude": 29.163213,
+          "mapsUrl": "https://maps.google.com/?cid=18305082375509845588",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-tarihi-kilis-kebapcisi",
+          "name": "Tarihi Kilis Kebapçısı",
+          "category": "Restoran",
+          "tags": [
+            "Kebap"
+          ],
+          "rating": 4.7,
+          "reviewCount": 570,
+          "address": "Piri Mehmet Paşa, Atatürk Cd. No:10C, 34570 Silivri/İstanbul",
+          "phone": "+90 545 789 27 79",
+          "priceLevel": 2,
+          "latitude": 41.0745408,
+          "longitude": 28.243333999999997,
+          "mapsUrl": "https://maps.google.com/?cid=16611566509298453748",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-zehra-heybeliada-restaurant",
+          "name": "Zehra Heybeliada Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 562,
+          "address": "Heybeliada, Ayyıldız Cd. 24/A, 34973 Adalar/İstanbul",
+          "phone": "+90 216 351 02 02",
+          "priceLevel": null,
+          "latitude": 40.8773647,
+          "longitude": 29.100347499999998,
+          "mapsUrl": "https://maps.google.com/?cid=8897699570319585318",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-fatih-usta-corba-salonu",
+          "name": "Fatih Usta Çorba Salonu",
+          "category": "Restoran",
+          "tags": [
+            "Çorba"
+          ],
+          "rating": 4.7,
+          "reviewCount": 549,
+          "address": "Cennet, Turgut Reis Cd. No:43, 34290 Küçükçekmece/İstanbul",
+          "phone": "+90 212 580 75 08",
+          "priceLevel": 2,
+          "latitude": 40.9899729,
+          "longitude": 28.777331600000004,
+          "mapsUrl": "https://maps.google.com/?cid=14668500920497194710",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-hanimeli-ev-yemekleri",
           "name": "Hanımeli Ev Yemekleri",
           "category": "Restoran",
@@ -373,6 +1369,60 @@
           "latitude": 41.0317429,
           "longitude": 28.982196599999998,
           "mapsUrl": "https://maps.google.com/?cid=4609703303265471770",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-evimiz-osmanli-mutfagi",
+          "name": "Evimiz Osmanlı Mutfağı",
+          "category": "Türk restoranı",
+          "tags": [
+            "Türk restoranı"
+          ],
+          "rating": 4.7,
+          "reviewCount": 434,
+          "address": "Yeniköy, Salihağa Sk. No:25, 34464 Sarıyer/İstanbul",
+          "phone": "+90 212 299 16 28",
+          "priceLevel": 2,
+          "latitude": 41.1178449,
+          "longitude": 29.0610415,
+          "mapsUrl": "https://maps.google.com/?cid=13726490630241448777",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-ibb-pendik-kent-lokantasi",
+          "name": "İBB Pendik Kent Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.7,
+          "reviewCount": 281,
+          "address": "Batı, Sabri Taşkın Cd. No:19/A, 34890 Pendik/İstanbul",
+          "phone": null,
+          "priceLevel": 1,
+          "latitude": 40.8775052,
+          "longitude": 29.230325099999998,
+          "mapsUrl": "https://maps.google.com/?cid=2662957424682659986",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-makbule-hanim",
+          "name": "Makbule Hanım",
+          "category": "Aile restoranı",
+          "tags": [
+            "Aile restoranı"
+          ],
+          "rating": 4.7,
+          "reviewCount": 258,
+          "address": "Mahmutbey, Peyami Safa Cd. No:38 D:C, 34218 Bağcılar/İstanbul",
+          "phone": "+90 212 445 06 07",
+          "priceLevel": 2,
+          "latitude": 41.057766199999996,
+          "longitude": 28.8195925,
+          "mapsUrl": "https://maps.google.com/?cid=8298633875146686608",
           "photoUrl": null,
           "note": null
         },
@@ -396,6 +1446,42 @@
           "note": null
         },
         {
+          "id": "istanbul-kekik-ege-mutfagi",
+          "name": "Kekik Ege Mutfağı",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 188,
+          "address": "Osmanağa, Kuşdili Caddesi Karadut Sokak No:28, 34714 Kadıköy/İstanbul",
+          "phone": "+90 216 330 63 31",
+          "priceLevel": 2,
+          "latitude": 40.990088199999995,
+          "longitude": 29.030640199999997,
+          "mapsUrl": "https://maps.google.com/?cid=17469838877232342646",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-islim-lokantasi",
+          "name": "islim lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.7,
+          "reviewCount": 184,
+          "address": "Güven, İnönü Cd. No:11/B, 34206 Güngören/İstanbul",
+          "phone": "+90 551 944 48 08",
+          "priceLevel": 2,
+          "latitude": 41.0114102,
+          "longitude": 28.8733606,
+          "mapsUrl": "https://maps.google.com/?cid=18411379808863827278",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-eyup-sultan-corbacisi",
           "name": "Eyüp Sultan Çorbacısı",
           "category": "Restoran",
@@ -414,6 +1500,78 @@
           "note": null
         },
         {
+          "id": "istanbul-hisar-ev-yemekleri-havalimani-hey",
+          "name": "Hisar Ev Yemekleri Havalimanı HEY",
+          "category": "Türk restoranı",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.7,
+          "reviewCount": 164,
+          "address": "Tayakadın, Yunus Caddesi No 6, 34277 Arnavutköy/İstanbul",
+          "phone": "+90 532 505 88 86",
+          "priceLevel": 2,
+          "latitude": 41.265648299999995,
+          "longitude": 28.6873117,
+          "mapsUrl": "https://maps.google.com/?cid=13925084617756724910",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-receb-usta-cayeli-kurufasulye",
+          "name": "Receb Usta Çayeli Kurufasulye",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 150,
+          "address": "Kumbaba, Kumbaba Cd. No : 76, 34980 Şile/İstanbul",
+          "phone": "+90 539 371 91 53",
+          "priceLevel": 2,
+          "latitude": 41.1654634,
+          "longitude": 29.5807471,
+          "mapsUrl": "https://maps.google.com/?cid=764387094240852382",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-ibb-sultangazi-kent-lokantasi",
+          "name": "İBB Sultangazi Kent Lokantası",
+          "category": "Topluluk merkezi",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.7,
+          "reviewCount": 145,
+          "address": "Uğur Mumcu, Hoca Ahmet Yesevi Cd. No:57-61/D, 34882 Sultangazi/İstanbul",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 41.1001374,
+          "longitude": 28.874098800000002,
+          "mapsUrl": "https://maps.google.com/?cid=16509810449978916184",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-sayeste-lokantasi",
+          "name": "Şayeste Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.7,
+          "reviewCount": 139,
+          "address": "Yıldırım, İkizler Sk. No:3, 34045 Bayrampaşa/İstanbul",
+          "phone": "+90 212 649 93 94",
+          "priceLevel": 2,
+          "latitude": 41.067116999999996,
+          "longitude": 28.896683499999998,
+          "mapsUrl": "https://maps.google.com/?cid=8280637393407088319",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-umut-ev-yemekleri",
           "name": "Umut Ev Yemekleri",
           "category": "Büfe",
@@ -428,6 +1586,60 @@
           "latitude": 41.0245471,
           "longitude": 28.9586068,
           "mapsUrl": "https://maps.google.com/?cid=4368716369583056263",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-emre-lokantasi",
+          "name": "Emre Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.7,
+          "reviewCount": 130,
+          "address": "Seyrantepe, Altınay Cad. 46/A, 34418 Kağıthane/İstanbul",
+          "phone": "+90 212 294 76 51",
+          "priceLevel": 2,
+          "latitude": 41.0951275,
+          "longitude": 28.9873472,
+          "mapsUrl": "https://maps.google.com/?cid=5086871780254346973",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-yonca-ev-yemekleri",
+          "name": "Yonca Ev Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.7,
+          "reviewCount": 107,
+          "address": "Ataköy 7-8-9-10. Kısım, C-4 G 50 Ata Sitesi C4 Blok, 34158 Ataköy/Bakırköy/İstanbul",
+          "phone": "+90 212 560 71 28",
+          "priceLevel": 2,
+          "latitude": 40.983550099999995,
+          "longitude": 28.8499008,
+          "mapsUrl": "https://maps.google.com/?cid=8878046238746803408",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-yaren-yemek-evi",
+          "name": "Yaren Yemek Evi",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 40,
+          "address": "Oruçreis, Giyimkent 18. Sk. No: 138A, 34230 Esenler/İstanbul",
+          "phone": "+90 552 898 78 18",
+          "priceLevel": null,
+          "latitude": 41.0751007,
+          "longitude": 28.8736464,
+          "mapsUrl": "https://maps.google.com/?cid=2289616104472636565",
           "photoUrl": null,
           "note": null
         },
@@ -464,6 +1676,42 @@
           "latitude": 41.033477999999995,
           "longitude": 28.946537000000003,
           "mapsUrl": "https://maps.google.com/?cid=10079743150806137656",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-efulim-erol-usta",
+          "name": "Efulim Erol Usta",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 2022,
+          "address": "Tozkoparan, Dumlupınar Cd. No:12, 34173 Güngören/İstanbul",
+          "phone": "+90 552 727 53 53",
+          "priceLevel": 2,
+          "latitude": 41.0128013,
+          "longitude": 28.899832,
+          "mapsUrl": "https://maps.google.com/?cid=7403952571093320379",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-zeytin-tuzla-balik-restorani",
+          "name": "ZEYTİN TUZLA (BALIK RESTORANI)",
+          "category": "Restoran",
+          "tags": [
+            "Balık"
+          ],
+          "rating": 4.6,
+          "reviewCount": 1651,
+          "address": "Cami, Cumhuriyet Cd. No:64, 34940 Tuzla/İstanbul",
+          "phone": "+90 533 158 13 34",
+          "priceLevel": 4,
+          "latitude": 40.815228,
+          "longitude": 29.304592,
+          "mapsUrl": "https://maps.google.com/?cid=7309981013013649376",
           "photoUrl": null,
           "note": null
         },
@@ -560,6 +1808,25 @@
           "note": null
         },
         {
+          "id": "istanbul-ceyhan-kebap-evi-sancaktepe-sancaktepe-kebap-pide-lahmacun",
+          "name": "Ceyhan Kebap Evi Sancaktepe - Sancaktepe Kebap Pide Lahmacun",
+          "category": "Kebap Restoranı",
+          "tags": [
+            "Kebap",
+            "Lahmacun & Pide"
+          ],
+          "rating": 4.6,
+          "reviewCount": 730,
+          "address": "Kemal Türkler, Atatürk Cd. No:138/A, 34785 Sancaktepe/İstanbul",
+          "phone": "+90 216 621 73 74",
+          "priceLevel": 2,
+          "latitude": 41.008309,
+          "longitude": 29.2210405,
+          "mapsUrl": "https://maps.google.com/?cid=5614927135184212312",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-altin-tepsi",
           "name": "Altın Tepsi",
           "category": "Restoran",
@@ -574,6 +1841,330 @@
           "latitude": 41.05935470000001,
           "longitude": 29.007837,
           "mapsUrl": "https://maps.google.com/?cid=10553225267648781905",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-nacak-restaurant",
+          "name": "Nacak Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 592,
+          "address": "İkitelli OSB, Atatürk Blv. Botaş İş Merkezi No:102, 34490 Başakşehir/İstanbul",
+          "phone": "+90 532 399 70 27",
+          "priceLevel": 2,
+          "latitude": 41.085980299999996,
+          "longitude": 28.8038445,
+          "mapsUrl": "https://maps.google.com/?cid=14762662093727231560",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-cinaralti-necati-usta-nin-yeri",
+          "name": "Çınaraltı Necati Usta`nın Yeri",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 586,
+          "address": "Sarıyer, Kumsal Arkası Sk. No:5 D:A, 34450 Sarıyer/İstanbul",
+          "phone": "+90 212 242 81 25",
+          "priceLevel": 2,
+          "latitude": 41.1678548,
+          "longitude": 29.0572517,
+          "mapsUrl": "https://maps.google.com/?cid=2668660387299980109",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-zumrutevler-restorani-ekspres",
+          "name": "Adile Sultan Ev Yemekleri- Zümrütevler Restoranı (Ekspres)",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 461,
+          "address": "Zümrütevler, Akşemsettin Cd. No:108, 34852 Maltepe/İstanbul",
+          "phone": "+90 216 912 42 16",
+          "priceLevel": 2,
+          "latitude": 40.941294299999996,
+          "longitude": 29.152370200000004,
+          "mapsUrl": "https://maps.google.com/?cid=3174038186960952028",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-ibb-avcilar-kent-lokantasi",
+          "name": "İBB Avcılar Kent Lokantası",
+          "category": "Topluluk merkezi",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 367,
+          "address": "Merkez, Şamlı Sk. No:33 D:1D, 34310 Avcılar/İstanbul",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 40.98108,
+          "longitude": 28.720450800000002,
+          "mapsUrl": "https://maps.google.com/?cid=7805630393264755537",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-ibb-kucukcekmece-kent-lokantasi",
+          "name": "İBB Küçükçekmece Kent Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 354,
+          "address": "Gültepe, Şht. Özgür Güven Cd. No:15/A, 34295 Küçükçekmece/İstanbul",
+          "phone": null,
+          "priceLevel": 1,
+          "latitude": 40.9946526,
+          "longitude": 28.794544699999996,
+          "mapsUrl": "https://maps.google.com/?cid=13112867541716167038",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-ozen-lokantasi",
+          "name": "Özen Lokantası",
+          "category": "Türk restoranı",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 352,
+          "address": "Yenidoğan, Şht. Komiser Günaydın Sok. No:135, 34020 Zeytinburnu/İstanbul",
+          "phone": "+90 212 547 92 26",
+          "priceLevel": 2,
+          "latitude": 40.989670499999995,
+          "longitude": 28.9042621,
+          "mapsUrl": "https://maps.google.com/?cid=7569388816376637924",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-icerenkoy-merkez-lokantasi",
+          "name": "İçerenköy Merkez Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 288,
+          "address": "İçerenköy, Prof. Dr. Ali Nihat Tarlan Cd NO:108 D:B, 34752 Ataşehir/İstanbul",
+          "phone": "+90 545 573 84 64",
+          "priceLevel": 2,
+          "latitude": 40.9689393,
+          "longitude": 29.108353400000002,
+          "mapsUrl": "https://maps.google.com/?cid=4456558564087844038",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-aydogdu-2-lokantasi",
+          "name": "Aydoğdu 2 Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 288,
+          "address": "İçerenköy, Huzur Hoca Cd no 76/A, 34756 Ataşehir/İstanbul",
+          "phone": "+90 216 575 29 73",
+          "priceLevel": 2,
+          "latitude": 40.9635122,
+          "longitude": 29.111102000000002,
+          "mapsUrl": "https://maps.google.com/?cid=9894301370949695735",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-kucukyali-restorani-ekspres",
+          "name": "Adile Sultan Ev Yemekleri- Küçükyalı Restoranı (Ekspres)",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 248,
+          "address": "Altıntepe, Lale Sk. No:3A, 34840 Maltepe/İstanbul",
+          "phone": "+90 216 912 42 01",
+          "priceLevel": 2,
+          "latitude": 40.949921599999996,
+          "longitude": 29.105456800000002,
+          "mapsUrl": "https://maps.google.com/?cid=11523672414145151174",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-acibadem-restorani",
+          "name": "Adile Sultan Ev Yemekleri - Acıbadem Restoranı",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 245,
+          "address": "Acıbadem, Gayretli Sokağı No:20 D:A, 34718 Kadıköy/İstanbul",
+          "phone": "+90 216 912 42 07",
+          "priceLevel": 2,
+          "latitude": 41.000986399999995,
+          "longitude": 29.052168299999998,
+          "mapsUrl": "https://maps.google.com/?cid=14338350479222683845",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-ata-lokantasi",
+          "name": "Ata Lokantası",
+          "category": "Türk restoranı",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 208,
+          "address": "Sarıyer İstanbul TR, Huzur, Ulubaş Cd. No:7, 34396 Şişli/İstanbul",
+          "phone": "+90 212 264 71 00",
+          "priceLevel": 2,
+          "latitude": 41.0970714,
+          "longitude": 29.005361699999995,
+          "mapsUrl": "https://maps.google.com/?cid=13854481261229727390",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-adnan-kahveci-restorani-ekspres",
+          "name": "Adile Sultan Ev Yemekleri- Adnan Kahveci Restoranı (Ekspres)",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 201,
+          "address": "Adnan Kahveci, Davutpaşa Cd. B Blok 10/2 İç Kapı No:19, 34515 Beylikdüzü/İstanbul",
+          "phone": "+90 212 912 92 11",
+          "priceLevel": 2,
+          "latitude": 40.9977997,
+          "longitude": 28.638469699999998,
+          "mapsUrl": "https://maps.google.com/?cid=6332080833213674919",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-sercesme-ev-yemekleri",
+          "name": "Serçeşme Ev Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 187,
+          "address": "185 A, Kireçburnu, Araba Yolu Cd., 34457 Sarıyer/İstanbul",
+          "phone": "+90 212 299 20 34",
+          "priceLevel": 2,
+          "latitude": 41.1428066,
+          "longitude": 29.0454488,
+          "mapsUrl": "https://maps.google.com/?cid=14108397039850479300",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-ibb-sultanbeyli-kent-lokantasi",
+          "name": "İBB Sultanbeyli Kent Lokantası",
+          "category": "Türk restoranı",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 180,
+          "address": "Mehmet Akif, Fatih Blv. 195/B, 34920 Sultanbeyli/İstanbul",
+          "phone": null,
+          "priceLevel": 1,
+          "latitude": 40.9658756,
+          "longitude": 29.271818699999997,
+          "mapsUrl": "https://maps.google.com/?cid=8703068368367033238",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-sarraf-sofrasi",
+          "name": "Sarraf sofrası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 155,
+          "address": "Sancaktepe, 897. Sk 15m C blok no:7, 34200 Bağcılar/İstanbul",
+          "phone": "+90 553 228 05 54",
+          "priceLevel": 2,
+          "latitude": 41.035372599999995,
+          "longitude": 28.855836300000004,
+          "mapsUrl": "https://maps.google.com/?cid=17750098126997199888",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-elifim-ev-yemekleri",
+          "name": "Elifim Ev Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 148,
+          "address": "Altayçeşme, Kader Sk. no:21A, 34843 Maltepe/İstanbul",
+          "phone": "+90 545 342 42 19",
+          "priceLevel": 2,
+          "latitude": 40.933846700000004,
+          "longitude": 29.1302798,
+          "mapsUrl": "https://maps.google.com/?cid=4294527196375594416",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-yerel-in-lokanta",
+          "name": "Yerel-in Lokanta",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 146,
+          "address": "İçerenköy Mahallesi Rize Sokak, İçerenköy, Hacılar Apt 5/D, 34752 Ataşehir/İstanbul",
+          "phone": "+90 543 423 17 05",
+          "priceLevel": 2,
+          "latitude": 40.9785535,
+          "longitude": 29.107295699999998,
+          "mapsUrl": "https://maps.google.com/?cid=12920546658110412412",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-altinvadi-ev-yemekleri-tabldot-catering",
+          "name": "ALTINVADİ EV YEMEKLERİ TABLDOT&CATERİNG",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 144,
+          "address": "Osmangazi, Beste Sk. No:32/B, 34522 Esenyurt/İstanbul",
+          "phone": "+90 506 023 55 55",
+          "priceLevel": null,
+          "latitude": 41.0416271,
+          "longitude": 28.643973499999998,
+          "mapsUrl": "https://maps.google.com/?cid=14600986473242363670",
           "photoUrl": null,
           "note": null
         },
@@ -596,6 +2187,205 @@
           "note": null
         },
         {
+          "id": "istanbul-adile-sultan-ev-yemekleri-basaksehir-restorani-ekspres",
+          "name": "Adile Sultan Ev Yemekleri- Başakşehir Restoranı (Ekspres)",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 139,
+          "address": "Ziya Gökalp, Hürriyet Bulvari No:93 D:C, 34480 Başakşehir/İstanbul",
+          "phone": "+90 212 912 92 21",
+          "priceLevel": 2,
+          "latitude": 41.0846436,
+          "longitude": 28.784574,
+          "mapsUrl": "https://maps.google.com/?cid=3304978370115080492",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-mecidiyekoy-restorani-ekspres",
+          "name": "Adile Sultan Ev Yemekleri- Mecidiyeköy Restoranı (Ekspres)",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 138,
+          "address": "Gülbahar, Karanfil Sk. no:2A, 34394 Şişli/İstanbul",
+          "phone": "+90 212 912 92 18",
+          "priceLevel": 2,
+          "latitude": 41.0724558,
+          "longitude": 28.998963999999997,
+          "mapsUrl": "https://maps.google.com/?cid=1145135300424796489",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-karadeniz-ev-yemekleri-rifat-usta",
+          "name": "Karadeniz Ev Yemekleri Rıfat Usta",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 136,
+          "address": "Fatih, Taşköprü Sk 3/B, 34500 Büyükçekmece/İstanbul",
+          "phone": "+90 546 741 11 99",
+          "priceLevel": 2,
+          "latitude": 41.022878399999996,
+          "longitude": 28.5870523,
+          "mapsUrl": "https://maps.google.com/?cid=8051756716932652999",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-sibel-in-ev-yemekleri",
+          "name": "Sibel'in Ev Yemekleri",
+          "category": "Türk restoranı",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 114,
+          "address": "Akbey SokakNo:4, Kavacık, Orhan Veli Kanık Cd. D:1, 34820 Beykoz/İstanbul",
+          "phone": "+90 216 680 00 81",
+          "priceLevel": 2,
+          "latitude": 41.0942647,
+          "longitude": 29.0907831,
+          "mapsUrl": "https://maps.google.com/?cid=2093853602386849119",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-karadeniz-yemek-salonu",
+          "name": "Karadeniz Yemek Salonu",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 101,
+          "address": "Siyavuşpaşa, Çamlık Cd. No:55, 34182 Bahçelievler/İstanbul",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 41.0041705,
+          "longitude": 28.857621499999997,
+          "mapsUrl": "https://maps.google.com/?cid=15574054485942593087",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-evist-yemek",
+          "name": "Evist Yemek",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 73,
+          "address": "Dizdariye, Hamam Sk. No:13, 34500 Büyükçekmece/İstanbul",
+          "phone": "+90 212 883 48 16",
+          "priceLevel": 2,
+          "latitude": 41.0227686,
+          "longitude": 28.5796843,
+          "mapsUrl": "https://maps.google.com/?cid=986489890557942120",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-sirin-bahce-yoresel-lezzetler",
+          "name": "Şirin Bahçe Yöresel Lezzetler",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 67,
+          "address": "Ekşioğlu, Kuran Kursu Cd. No:5, 34794 Çekmeköy/İstanbul",
+          "phone": "+90 541 353 61 31",
+          "priceLevel": null,
+          "latitude": 41.032370199999995,
+          "longitude": 29.2350152,
+          "mapsUrl": "https://maps.google.com/?cid=637804307660817263",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-nisantasi-restorani",
+          "name": "Adile Sultan Ev Yemekleri - Nişantaşı Restoranı",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 53,
+          "address": "Meşrutiyet, Kodaman Sk. no:12/A, 34363 Şişli/İstanbul",
+          "phone": "+90 212 912 92 33",
+          "priceLevel": 2,
+          "latitude": 41.053320199999995,
+          "longitude": 28.992362399999998,
+          "mapsUrl": "https://maps.google.com/?cid=8073264267578384675",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-garden-et-lokantasi",
+          "name": "Garden Et Lokantası",
+          "category": "Biftek restoranı",
+          "tags": [
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 6111,
+          "address": "Kavaklı İstiklal, Çizgi Sokak No:30, 34570 Silivri/İstanbul",
+          "phone": "+90 212 723 68 40",
+          "priceLevel": null,
+          "latitude": 41.0684781,
+          "longitude": 28.301709799999998,
+          "mapsUrl": "https://maps.google.com/?cid=2917352533121641309",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-imren-lokantasi",
+          "name": "İmren Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 2681,
+          "address": "Yeni Mahalle, İnönü Cd. No:148, 34290 Küçükçekmece/İstanbul",
+          "phone": "+90 212 541 42 99",
+          "priceLevel": 2,
+          "latitude": 41.0001278,
+          "longitude": 28.781111199999998,
+          "mapsUrl": "https://maps.google.com/?cid=12716093124513248904",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-pacaci-kadir-usta",
+          "name": "Paçacı Kadir Usta",
+          "category": "Çorbacı",
+          "tags": [
+            "Çorba"
+          ],
+          "rating": 4.5,
+          "reviewCount": 1359,
+          "address": "Abdurrahmangazi, Şanlıurfa Cd. No: 19, 34920 Sultanbeyli/İstanbul",
+          "phone": "+90 216 496 40 00",
+          "priceLevel": 2,
+          "latitude": 40.9677875,
+          "longitude": 29.259030100000004,
+          "mapsUrl": "https://maps.google.com/?cid=4495784962023282929",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-pacaci-necip-usta",
           "name": "Paçacı Necip Usta",
           "category": "Restoran",
@@ -610,6 +2400,115 @@
           "latitude": 41.0164731,
           "longitude": 28.9486258,
           "mapsUrl": "https://maps.google.com/?cid=17771603959025030124",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-sohretler-besiktas-koftecisi",
+          "name": "Şöhretler Beşiktaş Köftecisi",
+          "category": "Restoran",
+          "tags": [
+            "Köfte"
+          ],
+          "rating": 4.5,
+          "reviewCount": 1032,
+          "address": "Sinanpaşa, Şair Leyla Sk. 5 C, 34353 Beşiktaş/İstanbul",
+          "phone": "+90 212 260 25 60",
+          "priceLevel": 2,
+          "latitude": 41.0431891,
+          "longitude": 29.0045943,
+          "mapsUrl": "https://maps.google.com/?cid=3735398499441331054",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-tuzla-belediyesi-kir-lokantasi",
+          "name": "Tuzla Belediyesi Kır Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 723,
+          "address": "Evliya Çelebi, 34944 Tuzla/İstanbul",
+          "phone": "+90 216 581 47 90",
+          "priceLevel": 2,
+          "latitude": 40.842626599999996,
+          "longitude": 29.302206100000003,
+          "mapsUrl": "https://maps.google.com/?cid=14963195182685168550",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-eslem-sogus-bakirkoy-turkiyenin-en-genc-soguscusu",
+          "name": "Eslem Söğüş Bakırköy TÜRKİYENİN EN GENÇ SÖĞÜŞÇÜSÜ",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.5,
+          "reviewCount": 696,
+          "address": "Bakırköy, İncirli Cd. No:68, 34365 Bakırköy/İstanbul",
+          "phone": "+90 552 885 83 48",
+          "priceLevel": 2,
+          "latitude": 40.989869899999995,
+          "longitude": 28.8712588,
+          "mapsUrl": "https://maps.google.com/?cid=9046287999980987835",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-hisim-lezzet-lokantasi",
+          "name": "Hışım Lezzet Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 511,
+          "address": "Sultan Selim, Turan Sokağı No:4, 34415 Kağıthane/İstanbul",
+          "phone": "+90 212 281 72 32",
+          "priceLevel": null,
+          "latitude": 41.090935099999996,
+          "longitude": 29.002547399999994,
+          "mapsUrl": "https://maps.google.com/?cid=9848871900195153542",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-dulger-et-kahvalti",
+          "name": "Dülger Et & Kahvaltı",
+          "category": "Restoran",
+          "tags": [
+            "Kahvaltı"
+          ],
+          "rating": 4.5,
+          "reviewCount": 483,
+          "address": "Kaleiçi, Dr. Çeşme Caddesı no:126, 34540 Çatalca/İstanbul",
+          "phone": "+90 530 489 78 80",
+          "priceLevel": 2,
+          "latitude": 41.1628974,
+          "longitude": 28.4367779,
+          "mapsUrl": "https://maps.google.com/?cid=11487093381290127960",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-elit-yemek-nisantasi",
+          "name": "Elit Yemek Nişantaşı",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.5,
+          "reviewCount": 401,
+          "address": "Halaskargazi, Ayla Algan Sok. No:41, 34371 Şişli/İstanbul",
+          "phone": "+90 212 296 40 30",
+          "priceLevel": 2,
+          "latitude": 41.0514343,
+          "longitude": 28.9900238,
+          "mapsUrl": "https://maps.google.com/?cid=5273228913023292925",
           "photoUrl": null,
           "note": null
         },
@@ -633,6 +2532,115 @@
           "note": null
         },
         {
+          "id": "istanbul-adile-sultan-ev-yemekleri-atasehir-paket-servis-noktasi",
+          "name": "Adile Sultan Ev Yemekleri - Ataşehir Paket Servis Noktası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 301,
+          "address": "Atatürk, Şeref Sk. No:68, 34758 Ataşehir/İstanbul",
+          "phone": "+90 216 912 42 04",
+          "priceLevel": 2,
+          "latitude": 40.986803699999996,
+          "longitude": 29.130704299999998,
+          "mapsUrl": "https://maps.google.com/?cid=17026367284166363396",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-akoguz-izgara-ev-yemekleri",
+          "name": "Akoğuz Izgara & Ev Yemekleri",
+          "category": "Aile restoranı",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 258,
+          "address": "Rasimpaşa, Karakolhane Cd. 34/1, 34716 Kadıköy/İstanbul",
+          "phone": "+90 216 337 39 24",
+          "priceLevel": 2,
+          "latitude": 40.9947121,
+          "longitude": 29.029582599999994,
+          "mapsUrl": "https://maps.google.com/?cid=13939317644605430556",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-coskunlar-etli-ekmek-kebap",
+          "name": "Coşkunlar Etli Ekmek-Kebap",
+          "category": "Restoran",
+          "tags": [
+            "Kebap"
+          ],
+          "rating": 4.5,
+          "reviewCount": 233,
+          "address": "Yeşiltepe, 57/6. Sk. No:10, 34025 Zeytinburnu/İstanbul",
+          "phone": "+90 212 665 21 96",
+          "priceLevel": 2,
+          "latitude": 40.991022199999996,
+          "longitude": 28.899994399999997,
+          "mapsUrl": "https://maps.google.com/?cid=13072469496214676329",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-deger-tas-firin-restaurant",
+          "name": "Değer taş fırın restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.5,
+          "reviewCount": 230,
+          "address": "İkitelli organize sanayi Bölgesi, aymakop sanayi sitesi, İkitelli OSB, imam evi sokak no:1, 34306 Başakşehir/İstanbul",
+          "phone": "+90 212 812 40 67",
+          "priceLevel": 2,
+          "latitude": 41.0779912,
+          "longitude": 28.7871843,
+          "mapsUrl": "https://maps.google.com/?cid=1365277473729384298",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-gonul-sofrasi",
+          "name": "Gönül Sofrası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 216,
+          "address": "75. Yıl, İstiklal Cd. No:9, 34260 Sultangazi/İstanbul",
+          "phone": "+90 212 536 58 37",
+          "priceLevel": 2,
+          "latitude": 41.0969343,
+          "longitude": 28.9077479,
+          "mapsUrl": "https://maps.google.com/?cid=17356774249517960020",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-muderrisoglu-et-lokantasi",
+          "name": "Müderrisoğlu Et Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 201,
+          "address": "Cevatpaşa, Millet Cd. No:214, 34045 Bayrampaşa/İstanbul",
+          "phone": "+90 212 617 84 52",
+          "priceLevel": 2,
+          "latitude": 41.0717851,
+          "longitude": 28.883238799999997,
+          "mapsUrl": "https://maps.google.com/?cid=4330110066741326537",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-celebi-ev-yemekleri",
           "name": "Çelebi Ev Yemekleri",
           "category": "Türk restoranı",
@@ -651,6 +2659,97 @@
           "note": null
         },
         {
+          "id": "istanbul-koyum-manti-house",
+          "name": "Köyüm Mantı House",
+          "category": "Mantıcı",
+          "tags": [
+            "Mantı"
+          ],
+          "rating": 4.5,
+          "reviewCount": 196,
+          "address": "Siba 2 Konutları, Mimaroba, Çarmıklı Cd., 34515 Büyükçekmece/İstanbul",
+          "phone": "+90 212 863 44 35",
+          "priceLevel": 2,
+          "latitude": 41.0054643,
+          "longitude": 28.5347945,
+          "mapsUrl": "https://maps.google.com/?cid=668773855736014340",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-guzelyurt-paket-servis-noktasi",
+          "name": "Adile Sultan Ev Yemekleri - Güzelyurt Paket Servis Noktası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 194,
+          "address": "Güzelyurt, 2124. Sk. No:32 D:B, 34515 Esenyurt/İstanbul",
+          "phone": "+90 212 853 20 02",
+          "priceLevel": 2,
+          "latitude": 41.0108302,
+          "longitude": 28.6665651,
+          "mapsUrl": "https://maps.google.com/?cid=8820905770652482630",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-goliva-cayeli-kuru-fasulyecisi-karadeniz-ev-yemekleri",
+          "name": "Goliva Çayeli Kuru Fasulyecisi Karadeniz Ev Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 180,
+          "address": "Fatih, İstanbul Cd. No: 12/A, 34303 Küçükçekmece/İstanbul",
+          "phone": "+90 544 936 61 53",
+          "priceLevel": 2,
+          "latitude": 40.9889818,
+          "longitude": 28.7724485,
+          "mapsUrl": "https://maps.google.com/?cid=5697361824666462787",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-mahmutbey-restorani-ekspres",
+          "name": "Adile Sultan Ev Yemekleri- Mahmutbey Restoranı (Ekspres)",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 179,
+          "address": "Mahmutbey, Kültür Cd. Kehribar Evleri No: 5-7E, 34218 Bağcılar/İstanbul",
+          "phone": "+90 212 843 74 74",
+          "priceLevel": 2,
+          "latitude": 41.054269999999995,
+          "longitude": 28.827922599999997,
+          "mapsUrl": "https://maps.google.com/?cid=14688650524370372489",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-bogazici-et-lokantasi",
+          "name": "Boğaziçi Et Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 168,
+          "address": "no 5, Meclis, Barbaros Cd., 34785 Sancaktepe/İstanbul",
+          "phone": "+90 216 540 41 01",
+          "priceLevel": 2,
+          "latitude": 41.010284899999995,
+          "longitude": 29.194776899999994,
+          "mapsUrl": "https://maps.google.com/?cid=9619341729971195123",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-tarihi-malta-esnaf-lokantasi",
           "name": "Tarihi Malta Esnaf Lokantası",
           "category": "Restoran",
@@ -665,6 +2764,78 @@
           "latitude": 41.02135,
           "longitude": 28.9479342,
           "mapsUrl": "https://maps.google.com/?cid=15532256396819422851",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-merkez-esnaf-lokantasi",
+          "name": "Merkez Esnaf Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 114,
+          "address": "Büyükdere Caddesi Mecidiyeköy Selahattin Pınar caddesi, esnaf lokantası, Merkez, Yaşarbey Sk. 12 A, 34381 Şişli/İstanbul",
+          "phone": "+90 540 501 34 34",
+          "priceLevel": 2,
+          "latitude": 41.067231299999996,
+          "longitude": 28.9980942,
+          "mapsUrl": "https://maps.google.com/?cid=7958609551689699835",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-annemin-mutfagi-ev-yemekleri",
+          "name": "Annemin Mutfağı Ev Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 109,
+          "address": "Kavaklı, İbrahim Müteferrika Cd. No:30, 34570 Beylikdüzü/İstanbul",
+          "phone": "+90 545 128 05 05",
+          "priceLevel": 2,
+          "latitude": 40.9800324,
+          "longitude": 28.659571799999995,
+          "mapsUrl": "https://maps.google.com/?cid=14048902641846617515",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-sila-ev-yemekleri",
+          "name": "Sıla Ev Yemekleri",
+          "category": "Türk restoranı",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 68,
+          "address": "4 Bahçeşehir 1. Kısım Kemal Sunal Caddesi Atrium Çarşısı No:402, Bahçeşehir 1. Kısım, 34488 Başakşehir/İstanbul",
+          "phone": "+90 533 546 39 25",
+          "priceLevel": 1,
+          "latitude": 41.063477899999995,
+          "longitude": 28.688279599999998,
+          "mapsUrl": "https://maps.google.com/?cid=6916738625053800048",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-konya-esnaf-lokantasi",
+          "name": "Konya Esnaf Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 36,
+          "address": "Oruçreis, Giyimkent sitesi 7sk no 116, 34235 Esenler/İstanbul",
+          "phone": "+90 539 438 09 42",
+          "priceLevel": 2,
+          "latitude": 41.0686196,
+          "longitude": 28.8721071,
+          "mapsUrl": "https://maps.google.com/?cid=2715439384474245448",
           "photoUrl": null,
           "note": null
         },
@@ -797,6 +2968,25 @@
           "note": null
         },
         {
+          "id": "istanbul-babacan-et-lokantasi-irfanin-yeri",
+          "name": "Babacan Et Lokantası (İrfanın Yeri)",
+          "category": "Restoran",
+          "tags": [
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 2126,
+          "address": "Cumhuriyet mh, Florya Cd. No:19, 34570 Silivri/İstanbul",
+          "phone": "+90 543 342 22 68",
+          "priceLevel": null,
+          "latitude": 41.0906709,
+          "longitude": 28.022629499999997,
+          "mapsUrl": "https://maps.google.com/?cid=3275406312211945681",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-lale-lokantasi",
           "name": "Lale Lokantası",
           "category": "Restoran",
@@ -833,6 +3023,24 @@
           "note": null
         },
         {
+          "id": "istanbul-kars-igdir-lokantasi",
+          "name": "Kars Iğdır Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 1281,
+          "address": "Bahçelievler, Talatpaşa Cd No:16, 34160 Bahçelievler/İstanbul",
+          "phone": "+90 212 644 76 76",
+          "priceLevel": 2,
+          "latitude": 40.9997566,
+          "longitude": 28.8671136,
+          "mapsUrl": "https://maps.google.com/?cid=2723713891714587459",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-pacaci-hasan",
           "name": "Paçacı Hasan",
           "category": "Restoran",
@@ -847,6 +3055,388 @@
           "latitude": 41.0101751,
           "longitude": 28.9514317,
           "mapsUrl": "https://maps.google.com/?cid=17337086503889384713",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-osmanli-damak-lokantasi",
+          "name": "Osmanlı Damak Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 947,
+          "address": "Merkez, Çiğdem Cd. No:32, 34310 Avcılar/İstanbul",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 40.9819107,
+          "longitude": 28.722682900000002,
+          "mapsUrl": "https://maps.google.com/?cid=9746236878208337205",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-ahval-restoran-arnavutkoy",
+          "name": "Ahval Restoran Arnavutköy",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.4,
+          "reviewCount": 676,
+          "address": "Hicret, Abdullah Gül Cd. No:15 A, 34287 Arnavutköy/İstanbul",
+          "phone": "+90 551 850 03 36",
+          "priceLevel": 2,
+          "latitude": 41.200520999999995,
+          "longitude": 28.763029999999993,
+          "mapsUrl": "https://maps.google.com/?cid=6741850168029794919",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-hikmet-usta-kuzu-tandir-ocakbasi",
+          "name": "Hikmet Usta Kuzu Tandır Ocakbaşı",
+          "category": "Restoran",
+          "tags": [
+            "Kebap"
+          ],
+          "rating": 4.4,
+          "reviewCount": 662,
+          "address": "Eyüp Sultan, Refah Cd. No:48/A, 34885 Sancaktepe/İstanbul",
+          "phone": "+90 216 311 30 54",
+          "priceLevel": 2,
+          "latitude": 40.983273499999996,
+          "longitude": 29.229324499999997,
+          "mapsUrl": "https://maps.google.com/?cid=11635278492750169906",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-hatipogullari-lokantasi",
+          "name": "Hatipoğulları Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 649,
+          "address": "İsmet Paşa, Tuna Cd. No:56, 34040 Bayrampaşa/İstanbul",
+          "phone": "+90 212 544 79 19",
+          "priceLevel": 2,
+          "latitude": 41.0453504,
+          "longitude": 28.906400700000003,
+          "mapsUrl": "https://maps.google.com/?cid=5602323891678418973",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-maide-turk-mutfagi",
+          "name": "Maide Türk Mutfağı",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.4,
+          "reviewCount": 643,
+          "address": "İTOSB, 13. Cd. No:1, 34959 Tuzla/İstanbul",
+          "phone": "+90 216 519 53 55",
+          "priceLevel": 2,
+          "latitude": 40.881667199999995,
+          "longitude": 29.407164299999998,
+          "mapsUrl": "https://maps.google.com/?cid=5204250225687453944",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-ileri-lokantasi-self-servis",
+          "name": "İleri Lokantasi Self Servis",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 563,
+          "address": "Kemalpaşa, Sultan Murat Cd. No:3, 34295 Küçükçekmece/İstanbul",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 41.0052296,
+          "longitude": 28.796711699999996,
+          "mapsUrl": "https://maps.google.com/?cid=12596320920735601307",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-kismet-lokantasi",
+          "name": "Kısmet Lokantası",
+          "category": "Türk restoranı",
+          "tags": [
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 548,
+          "address": "Dikilitaş, Emirhan Cd. No:55, 34349 Beşiktaş/İstanbul",
+          "phone": "+90 212 236 36 21",
+          "priceLevel": 2,
+          "latitude": 41.0566846,
+          "longitude": 29.0028461,
+          "mapsUrl": "https://maps.google.com/?cid=10719190548975766528",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-hakkiogullari-beyran-gaziantep-ev-yemekleri-ve-k-paca-iskembe",
+          "name": "Hakkioğullari Beyran Gaziantep Ev Yemekleri Ve K.Paça-İşkembe",
+          "category": "Restoran",
+          "tags": [
+            "Çorba",
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 399,
+          "address": "Merkez, Tayfun Sk. No:4, 34164 Güngören/İstanbul",
+          "phone": "+90 212 434 30 27",
+          "priceLevel": 2,
+          "latitude": 41.025833299999995,
+          "longitude": 28.8716667,
+          "mapsUrl": "https://maps.google.com/?cid=16567691958517089788",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-bahcelievler-restorani-ekspres",
+          "name": "Adile Sultan Ev Yemekleri- Bahçelievler Restoranı (Ekspres)",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 380,
+          "address": "Siyavuşpaşa, Bankacılar Sk. 17/A, 34180 Bahçelievler/İstanbul",
+          "phone": "+90 212 912 92 01",
+          "priceLevel": 2,
+          "latitude": 41.0022233,
+          "longitude": 28.8588554,
+          "mapsUrl": "https://maps.google.com/?cid=900682656810019148",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-safak-lokantasi",
+          "name": "Şafak Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 306,
+          "address": "Orhantepe, Barem Sk., 34865 Kartal/İstanbul",
+          "phone": "+90 216 399 49 30",
+          "priceLevel": 2,
+          "latitude": 40.906678299999996,
+          "longitude": 29.163102499999997,
+          "mapsUrl": "https://maps.google.com/?cid=13795146537320386438",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-zafer-uygur-ev-yemekleri",
+          "name": "Zafer Uygur ev yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 281,
+          "address": "Nuripaşa, 11. Sk. No:13, 34025 Zeytinburnu/İstanbul",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 40.985110899999995,
+          "longitude": 28.899650099999995,
+          "mapsUrl": "https://maps.google.com/?cid=3309860627978475509",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-goztepe-restorani",
+          "name": "Adile Sultan Ev Yemekleri - Göztepe Restoranı",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 259,
+          "address": "Göztepe, Tütüncü Mehmet Efendi Cd. No:45/B, 34730 Kadıköy/İstanbul",
+          "phone": "+90 216 912 42 12",
+          "priceLevel": 2,
+          "latitude": 40.9769091,
+          "longitude": 29.0648203,
+          "mapsUrl": "https://maps.google.com/?cid=3019852054034324810",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-kelesler-lokantasi",
+          "name": "Keleşler Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 258,
+          "address": "Kartaltepe, Mercan Cd. No:95, 34040 Bayrampaşa/İstanbul",
+          "phone": "+90 212 640 75 67",
+          "priceLevel": 2,
+          "latitude": 41.054302,
+          "longitude": 28.900138000000002,
+          "mapsUrl": "https://maps.google.com/?cid=16947061389645690867",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-gul-lokantasi",
+          "name": "Gül Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 190,
+          "address": "Akşemsettin, 6. Sk. No:8, 34925 Sultanbeyli/İstanbul",
+          "phone": "+90 532 707 15 38",
+          "priceLevel": 2,
+          "latitude": 40.9509945,
+          "longitude": 29.299228099999997,
+          "mapsUrl": "https://maps.google.com/?cid=5530747261401109055",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-cagla-et-lokantasi",
+          "name": "Çağla Et Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 178,
+          "address": "Cevizlik, Hamam Sk. No:11, 34142 Bakırköy/İstanbul",
+          "phone": "+90 212 542 03 32",
+          "priceLevel": 2,
+          "latitude": 40.9789038,
+          "longitude": 28.875448199999997,
+          "mapsUrl": "https://maps.google.com/?cid=5499871440736786374",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-adile-sultan-ev-yemekleri-maltepe-cevizli-restorani",
+          "name": "Adile Sultan Ev Yemekleri - Maltepe Cevizli Restoranı",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 166,
+          "address": "Cevizli, Tansel Cd. No:45A, 34846 Maltepe/İstanbul",
+          "phone": "+90 216 387 71 11",
+          "priceLevel": 2,
+          "latitude": 40.9220708,
+          "longitude": 29.1558581,
+          "mapsUrl": "https://maps.google.com/?cid=13203486104293822202",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-nadire-abla-ev-yemekleri",
+          "name": "Nadire ABLA ev Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 148,
+          "address": "Fulya, 34394 Şişli/İstanbul",
+          "phone": "+90 533 664 08 50",
+          "priceLevel": 2,
+          "latitude": 41.0644572,
+          "longitude": 29.0021506,
+          "mapsUrl": "https://maps.google.com/?cid=346555169975472263",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-esnaf-lokantasi",
+          "name": "Esnaf Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 140,
+          "address": "Güneşli, 1277. Sk. No:48, 34212 Bağcılar/İstanbul",
+          "phone": "+90 212 630 52 62",
+          "priceLevel": 2,
+          "latitude": 41.0352676,
+          "longitude": 28.832901000000003,
+          "mapsUrl": "https://maps.google.com/?cid=6795615787580334389",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-coruh-et-lokantasi",
+          "name": "Çoruh Et Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 139,
+          "address": "Mustafa Kemal Paşa, İstiklal Cd. No:59 D:B, 34320 Avcılar/İstanbul",
+          "phone": "+90 212 423 80 68",
+          "priceLevel": 2,
+          "latitude": 40.999986299999996,
+          "longitude": 28.7069451,
+          "mapsUrl": "https://maps.google.com/?cid=10539765850581720405",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-guven-et-lokantasi-kucukkoy",
+          "name": "Güven Et Lokantasi Küçükköy",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 134,
+          "address": "Hürriyet, Cengiz Topel Cd. No:59, 34250 Gaziosmanpaşa/İstanbul",
+          "phone": "+90 212 581 24 45",
+          "priceLevel": 2,
+          "latitude": 41.066382,
+          "longitude": 28.9051046,
+          "mapsUrl": "https://maps.google.com/?cid=1906759647941540370",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-hamit-aga-et-lokantasi",
+          "name": "Hamit Aga Et Lokantasi",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 117,
+          "address": "Arnavutköy Merkez, Ayşıl Sk. No:29, 34275 Arnavutköy/İstanbul",
+          "phone": "+90 212 597 26 58",
+          "priceLevel": 2,
+          "latitude": 41.1828467,
+          "longitude": 28.743466199999997,
+          "mapsUrl": "https://maps.google.com/?cid=11965805050265904971",
           "photoUrl": null,
           "note": null
         },
@@ -869,6 +3459,24 @@
           "note": null
         },
         {
+          "id": "istanbul-kardesler-lokantasi",
+          "name": "Kardeşler Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 3526,
+          "address": "Mithatpaşa, İstanbul Cd. No:84, 34075 Eyüpsultan/İstanbul",
+          "phone": "+90 212 360 13 85",
+          "priceLevel": 2,
+          "latitude": 41.159501999999996,
+          "longitude": 28.913158000000003,
+          "mapsUrl": "https://maps.google.com/?cid=7934538589575607796",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-karakoy-corba-evi",
           "name": "Karaköy Çorba Evi",
           "category": "Çorbacı",
@@ -883,6 +3491,241 @@
           "latitude": 41.0243312,
           "longitude": 28.9784243,
           "mapsUrl": "https://maps.google.com/?cid=15727488026458369235",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-kardelen-iskembe-ve-kellepaca-salonu",
+          "name": "KARDELEN İşkembe ve Kellepaça Salonu",
+          "category": "Aile restoranı",
+          "tags": [
+            "Çorba"
+          ],
+          "rating": 4.3,
+          "reviewCount": 2074,
+          "address": "Yenidoğan, Abdi İpekçi Cd., 34040 Bayrampaşa/İstanbul",
+          "phone": "+90 212 565 73 72",
+          "priceLevel": 2,
+          "latitude": 41.041112,
+          "longitude": 28.912007,
+          "mapsUrl": "https://maps.google.com/?cid=8506234952716318531",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-karadeniz-sofrasi",
+          "name": "Karadeniz Sofrası",
+          "category": "Türk restoranı",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 2011,
+          "address": "Kemalpaşa, Namık Kemal Cd. No:129, 34204 Bağcılar/İstanbul",
+          "phone": "+90 212 629 56 43",
+          "priceLevel": 2,
+          "latitude": 41.0534592,
+          "longitude": 28.849393799999998,
+          "mapsUrl": "https://maps.google.com/?cid=16539099926920991941",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-etzade-essiz-anadolu-lezzetleri-testi-kebabi-dana-lokum-kahvalti",
+          "name": "Etzade Eşsiz Anadolu Lezzetleri - Testi Kebabı, Dana Lokum - Kahvaltı",
+          "category": "Restoran",
+          "tags": [
+            "Kebap",
+            "Kahvaltı"
+          ],
+          "rating": 4.3,
+          "reviewCount": 1919,
+          "address": "Adnan Menderes, Fatih Cd. No:451, 34283 Arnavutköy/İstanbul",
+          "phone": "+90 212 682 05 05",
+          "priceLevel": 2,
+          "latitude": 41.222195299999996,
+          "longitude": 28.707859300000003,
+          "mapsUrl": "https://maps.google.com/?cid=14598913663264892729",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-titiz-lokantasi",
+          "name": "Titiz Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 1460,
+          "address": "Tuzla Şifa Mahallesi İnönü Cd, Şifa, Mormenekşe Sk. No:1, 34940 Tuzla/İstanbul",
+          "phone": "+90 216 423 35 03",
+          "priceLevel": 2,
+          "latitude": 40.824617599999996,
+          "longitude": 29.3540094,
+          "mapsUrl": "https://maps.google.com/?cid=8054642496457571899",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-hacinin-yeri-yesilcam-cayeli-kurufasulye",
+          "name": "HACININ YERİ YEŞİLÇAM ÇAYELİ KURUFASULYE",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.3,
+          "reviewCount": 1305,
+          "address": "Yakuplu, Hürriyet Blv. 95/A, 34520 Beylikdüzü/İstanbul",
+          "phone": "+90 212 875 13 58",
+          "priceLevel": 2,
+          "latitude": 40.9979821,
+          "longitude": 28.6694426,
+          "mapsUrl": "https://maps.google.com/?cid=15643034942146786963",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-can-usta-et-mangal-kasap",
+          "name": "Can Usta Et Mangal Kasap",
+          "category": "Restoran",
+          "tags": [
+            "Et"
+          ],
+          "rating": 4.3,
+          "reviewCount": 1205,
+          "address": "Gökçeali, Gökçeali Cd. No: 180, 34540 Çatalca/İstanbul",
+          "phone": "+90 544 712 88 43",
+          "priceLevel": 2,
+          "latitude": 41.19684360000001,
+          "longitude": 28.4462476,
+          "mapsUrl": "https://maps.google.com/?cid=6935653124713686466",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-kurufasulyeci-ender-usta",
+          "name": "Kurufasülyeci ender usta",
+          "category": "Türk restoranı",
+          "tags": [
+            "Türk restoranı"
+          ],
+          "rating": 4.3,
+          "reviewCount": 846,
+          "address": "Kavacık, Fatih Sultan Mehmet Cd. No:12, 34810 Beykoz/İstanbul",
+          "phone": "+90 216 322 40 40",
+          "priceLevel": 2,
+          "latitude": 41.0931898,
+          "longitude": 29.0879187,
+          "mapsUrl": "https://maps.google.com/?cid=2615893091580693601",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-emin-celik-et-lokantasi",
+          "name": "Emin Celik Et Lokantasi",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 632,
+          "address": "İhsaniye, Bahadır sokak, 34540 Çatalca/İstanbul",
+          "phone": "+90 212 782 10 10",
+          "priceLevel": 3,
+          "latitude": 41.253640499999996,
+          "longitude": 28.360114399999997,
+          "mapsUrl": "https://maps.google.com/?cid=7855997036328656563",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-osmanli-damak-lokantasi-2",
+          "name": "Osmanli Damak Lokantasi",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 611,
+          "address": "Şirinevler, Meriç Sk No:12, 34188, 34188 Bahçelievler/İstanbul",
+          "phone": "+90 531 580 26 16",
+          "priceLevel": 2,
+          "latitude": 40.992430999999996,
+          "longitude": 28.844476799999995,
+          "mapsUrl": "https://maps.google.com/?cid=11031709317767679380",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-tarihi-kadikoy-saray-lokantasi",
+          "name": "Tarihi Kadıköy Saray Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 553,
+          "address": "Osmanağa, Tayyareci Sami Sk. No:1 D:1, 34714 Kadıköy/İstanbul",
+          "phone": "+90 216 346 22 62",
+          "priceLevel": 2,
+          "latitude": 40.9924847,
+          "longitude": 29.0254964,
+          "mapsUrl": "https://maps.google.com/?cid=1276579416249219467",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-gozde-et-lokantasi",
+          "name": "GÖZDE ET LOKANTASI",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 522,
+          "address": "Hürriyet, 270. Sk. 9/B, 34250 Gaziosmanpaşa/İstanbul",
+          "phone": "+90 212 538 46 00",
+          "priceLevel": null,
+          "latitude": 41.070274999999995,
+          "longitude": 28.8946433,
+          "mapsUrl": "https://maps.google.com/?cid=800659404541777719",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-valide-macka",
+          "name": "Valide Maçka",
+          "category": "Türk restoranı",
+          "tags": [
+            "Türk restoranı"
+          ],
+          "rating": 4.3,
+          "reviewCount": 403,
+          "address": "Vişnezade, Aktarlar Sk. no:6/a, 34357 Beşiktaş/İstanbul",
+          "phone": "+90 545 735 38 11",
+          "priceLevel": 3,
+          "latitude": 41.0438012,
+          "longitude": 28.998404400000002,
+          "mapsUrl": "https://maps.google.com/?cid=9418598610131932545",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-fahrettin-usta-yoresel-et-yemekleri",
+          "name": "Fahrettin Usta Yöresel Et Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.3,
+          "reviewCount": 398,
+          "address": "Bağlarçeşme, Doğan Araslı Blv. No:149, 34517 Esenyurt/İstanbul",
+          "phone": "+90 212 699 05 94",
+          "priceLevel": 2,
+          "latitude": 41.0381631,
+          "longitude": 28.6779804,
+          "mapsUrl": "https://maps.google.com/?cid=6958022622797944616",
           "photoUrl": null,
           "note": null
         },
@@ -905,6 +3748,78 @@
           "note": null
         },
         {
+          "id": "istanbul-sultangazi-belediyesi-maglova-sosyal-tesisleri",
+          "name": "Sultangazi Belediyesi Mağlova Sosyal Tesisleri",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.3,
+          "reviewCount": 309,
+          "address": "Cebeci, 2806 sokak, 34270 Sultangazi/İstanbul",
+          "phone": "+90 212 419 10 10",
+          "priceLevel": 2,
+          "latitude": 41.111129,
+          "longitude": 28.8815713,
+          "mapsUrl": "https://maps.google.com/?cid=875486700346169272",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-oba-lokantasi",
+          "name": "Oba Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 308,
+          "address": "Çeliktepe, İsmet İnönü Cd. No:19 D:B, 34410 Kağıthane/İstanbul",
+          "phone": "+90 212 280 59 11",
+          "priceLevel": 2,
+          "latitude": 41.08370130000001,
+          "longitude": 29.0041245,
+          "mapsUrl": "https://maps.google.com/?cid=4183078620278342301",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-lalezar-iskembe-salonu",
+          "name": "LALEZAR İŞKEMBE SALONU",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.3,
+          "reviewCount": 291,
+          "address": "Ferhatpaşa, Değirmen Sk. No:8, 34888 Çatalca/İstanbul",
+          "phone": "+90 212 789 59 84",
+          "priceLevel": 2,
+          "latitude": 41.142861599999996,
+          "longitude": 28.4592405,
+          "mapsUrl": "https://maps.google.com/?cid=12772818249080115413",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-konak-lokantasi",
+          "name": "Konak Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 272,
+          "address": "Maltepe, Gümüşsuyu Cd. No:14 D:C, 34010 Zeytinburnu/İstanbul",
+          "phone": "+90 212 613 81 72",
+          "priceLevel": 2,
+          "latitude": 41.0231996,
+          "longitude": 28.9104527,
+          "mapsUrl": "https://maps.google.com/?cid=14776284737928507426",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "istanbul-eyupsultan-corbacisi-pendik",
           "name": "Eyüpsultan Çorbacısı Pendik",
           "category": "Restoran",
@@ -919,6 +3834,117 @@
           "latitude": 40.899241599999996,
           "longitude": 29.259510600000002,
           "mapsUrl": "https://maps.google.com/?cid=17116555153260248066",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-roka-yemek-evi",
+          "name": "Roka Yemek Evi",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.3,
+          "reviewCount": 242,
+          "address": "Şeyhli, Şht. Hakan Kuyucu Cd. No:12, 34906 Pendik/İstanbul",
+          "phone": "+90 216 266 03 66",
+          "priceLevel": null,
+          "latitude": 40.906789800000006,
+          "longitude": 29.285896899999997,
+          "mapsUrl": "https://maps.google.com/?cid=4621708850874666703",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-kokoz-ev-yemekleri-kahvalti",
+          "name": "Kokoz Ev Yemekleri - Kahvaltı",
+          "category": "Restoran",
+          "tags": [
+            "Kahvaltı",
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 215,
+          "address": "Hacı Kasım, Üsküdar Cd., 34980 Şile/İstanbul",
+          "phone": "+90 535 616 53 85",
+          "priceLevel": 2,
+          "latitude": 41.1761212,
+          "longitude": 29.610041499999994,
+          "mapsUrl": "https://maps.google.com/?cid=8370784565336606161",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-bolkepce-et-lokantasi",
+          "name": "Bolkepçe Et Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 157,
+          "address": "Telsiz, Asım Kazancıgil Cd. No:31, 34020 Zeytinburnu/İstanbul",
+          "phone": "+90 212 510 91 41",
+          "priceLevel": 2,
+          "latitude": 41.001652299999996,
+          "longitude": 28.913388599999994,
+          "mapsUrl": "https://maps.google.com/?cid=16405348369314627025",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-karadeniz-lokanta-tabldot-ev-yemekleri-pilav-kavurma",
+          "name": "Karadeniz Lokanta Tabldot Ev Yemekleri Pilav Kavurma",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 120,
+          "address": "Gümüşpala, Şükrübey Cd No:14, 34320 Avcılar/İstanbul",
+          "phone": "+90 212 509 64 19",
+          "priceLevel": 1,
+          "latitude": 40.9796759,
+          "longitude": 28.734805599999998,
+          "mapsUrl": "https://maps.google.com/?cid=2169301781289754146",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-ozkervanli-et-lokantasi",
+          "name": "Özkervanlı Et Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 64,
+          "address": "İkitelli OSB Mah Metal Iş Sanayi Sit. No:2 D:Blok No:6, İkitelli OSB, 34192 Başakşehir/İstanbul",
+          "phone": "+90 212 671 80 21",
+          "priceLevel": 2,
+          "latitude": 41.0688886,
+          "longitude": 28.802982200000002,
+          "mapsUrl": "https://maps.google.com/?cid=3769484337035127159",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "istanbul-sirin-yemek-evi",
+          "name": "Şirin Yemek Evi",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.3,
+          "reviewCount": 57,
+          "address": "Karadeniz, Hamidiye Cd. 6/A, 34250 Gaziosmanpaşa/İstanbul",
+          "phone": "+90 212 477 93 83",
+          "priceLevel": null,
+          "latitude": 41.075926200000005,
+          "longitude": 28.882095699999997,
+          "mapsUrl": "https://maps.google.com/?cid=11586799300824509890",
           "photoUrl": null,
           "note": null
         }
@@ -2765,6 +5791,42 @@
       "tagline": "İskender ve İnegöl köftesiyle",
       "restaurants": [
         {
+          "id": "bursa-gursel-inegol-koftecisi",
+          "name": "Gürsel İnegöl Köftecisi",
+          "category": "Restoran",
+          "tags": [
+            "Köfte"
+          ],
+          "rating": 5.0,
+          "reviewCount": 3757,
+          "address": "Sinanbey, Zafer Cd. No:50, 16400 İnegöl/Bursa",
+          "phone": "+90 535 760 93 30",
+          "priceLevel": 2,
+          "latitude": 40.0815449,
+          "longitude": 29.513136099999997,
+          "mapsUrl": "https://maps.google.com/?cid=12370949988081266228",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-perishka-manti-evi-ve-yoresel-lezzetler",
+          "name": "Perishka Mantı Evi ve Yöresel Lezzetler",
+          "category": "Restoran",
+          "tags": [
+            "Mantı"
+          ],
+          "rating": 5.0,
+          "reviewCount": 248,
+          "address": "Barış, Osmangazi Cd No:34/A, 16500 Mustafakemalpaşa/Bursa",
+          "phone": "+90 505 018 81 18",
+          "priceLevel": 2,
+          "latitude": 40.0387133,
+          "longitude": 28.3873987,
+          "mapsUrl": "https://maps.google.com/?cid=14760617430968499437",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-meshur-huseyin-ustanin-yeri",
           "name": "Meşhur Hüseyin Ustanın Yeri",
           "category": "Restoran",
@@ -2797,6 +5859,24 @@
           "latitude": 40.2540255,
           "longitude": 29.014233299999997,
           "mapsUrl": "https://maps.google.com/?cid=9376605720959469591",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-kebapnare",
+          "name": "Kebapnare",
+          "category": "Aile restoranı",
+          "tags": [
+            "Kebap"
+          ],
+          "rating": 4.9,
+          "reviewCount": 885,
+          "address": "Arapzade, 16800 Orhangazi/Bursa",
+          "phone": "+90 506 700 26 16",
+          "priceLevel": 2,
+          "latitude": 40.5016909,
+          "longitude": 29.3102633,
+          "mapsUrl": "https://maps.google.com/?cid=164221356527920076",
           "photoUrl": null,
           "note": null
         },
@@ -2839,6 +5919,43 @@
           "note": null
         },
         {
+          "id": "bursa-green-garden",
+          "name": "Green Garden",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.9,
+          "reviewCount": 176,
+          "address": "Örnekköy, Göl Küme Evleri No:85, 16825 Orhangazi/Bursa",
+          "phone": "+90 546 642 38 27",
+          "priceLevel": 2,
+          "latitude": 40.450127699999996,
+          "longitude": 29.335386099999997,
+          "mapsUrl": "https://maps.google.com/?cid=6658626076737078442",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-ustam-cig-kofte-manti-evi-mudanya-bursa",
+          "name": "USTAM ÇİĞ KÖFTE & MANTI EVİ Mudanya/Bursa",
+          "category": "Türk restoranı",
+          "tags": [
+            "Köfte",
+            "Mantı"
+          ],
+          "rating": 4.9,
+          "reviewCount": 164,
+          "address": "Güzelyali Yali Mahallesi, Atatürk Caddesi, Güzelyalı Yalı, Sokak Özer sitesi No:7 C Blok 144/B, 16950 Mudanya/Bursa",
+          "phone": "+90 543 727 79 25",
+          "priceLevel": 2,
+          "latitude": 40.3619872,
+          "longitude": 28.90924,
+          "mapsUrl": "https://maps.google.com/?cid=17167550832940149641",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-nilufer-izgara",
           "name": "Nilüfer Izgara",
           "category": "Aile restoranı",
@@ -2857,6 +5974,24 @@
           "note": null
         },
         {
+          "id": "bursa-kokorechane",
+          "name": "Kokoreçhane",
+          "category": "Yiyecek Temini ve İkram Hizmeti",
+          "tags": [
+            "Yiyecek Temini ve İkram Hizmeti"
+          ],
+          "rating": 4.9,
+          "reviewCount": 91,
+          "address": "Yenice, Bursa Cd. 102/A, 16700 Karacabey/Bursa",
+          "phone": "+90 538 079 11 11",
+          "priceLevel": null,
+          "latitude": 40.2102916,
+          "longitude": 28.3550516,
+          "mapsUrl": "https://maps.google.com/?cid=1865289376131369698",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-kuru-fasulyeci-muammer-usta",
           "name": "Kuru Fasulyeci Muammer Usta",
           "category": "Restoran",
@@ -2871,6 +6006,42 @@
           "latitude": 40.1834481,
           "longitude": 29.065206099999997,
           "mapsUrl": "https://maps.google.com/?cid=3022799562350426175",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-sef-in-mutfagi",
+          "name": "Şef'in mutfağı",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.9,
+          "reviewCount": 36,
+          "address": "Bursa, Erenler, erenler sokak no 16/A, 16980 Orhaneli/Bursa",
+          "phone": "+90 531 327 09 83",
+          "priceLevel": null,
+          "latitude": 40.0439995,
+          "longitude": 28.895532499999998,
+          "mapsUrl": "https://maps.google.com/?cid=4262577426766592168",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-tavaci-namik-gol-et",
+          "name": "Tavacı Namık Göl Et",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 3970,
+          "address": "Subaşı yolu, İzmir yolu Sunpet içi, Subaşı, İzmir yolu No:409, 16270 Karacabey/Bursa",
+          "phone": "+90 536 773 97 27",
+          "priceLevel": 2,
+          "latitude": 40.2258895,
+          "longitude": 28.535101299999997,
+          "mapsUrl": "https://maps.google.com/?cid=323102579179910818",
           "photoUrl": null,
           "note": null
         },
@@ -2949,6 +6120,61 @@
           "note": null
         },
         {
+          "id": "bursa-mudanya-balik-lokantasi",
+          "name": "Mudanya Balik Lokantasi",
+          "category": "Restoran",
+          "tags": [
+            "Balık",
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 371,
+          "address": "Main beach, Hasanbey, 16940 Mudanya/Bursa",
+          "phone": "+90 538 443 00 21",
+          "priceLevel": 2,
+          "latitude": 40.3766706,
+          "longitude": 28.8855051,
+          "mapsUrl": "https://maps.google.com/?cid=9182348234926887378",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-dostlar-restoran",
+          "name": "Dostlar Restoran",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 150,
+          "address": "Sırabademler, 16700 Karacabey/Bursa",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 40.1876453,
+          "longitude": 28.359272299999997,
+          "mapsUrl": "https://maps.google.com/?cid=7620830370688626907",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-mysia",
+          "name": "Mysia",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 149,
+          "address": "Selçuk, Rauf Denktaş Cd 55G, 16860 İznik/Bursa",
+          "phone": "+90 555 157 30 71",
+          "priceLevel": 2,
+          "latitude": 40.4161581,
+          "longitude": 29.7132011,
+          "mapsUrl": "https://maps.google.com/?cid=17475975721508718399",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-sehzade-pideli-kofte-muaz-usta",
           "name": "Şehzade Pideli Köfte - Muaz Usta",
           "category": "Türk restoranı",
@@ -3004,6 +6230,24 @@
           "note": null
         },
         {
+          "id": "bursa-feyzan-restoran",
+          "name": "Feyzan Restoran",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 84,
+          "address": "Hamidiye, Menekşe Sk., 16600 Gemlik/Bursa",
+          "phone": "+90 224 513 21 23",
+          "priceLevel": 2,
+          "latitude": 40.4299959,
+          "longitude": 29.157087199999996,
+          "mapsUrl": "https://maps.google.com/?cid=14986549219316093239",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-rumeli-kardesler-sofrasi",
           "name": "Rumeli Kardeşler Sofrası",
           "category": "Restoran",
@@ -3018,6 +6262,78 @@
           "latitude": 40.1971741,
           "longitude": 29.0727196,
           "mapsUrl": "https://maps.google.com/?cid=8725924997003672409",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-orhanin-yeri-duvali-tatli",
+          "name": "Orhanın Yeri Duvalı Tatlı",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 2795,
+          "address": "Muradiye Mahallesi turist yolu Birlik Apartmanı No 178, Orhan’ın Yeri Lokantası, Muradiye, 16800 Orhangazi/Bursa",
+          "phone": "+90 224 573 07 01",
+          "priceLevel": 2,
+          "latitude": 40.4965888,
+          "longitude": 29.312839099999998,
+          "mapsUrl": "https://maps.google.com/?cid=17232192735549691392",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-kalyon-balik-restaurant",
+          "name": "Kalyon Balık Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Balık"
+          ],
+          "rating": 4.7,
+          "reviewCount": 1388,
+          "address": "Hasanbey, Halitpaşa Cd. No:21, 16940 Mudanya/Bursa",
+          "phone": "+90 224 544 73 87",
+          "priceLevel": null,
+          "latitude": 40.377023099999995,
+          "longitude": 28.8848439,
+          "mapsUrl": "https://maps.google.com/?cid=11846498093029929537",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-selim-usta-lokantasi",
+          "name": "Selim Usta Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.7,
+          "reviewCount": 205,
+          "address": "Demirtaşpaşa, İnönü Cad. No:72, 16230 Osmangazi/Bursa",
+          "phone": "+90 553 098 16 39",
+          "priceLevel": 2,
+          "latitude": 40.188821000000004,
+          "longitude": 29.071239799999994,
+          "mapsUrl": "https://maps.google.com/?cid=8801225095148172258",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-uludag-lokantasi",
+          "name": "Uludağ Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.7,
+          "reviewCount": 150,
+          "address": "Camiikebir, 16800 Orhangazi/Bursa",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 40.48392,
+          "longitude": 29.3069768,
+          "mapsUrl": "https://maps.google.com/?cid=2747077977722224021",
           "photoUrl": null,
           "note": null
         },
@@ -3094,6 +6410,24 @@
           "note": null
         },
         {
+          "id": "bursa-tutku-yemek",
+          "name": "TUTKU YEMEK",
+          "category": "Yiyecek",
+          "tags": [
+            "Yiyecek"
+          ],
+          "rating": 4.7,
+          "reviewCount": 74,
+          "address": "Yenidoğan OSB, Şht. Cüneyt Yıldız Cd. No: 233, 16580 Gürsu/Bursa",
+          "phone": "+90 539 528 76 54",
+          "priceLevel": null,
+          "latitude": 40.20097030000001,
+          "longitude": 29.1843529,
+          "mapsUrl": "https://maps.google.com/?cid=13490306966334339479",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-yildiz-ev-yemekleri",
           "name": "Yıldız Ev Yemekleri",
           "category": "Restoran",
@@ -3126,6 +6460,24 @@
           "latitude": 40.185436599999996,
           "longitude": 29.0608897,
           "mapsUrl": "https://maps.google.com/?cid=12987450781306156160",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-kocayayla-alabalik-et-mangal",
+          "name": "KOCAYAYLA ALABALIK & ET MANGAL",
+          "category": "Restoran",
+          "tags": [
+            "Balık"
+          ],
+          "rating": 4.7,
+          "reviewCount": 40,
+          "address": "Yenice, 16740 Keles/Bursa",
+          "phone": "+90 532 644 33 93",
+          "priceLevel": null,
+          "latitude": 39.9336862,
+          "longitude": 29.2474488,
+          "mapsUrl": "https://maps.google.com/?cid=18291284809640865907",
           "photoUrl": null,
           "note": null
         },
@@ -3220,6 +6572,24 @@
           "note": null
         },
         {
+          "id": "bursa-iznik-efsane-doner",
+          "name": "İznik Efsane Döner",
+          "category": "Türk restoranı",
+          "tags": [
+            "Döner"
+          ],
+          "rating": 4.6,
+          "reviewCount": 854,
+          "address": "Selçuk, Kılıçaslan Cd. No:65/A, 16860 İznik/Bursa",
+          "phone": "+90 507 342 70 02",
+          "priceLevel": 2,
+          "latitude": 40.4293221,
+          "longitude": 29.719345199999996,
+          "mapsUrl": "https://maps.google.com/?cid=16116565747450087353",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-zengin-lokantasi",
           "name": "Zengin Lokantası",
           "category": "Restoran",
@@ -3256,6 +6626,26 @@
           "note": null
         },
         {
+          "id": "bursa-kaptan-corba-islama-kofte-iznik-esnaf-lokantasi",
+          "name": "Kaptan Çorba & Islama Köfte - İznik Esnaf Lokantası",
+          "category": "Aile restoranı",
+          "tags": [
+            "Çorba",
+            "Köfte",
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 318,
+          "address": "Mahmut Çelebi, Salim Demircan Sk. No:4, 16860 İznik/Bursa",
+          "phone": "+90 224 757 25 62",
+          "priceLevel": 2,
+          "latitude": 40.429149699999996,
+          "longitude": 29.7220374,
+          "mapsUrl": "https://maps.google.com/?cid=2421925764680021792",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-abidin-usta-osmanli-sofrasi-istanbul-yolu-subesi",
           "name": "Abidin Usta Osmanlı Sofrası İstanbul Yolu Şubesi",
           "category": "Restoran",
@@ -3270,6 +6660,42 @@
           "latitude": 40.2473095,
           "longitude": 29.064389199999997,
           "mapsUrl": "https://maps.google.com/?cid=9106835304376317251",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-arda-lokantasi",
+          "name": "Arda Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 308,
+          "address": "Hamidiye, Kasım Efendi Cd. No:109, 16400 İnegöl/Bursa",
+          "phone": "+90 546 546 25 58",
+          "priceLevel": 2,
+          "latitude": 40.0731852,
+          "longitude": 29.514358899999994,
+          "mapsUrl": "https://maps.google.com/?cid=7664795664112224595",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-kofteci-sukru",
+          "name": "Köfteci Şükrü",
+          "category": "Restoran",
+          "tags": [
+            "Köfte"
+          ],
+          "rating": 4.6,
+          "reviewCount": 302,
+          "address": "Merkez, 4. Eylül Cd. No:1, 16770 Harmancık/Bursa",
+          "phone": "+90 532 276 98 10",
+          "priceLevel": 2,
+          "latitude": 39.6771478,
+          "longitude": 29.1542598,
+          "mapsUrl": "https://maps.google.com/?cid=2964944598939900675",
           "photoUrl": null,
           "note": null
         },
@@ -3383,6 +6809,24 @@
           "note": null
         },
         {
+          "id": "bursa-site-lokantasi",
+          "name": "Site Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 1073,
+          "address": "Üçevler, 14. Sk. No:90, 16120 Nilüfer/Bursa",
+          "phone": "+90 224 441 51 86",
+          "priceLevel": 2,
+          "latitude": 40.2080953,
+          "longitude": 28.9477368,
+          "mapsUrl": "https://maps.google.com/?cid=10835570525120099965",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-corbaci-engin",
           "name": "Çorbacı Engin",
           "category": "Çorbacı",
@@ -3401,6 +6845,24 @@
           "note": null
         },
         {
+          "id": "bursa-pinarcik-alabalik-tesisleri",
+          "name": "Pınarcık Alabalık Tesisleri",
+          "category": "Restoran",
+          "tags": [
+            "Balık"
+          ],
+          "rating": 4.5,
+          "reviewCount": 553,
+          "address": "Pınarcık, Pınarcık Köyü İç Yolu, 16740 Keles/Bursa",
+          "phone": "+90 224 874 81 45",
+          "priceLevel": 2,
+          "latitude": 39.9938429,
+          "longitude": 29.231884599999994,
+          "mapsUrl": "https://maps.google.com/?cid=11877521071603345437",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-da-vittorio-ristorante-italiano",
           "name": "Da Vittorio Ristorante Italiano",
           "category": "İtalyan restoranı",
@@ -3415,6 +6877,60 @@
           "latitude": 40.19675,
           "longitude": 29.038050399999996,
           "mapsUrl": "https://maps.google.com/?cid=14157093723056433337",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-kenan-corba-ve-yemek-salonu",
+          "name": "Kenan Çorba Ve Yemek Salonu",
+          "category": "Çorbacı",
+          "tags": [
+            "Çorba"
+          ],
+          "rating": 4.5,
+          "reviewCount": 337,
+          "address": "Selçuk, Atatürk Cd. No:93, 16860 İznik/Bursa",
+          "phone": "+90 224 757 02 35",
+          "priceLevel": 2,
+          "latitude": 40.4291579,
+          "longitude": 29.7196397,
+          "mapsUrl": "https://maps.google.com/?cid=14852581172046465281",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-tarihi-tophane-pilavcisi",
+          "name": "Tarihi Tophane pilavcısı",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.5,
+          "reviewCount": 229,
+          "address": "Doktor ziya kaya mah, 1 nolu aralık, gemiç apartmanı no1, 16500 Gemlik/Bursa",
+          "phone": "+90 544 842 40 46",
+          "priceLevel": 2,
+          "latitude": 40.4289798,
+          "longitude": 29.1558042,
+          "mapsUrl": "https://maps.google.com/?cid=768856624456016893",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-pehlevan-alabalik-ve-konaklama-tesisi",
+          "name": "Pehlevan Alabalık ve Konaklama Tesisi",
+          "category": "Restoran",
+          "tags": [
+            "Balık"
+          ],
+          "rating": 4.5,
+          "reviewCount": 208,
+          "address": "Dağdibi, 16740 Keles/Bursa",
+          "phone": "+90 530 767 16 81",
+          "priceLevel": 2,
+          "latitude": 39.9962453,
+          "longitude": 29.234537300000003,
+          "mapsUrl": "https://maps.google.com/?cid=10208175656925625434",
           "photoUrl": null,
           "note": null
         },
@@ -3438,6 +6954,42 @@
           "note": null
         },
         {
+          "id": "bursa-pilavci-baskan-kestel",
+          "name": "Pilavcı Başkan Kestel",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.5,
+          "reviewCount": 179,
+          "address": "Kale, Cuma Cd. No:3, 16450 Kestel/Bursa",
+          "phone": "+90 224 372 03 73",
+          "priceLevel": 2,
+          "latitude": 40.2006957,
+          "longitude": 29.213279099999994,
+          "mapsUrl": "https://maps.google.com/?cid=430403481547106318",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-karis-lokantasi",
+          "name": "Karış Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 145,
+          "address": "Nalbantoğlu, Ulucami Cd. No:84, 16010 Osmangazi/Bursa",
+          "phone": "+90 224 224 30 66",
+          "priceLevel": 2,
+          "latitude": 40.1858144,
+          "longitude": 29.0611985,
+          "mapsUrl": "https://maps.google.com/?cid=5089758367645757946",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-bursa-yasemin-ev-yemekleri",
           "name": "Bursa Yasemin Ev Yemekleri",
           "category": "Türk restoranı",
@@ -3452,6 +7004,96 @@
           "latitude": 40.182626,
           "longitude": 29.0642484,
           "mapsUrl": "https://maps.google.com/?cid=12062919130959175856",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-ipekbocegi-park",
+          "name": "İPEKBÖCEĞİ PARK",
+          "category": "Otel",
+          "tags": [
+            "Otel"
+          ],
+          "rating": 4.5,
+          "reviewCount": 109,
+          "address": "Düğüncüler, DÜĞÜNCÜLER SOKAK NO : 199, 16990 Büyükorhan/Bursa",
+          "phone": "+90 545 145 16 16",
+          "priceLevel": null,
+          "latitude": 39.6946966,
+          "longitude": 28.7280344,
+          "mapsUrl": "https://maps.google.com/?cid=5603842438832590136",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-cuma-sofrasi",
+          "name": "Cuma Sofrası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 89,
+          "address": "İsmetiye, Cuma Pazarı Sokak No:2, 16990 Büyükorhan/Bursa",
+          "phone": "+90 224 841 30 00",
+          "priceLevel": 2,
+          "latitude": 39.7951233,
+          "longitude": 28.922259300000004,
+          "mapsUrl": "https://maps.google.com/?cid=16430303842357102295",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-uludag-restoran",
+          "name": "ULUDAĞ RESTORAN",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.5,
+          "reviewCount": 38,
+          "address": "Kurtuluş OSB, Atatürk Cd. No:193, 16580 Gürsu/Bursa",
+          "phone": "+90 516 166 01 10",
+          "priceLevel": 2,
+          "latitude": 40.2041495,
+          "longitude": 29.189115700000002,
+          "mapsUrl": "https://maps.google.com/?cid=6626894306648194740",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-gursu-corba-salonu",
+          "name": "Gürsu Çorba Salonu",
+          "category": "Restoran",
+          "tags": [
+            "Çorba"
+          ],
+          "rating": 4.5,
+          "reviewCount": 37,
+          "address": "İstiklal, Atatürk Cd. No:13, 16580 Gürsu/Bursa",
+          "phone": "+90 224 376 02 80",
+          "priceLevel": null,
+          "latitude": 40.216654299999995,
+          "longitude": 29.1934054,
+          "mapsUrl": "https://maps.google.com/?cid=347334293114054187",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-halk-kasabi-kofte-evi-ve-izgara-salonu",
+          "name": "Halk Kasabı Köfte Evi ve ızgara salonu",
+          "category": "Restoran",
+          "tags": [
+            "Köfte"
+          ],
+          "rating": 4.5,
+          "reviewCount": 28,
+          "address": "Merkez, Tavşanlı Cd., 16770 Harmancık/Bursa",
+          "phone": "+90 546 289 75 48",
+          "priceLevel": 2,
+          "latitude": 39.677343,
+          "longitude": 29.153957,
+          "mapsUrl": "https://maps.google.com/?cid=4417448481178238619",
           "photoUrl": null,
           "note": null
         },
@@ -3528,6 +7170,42 @@
           "note": null
         },
         {
+          "id": "bursa-pavurya-balik-restaurant",
+          "name": "Pavurya Balik Restaurant",
+          "category": "Deniz mahsülleri restoranı",
+          "tags": [
+            "Balık"
+          ],
+          "rating": 4.4,
+          "reviewCount": 1276,
+          "address": "Hasanbey, Halitpaşa Cd. 19-21, 16940 Mudanya/Bursa",
+          "phone": "+90 224 544 68 37",
+          "priceLevel": null,
+          "latitude": 40.3770241,
+          "longitude": 28.885009,
+          "mapsUrl": "https://maps.google.com/?cid=16692164808686687979",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-narli-yakamoz-et-mangal",
+          "name": "Narlı Yakamoz Et Mangal",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.4,
+          "reviewCount": 728,
+          "address": "Narlı Mah. Narlı Merkez Sok No:169 Gemlik/BURSA, Narlı, 16000 Gemlik/Bursa",
+          "phone": "+90 224 534 55 35",
+          "priceLevel": 2,
+          "latitude": 40.479558999999995,
+          "longitude": 29.0392737,
+          "mapsUrl": "https://maps.google.com/?cid=17373660324949600560",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-1975-bursa-yildiz-lokantasi",
           "name": "1975 Bursa Yıldız Lokantası",
           "category": "Restoran",
@@ -3564,6 +7242,42 @@
           "note": null
         },
         {
+          "id": "bursa-gozde-kebap",
+          "name": "Gözde Kebap",
+          "category": "Kebap Restoranı",
+          "tags": [
+            "Kebap"
+          ],
+          "rating": 4.4,
+          "reviewCount": 328,
+          "address": "Demirsubaşı, Semerciler Ykş. No:14, 16600 Gemlik/Bursa",
+          "phone": "+90 224 513 15 08",
+          "priceLevel": 2,
+          "latitude": 40.4321085,
+          "longitude": 29.1545181,
+          "mapsUrl": "https://maps.google.com/?cid=328426445073536879",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-umut-restaurant",
+          "name": "Umut Restaurant",
+          "category": "Aile restoranı",
+          "tags": [
+            "Aile restoranı"
+          ],
+          "rating": 4.4,
+          "reviewCount": 312,
+          "address": "Mustafa Kemal Paşa, Aziz Sürük Sok No:39, 16860 İznik/Bursa",
+          "phone": "+90 546 566 37 17",
+          "priceLevel": 2,
+          "latitude": 40.43329,
+          "longitude": 29.715536399999994,
+          "mapsUrl": "https://maps.google.com/?cid=18150473861485814495",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-damak-corbacisi",
           "name": "Damak Çorbacısı",
           "category": "Çorbacı",
@@ -3582,6 +7296,60 @@
           "note": null
         },
         {
+          "id": "bursa-gulseven-lokantasi",
+          "name": "GÜLSEVEN LOKANTASI",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 221,
+          "address": "Ahmet Vefik Paşa, Bursa Cd. No:22, 16450 Kestel/Bursa",
+          "phone": "+90 224 372 17 10",
+          "priceLevel": 2,
+          "latitude": 40.2006139,
+          "longitude": 29.2116376,
+          "mapsUrl": "https://maps.google.com/?cid=7071189614777903526",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-karagoz-et-mangal",
+          "name": "Karagöz Et Mangal",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.4,
+          "reviewCount": 214,
+          "address": "Karagöz Et Mangal, İsmetpaşa, Zafer Cd., 16980 Orhaneli/Bursa",
+          "phone": "+90 531 080 41 47",
+          "priceLevel": 2,
+          "latitude": 39.902786,
+          "longitude": 28.9881691,
+          "mapsUrl": "https://maps.google.com/?cid=17358457253469501301",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-sanayi-lokantasi",
+          "name": "SANAYİ LOKANTASI",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 199,
+          "address": "Sırabademler, Bursa Çanakkale Yolu No:5, 16700, 16700 Karacabey/Bursa",
+          "phone": "+90 533 463 82 01",
+          "priceLevel": 2,
+          "latitude": 40.1858555,
+          "longitude": 28.3564643,
+          "mapsUrl": "https://maps.google.com/?cid=4606611452868792341",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-mesken-esnaf",
           "name": "Mesken Esnaf",
           "category": "Restoran",
@@ -3596,6 +7364,42 @@
           "latitude": 40.179646399999996,
           "longitude": 29.1103348,
           "mapsUrl": "https://maps.google.com/?cid=7154931701361893040",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-stresin-lokantasi",
+          "name": "Stresin Lokantası",
+          "category": "Türk restoranı",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 38,
+          "address": "Orhan, Cumhuriyet Cd., 16990 Büyükorhan/Bursa",
+          "phone": "+90 224 841 23 20",
+          "priceLevel": 2,
+          "latitude": 39.7707939,
+          "longitude": 28.885984399999998,
+          "mapsUrl": "https://maps.google.com/?cid=10413969195420998617",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-mervey-lokanta",
+          "name": "Mervey Lokanta",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 34,
+          "address": "Cuma, Tahir Hoca Cd., 16740 Keles/Bursa",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 39.912803000000004,
+          "longitude": 29.2334908,
+          "mapsUrl": "https://maps.google.com/?cid=6557476202370786776",
           "photoUrl": null,
           "note": null
         },
@@ -3636,6 +7440,78 @@
           "note": null
         },
         {
+          "id": "bursa-harmancik-eko-turizm-tesisleri",
+          "name": "Harmancık Eko Turizm Tesisleri",
+          "category": "Konaklama Tesisi",
+          "tags": [
+            "Konaklama Tesisi"
+          ],
+          "rating": 4.3,
+          "reviewCount": 1760,
+          "address": "Merkez, Akkus Dede Mevkii, 16770 Harmancık/Bursa",
+          "phone": "+90 224 881 24 01",
+          "priceLevel": null,
+          "latitude": 39.6790634,
+          "longitude": 29.149340400000003,
+          "mapsUrl": "https://maps.google.com/?cid=3747143097253173707",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-21-masa",
+          "name": "21 masa",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.3,
+          "reviewCount": 1693,
+          "address": "Bademli Mahallesi Aydoğdu Sokak Belen 2 Sitesi No:2 Kapı No:1, Bademli, 16960 Mudanya/Bursa",
+          "phone": "+90 224 235 21 21",
+          "priceLevel": null,
+          "latitude": 40.2894777,
+          "longitude": 28.920357499999998,
+          "mapsUrl": "https://maps.google.com/?cid=6559260257363385695",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-bursa-iskembe-turkiye-6-siet-yemekleri-izgara-kahvalti",
+          "name": "BURSA İŞKEMBE TÜRKİYE 6.sı®️Et yemekleri,ızgara,kahvaltı",
+          "category": "Restoran",
+          "tags": [
+            "Kahvaltı"
+          ],
+          "rating": 4.3,
+          "reviewCount": 1400,
+          "address": "Bursa, Hürriyet, Bursa Yalova Yolu No: 68/A, 16800 Orhangazi/Bursa",
+          "phone": "+90 224 573 91 08",
+          "priceLevel": 2,
+          "latitude": 40.471360100000005,
+          "longitude": 29.299268299999998,
+          "mapsUrl": "https://maps.google.com/?cid=8215355885851265433",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-yildiz-lokantasi",
+          "name": "YILDIZ LOKANTASI",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 1304,
+          "address": "Osmaniye, İstiklal Cd. No:4, 16400 İnegöl/Bursa",
+          "phone": "+90 224 716 00 90",
+          "priceLevel": 2,
+          "latitude": 40.080554299999996,
+          "longitude": 29.508661099999998,
+          "mapsUrl": "https://maps.google.com/?cid=918217260809445278",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-bir-esnaf-lokantasi-1958",
           "name": "Bir Esnaf Lokantası 1958",
           "category": "Restoran",
@@ -3654,6 +7530,60 @@
           "note": null
         },
         {
+          "id": "bursa-inegol-belediyesi-gastro-inegol",
+          "name": "İnegöl Belediyesi Gastro İnegöl",
+          "category": "Türk restoranı",
+          "tags": [
+            "Türk restoranı"
+          ],
+          "rating": 4.3,
+          "reviewCount": 699,
+          "address": "Kemalpaşa, Adnan Menderes Blv. No:3, 16400 İnegöl/Bursa",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 40.0732834,
+          "longitude": 29.507793399999994,
+          "mapsUrl": "https://maps.google.com/?cid=15313120425828343357",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-abidin-usta-kestel-sube",
+          "name": "Abidin Usta - Kestel Şube",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.3,
+          "reviewCount": 697,
+          "address": "Ahmet Vefik Paşa, Bursa Cd., 16450 Kestel/Bursa",
+          "phone": "+90 549 741 85 24",
+          "priceLevel": 2,
+          "latitude": 40.1976252,
+          "longitude": 29.201641499999997,
+          "mapsUrl": "https://maps.google.com/?cid=2019265839916487708",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-gemlik-balikcisi",
+          "name": "Gemlik Balıkçısı",
+          "category": "Balık ve Patates Cipsi Restoranı",
+          "tags": [
+            "Balık"
+          ],
+          "rating": 4.3,
+          "reviewCount": 689,
+          "address": "Hamidiye, Gazhane Cd. No:7, 16600 Gemlik/Bursa",
+          "phone": "+90 224 513 09 99",
+          "priceLevel": 2,
+          "latitude": 40.4310081,
+          "longitude": 29.154783899999998,
+          "mapsUrl": "https://maps.google.com/?cid=6490231248496218092",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "bursa-pacaci-sabri-usta",
           "name": "Paçacı Sabri Usta",
           "category": "Restoran",
@@ -3668,6 +7598,42 @@
           "latitude": 40.2058391,
           "longitude": 29.1214614,
           "mapsUrl": "https://maps.google.com/?cid=7841172532094734866",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-sehir-lokantasi-inegol",
+          "name": "Şehir Lokantası İnegöl",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 476,
+          "address": "Cuma, Atatürk Blv. No:3, 16400 İnegöl/Bursa",
+          "phone": "+90 224 716 04 92",
+          "priceLevel": 2,
+          "latitude": 40.0796673,
+          "longitude": 29.5096828,
+          "mapsUrl": "https://maps.google.com/?cid=4132755282003659239",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "bursa-meydan-corbacisi-karacabey",
+          "name": "Meydan Çorbacısı Karacabey",
+          "category": "Çorbacı",
+          "tags": [
+            "Çorba"
+          ],
+          "rating": 4.3,
+          "reviewCount": 268,
+          "address": "Tabaklar, Cumhuriyet Meydanı No:18, 16700 Karacabey/Bursa",
+          "phone": "+90 552 226 11 11",
+          "priceLevel": 2,
+          "latitude": 40.2163135,
+          "longitude": 28.3588173,
+          "mapsUrl": "https://maps.google.com/?cid=2399559733500501904",
           "photoUrl": null,
           "note": null
         }

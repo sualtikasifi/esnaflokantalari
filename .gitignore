@@ -13,3 +13,4 @@ test-release.keystore
 keystore.properties
 *.keystore
 *.jks
+__pycache__/
