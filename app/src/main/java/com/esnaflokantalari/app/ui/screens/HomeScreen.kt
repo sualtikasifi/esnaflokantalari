@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,7 +37,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -53,7 +51,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -65,6 +62,7 @@ import com.esnaflokantalari.app.R
 import com.esnaflokantalari.app.model.City
 import com.esnaflokantalari.app.model.Restaurant
 import com.esnaflokantalari.app.ui.components.MapsLinkButton
+import com.esnaflokantalari.app.ui.components.RestaurantChip
 import com.esnaflokantalari.app.ui.components.RestaurantVisual
 import com.esnaflokantalari.app.ui.components.restaurantHasRealPhoto
 import com.esnaflokantalari.app.ui.formatCount
@@ -430,54 +428,47 @@ private fun FeaturedCard(
 
     Card(
         onClick = onClick,
-        modifier = Modifier.width(200.dp).height(250.dp),
+        modifier = Modifier.width(200.dp).height(FEATURED_CARD_HEIGHT),
         shape = RoundedCornerShape(18.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
     ) {
         Column(modifier = Modifier.padding(14.dp).fillMaxHeight()) {
-            Row(verticalAlignment = Alignment.Top) {
+            // Görsel ve puan yan yana: dar kartın genişliğini boşluk bırakmadan doldurur.
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
-                        .size(44.dp)
-                        .clip(RoundedCornerShape(12.dp)),
+                        .size(48.dp)
+                        .clip(RoundedCornerShape(13.dp)),
                 ) {
                     RestaurantVisual(
                         restaurant = restaurant,
-                        modifier = Modifier.size(44.dp),
-                        iconSize = 18.dp,
-                        initialsSize = 13.sp,
+                        modifier = Modifier.size(48.dp),
+                        iconSize = 20.dp,
+                        initialsSize = 14.sp,
                         localPhotoPath = localPhotoPath,
                         hasBundledPhoto = hasBundledPhoto,
                     )
                 }
-                Text(
-                    restaurant.name,
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.titleSmall,
-                    maxLines = 2,
-                    minLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(start = 10.dp),
-                )
-            }
-
-            HorizontalDivider(
-                modifier = Modifier.padding(top = 12.dp, bottom = 10.dp),
-                color = ChipBackground,
-            )
-
-            if (restaurant.hasRating) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Filled.Star, contentDescription = null, tint = StarGold, modifier = Modifier.size(16.dp))
-                    Text(
-                        restaurant.rating!!.formatRating(),
-                        fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.titleMedium,
-                        modifier = Modifier.padding(start = 5.dp),
-                    )
+                Column(modifier = Modifier.padding(start = 11.dp)) {
+                    if (restaurant.hasRating) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                Icons.Filled.Star,
+                                contentDescription = "Puan",
+                                tint = StarGold,
+                                modifier = Modifier.size(16.dp),
+                            )
+                            Text(
+                                restaurant.rating!!.formatRating(),
+                                fontWeight = FontWeight.Bold,
+                                style = MaterialTheme.typography.titleMedium,
+                                modifier = Modifier.padding(start = 4.dp),
+                            )
+                        }
+                    }
                     restaurant.reviewCount?.takeIf { it > 0 }?.let {
                         Text(
-                            " · ${it.formatCount()} yorum",
+                            "${it.formatCount()} yorum",
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             style = MaterialTheme.typography.bodySmall,
                             maxLines = 1,
@@ -485,46 +476,46 @@ private fun FeaturedCard(
                         )
                     }
                 }
-            } else {
-                Text(
-                    "Puan yok",
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    style = MaterialTheme.typography.bodySmall,
-                )
             }
+
+            // İki satırlık sabit alan — kartların yüksekliği isim uzunluğundan etkilenmesin.
+            Text(
+                restaurant.name,
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.titleSmall,
+                maxLines = 2,
+                minLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
+            )
             Text(
                 restaurant.locationLabel(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodySmall,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(top = 4.dp),
+                modifier = Modifier.padding(top = 2.dp),
             )
 
-            restaurant.badge?.let { (emoji, label) ->
-                Text(
-                    "$emoji $label",
-                    color = Color(0xFF241A15),
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.labelMedium,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier
-                        .padding(top = 8.dp)
-                        .clip(RoundedCornerShape(50))
-                        .background(StarGold)
-                        .padding(horizontal = 10.dp, vertical = 5.dp),
-                )
-            }
+            RestaurantChip(restaurant, modifier = Modifier.padding(top = 10.dp))
 
             Spacer(modifier = Modifier.weight(1f))
 
             if (!hasRealPhoto) {
-                MapsLinkButton(onClick = { context.openInMaps(restaurant) })
+                MapsLinkButton(
+                    onClick = { context.openInMaps(restaurant) },
+                    modifier = Modifier.fillMaxWidth(),
+                )
             }
         }
     }
 }
+
+/**
+ * Vitrin kartlarının ortak yüksekliği. İçerik (görsel satırı + iki satır ad +
+ * konum + rozet + buton) tam bu boyu doldurur; büyütmek altta boşluk açar.
+ */
+private val FEATURED_CARD_HEIGHT = 232.dp
 
 @Composable
 private fun PhotoQueuePromptCard(missingCount: Int, onClick: () -> Unit, modifier: Modifier = Modifier) {

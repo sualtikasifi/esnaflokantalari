@@ -1,6 +1,7 @@
 package com.esnaflokantalari.app.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -45,6 +46,7 @@ import coil.compose.AsyncImage
 import java.io.File
 import com.esnaflokantalari.app.model.Restaurant
 import com.esnaflokantalari.app.ui.theme.ChipBackground
+import com.esnaflokantalari.app.ui.theme.StarGold
 import com.esnaflokantalari.app.ui.theme.Terracotta
 
 /**
@@ -96,19 +98,21 @@ fun RealPhotoCta(onClick: () -> Unit, modifier: Modifier = Modifier) {
 }
 
 /**
- * Kartın tüm genişliğini kaplayan, arka planlı "Haritada gör" butonu.
- * Gerçek fotoğrafı olmayan kartların altına, tıklanabilir bir çerçeve
- * içinde konur — küçük bir metin bağlantısından çok daha belirgin.
+ * Arka planlı ve çerçeveli "Haritada gör" butonu. Koyu temada dolgu rengi
+ * kart yüzeyine yakın kaldığı için ayrıca ince bir kenarlık çizilir —
+ * böylece havada duran bir yazı değil, gerçek bir buton gibi okunur.
+ *
+ * Genişliği çağıran belirler (`Modifier.weight(1f)` ya da `fillMaxWidth()`).
  */
 @Composable
 fun MapsLinkButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
-            .fillMaxWidth()
             .clip(RoundedCornerShape(50))
             .background(ChipBackground)
+            .border(1.dp, Terracotta.copy(alpha = 0.45f), RoundedCornerShape(50))
             .clickable(onClick = onClick)
-            .padding(vertical = 10.dp),
+            .padding(horizontal = 12.dp, vertical = 9.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -116,15 +120,65 @@ fun MapsLinkButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
             Icons.Filled.PhotoCamera,
             contentDescription = null,
             tint = Terracotta,
-            modifier = Modifier.size(16.dp),
+            modifier = Modifier.size(15.dp),
         )
         Text(
             "Haritada gör",
             color = Terracotta,
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.padding(start = 6.dp),
+            style = MaterialTheme.typography.labelMedium,
+            maxLines = 1,
+            modifier = Modifier.padding(start = 5.dp),
         )
+    }
+}
+
+/** Veriden türeyen altın rozet: 🏅 Efsane, 📍 İlçenin en iyisi. */
+@Composable
+fun AwardChip(label: String, modifier: Modifier = Modifier) {
+    Text(
+        label,
+        color = Color(0xFF241A15),
+        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.labelMedium,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+        modifier = modifier
+            .clip(RoundedCornerShape(50))
+            .background(StarGold)
+            .padding(horizontal = 10.dp, vertical = 6.dp),
+    )
+}
+
+/** Rozeti olmayan kartlarda aynı yeri dolduran nötr kategori etiketi. */
+@Composable
+fun CategoryChip(label: String, modifier: Modifier = Modifier) {
+    Text(
+        label,
+        color = MaterialTheme.colorScheme.onSurface,
+        fontWeight = FontWeight.SemiBold,
+        style = MaterialTheme.typography.labelMedium,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+        modifier = modifier
+            .clip(RoundedCornerShape(50))
+            .background(ChipBackground)
+            .border(1.dp, MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.28f), RoundedCornerShape(50))
+            .padding(horizontal = 10.dp, vertical = 6.dp),
+    )
+}
+
+/**
+ * Kartın rozet alanı: varsa altın başarı rozeti, yoksa kategori etiketi.
+ * Her kartta tam olarak bir tane bulunur — böylece kartların yüksekliği eşit kalır.
+ */
+@Composable
+fun RestaurantChip(restaurant: Restaurant, modifier: Modifier = Modifier) {
+    val badge = restaurant.badge
+    if (badge != null) {
+        AwardChip("${badge.first} ${badge.second}", modifier)
+    } else {
+        CategoryChip(restaurant.displayTags.first(), modifier)
     }
 }
 
