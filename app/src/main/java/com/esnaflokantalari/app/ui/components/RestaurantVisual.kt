@@ -1,9 +1,11 @@
 package com.esnaflokantalari.app.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -12,6 +14,7 @@ import androidx.compose.material.icons.filled.Egg
 import androidx.compose.material.icons.filled.LocalFireDepartment
 import androidx.compose.material.icons.filled.LocalDining
 import androidx.compose.material.icons.filled.LunchDining
+import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material.icons.filled.RamenDining
 import androidx.compose.material.icons.filled.RiceBowl
 import androidx.compose.material.icons.filled.SetMeal
@@ -24,6 +27,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -46,6 +51,47 @@ import com.esnaflokantalari.app.model.Restaurant
  * Bilinçli tercih: rastgele stok fotoğraf göstermiyoruz — kullanıcı gördüğü
  * fotoğrafın o mekana ait olduğunu sanmamalı.
  */
+/**
+ * Elimizde bu lokantaya ait gerçek bir fotoğraf var mı? Yoksa kapakta
+ * kategori illüstrasyonu/ikonu gösteriliyor demektir — bu durumda arayüz
+ * katmanları "Haritada gerçek fotoğrafları gör" gibi bir çağrı ekleyebilir.
+ */
+fun restaurantHasRealPhoto(
+    restaurant: Restaurant,
+    localPhotoPath: String? = null,
+    hasBundledPhoto: Boolean = false,
+): Boolean = localPhotoPath != null || hasBundledPhoto || !restaurant.photoUrl.isNullOrBlank()
+
+/**
+ * Kapak bir illüstrasyon/ikon olduğunda, kullanıcıyı gerçek fotoğraflar için
+ * Google Haritalar'a yönlendiren küçük bir çağrı. Kartın üstüne bindirilir.
+ */
+@Composable
+fun RealPhotoCta(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier
+            .clip(RoundedCornerShape(50))
+            .background(Color(0xCC241A15))
+            .clickable(onClick = onClick)
+            .padding(horizontal = 10.dp, vertical = 6.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(
+            Icons.Filled.PhotoCamera,
+            contentDescription = null,
+            tint = Color.White,
+            modifier = Modifier.size(14.dp),
+        )
+        Text(
+            "Haritada gör",
+            color = Color.White,
+            fontWeight = FontWeight.SemiBold,
+            style = MaterialTheme.typography.labelMedium,
+            modifier = Modifier.padding(start = 5.dp),
+        )
+    }
+}
+
 @Composable
 fun RestaurantVisual(
     restaurant: Restaurant,

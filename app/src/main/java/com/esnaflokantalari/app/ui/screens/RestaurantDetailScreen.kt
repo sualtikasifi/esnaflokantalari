@@ -57,8 +57,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.esnaflokantalari.app.model.Restaurant
+import com.esnaflokantalari.app.ui.components.RealPhotoCta
 import com.esnaflokantalari.app.ui.components.RestaurantVisual
 import com.esnaflokantalari.app.ui.components.SurpriseResultToast
+import com.esnaflokantalari.app.ui.components.restaurantHasRealPhoto
 import com.esnaflokantalari.app.ui.dial
 import com.esnaflokantalari.app.ui.formatCount
 import com.esnaflokantalari.app.ui.formatDistance
@@ -168,6 +170,13 @@ fun RestaurantDetailScreen(
                     initialsSize = 48.sp,
                     localPhotoPath = localPhotoPath,
                 )
+
+                if (!restaurantHasRealPhoto(restaurant, localPhotoPath)) {
+                    RealPhotoCta(
+                        onClick = { context.openInMaps(restaurant) },
+                        modifier = Modifier.align(Alignment.BottomStart).padding(12.dp),
+                    )
+                }
 
                 Row(
                     modifier = Modifier.align(Alignment.BottomEnd).padding(12.dp),

@@ -52,6 +52,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -60,9 +61,12 @@ import androidx.compose.ui.unit.dp
 import com.esnaflokantalari.app.R
 import com.esnaflokantalari.app.model.City
 import com.esnaflokantalari.app.model.Restaurant
+import com.esnaflokantalari.app.ui.components.RealPhotoCta
 import com.esnaflokantalari.app.ui.components.RestaurantVisual
+import com.esnaflokantalari.app.ui.components.restaurantHasRealPhoto
 import com.esnaflokantalari.app.ui.formatCount
 import com.esnaflokantalari.app.ui.formatRating
+import com.esnaflokantalari.app.ui.openInMaps
 import com.esnaflokantalari.app.ui.theme.ChipBackground
 import com.esnaflokantalari.app.ui.theme.StarGold
 import com.esnaflokantalari.app.ui.theme.Terracotta
@@ -417,6 +421,7 @@ private fun FeaturedCard(
     hasBundledPhoto: Boolean,
     onClick: () -> Unit,
 ) {
+    val context = LocalContext.current
     Card(
         onClick = onClick,
         modifier = Modifier.width(200.dp),
@@ -431,6 +436,12 @@ private fun FeaturedCard(
                     localPhotoPath = localPhotoPath,
                     hasBundledPhoto = hasBundledPhoto,
                 )
+                if (!restaurantHasRealPhoto(restaurant, localPhotoPath, hasBundledPhoto)) {
+                    RealPhotoCta(
+                        onClick = { context.openInMaps(restaurant) },
+                        modifier = Modifier.align(Alignment.BottomEnd).padding(8.dp),
+                    )
+                }
                 if (restaurant.hasRating) {
                     Row(
                         modifier = Modifier
