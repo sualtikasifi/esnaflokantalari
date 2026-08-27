@@ -148,7 +148,7 @@ private enum class FoodCategory(val key: String, val icon: ImageVector) {
 }
 
 /** Bu kategoriler için elle/Gemini ile üretilmiş, assets/illustrations altına gömülü görsel var. */
-private val ILLUSTRATED_CATEGORIES = setOf("corba", "pide")
+private val ILLUSTRATED_CATEGORIES = setOf("corba", "pide", "kebap")
 
 private val IllustrationCream = Color(0xFFF4E9DE)
 
