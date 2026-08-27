@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BakeryDining
 import androidx.compose.material.icons.filled.Egg
@@ -35,6 +36,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -43,7 +46,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import java.io.File
 import com.esnaflokantalari.app.model.Restaurant
 import com.esnaflokantalari.app.ui.theme.ChipBackground
 import com.esnaflokantalari.app.ui.theme.StarGold
@@ -61,11 +63,7 @@ import com.esnaflokantalari.app.ui.theme.Terracotta
  * kategori illüstrasyonu/ikonu gösteriliyor demektir — bu durumda arayüz
  * katmanları "Haritada gerçek fotoğrafları gör" gibi bir çağrı ekleyebilir.
  */
-fun restaurantHasRealPhoto(
-    restaurant: Restaurant,
-    localPhotoPath: String? = null,
-    hasBundledPhoto: Boolean = false,
-): Boolean = localPhotoPath != null || hasBundledPhoto || !restaurant.photoUrl.isNullOrBlank()
+fun restaurantHasRealPhoto(restaurant: Restaurant): Boolean = !restaurant.photoUrl.isNullOrBlank()
 
 /**
  * Kapak bir illüstrasyon/ikon olduğunda, kullanıcıyı gerçek fotoğraflar için
@@ -133,52 +131,26 @@ fun MapsLinkButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     }
 }
 
-/** Veriden türeyen altın rozet: 🏅 Efsane, 📍 İlçenin en iyisi. */
-@Composable
-fun AwardChip(label: String, modifier: Modifier = Modifier) {
-    Text(
-        label,
-        color = Color(0xFF241A15),
-        fontWeight = FontWeight.Bold,
-        style = MaterialTheme.typography.labelMedium,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis,
-        modifier = modifier
-            .clip(RoundedCornerShape(50))
-            .background(StarGold)
-            .padding(horizontal = 10.dp, vertical = 6.dp),
-    )
-}
-
-/** Rozeti olmayan kartlarda aynı yeri dolduran nötr kategori etiketi. */
-@Composable
-fun CategoryChip(label: String, modifier: Modifier = Modifier) {
-    Text(
-        label,
-        color = MaterialTheme.colorScheme.onSurface,
-        fontWeight = FontWeight.SemiBold,
-        style = MaterialTheme.typography.labelMedium,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis,
-        modifier = modifier
-            .clip(RoundedCornerShape(50))
-            .background(ChipBackground)
-            .border(1.dp, MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.28f), RoundedCornerShape(50))
-            .padding(horizontal = 10.dp, vertical = 6.dp),
-    )
-}
-
 /**
- * Kartın rozet alanı: varsa altın başarı rozeti, yoksa kategori etiketi.
- * Her kartta tam olarak bir tane bulunur — böylece kartların yüksekliği eşit kalır.
+ * Başarı rozetini (🏅 Efsane, 📍 İlçenin en iyisi) görselin köşesine bindirilen
+ * küçük bir ikon olarak gösterir — metin değil, sadece sembol. Çağıran taraf
+ * bunu bir `Box`ın içine `Modifier.align(Alignment.TopEnd)` ile yerleştirir.
  */
 @Composable
-fun RestaurantChip(restaurant: Restaurant, modifier: Modifier = Modifier) {
-    val badge = restaurant.badge
-    if (badge != null) {
-        AwardChip("${badge.first} ${badge.second}", modifier)
-    } else {
-        CategoryChip(restaurant.displayTags.first(), modifier)
+fun RestaurantBadgeIcon(badge: Pair<String, String>, modifier: Modifier = Modifier, size: Dp = 22.dp) {
+    Box(
+        modifier = modifier
+            .size(size)
+            .clip(CircleShape)
+            .background(StarGold)
+            .border(1.5.dp, Color.White.copy(alpha = 0.9f), CircleShape),
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            badge.first,
+            fontSize = (size.value * 0.55f).sp,
+            modifier = Modifier.semantics { contentDescription = badge.second },
+        )
     }
 }
 
@@ -188,20 +160,11 @@ fun RestaurantVisual(
     modifier: Modifier = Modifier,
     initialsSize: TextUnit = 34.sp,
     iconSize: Dp = 40.dp,
-    localPhotoPath: String? = null,
-    hasBundledPhoto: Boolean = false,
 ) {
-    // Öncelik sırası: cihazda çekilen fotoğraf -> uygulamaya gömülü fotoğraf
-    // -> veri dosyasındaki foto_url -> üretilen renkli kapak.
-    val model: Any? = when {
-        localPhotoPath != null -> File(localPhotoPath)
-        hasBundledPhoto -> "file:///android_asset/photos/${restaurant.id}.jpg"
-        !restaurant.photoUrl.isNullOrBlank() -> restaurant.photoUrl
-        else -> null
-    }
-    if (model != null) {
+    // Veri dosyasında bir foto_url varsa onu gösterir; yoksa üretilen kapağa düşer.
+    if (!restaurant.photoUrl.isNullOrBlank()) {
         AsyncImage(
-            model = model,
+            model = restaurant.photoUrl,
             contentDescription = restaurant.name,
             contentScale = ContentScale.Crop,
             modifier = modifier,

@@ -60,8 +60,6 @@ import com.esnaflokantalari.app.ui.theme.TerracottaContainer
 fun NearbyScreen(
     state: NearbyState,
     favoriteIds: Set<String>,
-    photos: Map<String, String>,
-    bundledPhotoIds: Set<String>,
     onToggleFavorite: (String) -> Unit,
     onRestaurantClick: (String) -> Unit,
     onRequestNearby: () -> Unit,
@@ -174,8 +172,6 @@ fun NearbyScreen(
                             isFavorite = favoriteIds.contains(restaurant.id),
                             onClick = { onRestaurantClick(restaurant.id) },
                             onToggleFavorite = { onToggleFavorite(restaurant.id) },
-                            localPhotoPath = photos[restaurant.id],
-                            hasBundledPhoto = restaurant.id in bundledPhotoIds,
                         )
                     }
                 }

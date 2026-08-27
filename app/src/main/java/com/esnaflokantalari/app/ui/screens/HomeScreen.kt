@@ -23,13 +23,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.AddAPhoto
-import androidx.compose.material.icons.filled.Casino
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationCity
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.NearMe
-import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
@@ -62,7 +59,7 @@ import com.esnaflokantalari.app.R
 import com.esnaflokantalari.app.model.City
 import com.esnaflokantalari.app.model.Restaurant
 import com.esnaflokantalari.app.ui.components.MapsLinkButton
-import com.esnaflokantalari.app.ui.components.RestaurantChip
+import com.esnaflokantalari.app.ui.components.RestaurantBadgeIcon
 import com.esnaflokantalari.app.ui.components.RestaurantVisual
 import com.esnaflokantalari.app.ui.components.restaurantHasRealPhoto
 import com.esnaflokantalari.app.ui.formatCount
@@ -73,7 +70,6 @@ import com.esnaflokantalari.app.ui.theme.ChipBackground
 import com.esnaflokantalari.app.ui.theme.StarGold
 import com.esnaflokantalari.app.ui.theme.Terracotta
 import com.esnaflokantalari.app.ui.theme.TerracottaContainer
-import java.util.Calendar
 
 /** Ana sayfadaki "canın ne çekiyor" çipleri — tools/build_dataset.py'deki TAG_RULES ile eşleşir. */
 val FOOD_CATEGORIES = listOf("Kebap", "Çorba", "Sulu Yemek", "Lahmacun & Pide", "Mantı", "Kahvaltı", "Döner", "Balık")
@@ -85,18 +81,11 @@ private const val MAX_LOCATION_PREVIEW = 10
 fun HomeScreen(
     cities: List<City>,
     dataUpdatedAt: String,
-    photoCount: Int,
-    photoMissingCount: Int,
-    photos: Map<String, String>,
-    bundledPhotoIds: Set<String>,
     lastKnownCityName: String?,
     lastKnownDistrictName: String?,
     appVersion: String,
     onCityClick: (String) -> Unit,
     onSearchClick: () -> Unit,
-    onSurpriseMe: () -> Unit,
-    onExportPhotos: () -> Unit,
-    onOpenPhotoQueue: () -> Unit,
     onRestaurantClick: (String) -> Unit,
     onTagClick: (String) -> Unit,
     onNearbyClick: () -> Unit,
@@ -108,7 +97,6 @@ fun HomeScreen(
     // küçüğe sıralı geliyor (bkz. tools/build_dataset.py).
     val cityRows = remember(cities) { cities.chunked(2) }
     val filledCityCount = remember(cities) { cities.count { it.hasRestaurants } }
-    val totalRestaurantCount = remember(cities) { cities.sumOf { it.restaurants.size } }
 
     // İl vitrini: son bilinen konumun ilindeki lokantalar.
     val cityPreview = remember(cities, lastKnownCityName) {
@@ -154,46 +142,6 @@ fun HomeScreen(
                     }
                     DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
                         DropdownMenuItem(
-                            leadingIcon = {
-                                Icon(Icons.Filled.AddAPhoto, contentDescription = null)
-                            },
-                            text = {
-                                Text(
-                                    if (photoMissingCount > 0) {
-                                        "Fotoğraf ekle ($photoMissingCount eksik)"
-                                    } else {
-                                        "Fotoğraf ekle"
-                                    },
-                                )
-                            },
-                            enabled = photoMissingCount > 0,
-                            onClick = {
-                                menuOpen = false
-                                onOpenPhotoQueue()
-                            },
-                        )
-                        DropdownMenuItem(
-                            leadingIcon = {
-                                Icon(Icons.Filled.PhotoLibrary, contentDescription = null)
-                            },
-                            text = {
-                                Text(
-                                    if (photoCount > 0) {
-                                        "Fotoğrafları dışa aktar ($photoCount)"
-                                    } else {
-                                        "Fotoğrafları dışa aktar"
-                                    },
-                                )
-                            },
-                            // Fotoğraf yokken tıklanamaz ama görünür kalır,
-                            // böylece özelliğin var olduğu belli olur.
-                            enabled = photoCount > 0,
-                            onClick = {
-                                menuOpen = false
-                                onExportPhotos()
-                            },
-                        )
-                        DropdownMenuItem(
                             leadingIcon = { Icon(Icons.Filled.Info, contentDescription = null) },
                             text = { Text("Sürüm $appVersion") },
                             enabled = false,
@@ -209,18 +157,10 @@ fun HomeScreen(
             contentPadding = PaddingValues(bottom = 24.dp),
         ) {
             item {
-                Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 4.dp, bottom = 12.dp)) {
-                    Text(greetingMessage(), style = MaterialTheme.typography.headlineSmall)
-                    Text(
-                        "$totalRestaurantCount lokanta · 81 il",
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(top = 4.dp),
-                    )
-
+                Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 12.dp)) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 16.dp)
                             .height(52.dp)
                             .clip(RoundedCornerShape(50))
                             .background(ChipBackground)
@@ -235,26 +175,6 @@ fun HomeScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                        )
-                    }
-
-                    Row(
-                        modifier = Modifier
-                            .padding(top = 10.dp)
-                            .height(48.dp)
-                            .clip(RoundedCornerShape(50))
-                            .background(TerracottaContainer)
-                            .clickable { onSurpriseMe() }
-                            .padding(horizontal = 16.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Icon(Icons.Filled.Casino, contentDescription = null, tint = Terracotta)
-                        Text(
-                            "Bugün ne yesem?",
-                            modifier = Modifier.padding(start = 8.dp),
-                            color = Terracotta,
-                            fontWeight = FontWeight.SemiBold,
-                            maxLines = 1,
                         )
                     }
                 }
@@ -276,8 +196,6 @@ fun HomeScreen(
                         items(cityPreview, key = { it.id }) { restaurant ->
                             FeaturedCard(
                                 restaurant = restaurant,
-                                localPhotoPath = photos[restaurant.id],
-                                hasBundledPhoto = restaurant.id in bundledPhotoIds,
                                 onClick = { onRestaurantClick(restaurant.id) },
                             )
                         }
@@ -300,8 +218,6 @@ fun HomeScreen(
                         items(districtPreview, key = { it.id }) { restaurant ->
                             FeaturedCard(
                                 restaurant = restaurant,
-                                localPhotoPath = photos[restaurant.id],
-                                hasBundledPhoto = restaurant.id in bundledPhotoIds,
                                 onClick = { onRestaurantClick(restaurant.id) },
                             )
                         }
@@ -326,16 +242,6 @@ fun HomeScreen(
                             style = MaterialTheme.typography.labelLarge,
                         )
                     }
-                }
-            }
-
-            if (photoMissingCount > 0) {
-                item {
-                    PhotoQueuePromptCard(
-                        missingCount = photoMissingCount,
-                        onClick = onOpenPhotoQueue,
-                        modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 6.dp),
-                    )
                 }
             }
 
@@ -374,15 +280,6 @@ fun HomeScreen(
     }
 }
 
-private fun greetingMessage(): String =
-    when (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) {
-        in 6..10 -> "Günaydın! Kahvaltı vakti"
-        in 11..14 -> "Bugün nerede yemek yiyelim?"
-        in 15..17 -> "İkindi keyfi"
-        in 18..21 -> "İyi akşamlar, sofra vakti"
-        else -> "Gece açsan doğru yerdesin"
-    }
-
 @Composable
 private fun SectionHeader(title: String, subtitle: String? = null, onSeeAll: (() -> Unit)? = null) {
     Row(
@@ -419,12 +316,10 @@ private fun SectionHeader(title: String, subtitle: String? = null, onSeeAll: (()
 @Composable
 private fun FeaturedCard(
     restaurant: Restaurant,
-    localPhotoPath: String?,
-    hasBundledPhoto: Boolean,
     onClick: () -> Unit,
 ) {
     val context = LocalContext.current
-    val hasRealPhoto = restaurantHasRealPhoto(restaurant, localPhotoPath, hasBundledPhoto)
+    val hasRealPhoto = restaurantHasRealPhoto(restaurant)
 
     Card(
         onClick = onClick,
@@ -435,19 +330,27 @@ private fun FeaturedCard(
         Column(modifier = Modifier.padding(14.dp).fillMaxHeight()) {
             // Görsel ve puan yan yana: dar kartın genişliğini boşluk bırakmadan doldurur.
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(
-                    modifier = Modifier
-                        .size(48.dp)
-                        .clip(RoundedCornerShape(13.dp)),
-                ) {
-                    RestaurantVisual(
-                        restaurant = restaurant,
-                        modifier = Modifier.size(48.dp),
-                        iconSize = 20.dp,
-                        initialsSize = 14.sp,
-                        localPhotoPath = localPhotoPath,
-                        hasBundledPhoto = hasBundledPhoto,
-                    )
+                Box {
+                    Box(
+                        modifier = Modifier
+                            .size(48.dp)
+                            .clip(RoundedCornerShape(13.dp)),
+                    ) {
+                        RestaurantVisual(
+                            restaurant = restaurant,
+                            modifier = Modifier.size(48.dp),
+                            iconSize = 20.dp,
+                            initialsSize = 14.sp,
+                        )
+                    }
+                    restaurant.badge?.let { badge ->
+                        RestaurantBadgeIcon(
+                            badge = badge,
+                            modifier = Modifier
+                                .align(Alignment.TopEnd)
+                                .padding(top = (-4).dp, end = (-4).dp),
+                        )
+                    }
                 }
                 Column(modifier = Modifier.padding(start = 11.dp)) {
                     if (restaurant.hasRating) {
@@ -497,8 +400,6 @@ private fun FeaturedCard(
                 modifier = Modifier.padding(top = 2.dp),
             )
 
-            RestaurantChip(restaurant, modifier = Modifier.padding(top = 10.dp))
-
             Spacer(modifier = Modifier.weight(1f))
 
             if (!hasRealPhoto) {
@@ -513,40 +414,9 @@ private fun FeaturedCard(
 
 /**
  * Vitrin kartlarının ortak yüksekliği. İçerik (görsel satırı + iki satır ad +
- * konum + rozet + buton) tam bu boyu doldurur; büyütmek altta boşluk açar.
+ * konum + buton) tam bu boyu doldurur; büyütmek altta boşluk açar.
  */
-private val FEATURED_CARD_HEIGHT = 232.dp
-
-@Composable
-private fun PhotoQueuePromptCard(missingCount: Int, onClick: () -> Unit, modifier: Modifier = Modifier) {
-    Card(
-        onClick = onClick,
-        modifier = modifier,
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = TerracottaContainer),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Icon(Icons.Filled.AddAPhoto, contentDescription = null, tint = Terracotta)
-            Column(modifier = Modifier.weight(1f).padding(start = 12.dp)) {
-                Text("Fotoğraf ekle", fontWeight = FontWeight.SemiBold)
-                Text(
-                    "$missingCount lokantada fotoğraf eksik — sırayla ekle",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
-            Icon(
-                Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        }
-    }
-}
+private val FEATURED_CARD_HEIGHT = 194.dp
 
 @Composable
 private fun CityCard(city: City, modifier: Modifier = Modifier, onClick: () -> Unit) {

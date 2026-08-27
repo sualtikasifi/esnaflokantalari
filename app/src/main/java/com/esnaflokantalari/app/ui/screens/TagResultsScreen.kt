@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -33,8 +34,7 @@ fun TagResultsScreen(
     tag: String,
     restaurants: List<Restaurant>,
     favoriteIds: Set<String>,
-    photos: Map<String, String>,
-    bundledPhotoIds: Set<String>,
+    lastKnownDistrictName: String?,
     onToggleFavorite: (String) -> Unit,
     onRestaurantClick: (String) -> Unit,
     onBack: () -> Unit,
@@ -68,19 +68,49 @@ fun TagResultsScreen(
             return@Scaffold
         }
 
+        // Bulunduğun ilçedeki eşleşmeler listenin başında — "önce bana yakın olanı öner".
+        val nearby = if (lastKnownDistrictName != null) {
+            restaurants.filter { it.district == lastKnownDistrictName }
+        } else {
+            emptyList()
+        }
+        val rest = restaurants.filterNot { it in nearby }
+
         Box(modifier = Modifier.padding(padding)) {
             LazyColumn(
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                items(restaurants, key = { it.id }) { restaurant ->
+                if (nearby.isNotEmpty()) {
+                    item {
+                        Text(
+                            "$lastKnownDistrictName ilçesinde",
+                            style = MaterialTheme.typography.titleMedium,
+                            modifier = Modifier.fillMaxWidth().padding(bottom = 2.dp),
+                        )
+                    }
+                    items(nearby, key = { it.id }) { restaurant ->
+                        RestaurantCard(
+                            restaurant = restaurant,
+                            isFavorite = favoriteIds.contains(restaurant.id),
+                            onClick = { onRestaurantClick(restaurant.id) },
+                            onToggleFavorite = { onToggleFavorite(restaurant.id) },
+                        )
+                    }
+                    item {
+                        Text(
+                            "Diğer $tag lokantaları",
+                            style = MaterialTheme.typography.titleMedium,
+                            modifier = Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 2.dp),
+                        )
+                    }
+                }
+                items(rest, key = { it.id }) { restaurant ->
                     RestaurantCard(
                         restaurant = restaurant,
                         isFavorite = favoriteIds.contains(restaurant.id),
                         onClick = { onRestaurantClick(restaurant.id) },
                         onToggleFavorite = { onToggleFavorite(restaurant.id) },
-                        localPhotoPath = photos[restaurant.id],
-                        hasBundledPhoto = restaurant.id in bundledPhotoIds,
                     )
                 }
             }

@@ -44,20 +44,6 @@ class RestaurantRepository(private val context: Context) {
 
     suspend fun cities(): List<City> = dataset().cities
 
-    /**
-     * Uygulamaya gömülü lokanta fotoğrafları (assets/photos/{id}.jpg).
-     * Bunlar tüm kullanıcılarda görünür; cihazda çekilenlerden farklıdır.
-     */
-    suspend fun bundledPhotoIds(): Set<String> = withContext(Dispatchers.IO) {
-        runCatching {
-            context.assets.list("photos")
-                .orEmpty()
-                .filter { it.endsWith(".jpg", ignoreCase = true) }
-                .map { it.removeSuffix(".jpg").removeSuffix(".JPG") }
-                .toSet()
-        }.getOrDefault(emptySet())
-    }
-
     suspend fun city(name: String): City? =
         dataset().cities.firstOrNull { it.name.equalsTr(name) }
 

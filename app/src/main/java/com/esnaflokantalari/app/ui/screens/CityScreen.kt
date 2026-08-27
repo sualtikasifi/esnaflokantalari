@@ -16,13 +16,17 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,6 +44,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.esnaflokantalari.app.model.City
 import com.esnaflokantalari.app.ui.components.RestaurantCard
@@ -47,14 +52,14 @@ import com.esnaflokantalari.app.ui.theme.ChipBackground
 import com.esnaflokantalari.app.ui.theme.Terracotta
 import com.esnaflokantalari.app.ui.theme.TerracottaContainer
 
+private const val ALL_DISTRICTS = "Tümü"
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CityScreen(
     cityName: String,
     city: City?,
     favoriteIds: Set<String>,
-    photos: Map<String, String>,
-    bundledPhotoIds: Set<String>,
     suggestionCount: Int,
     onToggleFavorite: (String) -> Unit,
     onBack: () -> Unit,
@@ -92,12 +97,17 @@ fun CityScreen(
         }
 
         var selectedTag by remember(cityName) { mutableStateOf(ALL_TAG) }
+        var selectedDistrict by remember(cityName) { mutableStateOf(ALL_DISTRICTS) }
         val tags = remember(restaurants) {
             listOf(ALL_TAG) + restaurants.flatMap { it.displayTags }.distinct()
         }
-        val filtered = remember(restaurants, selectedTag) {
-            if (selectedTag == ALL_TAG) restaurants
-            else restaurants.filter { selectedTag in it.displayTags }
+        val districts = remember(restaurants) {
+            restaurants.mapNotNull { it.district }.distinct().sorted()
+        }
+        val filtered = remember(restaurants, selectedTag, selectedDistrict) {
+            restaurants
+                .filter { selectedTag == ALL_TAG || selectedTag in it.displayTags }
+                .filter { selectedDistrict == ALL_DISTRICTS || it.district == selectedDistrict }
         }
 
         Column(modifier = Modifier.padding(padding)) {
@@ -107,6 +117,15 @@ fun CityScreen(
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
+                )
+            }
+
+            if (districts.isNotEmpty()) {
+                DistrictDropdown(
+                    districts = districts,
+                    selected = selectedDistrict,
+                    onSelect = { selectedDistrict = it },
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
                 )
             }
 
@@ -130,6 +149,15 @@ fun CityScreen(
                 }
             }
 
+            if (filtered.isEmpty()) {
+                Text(
+                    "$selectedDistrict ilçesinde bu etikette kayıtlı lokanta yok.",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().padding(24.dp),
+                )
+            }
+
             LazyColumn(
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -140,8 +168,6 @@ fun CityScreen(
                         isFavorite = favoriteIds.contains(restaurant.id),
                         onClick = { onRestaurantClick(restaurant.id) },
                         onToggleFavorite = { onToggleFavorite(restaurant.id) },
-                        localPhotoPath = photos[restaurant.id],
-                        hasBundledPhoto = restaurant.id in bundledPhotoIds,
                     )
                 }
 
@@ -154,6 +180,50 @@ fun CityScreen(
 }
 
 private const val ALL_TAG = "Tümü"
+
+/**
+ * İlçe seçimi: alfabetik sıralı, aşağı doğru açılan kaydırmalı bir liste.
+ * Şehre ilk girişte "Tümü" seçili gelir, tüm lokantalar gösterilir.
+ */
+@Composable
+private fun DistrictDropdown(
+    districts: List<String>,
+    selected: String,
+    onSelect: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    var expanded by remember { mutableStateOf(false) }
+    Box(modifier = modifier) {
+        Row(
+            modifier = Modifier
+                .clip(RoundedCornerShape(50))
+                .background(ChipBackground)
+                .clickable { expanded = true }
+                .padding(horizontal = 14.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                if (selected == ALL_DISTRICTS) "İlçe: Tümü" else "İlçe: $selected",
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.widthIn(max = 220.dp),
+            )
+            Icon(Icons.Filled.ArrowDropDown, contentDescription = null, modifier = Modifier.padding(start = 4.dp))
+        }
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            DropdownMenuItem(
+                text = { Text(ALL_DISTRICTS) },
+                onClick = { onSelect(ALL_DISTRICTS); expanded = false },
+            )
+            districts.forEach { district ->
+                DropdownMenuItem(
+                    text = { Text(district) },
+                    onClick = { onSelect(district); expanded = false },
+                )
+            }
+        }
+    }
+}
 
 @Composable
 private fun EmptyCityState(

@@ -1,14 +1,5 @@
 package com.esnaflokantalari.app.ui.screens
 
-import android.graphics.Bitmap
-import android.net.Uri
-import android.widget.Toast
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,13 +21,10 @@ import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Directions
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.AddAPhoto
-import androidx.compose.material.icons.filled.DeleteOutline
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -45,10 +33,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -58,8 +42,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.esnaflokantalari.app.model.Restaurant
 import com.esnaflokantalari.app.ui.components.RealPhotoCta
+import com.esnaflokantalari.app.ui.components.RestaurantBadgeIcon
 import com.esnaflokantalari.app.ui.components.RestaurantVisual
-import com.esnaflokantalari.app.ui.components.SurpriseResultToast
 import com.esnaflokantalari.app.ui.components.restaurantHasRealPhoto
 import com.esnaflokantalari.app.ui.dial
 import com.esnaflokantalari.app.ui.formatCount
@@ -76,11 +60,7 @@ fun RestaurantDetailScreen(
     restaurant: Restaurant?,
     isFavorite: Boolean,
     dataUpdatedAt: String,
-    localPhotoPath: String?,
-    surpriseMessage: String? = null,
     onToggleFavorite: () -> Unit,
-    onPickPhoto: (Bitmap) -> Unit,
-    onRemovePhoto: () -> Unit,
     onBack: () -> Unit,
 ) {
     if (restaurant == null) {
@@ -110,29 +90,6 @@ fun RestaurantDetailScreen(
     }
 
     val context = LocalContext.current
-    var pendingCropUri by remember { mutableStateOf<Uri?>(null) }
-
-    // Android 13+ sistem fotoğraf seçicisi — galeri izni istemeye gerek yok.
-    val photoPicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.PickVisualMedia(),
-    ) { uri: Uri? ->
-        if (uri != null) {
-            pendingCropUri = uri
-        }
-    }
-
-    pendingCropUri?.let { uri ->
-        PhotoCropScreen(
-            imageUri = uri,
-            onCancel = { pendingCropUri = null },
-            onConfirm = { bitmap ->
-                onPickPhoto(bitmap)
-                pendingCropUri = null
-                Toast.makeText(context, "Fotoğraf ekleniyor...", Toast.LENGTH_SHORT).show()
-            },
-        )
-        return
-    }
 
     Scaffold(
         topBar = {
@@ -168,37 +125,21 @@ fun RestaurantDetailScreen(
                     restaurant = restaurant,
                     modifier = Modifier.fillMaxWidth().aspectRatio(16f / 9f),
                     initialsSize = 48.sp,
-                    localPhotoPath = localPhotoPath,
                 )
 
-                if (!restaurantHasRealPhoto(restaurant, localPhotoPath)) {
+                if (!restaurantHasRealPhoto(restaurant)) {
                     RealPhotoCta(
                         onClick = { context.openInMaps(restaurant) },
                         modifier = Modifier.align(Alignment.BottomStart).padding(12.dp),
                     )
                 }
 
-                Row(
-                    modifier = Modifier.align(Alignment.BottomEnd).padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    if (localPhotoPath != null) {
-                        FilledTonalIconButton(onClick = onRemovePhoto) {
-                            Icon(Icons.Filled.DeleteOutline, contentDescription = "Fotoğrafı kaldır")
-                        }
-                    }
-                    FilledTonalIconButton(
-                        onClick = {
-                            photoPicker.launch(
-                                PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly),
-                            )
-                        },
-                    ) {
-                        Icon(
-                            Icons.Filled.AddAPhoto,
-                            contentDescription = if (localPhotoPath == null) "Fotoğraf ekle" else "Fotoğrafı değiştir",
-                        )
-                    }
+                restaurant.badge?.let { badge ->
+                    RestaurantBadgeIcon(
+                        badge = badge,
+                        size = 34.dp,
+                        modifier = Modifier.align(Alignment.TopEnd).padding(12.dp),
+                    )
                 }
             }
 
@@ -304,15 +245,6 @@ fun RestaurantDetailScreen(
                     ) {
                         Icon(Icons.Filled.Call, contentDescription = null, modifier = Modifier.padding(end = 8.dp))
                         Text("Ara: $phone")
-                    }
-                }
-
-                AnimatedVisibility(visible = surpriseMessage != null, enter = fadeIn(), exit = fadeOut()) {
-                    surpriseMessage?.let { message ->
-                        SurpriseResultToast(
-                            message = message,
-                            modifier = Modifier.fillMaxWidth().padding(top = 14.dp),
-                        )
                     }
                 }
 

@@ -1,6 +1,5 @@
 package com.esnaflokantalari.app.ui.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,8 +40,8 @@ import com.esnaflokantalari.app.ui.theme.Terracotta
  * kapaklar kartın yarısını kaplayıp "oyun" hissi vermez.
  *
  * Yerleşim, boşluk bırakmayacak şekilde sıkıdır: görselin sağındaki sütun
- * üç satırı (ad / konum · kategori / puan) taşır, altta tek sıra hâlinde
- * rozet ve "Haritada gör" butonu yer alır.
+ * iki satırı (ad / konum · puan) taşır, altta tam genişlik "Haritada gör"
+ * butonu yer alır. Başarı rozeti (varsa) görselin köşesinde küçük bir ikon.
  */
 @Composable
 fun RestaurantCard(
@@ -50,12 +49,10 @@ fun RestaurantCard(
     isFavorite: Boolean,
     onClick: () -> Unit,
     onToggleFavorite: (() -> Unit)? = null,
-    localPhotoPath: String? = null,
-    hasBundledPhoto: Boolean = false,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    val hasRealPhoto = restaurantHasRealPhoto(restaurant, localPhotoPath, hasBundledPhoto)
+    val hasRealPhoto = restaurantHasRealPhoto(restaurant)
 
     Card(
         onClick = onClick,
@@ -65,19 +62,27 @@ fun RestaurantCard(
     ) {
         Column(modifier = Modifier.padding(15.dp)) {
             Row(verticalAlignment = Alignment.Top) {
-                Box(
-                    modifier = Modifier
-                        .size(58.dp)
-                        .clip(RoundedCornerShape(15.dp)),
-                ) {
-                    RestaurantVisual(
-                        restaurant = restaurant,
-                        modifier = Modifier.size(58.dp),
-                        iconSize = 24.dp,
-                        initialsSize = 16.sp,
-                        localPhotoPath = localPhotoPath,
-                        hasBundledPhoto = hasBundledPhoto,
-                    )
+                Box {
+                    Box(
+                        modifier = Modifier
+                            .size(58.dp)
+                            .clip(RoundedCornerShape(15.dp)),
+                    ) {
+                        RestaurantVisual(
+                            restaurant = restaurant,
+                            modifier = Modifier.size(58.dp),
+                            iconSize = 24.dp,
+                            initialsSize = 16.sp,
+                        )
+                    }
+                    restaurant.badge?.let { badge ->
+                        RestaurantBadgeIcon(
+                            badge = badge,
+                            modifier = Modifier
+                                .align(Alignment.TopEnd)
+                                .padding(top = (-4).dp, end = (-4).dp),
+                        )
+                    }
                 }
 
                 Column(
@@ -93,7 +98,7 @@ fun RestaurantCard(
                         overflow = TextOverflow.Ellipsis,
                     )
                     Text(
-                        restaurant.contextLine(),
+                        restaurant.locationLabel(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.bodyMedium,
                         maxLines = 1,
@@ -141,28 +146,14 @@ fun RestaurantCard(
                 }
             }
 
-            Row(
-                modifier = Modifier.padding(top = 13.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                RestaurantChip(restaurant)
-                if (!hasRealPhoto) {
-                    MapsLinkButton(
-                        onClick = { context.openInMaps(restaurant) },
-                        modifier = Modifier.weight(1f),
-                    )
-                }
+            if (!hasRealPhoto) {
+                MapsLinkButton(
+                    onClick = { context.openInMaps(restaurant) },
+                    modifier = Modifier.padding(top = 13.dp).fillMaxWidth(),
+                )
             }
         }
     }
-}
-
-/** "Kağıthane/İstanbul · Lokanta" — konum ve kategori tek satırda. */
-private fun Restaurant.contextLine(): String {
-    val place = locationLabel()
-    val category = displayTags.firstOrNull()
-    return if (category != null && badge != null) "$place · $category" else place
 }
 
 /** Puanın yanındaki ikincil bilgiler: yorum sayısı ve fiyat. */

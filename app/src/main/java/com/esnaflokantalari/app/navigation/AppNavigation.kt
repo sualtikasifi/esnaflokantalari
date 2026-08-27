@@ -1,10 +1,6 @@
 package com.esnaflokantalari.app.navigation
 
 import android.net.Uri
-import android.widget.Toast
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
@@ -18,18 +14,11 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.esnaflokantalari.app.ui.components.SurpriseLoadingOverlay
-import kotlinx.coroutines.delay
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -42,14 +31,11 @@ import androidx.navigation.navArgument
 import com.esnaflokantalari.app.BuildConfig
 import com.esnaflokantalari.app.data.equalsTr
 import com.esnaflokantalari.app.ui.AppViewModel
-import com.esnaflokantalari.app.ui.SurpriseEvent
-import com.esnaflokantalari.app.ui.shareExport
 import com.esnaflokantalari.app.ui.screens.CityScreen
 import com.esnaflokantalari.app.ui.screens.CitySearchScreen
 import com.esnaflokantalari.app.ui.screens.FavoritesScreen
 import com.esnaflokantalari.app.ui.screens.HomeScreen
 import com.esnaflokantalari.app.ui.screens.NearbyScreen
-import com.esnaflokantalari.app.ui.screens.PhotoQueueScreen
 import com.esnaflokantalari.app.ui.screens.RestaurantDetailScreen
 import com.esnaflokantalari.app.ui.screens.SuggestScreen
 import com.esnaflokantalari.app.ui.screens.TagResultsScreen
@@ -59,7 +45,6 @@ private object Routes {
     const val FAVORITES = "favorites"
     const val NEARBY = "nearby"
     const val CITY_SEARCH = "city_search"
-    const val PHOTO_QUEUE = "photo_queue"
     const val CITY = "city/{cityName}"
     const val SUGGEST = "suggest/{cityName}"
     const val RESTAURANT = "restaurant/{restaurantId}"
@@ -82,48 +67,17 @@ private val bottomTabs = listOf(
 @Composable
 fun AppNavigation(viewModel: AppViewModel = viewModel()) {
     val navController: NavHostController = rememberNavController()
-    val context = LocalContext.current
 
     val cities by viewModel.cities.collectAsState()
     val favorites by viewModel.favorites.collectAsState()
     val favoriteIds by viewModel.favoriteIds.collectAsState()
     val suggestions by viewModel.suggestions.collectAsState()
     val dataUpdatedAt by viewModel.dataUpdatedAt.collectAsState()
-    val photos by viewModel.photos.collectAsState()
-    val surprise by viewModel.surprise.collectAsState()
-    val bundledPhotoIds by viewModel.bundledPhotoIds.collectAsState()
-    val missingPhotoRestaurants by viewModel.missingPhotoRestaurants.collectAsState()
     val lastKnownCityName by viewModel.lastKnownCityName.collectAsState()
     val lastKnownDistrictName by viewModel.lastKnownDistrictName.collectAsState()
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
-
-    // "Bugün ne yesem?" sonucu: konum alınınca lokantaya git, olmazsa bilgi ver.
-    // Başarı mesajı artık üstte kaplama olarak değil, lokanta detay sayfasında
-    // telefon numarasının altında gösteriliyor — bkz. RestaurantDetailScreen.
-    var surpriseMessage by remember { mutableStateOf<String?>(null) }
-    LaunchedEffect(surprise) {
-        when (val event = surprise) {
-            is SurpriseEvent.Picked -> {
-                navController.navigate(Routes.restaurant(event.restaurantId))
-                surpriseMessage = "${event.cityName} için seçtik: afiyet olsun!"
-                viewModel.clearSurprise()
-            }
-            is SurpriseEvent.Failed -> {
-                Toast.makeText(context, event.message, Toast.LENGTH_LONG).show()
-                viewModel.clearSurprise()
-            }
-            else -> Unit
-        }
-    }
-    // Birkaç saniye görünüp kendiliğinden solarak kaybolur.
-    LaunchedEffect(surpriseMessage) {
-        if (surpriseMessage != null) {
-            delay(2600)
-            surpriseMessage = null
-        }
-    }
 
     fun goToTab(route: String) {
         navController.navigate(route) {
@@ -167,43 +121,14 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                 HomeScreen(
                     cities = cities,
                     dataUpdatedAt = dataUpdatedAt,
-                    photoCount = photos.size,
-                    photoMissingCount = missingPhotoRestaurants.size,
-                    photos = photos,
-                    bundledPhotoIds = bundledPhotoIds,
                     lastKnownCityName = lastKnownCityName,
                     lastKnownDistrictName = lastKnownDistrictName,
                     appVersion = BuildConfig.VERSION_NAME,
                     onCityClick = { navController.navigate(Routes.city(it)) },
                     onSearchClick = { navController.navigate(Routes.CITY_SEARCH) },
-                    onSurpriseMe = { viewModel.surpriseMe() },
-                    onExportPhotos = {
-                        viewModel.exportPhotos { archive ->
-                            if (archive != null) {
-                                context.shareExport(archive)
-                            } else {
-                                Toast.makeText(
-                                    context,
-                                    "Dışa aktarılacak fotoğraf bulunamadı.",
-                                    Toast.LENGTH_SHORT,
-                                ).show()
-                            }
-                        }
-                    },
-                    onOpenPhotoQueue = { navController.navigate(Routes.PHOTO_QUEUE) },
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
                     onTagClick = { navController.navigate(Routes.tag(it)) },
                     onNearbyClick = { goToTab(Routes.NEARBY) },
-                )
-            }
-
-            composable(Routes.PHOTO_QUEUE) {
-                PhotoQueueScreen(
-                    restaurants = missingPhotoRestaurants,
-                    onPickPhoto = { restaurantId, bitmap ->
-                        viewModel.savePhotoBitmap(restaurantId, bitmap)
-                    },
-                    onBack = { navController.popBackStack() },
                 )
             }
 
@@ -221,12 +146,21 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                 arguments = listOf(navArgument("tagName") { type = NavType.StringType }),
             ) { entry ->
                 val tagName = Uri.decode(entry.arguments?.getString("tagName").orEmpty())
+                // Bulunduğun ile öncelik veriyoruz; ilin dışındaki eşleşmeler
+                // TagResultsScreen içinde "diğer" grubuna düşer.
+                val matches = cities
+                    .filter { lastKnownCityName == null || it.name == lastKnownCityName }
+                    .flatMap { it.restaurants }
+                    .filter { tagName in it.displayTags }
+                    .let { sameCity ->
+                        if (sameCity.isNotEmpty()) sameCity
+                        else cities.flatMap { it.restaurants }.filter { tagName in it.displayTags }
+                    }
                 TagResultsScreen(
                     tag = tagName,
-                    restaurants = cities.flatMap { it.restaurants }.filter { tagName in it.displayTags },
+                    restaurants = matches,
                     favoriteIds = favoriteIds,
-                    photos = photos,
-                    bundledPhotoIds = bundledPhotoIds,
+                    lastKnownDistrictName = lastKnownDistrictName,
                     onToggleFavorite = { viewModel.toggleFavoriteById(it) },
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
                     onBack = { navController.popBackStack() },
@@ -236,8 +170,6 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
             composable(Routes.FAVORITES) {
                 FavoritesScreen(
                     favorites = favorites,
-                    photos = photos,
-                    bundledPhotoIds = bundledPhotoIds,
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
                     onToggleFavorite = { viewModel.toggleFavoriteById(it) },
                     onExploreClick = { goToTab(Routes.HOME) },
@@ -249,8 +181,6 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                 NearbyScreen(
                     state = nearby,
                     favoriteIds = favoriteIds,
-                    photos = photos,
-                    bundledPhotoIds = bundledPhotoIds,
                     onToggleFavorite = { viewModel.toggleFavoriteById(it) },
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
                     onRequestNearby = { viewModel.loadNearby() },
@@ -268,8 +198,6 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     cityName = cityName,
                     city = viewModel.city(cityName),
                     favoriteIds = favoriteIds,
-                    photos = photos,
-                    bundledPhotoIds = bundledPhotoIds,
                     suggestionCount = suggestions.count { it.city.equalsTr(cityName) },
                     onToggleFavorite = { viewModel.toggleFavoriteById(it) },
                     onBack = { navController.popBackStack() },
@@ -305,30 +233,10 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     restaurant = restaurant,
                     isFavorite = favoriteIds.contains(restaurantId),
                     dataUpdatedAt = dataUpdatedAt,
-                    localPhotoPath = photos[restaurantId],
-                    surpriseMessage = surpriseMessage,
                     onToggleFavorite = { restaurant?.let(viewModel::toggleFavorite) },
-                    onPickPhoto = { bitmap ->
-                        viewModel.savePhotoBitmap(restaurantId, bitmap) { success ->
-                            Toast.makeText(
-                                context,
-                                if (success) "Fotoğraf eklendi" else "Fotoğraf eklenemedi",
-                                Toast.LENGTH_SHORT,
-                            ).show()
-                        }
-                    },
-                    onRemovePhoto = { viewModel.removePhoto(restaurantId) },
                     onBack = { navController.popBackStack() },
                 )
             }
-        }
-
-        AnimatedVisibility(
-            visible = surprise is SurpriseEvent.Locating,
-            enter = fadeIn(),
-            exit = fadeOut(),
-        ) {
-            SurpriseLoadingOverlay()
         }
         }
     }

@@ -37,8 +37,6 @@ import com.esnaflokantalari.app.ui.theme.Terracotta
 @Composable
 fun FavoritesScreen(
     favorites: List<Restaurant>,
-    photos: Map<String, String>,
-    bundledPhotoIds: Set<String>,
     onRestaurantClick: (String) -> Unit,
     onToggleFavorite: (String) -> Unit,
     onExploreClick: () -> Unit,
@@ -94,8 +92,6 @@ fun FavoritesScreen(
                     isFavorite = true,
                     onClick = { onRestaurantClick(restaurant.id) },
                     onToggleFavorite = { onToggleFavorite(restaurant.id) },
-                    localPhotoPath = photos[restaurant.id],
-                    hasBundledPhoto = restaurant.id in bundledPhotoIds,
                 )
             }
         }
