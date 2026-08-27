@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -43,6 +44,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import java.io.File
 import com.esnaflokantalari.app.model.Restaurant
+import com.esnaflokantalari.app.ui.theme.ChipBackground
+import com.esnaflokantalari.app.ui.theme.Terracotta
 
 /**
  * Lokantanın görseli. Elimizde gerçek bir fotoğraf varsa (CSV'deki foto_url)
@@ -88,6 +91,39 @@ fun RealPhotoCta(onClick: () -> Unit, modifier: Modifier = Modifier) {
             fontWeight = FontWeight.SemiBold,
             style = MaterialTheme.typography.labelMedium,
             modifier = Modifier.padding(start = 5.dp),
+        )
+    }
+}
+
+/**
+ * Kartın tüm genişliğini kaplayan, arka planlı "Haritada gör" butonu.
+ * Gerçek fotoğrafı olmayan kartların altına, tıklanabilir bir çerçeve
+ * içinde konur — küçük bir metin bağlantısından çok daha belirgin.
+ */
+@Composable
+fun MapsLinkButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(50))
+            .background(ChipBackground)
+            .clickable(onClick = onClick)
+            .padding(vertical = 10.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(
+            Icons.Filled.PhotoCamera,
+            contentDescription = null,
+            tint = Terracotta,
+            modifier = Modifier.size(16.dp),
+        )
+        Text(
+            "Haritada gör",
+            color = Terracotta,
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.labelLarge,
+            modifier = Modifier.padding(start = 6.dp),
         )
     }
 }

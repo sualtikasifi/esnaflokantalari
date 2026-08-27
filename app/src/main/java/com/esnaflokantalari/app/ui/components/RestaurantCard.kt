@@ -1,7 +1,6 @@
 package com.esnaflokantalari.app.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,8 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.esnaflokantalari.app.model.Restaurant
 import com.esnaflokantalari.app.ui.formatCount
-import com.esnaflokantalari.app.ui.formatDistance
 import com.esnaflokantalari.app.ui.formatRating
+import com.esnaflokantalari.app.ui.locationLabel
 import com.esnaflokantalari.app.ui.openInMaps
 import com.esnaflokantalari.app.ui.theme.ChipBackground
 import com.esnaflokantalari.app.ui.theme.StarGold
@@ -92,7 +91,7 @@ fun RestaurantCard(
                         overflow = TextOverflow.Ellipsis,
                     )
                     Text(
-                        restaurant.locationText(),
+                        restaurant.locationLabel(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.bodyMedium,
                         maxLines = 1,
@@ -166,24 +165,13 @@ fun RestaurantCard(
             }
 
             if (!hasRealPhoto) {
-                Text(
-                    "Haritada gör →",
-                    color = Terracotta,
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier
-                        .padding(top = 12.dp)
-                        .clickable { context.openInMaps(restaurant) },
+                MapsLinkButton(
+                    onClick = { context.openInMaps(restaurant) },
+                    modifier = Modifier.padding(top = 14.dp),
                 )
             }
         }
     }
-}
-
-private fun Restaurant.locationText(): String = when {
-    distanceMeters != null -> "${distanceMeters.formatDistance()} uzaklıkta"
-    district != null -> "$city · $district"
-    else -> city
 }
 
 @Composable

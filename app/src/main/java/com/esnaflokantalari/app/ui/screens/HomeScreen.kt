@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -63,10 +64,12 @@ import androidx.compose.ui.unit.sp
 import com.esnaflokantalari.app.R
 import com.esnaflokantalari.app.model.City
 import com.esnaflokantalari.app.model.Restaurant
+import com.esnaflokantalari.app.ui.components.MapsLinkButton
 import com.esnaflokantalari.app.ui.components.RestaurantVisual
 import com.esnaflokantalari.app.ui.components.restaurantHasRealPhoto
 import com.esnaflokantalari.app.ui.formatCount
 import com.esnaflokantalari.app.ui.formatRating
+import com.esnaflokantalari.app.ui.locationLabel
 import com.esnaflokantalari.app.ui.openInMaps
 import com.esnaflokantalari.app.ui.theme.ChipBackground
 import com.esnaflokantalari.app.ui.theme.StarGold
@@ -427,11 +430,11 @@ private fun FeaturedCard(
 
     Card(
         onClick = onClick,
-        modifier = Modifier.width(200.dp),
+        modifier = Modifier.width(200.dp).height(250.dp),
         shape = RoundedCornerShape(18.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
     ) {
-        Column(modifier = Modifier.padding(14.dp)) {
+        Column(modifier = Modifier.padding(14.dp).fillMaxHeight()) {
             Row(verticalAlignment = Alignment.Top) {
                 Box(
                     modifier = Modifier
@@ -474,7 +477,7 @@ private fun FeaturedCard(
                     )
                     restaurant.reviewCount?.takeIf { it > 0 }?.let {
                         Text(
-                            " · ${it.formatCount()}",
+                            " · ${it.formatCount()} yorum",
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             style = MaterialTheme.typography.bodySmall,
                             maxLines = 1,
@@ -482,9 +485,15 @@ private fun FeaturedCard(
                         )
                     }
                 }
+            } else {
+                Text(
+                    "Puan yok",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodySmall,
+                )
             }
             Text(
-                restaurant.city,
+                restaurant.locationLabel(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodySmall,
                 maxLines = 1,
@@ -501,23 +510,17 @@ private fun FeaturedCard(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier
-                        .padding(top = 10.dp)
+                        .padding(top = 8.dp)
                         .clip(RoundedCornerShape(50))
                         .background(StarGold)
                         .padding(horizontal = 10.dp, vertical = 5.dp),
                 )
             }
 
+            Spacer(modifier = Modifier.weight(1f))
+
             if (!hasRealPhoto) {
-                Text(
-                    "Haritada gör →",
-                    color = Terracotta,
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier
-                        .padding(top = 10.dp)
-                        .clickable { context.openInMaps(restaurant) },
-                )
+                MapsLinkButton(onClick = { context.openInMaps(restaurant) })
             }
         }
     }

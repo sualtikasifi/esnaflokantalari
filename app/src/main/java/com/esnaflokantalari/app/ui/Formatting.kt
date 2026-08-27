@@ -24,6 +24,13 @@ fun Double.formatRating(): String = String.format(TURKISH, "%.1f", this)
 fun Double.formatDistance(): String =
     if (this < 1000) "${this.toInt()} m" else String.format(TURKISH, "%.1f km", this / 1000)
 
+/** Kartlarda gösterilecek konum metni: uzaklık > ilçe/il > il. */
+fun Restaurant.locationLabel(): String = when {
+    distanceMeters != null -> "${distanceMeters!!.formatDistance()} uzaklıkta"
+    district != null -> "$district/$city"
+    else -> city
+}
+
 /**
  * Lokantayı harita uygulamasında açar. Harita uygulaması yoksa çökmek yerine
  * kullanıcıya bilgi verir.
