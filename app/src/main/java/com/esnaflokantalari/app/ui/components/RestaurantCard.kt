@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -63,27 +62,17 @@ fun RestaurantCard(
     ) {
         Column(modifier = Modifier.padding(15.dp)) {
             Row(verticalAlignment = Alignment.Top) {
-                Box {
-                    Box(
-                        modifier = Modifier
-                            .size(58.dp)
-                            .clip(RoundedCornerShape(15.dp)),
-                    ) {
-                        RestaurantVisual(
-                            restaurant = restaurant,
-                            modifier = Modifier.size(58.dp),
-                            iconSize = 24.dp,
-                            initialsSize = 16.sp,
-                        )
-                    }
-                    restaurant.badge?.let { badge ->
-                        RestaurantBadgeIcon(
-                            badge = badge,
-                            modifier = Modifier
-                                .align(Alignment.TopEnd)
-                                .offset(x = 4.dp, y = (-4).dp),
-                        )
-                    }
+                Box(
+                    modifier = Modifier
+                        .size(58.dp)
+                        .clip(RoundedCornerShape(15.dp)),
+                ) {
+                    RestaurantVisual(
+                        restaurant = restaurant,
+                        modifier = Modifier.size(58.dp),
+                        iconSize = 24.dp,
+                        initialsSize = 16.sp,
+                    )
                 }
 
                 Column(
@@ -133,6 +122,10 @@ fun RestaurantCard(
                             modifier = Modifier.padding(start = if (restaurant.hasRating) 6.dp else 0.dp),
                         )
                     }
+                }
+
+                restaurant.badge?.let { badge ->
+                    CardCornerBadge(badge, modifier = Modifier.padding(start = 6.dp))
                 }
 
                 if (onToggleFavorite != null) {

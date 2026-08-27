@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BakeryDining
@@ -150,6 +151,31 @@ fun RestaurantBadgeIcon(badge: Pair<String, String>, modifier: Modifier = Modifi
             badge.first,
             fontSize = (size.value * 0.55f).sp,
             modifier = Modifier.semantics { contentDescription = badge.second },
+        )
+    }
+}
+
+/**
+ * Kartın (görselin değil, kartın kendisinin) sağ üst köşesine konan rozet:
+ * küçük ikon, altında çok küçük puntoyla adı. Çağıran taraf bunu kartın
+ * dış Box'ında `Modifier.align(Alignment.TopEnd)` ile köşeye sabitler.
+ */
+@Composable
+fun CardCornerBadge(badge: Pair<String, String>, modifier: Modifier = Modifier) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.width(58.dp),
+    ) {
+        RestaurantBadgeIcon(badge = badge, size = 22.dp)
+        Text(
+            badge.second,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            fontSize = 8.5.sp,
+            lineHeight = 10.sp,
+            textAlign = TextAlign.Center,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.padding(top = 2.dp),
         )
     }
 }

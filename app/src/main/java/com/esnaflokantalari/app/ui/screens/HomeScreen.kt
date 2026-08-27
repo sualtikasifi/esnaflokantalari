@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -60,7 +59,7 @@ import com.esnaflokantalari.app.R
 import com.esnaflokantalari.app.model.City
 import com.esnaflokantalari.app.model.Restaurant
 import com.esnaflokantalari.app.ui.components.MapsLinkButton
-import com.esnaflokantalari.app.ui.components.RestaurantBadgeIcon
+import com.esnaflokantalari.app.ui.components.CardCornerBadge
 import com.esnaflokantalari.app.ui.components.RestaurantVisual
 import com.esnaflokantalari.app.ui.components.restaurantHasRealPhoto
 import com.esnaflokantalari.app.ui.formatCount
@@ -157,8 +156,28 @@ fun HomeScreen(
             modifier = Modifier.fillMaxSize().padding(padding),
             contentPadding = PaddingValues(bottom = 24.dp),
         ) {
+            item { SectionHeader("Canın ne çekiyor?", modifier = Modifier.padding(top = 12.dp)) }
             item {
-                Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 12.dp)) {
+                LazyRow(
+                    contentPadding = PaddingValues(horizontal = 20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    items(FOOD_CATEGORIES) { tag ->
+                        Text(
+                            tag,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(50))
+                                .background(ChipBackground)
+                                .clickable { onTagClick(tag) }
+                                .padding(horizontal = 16.dp, vertical = 10.dp),
+                            style = MaterialTheme.typography.labelLarge,
+                        )
+                    }
+                }
+            }
+
+            item {
+                Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 16.dp, bottom = 12.dp)) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -226,26 +245,6 @@ fun HomeScreen(
                 }
             }
 
-            item { SectionHeader("Canın ne çekiyor?") }
-            item {
-                LazyRow(
-                    contentPadding = PaddingValues(horizontal = 20.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    items(FOOD_CATEGORIES) { tag ->
-                        Text(
-                            tag,
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(50))
-                                .background(ChipBackground)
-                                .clickable { onTagClick(tag) }
-                                .padding(horizontal = 16.dp, vertical = 10.dp),
-                            style = MaterialTheme.typography.labelLarge,
-                        )
-                    }
-                }
-            }
-
             item {
                 SectionHeader("Şehirler", "$filledCityCount ilde lokanta kayıtlı")
             }
@@ -282,9 +281,14 @@ fun HomeScreen(
 }
 
 @Composable
-private fun SectionHeader(title: String, subtitle: String? = null, onSeeAll: (() -> Unit)? = null) {
+private fun SectionHeader(
+    title: String,
+    subtitle: String? = null,
+    onSeeAll: (() -> Unit)? = null,
+    modifier: Modifier = Modifier,
+) {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp),
+        modifier = modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(modifier = Modifier.weight(1f)) {
@@ -330,30 +334,21 @@ private fun FeaturedCard(
     ) {
         Column(modifier = Modifier.padding(14.dp).fillMaxHeight()) {
             // Görsel ve puan yan yana: dar kartın genişliğini boşluk bırakmadan doldurur.
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box {
-                    Box(
-                        modifier = Modifier
-                            .size(48.dp)
-                            .clip(RoundedCornerShape(13.dp)),
-                    ) {
-                        RestaurantVisual(
-                            restaurant = restaurant,
-                            modifier = Modifier.size(48.dp),
-                            iconSize = 20.dp,
-                            initialsSize = 14.sp,
-                        )
-                    }
-                    restaurant.badge?.let { badge ->
-                        RestaurantBadgeIcon(
-                            badge = badge,
-                            modifier = Modifier
-                                .align(Alignment.TopEnd)
-                                .offset(x = 4.dp, y = (-4).dp),
-                        )
-                    }
+            // Rozet (varsa) sağ üst köşede, kartın kendisine ait — görselin üstünde değil.
+            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
+                Box(
+                    modifier = Modifier
+                        .size(48.dp)
+                        .clip(RoundedCornerShape(13.dp)),
+                ) {
+                    RestaurantVisual(
+                        restaurant = restaurant,
+                        modifier = Modifier.size(48.dp),
+                        iconSize = 20.dp,
+                        initialsSize = 14.sp,
+                    )
                 }
-                Column(modifier = Modifier.padding(start = 11.dp)) {
+                Column(modifier = Modifier.padding(start = 11.dp).weight(1f)) {
                     if (restaurant.hasRating) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
@@ -380,6 +375,7 @@ private fun FeaturedCard(
                         )
                     }
                 }
+                restaurant.badge?.let { badge -> CardCornerBadge(badge) }
             }
 
             // İki satırlık sabit alan — kartların yüksekliği isim uzunluğundan etkilenmesin.
