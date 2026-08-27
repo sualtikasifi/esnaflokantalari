@@ -39,11 +39,10 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,7 +52,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -74,7 +72,7 @@ import java.util.Calendar
 /** Ana sayfadaki "canın ne çekiyor" çipleri — tools/build_dataset.py'deki TAG_RULES ile eşleşir. */
 val FOOD_CATEGORIES = listOf("Kebap", "Çorba", "Sulu Yemek", "Lahmacun & Pide", "Mantı", "Kahvaltı", "Döner", "Balık")
 
-private const val MAX_FEATURED = 12
+private const val MAX_LOCATION_PREVIEW = 10
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -86,6 +84,7 @@ fun HomeScreen(
     photos: Map<String, String>,
     bundledPhotoIds: Set<String>,
     lastKnownCityName: String?,
+    lastKnownDistrictName: String?,
     appVersion: String,
     onCityClick: (String) -> Unit,
     onSearchClick: () -> Unit,
@@ -97,7 +96,6 @@ fun HomeScreen(
     onNearbyClick: () -> Unit,
 ) {
     var menuOpen by remember { mutableStateOf(false) }
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
     // Kaydırma sırasında her karede yeniden hesaplanmasın diye önceden ayrılır.
     // Şehirler assets/restaurants.json içinde zaten nüfusa göre büyükten
@@ -106,32 +104,33 @@ fun HomeScreen(
     val filledCityCount = remember(cities) { cities.count { it.hasRestaurants } }
     val totalRestaurantCount = remember(cities) { cities.sumOf { it.restaurants.size } }
 
-    // Vitrin: gerçek fotoğrafı olan, en yüksek puanlı lokantalar önce.
-    val featured = remember(cities, photos, bundledPhotoIds) {
-        cities.asSequence()
-            .flatMap { it.restaurants.asSequence() }
-            .filter { it.id in photos || it.id in bundledPhotoIds }
-            .sortedWith(
-                compareByDescending<Restaurant> { it.rating ?: 0.0 }
-                    .thenByDescending { it.reviewCount ?: 0 },
-            )
-            .take(MAX_FEATURED)
-            .toList()
-    }
-
-    val nearbyPreview = remember(cities, lastKnownCityName) {
+    // İl vitrini: son bilinen konumun ilindeki lokantalar.
+    val cityPreview = remember(cities, lastKnownCityName) {
         lastKnownCityName
             ?.let { name -> cities.firstOrNull { it.name == name } }
             ?.restaurants
-            ?.take(6)
+            ?.take(MAX_LOCATION_PREVIEW)
             .orEmpty()
     }
 
+    // İlçe vitrini: aynı ildeki lokantalar arasından, adresinden çıkarılan
+    // ilçesi son bilinen ilçeyle eşleşenler (bkz. Restaurant.district).
+    val districtPreview = remember(cities, lastKnownCityName, lastKnownDistrictName) {
+        if (lastKnownDistrictName == null) {
+            emptyList()
+        } else {
+            lastKnownCityName
+                ?.let { name -> cities.firstOrNull { it.name == name } }
+                ?.restaurants
+                ?.filter { it.district == lastKnownDistrictName }
+                ?.take(MAX_LOCATION_PREVIEW)
+                .orEmpty()
+        }
+    }
+
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            LargeTopAppBar(
-                scrollBehavior = scrollBehavior,
+            TopAppBar(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Image(
@@ -255,14 +254,44 @@ fun HomeScreen(
                 }
             }
 
-            if (featured.isNotEmpty()) {
-                item { SectionHeader("Bu akşam nereye?", "En yüksek puanlı, fotoğraflı lokantalar") }
+            if (cityPreview.isNotEmpty()) {
+                item {
+                    SectionHeader(
+                        "$lastKnownCityName civarında",
+                        "Son bilinen konumundaki lokantalar",
+                        onSeeAll = onNearbyClick,
+                    )
+                }
                 item {
                     LazyRow(
                         contentPadding = PaddingValues(horizontal = 20.dp),
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
                     ) {
-                        items(featured, key = { it.id }) { restaurant ->
+                        items(cityPreview, key = { it.id }) { restaurant ->
+                            FeaturedCard(
+                                restaurant = restaurant,
+                                localPhotoPath = photos[restaurant.id],
+                                hasBundledPhoto = restaurant.id in bundledPhotoIds,
+                                onClick = { onRestaurantClick(restaurant.id) },
+                            )
+                        }
+                    }
+                }
+            }
+
+            if (districtPreview.isNotEmpty()) {
+                item {
+                    SectionHeader(
+                        "$lastKnownDistrictName civarında",
+                        "Bulunduğun ilçedeki lokantalar",
+                    )
+                }
+                item {
+                    LazyRow(
+                        contentPadding = PaddingValues(horizontal = 20.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    ) {
+                        items(districtPreview, key = { it.id }) { restaurant ->
                             FeaturedCard(
                                 restaurant = restaurant,
                                 localPhotoPath = photos[restaurant.id],
@@ -290,31 +319,6 @@ fun HomeScreen(
                                 .padding(horizontal = 16.dp, vertical = 10.dp),
                             style = MaterialTheme.typography.labelLarge,
                         )
-                    }
-                }
-            }
-
-            if (nearbyPreview.isNotEmpty()) {
-                item {
-                    SectionHeader(
-                        "$lastKnownCityName civarında",
-                        "Son bilinen konumundaki lokantalar",
-                        onSeeAll = onNearbyClick,
-                    )
-                }
-                item {
-                    LazyRow(
-                        contentPadding = PaddingValues(horizontal = 20.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    ) {
-                        items(nearbyPreview, key = { it.id }) { restaurant ->
-                            FeaturedCard(
-                                restaurant = restaurant,
-                                localPhotoPath = photos[restaurant.id],
-                                hasBundledPhoto = restaurant.id in bundledPhotoIds,
-                                onClick = { onRestaurantClick(restaurant.id) },
-                            )
-                        }
                     }
                 }
             }

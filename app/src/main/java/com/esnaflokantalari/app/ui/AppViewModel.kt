@@ -65,8 +65,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     val photos: StateFlow<Map<String, String>> = photoStore.photos
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
 
-    /** En son GPS ile doğrulanan il — ana sayfadaki "civarında" önizlemesi için. */
+    /** En son GPS ile doğrulanan il/ilçe — ana sayfadaki "civarında" önizlemeleri için. */
     val lastKnownCityName: StateFlow<String?> = lastCityStore.cityName
+        .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+    val lastKnownDistrictName: StateFlow<String?> = lastCityStore.districtName
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
     private val _cities = MutableStateFlow<List<City>>(emptyList())
@@ -217,7 +219,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                             "Bildiğin bir yer varsa şehir sayfasından öner!",
                     )
                 } else {
-                    cityName?.let { lastCityStore.save(it) }
+                    // En yakın lokantanın adresinden çıkarılan ilçe, kullanıcının
+                    // bulunduğu ilçe için elimizdeki en pratik yaklaşım (ayrı bir
+                    // ilçe alanı toplamıyoruz).
+                    cityName?.let { lastCityStore.save(it, results.firstOrNull()?.district) }
                     NearbyState.Ready(results, cityName, refreshing = false, isCached = false)
                 }
             }

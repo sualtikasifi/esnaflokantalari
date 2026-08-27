@@ -40,4 +40,16 @@ data class Restaurant(
         latitude != null && longitude != null -> "geo:$latitude,$longitude?q=$latitude,$longitude(${Uri.encode(name)})"
         else -> "geo:0,0?q=${Uri.encode("$name $address")}"
     }
+
+    /**
+     * İlçe adı, adresin sonundaki "İlçe/İl" kalıbından çıkarılır (Google
+     * Haritalar adresleri neredeyse hep bu şekilde bitiyor, ör. "Beykoz/İstanbul").
+     * Ayrı bir ilçe alanı toplamadığımız için şimdilik en pratik kaynak bu.
+     */
+    val district: String?
+        get() = DISTRICT_SUFFIX.find(address.trim())?.groupValues?.get(1)
+
+    private companion object {
+        val DISTRICT_SUFFIX = Regex("([\\p{L}]+)/[\\p{L}]+\\s*$")
+    }
 }

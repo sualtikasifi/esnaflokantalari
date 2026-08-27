@@ -10,21 +10,38 @@ import kotlinx.coroutines.flow.map
 
 private val Context.lastCityDataStore by preferencesDataStore(name = "last_city")
 private val LAST_CITY_KEY = stringPreferencesKey("last_known_city")
+private val LAST_DISTRICT_KEY = stringPreferencesKey("last_known_district")
 
 /**
- * En son GPS ile doğrulanan ilin adını saklar. "Yakınımda" ve "Bugün ne
+ * En son GPS ile doğrulanan il/ilçeyi saklar. "Yakınımda" ve "Bugün ne
  * yesem?" her seferinde yeni bir konum araması beklemek yerine, kullanıcı
- * konumunu değiştirdiğini belirtene kadar (Yenile ile) bu ile göre önerilere
- * devam eder.
+ * konumunu değiştirdiğini belirtene kadar (Yenile ile) bu il/ilçeye göre
+ * önerilere devam eder.
  */
 class LastCityStore(private val context: Context) {
 
     val cityName: Flow<String?> = context.lastCityDataStore.data
         .map { preferences -> preferences[LAST_CITY_KEY]?.takeIf { it.isNotBlank() } }
 
+    val districtName: Flow<String?> = context.lastCityDataStore.data
+        .map { preferences -> preferences[LAST_DISTRICT_KEY]?.takeIf { it.isNotBlank() } }
+
     suspend fun get(): String? = cityName.first()
 
-    suspend fun save(name: String) {
-        context.lastCityDataStore.edit { preferences -> preferences[LAST_CITY_KEY] = name }
+    /**
+     * İl adını her zaman günceller. İlçe sadece verildiğinde güncellenir —
+     * null geçilirse (ör. "Bugün ne yesem?" sadece il belirlediğinde) ve il
+     * değişmediyse daha önce bilinen ilçe olduğu gibi kalır; il değiştiyse
+     * artık geçersiz olacağından silinir.
+     */
+    suspend fun save(name: String, district: String? = null) {
+        context.lastCityDataStore.edit { preferences ->
+            val cityChanged = preferences[LAST_CITY_KEY] != name
+            preferences[LAST_CITY_KEY] = name
+            when {
+                district != null -> preferences[LAST_DISTRICT_KEY] = district
+                cityChanged -> preferences.remove(LAST_DISTRICT_KEY)
+            }
+        }
     }
 }

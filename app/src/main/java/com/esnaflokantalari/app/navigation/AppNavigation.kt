@@ -94,6 +94,7 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
     val bundledPhotoIds by viewModel.bundledPhotoIds.collectAsState()
     val missingPhotoRestaurants by viewModel.missingPhotoRestaurants.collectAsState()
     val lastKnownCityName by viewModel.lastKnownCityName.collectAsState()
+    val lastKnownDistrictName by viewModel.lastKnownDistrictName.collectAsState()
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
@@ -171,6 +172,7 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     photos = photos,
                     bundledPhotoIds = bundledPhotoIds,
                     lastKnownCityName = lastKnownCityName,
+                    lastKnownDistrictName = lastKnownDistrictName,
                     appVersion = BuildConfig.VERSION_NAME,
                     onCityClick = { navController.navigate(Routes.city(it)) },
                     onSearchClick = { navController.navigate(Routes.CITY_SEARCH) },
