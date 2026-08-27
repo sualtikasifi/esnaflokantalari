@@ -25,8 +25,8 @@ android {
         applicationId = "com.esnaflokantalari.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 34
-        versionName = "2.1.0"
+        versionCode = 35
+        versionName = "2.2.0"
 
         resourceConfigurations += listOf("tr", "en")
     }

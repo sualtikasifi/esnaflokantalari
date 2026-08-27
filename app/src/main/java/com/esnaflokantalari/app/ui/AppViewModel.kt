@@ -171,6 +171,16 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         )
     }
 
+    /**
+     * Kullanıcının elle seçtiği il/ilçe — konum kapalıyken ya da GPS'e güvenmek
+     * istemediğinde, ana sayfadaki "civarında" önerilerini değiştirmenin yolu.
+     * GPS'ten gelen kayıtla aynı depoyu kullanır, o yüzden bir sonraki GPS
+     * okuması bunun üzerine yazar.
+     */
+    fun setManualLocation(cityName: String, districtName: String?) {
+        viewModelScope.launch { lastCityStore.save(cityName, districtName, forceClearDistrict = true) }
+    }
+
     // --- Öneriler ---
 
     fun addSuggestion(city: String, name: String, category: String, address: String, note: String) {

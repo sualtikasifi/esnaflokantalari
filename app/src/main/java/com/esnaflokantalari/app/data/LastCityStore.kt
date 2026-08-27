@@ -33,14 +33,17 @@ class LastCityStore(private val context: Context) {
      * null geçilirse (ör. "Bugün ne yesem?" sadece il belirlediğinde) ve il
      * değişmediyse daha önce bilinen ilçe olduğu gibi kalır; il değiştiyse
      * artık geçersiz olacağından silinir.
+     *
+     * [forceClearDistrict] elle seçimde kullanılır: kullanıcı bilerek "Tümü"
+     * (ilçesiz) seçtiğinde, il değişmemiş olsa bile eski ilçe silinsin diye.
      */
-    suspend fun save(name: String, district: String? = null) {
+    suspend fun save(name: String, district: String? = null, forceClearDistrict: Boolean = false) {
         context.lastCityDataStore.edit { preferences ->
             val cityChanged = preferences[LAST_CITY_KEY] != name
             preferences[LAST_CITY_KEY] = name
             when {
                 district != null -> preferences[LAST_DISTRICT_KEY] = district
-                cityChanged -> preferences.remove(LAST_DISTRICT_KEY)
+                cityChanged || forceClearDistrict -> preferences.remove(LAST_DISTRICT_KEY)
             }
         }
     }

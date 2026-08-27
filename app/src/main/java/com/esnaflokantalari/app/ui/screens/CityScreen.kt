@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -45,6 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.esnaflokantalari.app.model.City
 import com.esnaflokantalari.app.ui.components.RestaurantCard
@@ -210,7 +212,15 @@ private fun DistrictDropdown(
             )
             Icon(Icons.Filled.ArrowDropDown, contentDescription = null, modifier = Modifier.padding(start = 4.dp))
         }
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            offset = DpOffset(0.dp, 4.dp),
+            // ~5 satır görünür yükseklik; gerisi içeride kaydırılır. Menü tüm
+            // ilçe sayısı kadar uzamayınca aşağıda her zaman yer buluyor ve
+            // butonun üstüne taşmıyor.
+            modifier = Modifier.heightIn(max = 260.dp),
+        ) {
             DropdownMenuItem(
                 text = { Text(ALL_DISTRICTS) },
                 onClick = { onSelect(ALL_DISTRICTS); expanded = false },

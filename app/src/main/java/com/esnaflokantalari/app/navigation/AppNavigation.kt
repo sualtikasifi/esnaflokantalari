@@ -28,13 +28,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.esnaflokantalari.app.BuildConfig
 import com.esnaflokantalari.app.data.equalsTr
 import com.esnaflokantalari.app.ui.AppViewModel
 import com.esnaflokantalari.app.ui.screens.CityScreen
 import com.esnaflokantalari.app.ui.screens.CitySearchScreen
 import com.esnaflokantalari.app.ui.screens.FavoritesScreen
 import com.esnaflokantalari.app.ui.screens.HomeScreen
+import com.esnaflokantalari.app.ui.screens.LocationPickerScreen
 import com.esnaflokantalari.app.ui.screens.NearbyScreen
 import com.esnaflokantalari.app.ui.screens.RestaurantDetailScreen
 import com.esnaflokantalari.app.ui.screens.SuggestScreen
@@ -45,6 +45,7 @@ private object Routes {
     const val FAVORITES = "favorites"
     const val NEARBY = "nearby"
     const val CITY_SEARCH = "city_search"
+    const val LOCATION_PICKER = "location_picker"
     const val CITY = "city/{cityName}"
     const val SUGGEST = "suggest/{cityName}"
     const val RESTAURANT = "restaurant/{restaurantId}"
@@ -123,9 +124,9 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     dataUpdatedAt = dataUpdatedAt,
                     lastKnownCityName = lastKnownCityName,
                     lastKnownDistrictName = lastKnownDistrictName,
-                    appVersion = BuildConfig.VERSION_NAME,
                     onCityClick = { navController.navigate(Routes.city(it)) },
                     onSearchClick = { navController.navigate(Routes.CITY_SEARCH) },
+                    onPickLocationClick = { navController.navigate(Routes.LOCATION_PICKER) },
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
                     onTagClick = { navController.navigate(Routes.tag(it)) },
                     onNearbyClick = { goToTab(Routes.NEARBY) },
@@ -138,6 +139,21 @@ fun AppNavigation(viewModel: AppViewModel = viewModel()) {
                     onBack = { navController.popBackStack() },
                     onCityClick = { navController.navigate(Routes.city(it)) },
                     onRestaurantClick = { navController.navigate(Routes.restaurant(it)) },
+                )
+            }
+
+            composable(Routes.LOCATION_PICKER) {
+                LocationPickerScreen(
+                    cities = cities,
+                    onUseCurrentLocation = {
+                        viewModel.refreshNearby()
+                        navController.popBackStack()
+                    },
+                    onSelect = { cityName, districtName ->
+                        viewModel.setManualLocation(cityName, districtName)
+                        navController.popBackStack()
+                    },
+                    onBack = { navController.popBackStack() },
                 )
             }
 

@@ -23,16 +23,13 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.EditLocationAlt
 import androidx.compose.material.icons.filled.LocationCity
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.NearMe
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -42,9 +39,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -83,15 +78,13 @@ fun HomeScreen(
     dataUpdatedAt: String,
     lastKnownCityName: String?,
     lastKnownDistrictName: String?,
-    appVersion: String,
     onCityClick: (String) -> Unit,
     onSearchClick: () -> Unit,
+    onPickLocationClick: () -> Unit,
     onRestaurantClick: (String) -> Unit,
     onTagClick: (String) -> Unit,
     onNearbyClick: () -> Unit,
 ) {
-    var menuOpen by remember { mutableStateOf(false) }
-
     // Kaydırma sırasında her karede yeniden hesaplanmasın diye önceden ayrılır.
     // Şehirler assets/restaurants.json içinde zaten nüfusa göre büyükten
     // küçüğe sıralı geliyor (bkz. tools/build_dataset.py).
@@ -135,20 +128,6 @@ fun HomeScreen(
                         Text("Gurme", modifier = Modifier.padding(start = 8.dp))
                     }
                 },
-                actions = {
-                    // Menü her zaman görünür: gizli bir menü bulunamaz.
-                    IconButton(onClick = { menuOpen = true }) {
-                        Icon(Icons.Filled.MoreVert, contentDescription = "Menü")
-                    }
-                    DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
-                        DropdownMenuItem(
-                            leadingIcon = { Icon(Icons.Filled.Info, contentDescription = null) },
-                            text = { Text("Sürüm $appVersion") },
-                            enabled = false,
-                            onClick = {},
-                        )
-                    }
-                },
             )
         },
     ) { padding ->
@@ -177,10 +156,15 @@ fun HomeScreen(
             }
 
             item {
-                Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 16.dp, bottom = 12.dp)) {
+                Row(
+                    modifier = Modifier
+                        .padding(horizontal = 20.dp)
+                        .padding(top = 16.dp, bottom = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
                     Row(
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .weight(1f)
                             .height(52.dp)
                             .clip(RoundedCornerShape(50))
                             .background(ChipBackground)
@@ -195,6 +179,20 @@ fun HomeScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
+                        )
+                    }
+                    IconButton(
+                        onClick = onPickLocationClick,
+                        modifier = Modifier
+                            .padding(start = 8.dp)
+                            .size(52.dp)
+                            .clip(RoundedCornerShape(50))
+                            .background(TerracottaContainer),
+                    ) {
+                        Icon(
+                            Icons.Filled.EditLocationAlt,
+                            contentDescription = "İl / ilçe seç",
+                            tint = Terracotta,
                         )
                     }
                 }
@@ -332,77 +330,91 @@ private fun FeaturedCard(
         shape = RoundedCornerShape(18.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
     ) {
-        Column(modifier = Modifier.padding(14.dp).fillMaxHeight()) {
-            // Görsel ve puan yan yana: dar kartın genişliğini boşluk bırakmadan doldurur.
-            // Rozet (varsa) sağ üst köşede, kartın kendisine ait — görselin üstünde değil.
-            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
-                Box(
-                    modifier = Modifier
-                        .size(48.dp)
-                        .clip(RoundedCornerShape(13.dp)),
-                ) {
-                    RestaurantVisual(
-                        restaurant = restaurant,
-                        modifier = Modifier.size(48.dp),
-                        iconSize = 20.dp,
-                        initialsSize = 14.sp,
-                    )
-                }
-                Column(modifier = Modifier.padding(start = 11.dp).weight(1f)) {
-                    if (restaurant.hasRating) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                Icons.Filled.Star,
-                                contentDescription = "Puan",
-                                tint = StarGold,
-                                modifier = Modifier.size(16.dp),
-                            )
+        Box {
+            Column(modifier = Modifier.padding(14.dp).fillMaxHeight()) {
+                // Görsel ve puan yan yana: dar kartın genişliğini boşluk bırakmadan doldurur.
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        modifier = Modifier
+                            .size(48.dp)
+                            .clip(RoundedCornerShape(13.dp)),
+                    ) {
+                        RestaurantVisual(
+                            restaurant = restaurant,
+                            modifier = Modifier.size(48.dp),
+                            iconSize = 20.dp,
+                            initialsSize = 14.sp,
+                        )
+                    }
+                    Column(modifier = Modifier.padding(start = 11.dp)) {
+                        if (restaurant.hasRating) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(
+                                    Icons.Filled.Star,
+                                    contentDescription = "Puan",
+                                    tint = StarGold,
+                                    modifier = Modifier.size(16.dp),
+                                )
+                                Text(
+                                    restaurant.rating!!.formatRating(),
+                                    fontWeight = FontWeight.Bold,
+                                    style = MaterialTheme.typography.titleMedium,
+                                    modifier = Modifier.padding(start = 4.dp),
+                                )
+                            }
+                        }
+                        restaurant.reviewCount?.takeIf { it > 0 }?.let {
                             Text(
-                                restaurant.rating!!.formatRating(),
-                                fontWeight = FontWeight.Bold,
-                                style = MaterialTheme.typography.titleMedium,
-                                modifier = Modifier.padding(start = 4.dp),
+                                "${it.formatCount()} yorum",
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                style = MaterialTheme.typography.bodySmall,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
                             )
                         }
                     }
-                    restaurant.reviewCount?.takeIf { it > 0 }?.let {
-                        Text(
-                            "${it.formatCount()} yorum",
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            style = MaterialTheme.typography.bodySmall,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                        )
+                    // Rozet varsa, köşedeki CardCornerBadge katmanına yer açmak için
+                    // başlık satırında sağda boşluk bırakılır — üst üste binmesin.
+                    if (restaurant.badge != null) {
+                        Spacer(modifier = Modifier.width(46.dp))
                     }
                 }
-                restaurant.badge?.let { badge -> CardCornerBadge(badge) }
+
+                // İki satırlık sabit alan — kartların yüksekliği isim uzunluğundan etkilenmesin.
+                Text(
+                    restaurant.name,
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.titleSmall,
+                    maxLines = 2,
+                    minLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
+                )
+                Text(
+                    restaurant.locationLabel(),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodySmall,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(top = 2.dp),
+                )
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                if (!hasRealPhoto) {
+                    MapsLinkButton(
+                        onClick = { context.openInMaps(restaurant) },
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
             }
 
-            // İki satırlık sabit alan — kartların yüksekliği isim uzunluğundan etkilenmesin.
-            Text(
-                restaurant.name,
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleSmall,
-                maxLines = 2,
-                minLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
-            )
-            Text(
-                restaurant.locationLabel(),
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                style = MaterialTheme.typography.bodySmall,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(top = 2.dp),
-            )
-
-            Spacer(modifier = Modifier.weight(1f))
-
-            if (!hasRealPhoto) {
-                MapsLinkButton(
-                    onClick = { context.openInMaps(restaurant) },
-                    modifier = Modifier.fillMaxWidth(),
+            // Rozet, satırın içinde yer kaplayıp yorum yazısını sıkıştırmasın diye
+            // kartın kendi köşesine ayrı bir katman olarak bindiriliyor.
+            restaurant.badge?.let { badge ->
+                CardCornerBadge(
+                    badge,
+                    modifier = Modifier.align(Alignment.TopEnd).padding(top = 10.dp, end = 10.dp),
                 )
             }
         }
@@ -442,12 +454,14 @@ private fun CityCard(city: City, modifier: Modifier = Modifier, onClick: () -> U
             }
             Column(modifier = Modifier.weight(1f).padding(start = 10.dp)) {
                 Text(city.name, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                Text(
-                    if (city.hasRestaurants) "${city.restaurants.size} lokanta" else "Öneri bekliyor",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    maxLines = 1,
-                )
+                if (!city.hasRestaurants) {
+                    Text(
+                        "Öneri bekliyor",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        maxLines = 1,
+                    )
+                }
             }
             Icon(
                 Icons.AutoMirrored.Filled.KeyboardArrowRight,
