@@ -22,6 +22,7 @@ import math
 import os
 import sys
 import time
+import unicodedata
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -224,6 +225,19 @@ def search(query: str, api_key: str):
         return []
 
 
+def clean_text(value: str) -> str:
+    """
+    Google'ın adres/ad verisinde "İ" harfi bazen bozuk geliyor: büyük harfli
+    metni küçültürken Türkçe kuralına değil varsayılan Unicode kuralına
+    uyulmuş, "İ" → "i" + ayrı bir birleşen nokta (U+0307) olmuş. Bu fazladan
+    noktayı temizler (bkz. tools/build_dataset.py'deki aynı fonksiyon).
+    """
+    if not value:
+        return value
+    value = unicodedata.normalize("NFC", value)
+    return value.replace("i̇", "i")
+
+
 def is_chain(name: str) -> bool:
     lowered = name.lower()
     return any(keyword in lowered for keyword in CHAIN_KEYWORDS)
@@ -261,7 +275,7 @@ def collect_city(city: str, api_key: str, delay: float):
 def filter_places(found: dict, city: str, min_reviews: int):
     kept = []
     for place in found.values():
-        name = (place.get("displayName") or {}).get("text", "").strip()
+        name = clean_text((place.get("displayName") or {}).get("text", "").strip())
         rating = place.get("rating")
         reviews = place.get("userRatingCount") or 0
         types = set(place.get("types") or [])
@@ -284,11 +298,11 @@ def filter_places(found: dict, city: str, min_reviews: int):
         if category_raw.strip().lower() in EXCLUDED_CATEGORIES:
             continue
         # Adres il adını içermiyorsa büyük ihtimalle başka ilden gelmiş.
-        address = place.get("formattedAddress", "")
+        address = clean_text(place.get("formattedAddress", ""))
         if city.lower() not in address.lower():
             continue
 
-        category = (place.get("primaryTypeDisplayName") or {}).get("text", "Lokanta")
+        category = clean_text((place.get("primaryTypeDisplayName") or {}).get("text", "Lokanta"))
         kept.append({
             "il": city,
             "ad": name,

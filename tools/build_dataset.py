@@ -46,6 +46,20 @@ def slugify(value: str) -> str:
     return value
 
 
+def clean_text(value: str) -> str:
+    """
+    Google'ın adres/ad verisinde "İ" harfi bazen bozuk geliyor: büyük harfli
+    metni küçültürken Türkçe kuralına değil varsayılan Unicode kuralına
+    uyulmuş, "İ" → "i" + ayrı bir birleşen nokta (U+0307) olmuş (ör.
+    "Nİlüfer" yerine "Ni̇lüfer" — gözle aynı görünür ama fazladan bir
+    karakter taşır ve "Nilüfer" ile eşleşmez). Bu fazladan noktayı temizler.
+    """
+    if not value:
+        return value
+    value = unicodedata.normalize("NFC", value)
+    return value.replace("i̇", "i")
+
+
 def parse_float(value: str):
     value = (value or "").strip().replace(",", ".")
     if not value:
@@ -70,7 +84,7 @@ def read_cities():
     cities = []
     with CITIES_CSV.open(encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
-            name = row["il"].strip()
+            name = clean_text(row["il"].strip())
             if not name:
                 continue
             cities.append({
@@ -78,7 +92,7 @@ def read_cities():
                 "slug": (row.get("slug") or "").strip() or slugify(name),
                 "plate": parse_int(row.get("plaka")),
                 "population": parse_int(row.get("nufus")),
-                "tagline": (row.get("tanitim") or "").strip(),
+                "tagline": clean_text((row.get("tanitim") or "").strip()),
                 "restaurants": [],
             })
     return cities
@@ -88,8 +102,8 @@ def read_restaurants():
     rows = []
     with RESTAURANTS_CSV.open(encoding="utf-8") as handle:
         for line_no, row in enumerate(csv.DictReader(handle), start=2):
-            name = (row.get("ad") or "").strip()
-            city = (row.get("il") or "").strip()
+            name = clean_text((row.get("ad") or "").strip())
+            city = clean_text((row.get("il") or "").strip())
             if not name or not city:
                 continue
 
@@ -101,25 +115,25 @@ def read_restaurants():
                 )
                 continue
 
-            tags = [t.strip() for t in (row.get("etiketler") or "").split("|") if t.strip()]
+            tags = [clean_text(t.strip()) for t in (row.get("etiketler") or "").split("|") if t.strip()]
 
             rows.append({
                 "city": city,
                 "data": {
                     "id": f"{slugify(city)}-{slugify(name)}",
                     "name": name,
-                    "category": (row.get("kategori") or "Lokanta").strip(),
+                    "category": clean_text((row.get("kategori") or "Lokanta").strip()),
                     "tags": tags,
                     "rating": rating,
                     "reviewCount": parse_int(row.get("yorum_sayisi")),
-                    "address": (row.get("adres") or "").strip(),
+                    "address": clean_text((row.get("adres") or "").strip()),
                     "phone": (row.get("telefon") or "").strip() or None,
                     "priceLevel": parse_int(row.get("fiyat")),
                     "latitude": parse_float(row.get("enlem")),
                     "longitude": parse_float(row.get("boylam")),
                     "mapsUrl": (row.get("maps_url") or "").strip() or None,
                     "photoUrl": (row.get("foto_url") or "").strip() or None,
-                    "note": (row.get("not") or "").strip() or None,
+                    "note": clean_text((row.get("not") or "").strip()) or None,
                 },
             })
     return rows
