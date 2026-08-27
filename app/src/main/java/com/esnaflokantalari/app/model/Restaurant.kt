@@ -19,9 +19,25 @@ data class Restaurant(
     val photoUrl: String? = null,
     val note: String? = null,
     val distanceMeters: Double? = null,
+    /** Kendi ilçesindeki en yüksek puanlı lokanta mı? RestaurantRepository hesaplar. */
+    val isBestInDistrict: Boolean = false,
 ) {
     /** Puanı olmayan mekanlar için "-" göstermek yerine bu kontrol kullanılır. */
     val hasRating: Boolean get() = (rating ?: 0.0) > 0.0
+
+    /** Çok yüksek puan + çok sayıda yorum: tanınmış, kanıtlanmış bir mekan. */
+    val isLegendary: Boolean get() = (rating ?: 0.0) >= 4.8 && (reviewCount ?: 0) >= 1000
+
+    /**
+     * Kartta gösterilecek tek rozet, önceliğe göre seçilir.
+     * (emoji, etiket) — hiçbiri uymuyorsa null.
+     */
+    val badge: Pair<String, String>?
+        get() = when {
+            isLegendary -> "🏅" to "Efsane"
+            isBestInDistrict -> "📍" to "İlçenin en iyisi"
+            else -> null
+        }
 
     /** Kartlarda gösterilecek etiketler; hiç etiket yoksa kategoriye düşer. */
     val displayTags: List<String>

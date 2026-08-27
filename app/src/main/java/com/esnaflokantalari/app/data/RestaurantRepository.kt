@@ -123,7 +123,32 @@ class RestaurantRepository(private val context: Context) {
             }
         }
 
-        return Dataset(updatedAt = root.optString("updatedAt"), cities = cities)
+        return Dataset(updatedAt = root.optString("updatedAt"), cities = cities.withDistrictBadges())
+    }
+
+    /**
+     * Her (il, ilçe) grubunda en az 3 lokanta varsa, en yüksek puanlı (eşitlikte
+     * en çok yorumlu) olanı "İlçenin en iyisi" rozetini alır. Az lokantalı
+     * ilçelerde bu karşılaştırma anlamsız olacağı için atlanır.
+     */
+    private fun List<City>.withDistrictBadges(): List<City> {
+        val bestIds = flatMap { it.restaurants }
+            .filter { it.hasRating && it.district != null }
+            .groupBy { it.city to it.district }
+            .values
+            .filter { it.size >= 3 }
+            .mapNotNull { group ->
+                group.maxWithOrNull(compareBy({ it.rating ?: 0.0 }, { it.reviewCount ?: 0 }))?.id
+            }
+            .toSet()
+        if (bestIds.isEmpty()) return this
+        return map { city ->
+            city.copy(
+                restaurants = city.restaurants.map { restaurant ->
+                    if (restaurant.id in bestIds) restaurant.copy(isBestInDistrict = true) else restaurant
+                },
+            )
+        }
     }
 
     private fun JSONArray?.toRestaurants(cityName: String): List<Restaurant> {

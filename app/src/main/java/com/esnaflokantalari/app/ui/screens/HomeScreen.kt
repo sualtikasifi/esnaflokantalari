@@ -37,6 +37,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -58,10 +59,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.esnaflokantalari.app.R
 import com.esnaflokantalari.app.model.City
 import com.esnaflokantalari.app.model.Restaurant
-import com.esnaflokantalari.app.ui.components.RealPhotoCta
 import com.esnaflokantalari.app.ui.components.RestaurantVisual
 import com.esnaflokantalari.app.ui.components.restaurantHasRealPhoto
 import com.esnaflokantalari.app.ui.formatCount
@@ -422,65 +423,100 @@ private fun FeaturedCard(
     onClick: () -> Unit,
 ) {
     val context = LocalContext.current
+    val hasRealPhoto = restaurantHasRealPhoto(restaurant, localPhotoPath, hasBundledPhoto)
+
     Card(
         onClick = onClick,
         modifier = Modifier.width(200.dp),
         shape = RoundedCornerShape(18.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
     ) {
-        Column {
-            Box {
-                RestaurantVisual(
-                    restaurant = restaurant,
-                    modifier = Modifier.fillMaxWidth().aspectRatio(4f / 3f),
-                    localPhotoPath = localPhotoPath,
-                    hasBundledPhoto = hasBundledPhoto,
-                )
-                if (!restaurantHasRealPhoto(restaurant, localPhotoPath, hasBundledPhoto)) {
-                    RealPhotoCta(
-                        onClick = { context.openInMaps(restaurant) },
-                        modifier = Modifier.align(Alignment.BottomEnd).padding(8.dp),
+        Column(modifier = Modifier.padding(14.dp)) {
+            Row(verticalAlignment = Alignment.Top) {
+                Box(
+                    modifier = Modifier
+                        .size(44.dp)
+                        .clip(RoundedCornerShape(12.dp)),
+                ) {
+                    RestaurantVisual(
+                        restaurant = restaurant,
+                        modifier = Modifier.size(44.dp),
+                        iconSize = 18.dp,
+                        initialsSize = 13.sp,
+                        localPhotoPath = localPhotoPath,
+                        hasBundledPhoto = hasBundledPhoto,
                     )
                 }
-                if (restaurant.hasRating) {
-                    Row(
-                        modifier = Modifier
-                            .align(Alignment.BottomStart)
-                            .padding(8.dp)
-                            .clip(RoundedCornerShape(50))
-                            .background(Color.White.copy(alpha = 0.94f))
-                            .padding(horizontal = 8.dp, vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Icon(Icons.Filled.Star, contentDescription = null, tint = StarGold, modifier = Modifier.size(14.dp))
+                Text(
+                    restaurant.name,
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.titleSmall,
+                    maxLines = 2,
+                    minLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(start = 10.dp),
+                )
+            }
+
+            HorizontalDivider(
+                modifier = Modifier.padding(top = 12.dp, bottom = 10.dp),
+                color = ChipBackground,
+            )
+
+            if (restaurant.hasRating) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Filled.Star, contentDescription = null, tint = StarGold, modifier = Modifier.size(16.dp))
+                    Text(
+                        restaurant.rating!!.formatRating(),
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(start = 5.dp),
+                    )
+                    restaurant.reviewCount?.takeIf { it > 0 }?.let {
                         Text(
-                            restaurant.rating!!.formatRating(),
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF241A15),
-                            style = MaterialTheme.typography.labelMedium,
-                            modifier = Modifier.padding(start = 3.dp),
+                            " · ${it.formatCount()}",
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            style = MaterialTheme.typography.bodySmall,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
                         )
                     }
                 }
             }
-            Column(modifier = Modifier.padding(10.dp)) {
+            Text(
+                restaurant.city,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodySmall,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.padding(top = 4.dp),
+            )
+
+            restaurant.badge?.let { (emoji, label) ->
                 Text(
-                    restaurant.name,
-                    fontWeight = FontWeight.SemiBold,
+                    "$emoji $label",
+                    color = Color(0xFF241A15),
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.labelMedium,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                        .clip(RoundedCornerShape(50))
+                        .background(StarGold)
+                        .padding(horizontal = 10.dp, vertical = 5.dp),
                 )
+            }
+
+            if (!hasRealPhoto) {
                 Text(
-                    buildString {
-                        append(restaurant.city)
-                        restaurant.reviewCount?.takeIf { it > 0 }?.let { append(" · ${it.formatCount()} yorum") }
-                    },
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    style = MaterialTheme.typography.bodyMedium,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(top = 2.dp),
+                    "Haritada gör →",
+                    color = Terracotta,
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                        .clickable { context.openInMaps(restaurant) },
                 )
             }
         }
