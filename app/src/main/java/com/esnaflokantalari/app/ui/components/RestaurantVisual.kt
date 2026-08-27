@@ -74,8 +74,20 @@ fun RestaurantVisual(
     }
 
     // Kaydırma sırasında her karede yeniden üretilmesin diye hatırlanır.
+    val category = remember(restaurant.id) { categoryFor(restaurant) }
+
+    if (category.key in ILLUSTRATED_CATEGORIES) {
+        AsyncImage(
+            model = "file:///android_asset/illustrations/${category.key}.png",
+            contentDescription = restaurant.name,
+            contentScale = ContentScale.Crop,
+            modifier = modifier.background(IllustrationCream),
+        )
+        return
+    }
+
     val brush = remember(restaurant.id) { Brush.linearGradient(coverPalette(restaurant.id)) }
-    val icon = remember(restaurant.id) { foodIcon(restaurant) }
+    val icon = category.icon
     val initials = remember(restaurant.id) { restaurant.initials() }
 
     Box(modifier = modifier.background(brush), contentAlignment = Alignment.Center) {
@@ -122,22 +134,40 @@ private fun Restaurant.initials(): String =
         .joinToString("") { it.first().uppercase() }
         .ifBlank { "?" }
 
-/** Etiket ve ada bakarak uygun yemek ikonunu seçer. */
-private fun foodIcon(restaurant: Restaurant): ImageVector {
+/** Bir yemek kategorisi: hem ikon-fallback hem de gömülü illüstrasyon anahtarı taşır. */
+private enum class FoodCategory(val key: String, val icon: ImageVector) {
+    Kebap("kebap", Icons.Filled.LocalFireDepartment),
+    Corba("corba", Icons.Filled.SoupKitchen),
+    Pide("pide", Icons.Filled.BakeryDining),
+    Balik("balik", Icons.Filled.SetMeal),
+    Kahvalti("kahvalti", Icons.Filled.Egg),
+    Manti("manti", Icons.Filled.RamenDining),
+    Doner("doner", Icons.Filled.LunchDining),
+    Lokanta("lokanta", Icons.Filled.RiceBowl),
+    Genel("genel", Icons.Filled.LocalDining),
+}
+
+/** Bu kategoriler için elle/Gemini ile üretilmiş, assets/illustrations altına gömülü görsel var. */
+private val ILLUSTRATED_CATEGORIES = setOf("corba", "pide")
+
+private val IllustrationCream = Color(0xFFF4E9DE)
+
+/** Etiket ve ada bakarak uygun yemek kategorisini seçer. */
+private fun categoryFor(restaurant: Restaurant): FoodCategory {
     val haystack = (restaurant.displayTags + restaurant.name + restaurant.category)
         .joinToString(" ")
         .lowercase()
 
     return when {
-        haystack.containsAny("kebap", "kebab", "ocakbaşı", "et", "kasap") -> Icons.Filled.LocalFireDepartment
-        haystack.containsAny("çorba", "corba", "paça", "beyran", "işkembe") -> Icons.Filled.SoupKitchen
-        haystack.containsAny("lahmacun", "pide", "börek", "fırın") -> Icons.Filled.BakeryDining
-        haystack.containsAny("balık", "balik", "deniz") -> Icons.Filled.SetMeal
-        haystack.containsAny("kahvaltı", "kahvalti", "serpme") -> Icons.Filled.Egg
-        haystack.containsAny("mantı", "manti", "makarna") -> Icons.Filled.RamenDining
-        haystack.containsAny("döner", "doner", "dürüm", "tantuni", "köfte", "burger") -> Icons.Filled.LunchDining
-        haystack.containsAny("sulu yemek", "ev yemek", "lokanta", "sofra", "pilav") -> Icons.Filled.RiceBowl
-        else -> Icons.Filled.LocalDining
+        haystack.containsAny("kebap", "kebab", "ocakbaşı", "et", "kasap") -> FoodCategory.Kebap
+        haystack.containsAny("çorba", "corba", "paça", "beyran", "işkembe") -> FoodCategory.Corba
+        haystack.containsAny("lahmacun", "pide", "börek", "fırın") -> FoodCategory.Pide
+        haystack.containsAny("balık", "balik", "deniz") -> FoodCategory.Balik
+        haystack.containsAny("kahvaltı", "kahvalti", "serpme") -> FoodCategory.Kahvalti
+        haystack.containsAny("mantı", "manti", "makarna") -> FoodCategory.Manti
+        haystack.containsAny("döner", "doner", "dürüm", "tantuni", "köfte", "burger") -> FoodCategory.Doner
+        haystack.containsAny("sulu yemek", "ev yemek", "lokanta", "sofra", "pilav") -> FoodCategory.Lokanta
+        else -> FoodCategory.Genel
     }
 }
 
