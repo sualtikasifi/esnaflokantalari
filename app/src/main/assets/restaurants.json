@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-30",
+  "updatedAt": "2026-08-31",
   "minRating": 4.3,
   "cities": [
     {
@@ -19081,6 +19081,42 @@
       "tagline": "Tantunisi ve cezeryesiyle",
       "restaurants": [
         {
+          "id": "mersin-deniz-ev-yemekleri",
+          "name": "DENİZ EV YEMEKLERİ",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 5.0,
+          "reviewCount": 69,
+          "address": "yeni belediye karşısı, Mukaddem, Devran Sk. 15b, 33940 Silifke/Mersin",
+          "phone": "+90 553 791 15 35",
+          "priceLevel": 1,
+          "latitude": 36.3736842,
+          "longitude": 33.9335889,
+          "mapsUrl": "https://maps.google.com/?cid=3840054649425781206",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-hulya-ev-yemekleri",
+          "name": "Hülya Ev Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 5.0,
+          "reviewCount": 54,
+          "address": "Yemişkumu plajı karşısı Dostlar Market yanı, Ayaş, Atatürk(Yemişkumu) Cad No:402 A B15, 33750 Erdemli/Mersin",
+          "phone": "+90 544 268 63 86",
+          "priceLevel": 2,
+          "latitude": 36.4968893,
+          "longitude": 34.182550899999995,
+          "mapsUrl": "https://maps.google.com/?cid=75310700779343151",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "mersin-beykan-kebab",
           "name": "Beykan Kebab",
           "category": "Restoran",
@@ -19153,6 +19189,61 @@
           "note": null
         },
         {
+          "id": "mersin-bulent-usta-tantuni-kebap",
+          "name": "BÜLENT USTA TANTUNİ & KEBAP",
+          "category": "Restoran",
+          "tags": [
+            "Kebap",
+            "Tantuni"
+          ],
+          "rating": 4.9,
+          "reviewCount": 121,
+          "address": "Palantepe, Mut Sanayi Sitesi, 33600 Mut/Mersin",
+          "phone": "+90 535 212 99 77",
+          "priceLevel": 2,
+          "latitude": 36.6075217,
+          "longitude": 33.4382693,
+          "mapsUrl": "https://maps.google.com/?cid=2565498756666452682",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-unal-kardesler-kasabi",
+          "name": "ÜNAL KARDEŞLER KASABI",
+          "category": "Kasap",
+          "tags": [
+            "Et"
+          ],
+          "rating": 4.9,
+          "reviewCount": 116,
+          "address": "Sarıkavak, Çamlıyayla Tarsus Yolu, 33580 Çamlıyayla/Mersin",
+          "phone": "+90 543 535 89 09",
+          "priceLevel": null,
+          "latitude": 37.124286,
+          "longitude": 34.693142,
+          "mapsUrl": "https://maps.google.com/?cid=10939072465697678979",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-dogan-pide-restaurant",
+          "name": "Doğan Pide Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Lahmacun & Pide"
+          ],
+          "rating": 4.9,
+          "reviewCount": 68,
+          "address": "Çubukkoyağı, 33830 Bozyazı/Mersin",
+          "phone": "+90 532 624 15 99",
+          "priceLevel": 2,
+          "latitude": 36.103228699999995,
+          "longitude": 32.9936952,
+          "mapsUrl": "https://maps.google.com/?cid=9434488089734316350",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "mersin-borani-restaurant",
           "name": "Borani Restaurant",
           "category": "Restoran",
@@ -19185,6 +19276,24 @@
           "latitude": 36.8482804,
           "longitude": 34.6389397,
           "mapsUrl": "https://maps.google.com/?cid=14695176877606668557",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-emek-tantuni",
+          "name": "EMEK TANTUNİ",
+          "category": "Türk restoranı",
+          "tags": [
+            "Tantuni"
+          ],
+          "rating": 4.9,
+          "reviewCount": 53,
+          "address": "Göksu Mah. Yavuz Sultan Selim Sk. Hatice Fevzi Seygen Apt, Göksu, No.2B, 33960 Silifke/Mersin",
+          "phone": "+90 532 615 33 61",
+          "priceLevel": 2,
+          "latitude": 36.3808127,
+          "longitude": 33.9322647,
+          "mapsUrl": "https://maps.google.com/?cid=2944224962176813269",
           "photoUrl": null,
           "note": null
         },
@@ -19245,6 +19354,24 @@
           "note": null
         },
         {
+          "id": "mersin-gulun-diyari",
+          "name": "Gülün Diyarı",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.9,
+          "reviewCount": 7,
+          "address": "bim yanı, Büyükeceli, Akdeniz caddesi, 33700 Gülnar/Mersin",
+          "phone": "+90 531 829 66 39",
+          "priceLevel": null,
+          "latitude": 36.163928999999996,
+          "longitude": 33.567633199999996,
+          "mapsUrl": "https://maps.google.com/?cid=388465541842815693",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "mersin-koksal-restoran-tantuni-doner",
           "name": "Köksal Restoran Tantuni & Döner",
           "category": "Aile restoranı",
@@ -19260,6 +19387,42 @@
           "latitude": 36.8030942,
           "longitude": 34.6317138,
           "mapsUrl": "https://maps.google.com/?cid=7094082309069922774",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-mali-tantuni",
+          "name": "Mali Tantuni",
+          "category": "Restoran",
+          "tags": [
+            "Tantuni"
+          ],
+          "rating": 4.8,
+          "reviewCount": 345,
+          "address": "Merkez, Atatürk Cd No:13-4, 33830 Bozyazı/Mersin",
+          "phone": "+90 324 851 36 17",
+          "priceLevel": 2,
+          "latitude": 36.104793,
+          "longitude": 32.9764657,
+          "mapsUrl": "https://maps.google.com/?cid=6319437843145837398",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-adanali-irfan-usta-kebab-ve-pide",
+          "name": "ADANALI İRFAN USTA KEBAB VE PİDE",
+          "category": "Restoran",
+          "tags": [
+            "Kebap"
+          ],
+          "rating": 4.8,
+          "reviewCount": 335,
+          "address": "Bahçelievler ANAMED KARŞISI, Bahçelievler, Ahmet Yesevi Cd. No:27, 33650 Anamur/Mersin",
+          "phone": "+90 324 816 43 44",
+          "priceLevel": 2,
+          "latitude": 36.078505199999995,
+          "longitude": 32.850271,
+          "mapsUrl": "https://maps.google.com/?cid=11461111187749563339",
           "photoUrl": null,
           "note": null
         },
@@ -19336,6 +19499,42 @@
           "note": null
         },
         {
+          "id": "mersin-akin-humus-tarsus",
+          "name": "Akın Humus Tarsus",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 448,
+          "address": "Caminur, 0801. Sk. No:27, 33440 Tarsus/Mersin",
+          "phone": "+90 324 622 15 04",
+          "priceLevel": 2,
+          "latitude": 36.9149858,
+          "longitude": 34.894517,
+          "mapsUrl": "https://maps.google.com/?cid=2629112689758521909",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-mert-emniyet-lahmacun-salonu",
+          "name": "Mert emniyet lahmacun salonu",
+          "category": "Restoran",
+          "tags": [
+            "Lahmacun & Pide"
+          ],
+          "rating": 4.7,
+          "reviewCount": 196,
+          "address": "Şehitkerim, 3401. Sk., 33440 Tarsus/Mersin",
+          "phone": "+90 535 480 53 33",
+          "priceLevel": 2,
+          "latitude": 36.915813199999995,
+          "longitude": 34.8954407,
+          "mapsUrl": "https://maps.google.com/?cid=12716793066102433022",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "mersin-gece-mutfagi-hacibey-doner-corba-sirdan",
           "name": "GECE MUTFAĞI HACIBEY DÖNER ÇORBA ŞIRDAN",
           "category": "Türk restoranı",
@@ -19373,6 +19572,24 @@
           "note": null
         },
         {
+          "id": "mersin-antepli-ali-usta",
+          "name": "ANTEPLİ ALİ USTA",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 165,
+          "address": "Saray, 202. Sk. No:5 D:A, 33640 Anamur/Mersin",
+          "phone": "+90 324 814 35 65",
+          "priceLevel": 2,
+          "latitude": 36.078193399999996,
+          "longitude": 32.8313747,
+          "mapsUrl": "https://maps.google.com/?cid=10412691474150124594",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "mersin-yuvam-ev-yemekleri",
           "name": "Yuvam Ev Yemekleri",
           "category": "Restoran",
@@ -19391,6 +19608,24 @@
           "note": null
         },
         {
+          "id": "mersin-nefis-ev-yemekleri",
+          "name": "Nefis Ev Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.7,
+          "reviewCount": 12,
+          "address": "Hacıpınar, Celal Kılıç Caddesi No7/B, 33700 Gülnar/Mersin",
+          "phone": "+90 533 433 42 73",
+          "priceLevel": 1,
+          "latitude": 36.3388213,
+          "longitude": 33.4016197,
+          "mapsUrl": "https://maps.google.com/?cid=955370992285805851",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "mersin-tarsuslu-murat-usta",
           "name": "Tarsuslu Murat Usta",
           "category": "Restoran",
@@ -19405,6 +19640,43 @@
           "latitude": 36.795450800000005,
           "longitude": 34.6233712,
           "mapsUrl": "https://maps.google.com/?cid=8539185469665941596",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-azim-baba-lahmacun-humus-mercimek-corba-tavuk-corba-tarsus",
+          "name": "Azim Baba Lahmacun Humus,mercimek çorba,Tavuk çorba Tarsus",
+          "category": "Restoran",
+          "tags": [
+            "Çorba",
+            "Lahmacun & Pide"
+          ],
+          "rating": 4.6,
+          "reviewCount": 888,
+          "address": "Şehitkerim, Adana Blv. No:22/B, 33400 Tarsus/Mersin",
+          "phone": "+90 324 613 12 01",
+          "priceLevel": 2,
+          "latitude": 36.917516,
+          "longitude": 34.898089299999995,
+          "mapsUrl": "https://maps.google.com/?cid=1739691224872254962",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-sertavul-1650-et-lokantasi-mehmet-hoca-nin-yeri",
+          "name": "SERTAVUL 1650 ET LOKANTASI MEHMET HOCA'NIN YERİ",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 537,
+          "address": "Sertavul Yaylası, Narlıdere, Mersin Karaman Yolu, 33600 Mut/Mersin",
+          "phone": "+90 536 611 79 80",
+          "priceLevel": 2,
+          "latitude": 36.884196599999996,
+          "longitude": 33.281106699999995,
+          "mapsUrl": "https://maps.google.com/?cid=13458511005212941689",
           "photoUrl": null,
           "note": null
         },
@@ -19481,6 +19753,24 @@
           "note": null
         },
         {
+          "id": "mersin-celimli-aile-lokantasi",
+          "name": "Çelimli Aile Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 149,
+          "address": "Atatürk, Çevik Sk. No:12, 33840 Aydıncık/Mersin",
+          "phone": "+90 536 823 33 22",
+          "priceLevel": 2,
+          "latitude": 36.1394165,
+          "longitude": 33.3170436,
+          "mapsUrl": "https://maps.google.com/?cid=4277835073231804786",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "mersin-nefes-restaurant-mersin",
           "name": "Nefes Restaurant Mersin",
           "category": "Restoran",
@@ -19513,6 +19803,24 @@
           "latitude": 36.8043298,
           "longitude": 34.6203141,
           "mapsUrl": "https://maps.google.com/?cid=1456227545083870333",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-sarikavak-yoruk-otagi-sikma-ayran",
+          "name": "Sarıkavak Yörük Otağı Sıkma Ayran",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 65,
+          "address": "Sarıkavak, Taşlık mevki, 33580 Çamlıyayla/Mersin",
+          "phone": "+90 553 137 33 66",
+          "priceLevel": 1,
+          "latitude": 37.12811490000001,
+          "longitude": 34.6974316,
+          "mapsUrl": "https://maps.google.com/?cid=13781677357672790747",
           "photoUrl": null,
           "note": null
         },
@@ -19603,6 +19911,24 @@
           "latitude": 36.7930735,
           "longitude": 34.621885999999996,
           "mapsUrl": "https://maps.google.com/?cid=7366817063586537103",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-tas-konak-camliyayla",
+          "name": "Taş Konak Çamlıyayla",
+          "category": "Otel",
+          "tags": [
+            "Otel"
+          ],
+          "rating": 4.5,
+          "reviewCount": 178,
+          "address": "Cumayakası, Çakır sok No:7, 33580 Çamlıyayla/Mersin",
+          "phone": "+90 535 490 63 08",
+          "priceLevel": null,
+          "latitude": 37.1466578,
+          "longitude": 34.5992004,
+          "mapsUrl": "https://maps.google.com/?cid=17766164773795986469",
           "photoUrl": null,
           "note": null
         },
@@ -19715,6 +20041,60 @@
           "note": null
         },
         {
+          "id": "mersin-esenpinar-tantuni",
+          "name": "Esenpınar Tantuni",
+          "category": "Türk restoranı",
+          "tags": [
+            "Tantuni"
+          ],
+          "rating": 4.4,
+          "reviewCount": 1095,
+          "address": "Merkez, Türbe Cd., 33730 Erdemli/Mersin",
+          "phone": "+90 535 446 29 55",
+          "priceLevel": 2,
+          "latitude": 36.6066617,
+          "longitude": 34.309802,
+          "mapsUrl": "https://maps.google.com/?cid=14706260614490492597",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-mbr-iskender",
+          "name": "MBR İskender",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.4,
+          "reviewCount": 1002,
+          "address": "Göksu, Atatürk Blv No : 56 / A, 33940 Silifke/Mersin",
+          "phone": "+90 324 714 35 35",
+          "priceLevel": 2,
+          "latitude": 36.3801489,
+          "longitude": 33.932552199999996,
+          "mapsUrl": "https://maps.google.com/?cid=17943557165260761283",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-ergene-cesmesi",
+          "name": "Ergene çeşmesi",
+          "category": "Tarihi Yer",
+          "tags": [
+            "Tarihi Yer"
+          ],
+          "rating": 4.4,
+          "reviewCount": 666,
+          "address": "Kale, 33580 Çamlıyayla/Mersin",
+          "phone": "+90 324 681 30 03",
+          "priceLevel": null,
+          "latitude": 37.1434366,
+          "longitude": 34.6324055,
+          "mapsUrl": "https://maps.google.com/?cid=14586949638150172400",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "mersin-kucuksaat-kebapcisi-mersin",
           "name": "Küçüksaat Kebapçısı Mersin",
           "category": "Restoran",
@@ -19733,6 +20113,116 @@
           "note": null
         },
         {
+          "id": "mersin-yesilova-kebap-ve-lahmacun-salonu-bahce-keyfi",
+          "name": "Yeşilova Kebap Ve Lahmacun Salonu Bahçe Keyfi",
+          "category": "Restoran",
+          "tags": [
+            "Kebap",
+            "Lahmacun & Pide"
+          ],
+          "rating": 4.4,
+          "reviewCount": 549,
+          "address": "Caminur, 0801. Sk. No:27, 33440 Tarsus/Mersin",
+          "phone": "+90 324 624 20 52",
+          "priceLevel": 2,
+          "latitude": 36.9150888,
+          "longitude": 34.8946019,
+          "mapsUrl": "https://maps.google.com/?cid=8129101898260558985",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-konyalilar-restaurant-anamur",
+          "name": "Konyalılar Restaurant - Anamur",
+          "category": "Aile restoranı",
+          "tags": [
+            "Aile restoranı"
+          ],
+          "rating": 4.4,
+          "reviewCount": 284,
+          "address": "Saray, Bankalar Caddesi No.: 14, 33640 Anamur/Mersin",
+          "phone": "+90 324 814 90 51",
+          "priceLevel": 2,
+          "latitude": 36.0796589,
+          "longitude": 32.8309354,
+          "mapsUrl": "https://maps.google.com/?cid=3950781149426719596",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-kibrislinin-yeri",
+          "name": "Kıbrıslının Yeri",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.4,
+          "reviewCount": 220,
+          "address": "Tekmen, Mersin - Antalya Yolu, 33836 Bozyazı/Mersin",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 36.096251699999996,
+          "longitude": 33.042792999999996,
+          "mapsUrl": "https://maps.google.com/?cid=9060176522880240181",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-selale-restaurant",
+          "name": "Şelale Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.4,
+          "reviewCount": 179,
+          "address": "Karşıyaka, Mustafa Kemal Blv No:67, 33600, 33600 Mut/Mersin",
+          "phone": "+90 539 951 73 80",
+          "priceLevel": 2,
+          "latitude": 36.6483105,
+          "longitude": 33.4269055,
+          "mapsUrl": "https://maps.google.com/?cid=10510443869590242165",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-yayla-restaurant-antep-sofrasi",
+          "name": "Yayla restaurant.. Antep sofrası",
+          "category": "Kebap Restoranı",
+          "tags": [
+            "Kebap",
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 175,
+          "address": "Merkez, Alparslan Türkeş bulvarı 193/10, 33830 Bozyazı/Mersin",
+          "phone": "+90 546 284 82 71",
+          "priceLevel": 2,
+          "latitude": 36.105356799999996,
+          "longitude": 32.9666887,
+          "mapsUrl": "https://maps.google.com/?cid=1565241515564101683",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-temiz-is-lokantasi",
+          "name": "Temiz iş lokantası",
+          "category": "Çok Amaçlı Salon",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 116,
+          "address": "Kale, Dış Çarşı Cd. No:34, 33600 Mut/Mersin",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 36.6525795,
+          "longitude": 33.4519093,
+          "mapsUrl": "https://maps.google.com/?cid=6067828878810183366",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "mersin-hanimeller-ev-yemekleri",
           "name": "Hanımeller ev yemekleri",
           "category": "Restoran",
@@ -19747,6 +20237,24 @@
           "latitude": 36.79033640000001,
           "longitude": 34.6073786,
           "mapsUrl": "https://maps.google.com/?cid=15801965324337655730",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-camlik-dedikodu-restaurant",
+          "name": "Çamlık Dedikodu Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.4,
+          "reviewCount": 15,
+          "address": "Cumhuriyet, 33840 Aydıncık/Mersin",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 36.1539901,
+          "longitude": 33.349505,
+          "mapsUrl": "https://maps.google.com/?cid=10743296027250852526",
           "photoUrl": null,
           "note": null
         },
@@ -19788,6 +20296,24 @@
           "note": null
         },
         {
+          "id": "mersin-bedii-usta-kebap-salonu",
+          "name": "Bedii Usta Kebap Salonu",
+          "category": "Kebap Restoranı",
+          "tags": [
+            "Kebap"
+          ],
+          "rating": 4.3,
+          "reviewCount": 1749,
+          "address": "Şehitkerim, 3415. Sk. No:1, 33440 Tarsus/Mersin",
+          "phone": "+90 324 624 14 06",
+          "priceLevel": 2,
+          "latitude": 36.916996,
+          "longitude": 34.8969571,
+          "mapsUrl": "https://maps.google.com/?cid=8887973108555821371",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "mersin-rina-restaurant",
           "name": "Rina Restaurant",
           "category": "Restoran",
@@ -19824,6 +20350,42 @@
           "note": null
         },
         {
+          "id": "mersin-ufuk-lokantasi",
+          "name": "Ufuk Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 399,
+          "address": "Göksu, Oğuz Kağan Cd. No:28, 33960 Silifke/Mersin",
+          "phone": "+90 324 714 74 33",
+          "priceLevel": 2,
+          "latitude": 36.381780299999996,
+          "longitude": 33.9322533,
+          "mapsUrl": "https://maps.google.com/?cid=12409885175066434980",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-kuru-fasulyeci-ali-usta",
+          "name": "Kuru Fasülyeci Ali Usta",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.3,
+          "reviewCount": 362,
+          "address": "Akdeniz, Güzeloluk Cd. No:59 D:f, 33730 Erdemli/Mersin",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 36.6040632,
+          "longitude": 34.2974063,
+          "mapsUrl": "https://maps.google.com/?cid=15948557940561299035",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "mersin-dede-restaurant",
           "name": "Dede Restaurant",
           "category": "Restoran",
@@ -19842,6 +20404,24 @@
           "note": null
         },
         {
+          "id": "mersin-anamur-asmaalti-lokantasi",
+          "name": "Anamur Asmaaltı Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 349,
+          "address": "Göktaş, Akdeniz Cd. No:171, 33650 Anamur/Mersin",
+          "phone": "+90 324 814 80 40",
+          "priceLevel": 2,
+          "latitude": 36.0819492,
+          "longitude": 32.8405018,
+          "mapsUrl": "https://maps.google.com/?cid=15575658107521837049",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "mersin-2tike",
           "name": "2tike",
           "category": "Aile restoranı",
@@ -19856,6 +20436,42 @@
           "latitude": 36.7818153,
           "longitude": 34.6080568,
           "mapsUrl": "https://maps.google.com/?cid=15733831019067624226",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-kofteci-ramiz-anamur",
+          "name": "Köfteci Ramiz Anamur",
+          "category": "Restoran",
+          "tags": [
+            "Köfte"
+          ],
+          "rating": 4.3,
+          "reviewCount": 270,
+          "address": "Güzelyurt, Alparslan Türkeş Blv. No:183/5, 33650 Anamur/Mersin",
+          "phone": "+90 505 785 15 15",
+          "priceLevel": 2,
+          "latitude": 36.0707166,
+          "longitude": 32.834582,
+          "mapsUrl": "https://maps.google.com/?cid=361585435052401867",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-kiyi-33",
+          "name": "Kıyı 33",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.3,
+          "reviewCount": 168,
+          "address": "Denizciler, Alparslan Türkeş Bulvarı No:126, 33830 Bozyazı/Mersin",
+          "phone": "+90 530 076 54 94",
+          "priceLevel": 2,
+          "latitude": 36.1046153,
+          "longitude": 32.954454399999996,
+          "mapsUrl": "https://maps.google.com/?cid=1066827087936657478",
           "photoUrl": null,
           "note": null
         },
@@ -19911,6 +20527,24 @@
           "latitude": 36.77664,
           "longitude": 34.5726741,
           "mapsUrl": "https://maps.google.com/?cid=17647829763319275151",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "mersin-misafir-lokantasi-erdemli",
+          "name": "Misafir Lokantası Erdemli",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 51,
+          "address": "Alata, Osman Bölükbaşı Cd. No:4/A, 33730 Erdemli/Mersin",
+          "phone": "+90 324 516 22 77",
+          "priceLevel": 2,
+          "latitude": 36.6138644,
+          "longitude": 34.3227761,
+          "mapsUrl": "https://maps.google.com/?cid=7198206461881211788",
           "photoUrl": null,
           "note": null
         },
@@ -21054,6 +21688,24 @@
           "note": null
         },
         {
+          "id": "kayseri-kolezyum-at-binicilik-kir-bahcesi",
+          "name": "Kolezyum at binicilik kır bahçesi",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 5.0,
+          "reviewCount": 56,
+          "address": "Doğanlar, kayseri cad no:359, 38600 Bünyan/Kayseri",
+          "phone": "+90 532 232 35 52",
+          "priceLevel": 2,
+          "latitude": 38.8566107,
+          "longitude": 35.7844778,
+          "mapsUrl": "https://maps.google.com/?cid=6516705638216112588",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "kayseri-veranda-restaurant",
           "name": "Veranda Restaurant",
           "category": "Restoran",
@@ -21090,6 +21742,24 @@
           "note": null
         },
         {
+          "id": "kayseri-cukurova-sofrasi-kadir-usta",
+          "name": "ÇUKUROVA SOFRASI KADİR USTA",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 5.0,
+          "reviewCount": 20,
+          "address": "Semerkent, 38560 İncesu/Kayseri",
+          "phone": "+90 538 962 66 14",
+          "priceLevel": null,
+          "latitude": 38.6110832,
+          "longitude": 35.1862904,
+          "mapsUrl": "https://maps.google.com/?cid=2263847401105893289",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "kayseri-saray-kozde-sulu-yemek-2",
           "name": "Saray Közde Sulu Yemek",
           "category": "Restoran",
@@ -21104,6 +21774,43 @@
           "latitude": 38.7210347,
           "longitude": 35.4857833,
           "mapsUrl": "https://maps.google.com/?cid=9765677828663173114",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-ustun-pide-ve-lahmacun",
+          "name": "Üstün Pide ve Lahmacun",
+          "category": "Orta Doğu Restoranı",
+          "tags": [
+            "Lahmacun & Pide"
+          ],
+          "rating": 5.0,
+          "reviewCount": 12,
+          "address": "Günesen, Atatürk Cd. No:29, 38660 Sarız/Kayseri",
+          "phone": "+90 506 633 80 15",
+          "priceLevel": null,
+          "latitude": 38.478496799999995,
+          "longitude": 36.498021,
+          "mapsUrl": "https://maps.google.com/?cid=9295590196527228787",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-sakli-konak-durum-corba",
+          "name": "SAKLI KONAK Dürüm & Çorba",
+          "category": "Restoran",
+          "tags": [
+            "Çorba",
+            "Döner"
+          ],
+          "rating": 4.9,
+          "reviewCount": 172,
+          "address": "Kayseri, Seydili, Eski Sanayi Cd., 38500 Yahyalı/Kayseri",
+          "phone": "+90 543 817 80 00",
+          "priceLevel": 1,
+          "latitude": 38.10184720000001,
+          "longitude": 35.3579624,
+          "mapsUrl": "https://maps.google.com/?cid=14628485221334382022",
           "photoUrl": null,
           "note": null
         },
@@ -21144,6 +21851,24 @@
           "note": null
         },
         {
+          "id": "kayseri-aziziye-yemek-salonu",
+          "name": "Aziziye Yemek Salonu",
+          "category": "Aile restoranı",
+          "tags": [
+            "Aile restoranı"
+          ],
+          "rating": 4.9,
+          "reviewCount": 39,
+          "address": "Yeniocak, Dedeman Cd. No44, 38700 Pınarbaşı/Kayseri",
+          "phone": "+90 530 447 38 50",
+          "priceLevel": null,
+          "latitude": 38.7211277,
+          "longitude": 36.389613,
+          "mapsUrl": "https://maps.google.com/?cid=13942566486984990824",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "kayseri-kayseri-toplu-yemek-hizmetleri-dugun-sunnet-nisan-cenaze-mevlut-taziye-yemek-hizmeti-yemek-firmasi",
           "name": "KAYSERİ TOPLU YEMEK HİZMETLERİ DÜĞÜN SÜNNET NIŞAN CENAZE MEVLÜT TAZİYE YEMEK HİZMETİ YEMEK FİRMASI",
           "category": "Restoran",
@@ -21158,6 +21883,24 @@
           "latitude": 38.752508399999996,
           "longitude": 35.5241895,
           "mapsUrl": "https://maps.google.com/?cid=4066829515033398839",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-oses-cig-kofte",
+          "name": "Oses Çiğ Köfte",
+          "category": "Türk restoranı",
+          "tags": [
+            "Köfte"
+          ],
+          "rating": 4.9,
+          "reviewCount": 27,
+          "address": "Şenyurt, Kayseri Cd. No:43/D, 38820 Sarıoğlan/Kayseri",
+          "phone": "+90 537 707 35 38",
+          "priceLevel": null,
+          "latitude": 39.0777606,
+          "longitude": 35.9684266,
+          "mapsUrl": "https://maps.google.com/?cid=1262671738845494707",
           "photoUrl": null,
           "note": null
         },
@@ -21218,6 +21961,24 @@
           "note": null
         },
         {
+          "id": "kayseri-meydan-ocakbasi",
+          "name": "MEYDAN OCAKBAŞI",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 166,
+          "address": "Yenicami, Karslı Sk. No:4 A 1, 38700 Pınarbaşı/Kayseri",
+          "phone": "+90 545 471 08 38",
+          "priceLevel": 2,
+          "latitude": 38.721708799999995,
+          "longitude": 36.3946755,
+          "mapsUrl": "https://maps.google.com/?cid=4402216248036989436",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "kayseri-kombe-et-lokantasi",
           "name": "Kömbe Et Lokantası",
           "category": "Restoran",
@@ -21233,6 +21994,24 @@
           "latitude": 38.7392846,
           "longitude": 35.3709736,
           "mapsUrl": "https://maps.google.com/?cid=2308568534913075940",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-bey-sofrasi-restaurant",
+          "name": "Bey Sofrası Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.8,
+          "reviewCount": 75,
+          "address": "Bey Sofrası Restaurant, İdris, Cumhuriyet Cd. no:4, 38800 Yeşilhisar/Kayseri",
+          "phone": "+90 546 912 24 22",
+          "priceLevel": 2,
+          "latitude": 38.351847,
+          "longitude": 35.0898873,
+          "mapsUrl": "https://maps.google.com/?cid=2875075434282150362",
           "photoUrl": null,
           "note": null
         },
@@ -21291,6 +22070,24 @@
           "note": null
         },
         {
+          "id": "kayseri-cicek-develi-civiklisi-develi",
+          "name": "Çiçek develi cıvıklısı Develi",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 355,
+          "address": "Feneseaşağı, Hadibey Cd. No:14, 38400 Develi/Kayseri",
+          "phone": "+90 352 621 53 11",
+          "priceLevel": 2,
+          "latitude": 38.3885534,
+          "longitude": 35.4932369,
+          "mapsUrl": "https://maps.google.com/?cid=14271951248465207225",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "kayseri-corbahan-alpaslan",
           "name": "Çorbahan Alpaslan",
           "category": "Restoran",
@@ -21327,6 +22124,78 @@
           "note": null
         },
         {
+          "id": "kayseri-yesil-vadi-restaurant",
+          "name": "Yeşil vadi restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 123,
+          "address": "Yuları, Kayseri Cd., 38500 Yahyalı/Kayseri",
+          "phone": "+90 535 480 74 38",
+          "priceLevel": 2,
+          "latitude": 38.165684299999995,
+          "longitude": 35.3324418,
+          "mapsUrl": "https://maps.google.com/?cid=15125683310856750643",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-corbacimm-yahyali",
+          "name": "Corbacimm Yahyali",
+          "category": "Restoran",
+          "tags": [
+            "Çorba"
+          ],
+          "rating": 4.7,
+          "reviewCount": 117,
+          "address": "Seydili, Atatürk Blv. No:56/A, 38500 Yahyalı/Kayseri",
+          "phone": "+90 352 611 86 11",
+          "priceLevel": 2,
+          "latitude": 38.104305499999995,
+          "longitude": 35.3597447,
+          "mapsUrl": "https://maps.google.com/?cid=9247632459770098047",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-incesu-cigkofte-meshur-adiyaman-cigkoftecisi-bayram-usta-incesu-subesi",
+          "name": "İncesu Çiğköfte Meşhur Adıyaman Çiğköftecisi Bayram Usta ( İncesu Şubesi)",
+          "category": "Türk restoranı",
+          "tags": [
+            "Köfte"
+          ],
+          "rating": 4.7,
+          "reviewCount": 102,
+          "address": "Gönen Kent Mah. Karamustafa Paşa Bulv. No.38/A, Gönenkent, 38560 İncesu/Kayseri",
+          "phone": "+90 541 724 15 12",
+          "priceLevel": 1,
+          "latitude": 38.6292168,
+          "longitude": 35.186023399999996,
+          "mapsUrl": "https://maps.google.com/?cid=2930137910884940292",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-yedioluk-dinlenme-tesisleri",
+          "name": "Yedioluk Dinlenme Tesisleri",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 97,
+          "address": "Yedioluk, 38660 Sarız/Kayseri",
+          "phone": "+90 543 544 28 27",
+          "priceLevel": 2,
+          "latitude": 38.565366399999995,
+          "longitude": 36.4358565,
+          "mapsUrl": "https://maps.google.com/?cid=4424482943062221659",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "kayseri-kardesler-lokanta",
           "name": "KARDEŞLER LOKANTA",
           "category": "Restoran",
@@ -21341,6 +22210,60 @@
           "latitude": 38.71982500000001,
           "longitude": 35.497693999999996,
           "mapsUrl": "https://maps.google.com/?cid=12919775978720109160",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-kucuk-market",
+          "name": "Küçük Market",
+          "category": "Bakkal",
+          "tags": [
+            "Bakkal"
+          ],
+          "rating": 4.7,
+          "reviewCount": 47,
+          "address": "Şenyurt, 38880 Sarıoğlan/Kayseri",
+          "phone": "+90 352 811 20 34",
+          "priceLevel": null,
+          "latitude": 39.075410399999996,
+          "longitude": 35.9690466,
+          "mapsUrl": "https://maps.google.com/?cid=325389765843210445",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-emin-usta-pide-firini",
+          "name": "Emin Usta Pide Fırını",
+          "category": "Orta Doğu Restoranı",
+          "tags": [
+            "Lahmacun & Pide"
+          ],
+          "rating": 4.7,
+          "reviewCount": 44,
+          "address": "Sağlık, Şengül Sk. No:4, 38600 Bünyan/Kayseri",
+          "phone": "+90 554 112 38 03",
+          "priceLevel": null,
+          "latitude": 38.849928899999995,
+          "longitude": 35.8585309,
+          "mapsUrl": "https://maps.google.com/?cid=9688997242531606515",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-matador-pide-firini",
+          "name": "Matador Pide Fırını",
+          "category": "Orta Doğu Restoranı",
+          "tags": [
+            "Lahmacun & Pide"
+          ],
+          "rating": 4.7,
+          "reviewCount": 38,
+          "address": "Yakutiye mahallesi, Enes bediz caddesi no 26, 38600 Bünyan/Kayseri",
+          "phone": "+90 352 712 17 42",
+          "priceLevel": null,
+          "latitude": 38.8450919,
+          "longitude": 35.857488599999996,
+          "mapsUrl": "https://maps.google.com/?cid=5542971081120147937",
           "photoUrl": null,
           "note": null
         },
@@ -21363,6 +22286,25 @@
           "note": null
         },
         {
+          "id": "kayseri-aysenin-bereket-sofrasi",
+          "name": "Ayşe’nin Bereket Sofrası",
+          "category": "Kahvaltı restoranı",
+          "tags": [
+            "Kahvaltı",
+            "Sulu Yemek"
+          ],
+          "rating": 4.7,
+          "reviewCount": 16,
+          "address": "Saraycık, Kayseri Niğde Yolu No:18, 38560 İncesu/Kayseri",
+          "phone": "+90 533 137 16 53",
+          "priceLevel": 2,
+          "latitude": 38.723216099999995,
+          "longitude": 35.275045999999996,
+          "mapsUrl": "https://maps.google.com/?cid=5703634024274722476",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "kayseri-lezzet-develi-civiklisi",
           "name": "Lezzet Develi Cıvıklısı",
           "category": "Türk restoranı",
@@ -21377,6 +22319,24 @@
           "latitude": 38.7322754,
           "longitude": 35.517848,
           "mapsUrl": "https://maps.google.com/?cid=2651029756490861675",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-seker-restaurant",
+          "name": "Şeker Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 1491,
+          "address": "Örenşehir, Adana Karayolu 23. KM, 38560 İncesu/Kayseri",
+          "phone": "+90 542 232 80 80",
+          "priceLevel": 2,
+          "latitude": 38.691218299999996,
+          "longitude": 35.2427584,
+          "mapsUrl": "https://maps.google.com/?cid=16181827387579330452",
           "photoUrl": null,
           "note": null
         },
@@ -21417,6 +22377,24 @@
           "note": null
         },
         {
+          "id": "kayseri-kuytu-restaurant",
+          "name": "Kuytu Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 234,
+          "address": "Seydili, Sandıklar sokak no:10, 38500 Yahyalı/Kayseri",
+          "phone": "+90 352 611 94 01",
+          "priceLevel": 2,
+          "latitude": 38.1014537,
+          "longitude": 35.3598214,
+          "mapsUrl": "https://maps.google.com/?cid=16247166518644807482",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "kayseri-mulhem-kaytur",
           "name": "Mülhem | Kaytur",
           "category": "Restoran",
@@ -21435,6 +22413,42 @@
           "note": null
         },
         {
+          "id": "kayseri-hizmet-restaurant",
+          "name": "Hizmet Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Et"
+          ],
+          "rating": 4.6,
+          "reviewCount": 141,
+          "address": "Yeni, Sanayi Cd. No:3, 38400 Develi/Kayseri",
+          "phone": "+90 535 285 55 03",
+          "priceLevel": 2,
+          "latitude": 38.3953042,
+          "longitude": 35.4832958,
+          "mapsUrl": "https://maps.google.com/?cid=16347226768030237272",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-guzeloz-koyu-koy-evi-koy-yemekleri",
+          "name": "Güzelöz Köyü Köy Evi Köy Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 92,
+          "address": "Güzelöz, 38800 Yeşilhisar/Kayseri",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 38.3856714,
+          "longitude": 34.956998999999996,
+          "mapsUrl": "https://maps.google.com/?cid=17274726215848369835",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "kayseri-gul-sofrasi-develi-civiklisi-sulu-yemek",
           "name": "Gül sofrası develi cıvıklısı sulu yemek",
           "category": "Restoran",
@@ -21449,6 +22463,115 @@
           "latitude": 38.6910891,
           "longitude": 35.5503254,
           "mapsUrl": "https://maps.google.com/?cid=7115422751456405477",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-ozvatan-belediye-lokantasi",
+          "name": "Özvatan Belediye Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 89,
+          "address": "Kale, 38770 Özvatan/Kayseri",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 39.106516,
+          "longitude": 35.69856680000001,
+          "mapsUrl": "https://maps.google.com/?cid=11560943793323628798",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-ataman-esnaf-lokantasi-ataman-corba",
+          "name": "Ataman Esnaf Lokantası - Ataman Çorba",
+          "category": "Restoran",
+          "tags": [
+            "Çorba",
+            "Sulu Yemek"
+          ],
+          "rating": 4.6,
+          "reviewCount": 70,
+          "address": "Harman, Elbiz Cd. No:26, 38400 Develi/Kayseri",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 38.389315499999995,
+          "longitude": 35.4909982,
+          "mapsUrl": "https://maps.google.com/?cid=12577989150984694640",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-kafkas",
+          "name": "KAFKAS",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 53,
+          "address": "Şenyurt, 38880 Sarıoğlan/Kayseri",
+          "phone": "+90 352 811 25 15",
+          "priceLevel": null,
+          "latitude": 39.077749399999995,
+          "longitude": 35.967092699999995,
+          "mapsUrl": "https://maps.google.com/?cid=11746136368629301259",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-ciftci-doner-erdal-usta",
+          "name": "Çiftci Döner Erdal usta",
+          "category": "Türk restoranı",
+          "tags": [
+            "Döner"
+          ],
+          "rating": 4.6,
+          "reviewCount": 36,
+          "address": "Güney, Cengiz Topel Cd. No:3, 38700 Pınarbaşı/Kayseri",
+          "phone": "+90 538 852 73 05",
+          "priceLevel": 1,
+          "latitude": 38.721976399999996,
+          "longitude": 36.3948599,
+          "mapsUrl": "https://maps.google.com/?cid=5158847466108167084",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-yanar-doner-durum-salonu",
+          "name": "Yanar Döner Dürüm Salonu",
+          "category": "Restoran",
+          "tags": [
+            "Döner"
+          ],
+          "rating": 4.6,
+          "reviewCount": 33,
+          "address": "Dervişağa, İnönü Cd. No:15, 38600 Bünyan/Kayseri",
+          "phone": "+90 537 706 13 99",
+          "priceLevel": null,
+          "latitude": 38.845666,
+          "longitude": 35.859466,
+          "mapsUrl": "https://maps.google.com/?cid=2855935096936935631",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-numanin-mesur-donercisi",
+          "name": "Numanın Meşur Dönercisi",
+          "category": "Türk restoranı",
+          "tags": [
+            "Döner"
+          ],
+          "rating": 4.6,
+          "reviewCount": 9,
+          "address": "Bahçeli Evler, Karabağ caddesi, 38000 Özvatan/Kayseri",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 39.105655999999996,
+          "longitude": 35.7047984,
+          "mapsUrl": "https://maps.google.com/?cid=10916012197009883616",
           "photoUrl": null,
           "note": null
         },
@@ -21508,6 +22631,42 @@
           "note": null
         },
         {
+          "id": "kayseri-bereket-develi-civiklisi",
+          "name": "Bereket Develi Cıvıklısı",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.5,
+          "reviewCount": 311,
+          "address": "Okudur Pasajı, Feneseaşağı, Uzun Çarşı Sk. No:14, 38400 Develi/Kayseri",
+          "phone": "+90 537 613 94 72",
+          "priceLevel": 2,
+          "latitude": 38.3883502,
+          "longitude": 35.493518,
+          "mapsUrl": "https://maps.google.com/?cid=9861378858956779877",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-sariz-et-lokantasi",
+          "name": "SARIZ ET LOKANTASI",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 41,
+          "address": "Bahçeli, Atatürk Cd. No:104, 38660 Sarız/Kayseri",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 38.4784972,
+          "longitude": 36.4980366,
+          "mapsUrl": "https://maps.google.com/?cid=3885774256219752722",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "kayseri-incir-ev-lezzetleri-gunluk-taze-ev-yemekleri",
           "name": "İncir Ev Lezzetleri | Günlük Taze Ev Yemekleri",
           "category": "Restoran",
@@ -21522,6 +22681,24 @@
           "latitude": 38.7180588,
           "longitude": 35.5618665,
           "mapsUrl": "https://maps.google.com/?cid=8369837141493225112",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-meydan-pide-firini",
+          "name": "Meydan Pide Fırını",
+          "category": "Orta Doğu Restoranı",
+          "tags": [
+            "Lahmacun & Pide"
+          ],
+          "rating": 4.5,
+          "reviewCount": 16,
+          "address": "Meydan Pide Fırını, Cumhuriyet, Sarımehmetli Caddesi, 38900 Tomarza/Kayseri",
+          "phone": "+90 352 661 24 30",
+          "priceLevel": null,
+          "latitude": 38.4483987,
+          "longitude": 35.7968782,
+          "mapsUrl": "https://maps.google.com/?cid=11712246619344962155",
           "photoUrl": null,
           "note": null
         },
@@ -21653,6 +22830,43 @@
           "note": null
         },
         {
+          "id": "kayseri-develi-mangal",
+          "name": "Develi Mangal",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.4,
+          "reviewCount": 253,
+          "address": "Aksu Mesire alani, Mustafa Asım Köksal, Kayseri Develi Yolu, 38400 Develi/Kayseri",
+          "phone": "+90 542 346 87 48",
+          "priceLevel": null,
+          "latitude": 38.4384875,
+          "longitude": 35.4929692,
+          "mapsUrl": "https://maps.google.com/?cid=16617711182949369257",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-nefis-doner-et-lokantasi",
+          "name": "NEFİS DÖNER ET LOKANTASI",
+          "category": "Restoran",
+          "tags": [
+            "Döner",
+            "Sulu Yemek"
+          ],
+          "rating": 4.4,
+          "reviewCount": 142,
+          "address": "Dervişağa, Halıfuarı Cd. No:29, 38600 Bünyan/Kayseri",
+          "phone": "+90 352 712 08 78",
+          "priceLevel": 2,
+          "latitude": 38.8453455,
+          "longitude": 35.8587406,
+          "mapsUrl": "https://maps.google.com/?cid=17455687997831105116",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "kayseri-saray-kozde-sulu-yemek",
           "name": "Saray Közde Sulu Yemek",
           "category": "Restoran",
@@ -21725,6 +22939,24 @@
           "note": null
         },
         {
+          "id": "kayseri-erciyes-binicilik-kayseri-kahvalti",
+          "name": "Erciyes Binicilik - Kayseri Kahvaltı",
+          "category": "Kahvaltı restoranı",
+          "tags": [
+            "Kahvaltı"
+          ],
+          "rating": 4.3,
+          "reviewCount": 2790,
+          "address": "Hisarcık, Hacılar Cd. No:101, 38220 Melikgazi/Kayseri",
+          "phone": "+90 352 341 25 35",
+          "priceLevel": 2,
+          "latitude": 38.6404727,
+          "longitude": 35.4986907,
+          "mapsUrl": "https://maps.google.com/?cid=2121990647849422539",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "kayseri-marasli-et-lokantasi",
           "name": "MARAŞLI ET LOKANTASI",
           "category": "Restoran",
@@ -21761,6 +22993,61 @@
           "note": null
         },
         {
+          "id": "kayseri-doga-et-lokantasi",
+          "name": "Doğa Et Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 446,
+          "address": "İdris, 38800 Yeşilhisar/Kayseri",
+          "phone": "+90 543 540 51 75",
+          "priceLevel": 2,
+          "latitude": 38.351500699999995,
+          "longitude": 35.0919615,
+          "mapsUrl": "https://maps.google.com/?cid=9486293706777263521",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-tepe-restaurant",
+          "name": "TEPE RESTAURANT",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.3,
+          "reviewCount": 315,
+          "address": "Kirazlı, 38500 Yahyalı/Kayseri",
+          "phone": "+90 530 202 97 00",
+          "priceLevel": 2,
+          "latitude": 38.087198199999996,
+          "longitude": 35.3500113,
+          "mapsUrl": "https://maps.google.com/?cid=1071786591028826288",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-develi-sofrasi",
+          "name": "DEVELİ SOFRASI",
+          "category": "Orta Doğu Restoranı",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 220,
+          "address": "durak kahvesi yanı, Camikebir, Cumhuriyet Cd. no:15, 38800 Yeşilhisar/Kayseri",
+          "phone": "+90 535 624 29 66",
+          "priceLevel": 2,
+          "latitude": 38.3518422,
+          "longitude": 35.0899583,
+          "mapsUrl": "https://maps.google.com/?cid=9001669384651706532",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "kayseri-akif-usta-anadolu-sofrasi",
           "name": "Akif Usta Anadolu Sofrası",
           "category": "Restoran",
@@ -21775,6 +23062,136 @@
           "latitude": 38.7185081,
           "longitude": 35.4883869,
           "mapsUrl": "https://maps.google.com/?cid=12154685150443617114",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-enisogullari-pide-salonu",
+          "name": "Enisoğulları Pide Salonu",
+          "category": "Orta Doğu Restoranı",
+          "tags": [
+            "Lahmacun & Pide"
+          ],
+          "rating": 4.3,
+          "reviewCount": 114,
+          "address": "Karaözü, Karaözü Köyü Yolu, 38820 Sarıoğlan/Kayseri",
+          "phone": "+90 352 814 65 20",
+          "priceLevel": 2,
+          "latitude": 39.192279,
+          "longitude": 35.934535,
+          "mapsUrl": "https://maps.google.com/?cid=820318949393120887",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-kader-kebap-pide-ve-et-lokantasi",
+          "name": "Kader Kebap Pide Ve Et Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Kebap",
+            "Lahmacun & Pide",
+            "Et"
+          ],
+          "rating": 4.3,
+          "reviewCount": 112,
+          "address": "Yeni, Atatürk Bulv. Bülent Ecevit Cad. No:1, 38750 Felahiye/Kayseri",
+          "phone": "+90 352 791 25 64",
+          "priceLevel": 2,
+          "latitude": 39.090368999999995,
+          "longitude": 35.569749699999996,
+          "mapsUrl": "https://maps.google.com/?cid=10678182462210978581",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-ses-et-restaurant",
+          "name": "SES ET RESTAURANT",
+          "category": "Restoran",
+          "tags": [
+            "Et"
+          ],
+          "rating": 4.3,
+          "reviewCount": 103,
+          "address": "Kayseri Pınarbaşı yolu, Solaklar, 1896 sokak bölge trafik karşısı No:8, 38700 Pınarbaşı/Kayseri",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 38.692042,
+          "longitude": 36.3575594,
+          "mapsUrl": "https://maps.google.com/?cid=9392054958255664857",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-cobanoglu-alabalik-et-lokantasi",
+          "name": "Çobanoğlu Alabalık & Et Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Balık",
+            "Et",
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 49,
+          "address": "Yukarıbeyçayırı Mahallesi Degirmen dere, sok, Yukarıbeyçayırı, Sarız Yolu, 38700 Pınarbaşı/Kayseri",
+          "phone": "+90 533 493 10 66",
+          "priceLevel": 2,
+          "latitude": 38.6081457,
+          "longitude": 36.4328633,
+          "mapsUrl": "https://maps.google.com/?cid=7144010566024915957",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-karasahin-lokantasi",
+          "name": "Karaşahin Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 27,
+          "address": "Cumhuriyet, Belediye pasajı no 2, 38940 Tomarza/Kayseri",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 38.4475767,
+          "longitude": 35.80215460000001,
+          "mapsUrl": "https://maps.google.com/?cid=16037246780998656650",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-karatas-pide-firini",
+          "name": "Karataş Pide Fırını",
+          "category": "Orta Doğu Restoranı",
+          "tags": [
+            "Lahmacun & Pide"
+          ],
+          "rating": 4.3,
+          "reviewCount": 16,
+          "address": "Cumhuriyet, Hamam Sk. No:2, 38900 Tomarza/Kayseri",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 38.447188000000004,
+          "longitude": 35.802717799999996,
+          "mapsUrl": "https://maps.google.com/?cid=6072579872398324132",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "kayseri-fatos-ablanin-yeri-kahvalti-evi",
+          "name": "Fatoş Ablanın Yeri Kahvaltı Evi",
+          "category": "Kahvaltı restoranı",
+          "tags": [
+            "Kahvaltı"
+          ],
+          "rating": 4.3,
+          "reviewCount": 11,
+          "address": "Adana karayolu Bahçelievler Mah küme evler bayraklı parkı no:9/a, Bahçelievler, 38560 İncesu/Kayseri",
+          "phone": "+90 532 542 24 40",
+          "priceLevel": null,
+          "latitude": 38.6274456,
+          "longitude": 35.191721,
+          "mapsUrl": "https://maps.google.com/?cid=18067935080026486580",
           "photoUrl": null,
           "note": null
         }
@@ -27244,6 +28661,24 @@
           "note": null
         },
         {
+          "id": "trabzon-bi-corba",
+          "name": "Bi Çorba",
+          "category": "Restoran",
+          "tags": [
+            "Çorba"
+          ],
+          "rating": 5.0,
+          "reviewCount": 32,
+          "address": "Sulaklı, Menekşe Sk., 61830 Of/Trabzon",
+          "phone": "+90 542 524 20 54",
+          "priceLevel": 2,
+          "latitude": 40.9454644,
+          "longitude": 40.2674387,
+          "mapsUrl": "https://maps.google.com/?cid=9653733145053810197",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "trabzon-lezzet-sokagi-akif-usta",
           "name": "Lezzet Sokağı Akif USTA",
           "category": "Restoran",
@@ -27258,6 +28693,78 @@
           "latitude": 40.994975,
           "longitude": 39.6734708,
           "mapsUrl": "https://maps.google.com/?cid=16914523946815299524",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-tonya-cennet-bahcesi",
+          "name": "Tonya Cennet Bahçesi",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 5.0,
+          "reviewCount": 23,
+          "address": "Canik, Karşular, dere yürüyüş yolu no:30, 61500 Tonya/Trabzon",
+          "phone": "+90 546 604 10 61",
+          "priceLevel": null,
+          "latitude": 40.880877,
+          "longitude": 39.292018299999995,
+          "mapsUrl": "https://maps.google.com/?cid=8266243572643276402",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-neza-surmene-kavurmacisi-ev-yemekleri",
+          "name": "Neza Sürmene Kavurmacısı & Ev Yemekleri",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 5.0,
+          "reviewCount": 17,
+          "address": "Çarşı, Saadettin Bey Cd. 5A, 61600 Sürmene/Trabzon",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 40.91311400000001,
+          "longitude": 40.1136872,
+          "mapsUrl": "https://maps.google.com/?cid=6377323304252356742",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-ceset-ahmet-in-yeri-kadiralak",
+          "name": "Ceset Ahmet'in Yeri Kadıralak",
+          "category": "Aile restoranı",
+          "tags": [
+            "Aile restoranı"
+          ],
+          "rating": 5.0,
+          "reviewCount": 13,
+          "address": "Karşular, 61500 Tonya/Trabzon",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 40.8822464,
+          "longitude": 39.3280564,
+          "mapsUrl": "https://maps.google.com/?cid=6857014662163224754",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-sakallioglu-pide-salonu",
+          "name": "Sakallıoğlu Pide Salonu",
+          "category": "Orta Doğu Restoranı",
+          "tags": [
+            "Lahmacun & Pide"
+          ],
+          "rating": 5.0,
+          "reviewCount": 6,
+          "address": "Kireç, 61670 Şalpazarı/Trabzon",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 40.9420005,
+          "longitude": 39.1931002,
+          "mapsUrl": "https://maps.google.com/?cid=4260512857303462725",
           "photoUrl": null,
           "note": null
         },
@@ -27334,6 +28841,24 @@
           "note": null
         },
         {
+          "id": "trabzon-cureogullari-vakfikebir-ekmegi",
+          "name": "Cüreoğulları Vakfıkebir Ekmeği",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.9,
+          "reviewCount": 28,
+          "address": "Kemaliye, Hacı Ziya Habiboğlu Cd. No:12, 61400 Vakfıkebir/Trabzon",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 41.0476123,
+          "longitude": 39.2786541,
+          "mapsUrl": "https://maps.google.com/?cid=6023745181639495115",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "trabzon-adanali-hasan-kolcuoglu-trabzon",
           "name": "Adanalı Hasan Kolcuoğlu Trabzon",
           "category": "Restoran",
@@ -27366,6 +28891,43 @@
           "latitude": 40.93943170000001,
           "longitude": 40.0562417,
           "mapsUrl": "https://maps.google.com/?cid=2608271852583351738",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-ahm-et-kasap-mangal",
+          "name": "Ahm-et Kasap & Mangal",
+          "category": "Restoran",
+          "tags": [
+            "Et"
+          ],
+          "rating": 4.8,
+          "reviewCount": 424,
+          "address": "Mataracı, Zigana Cad No:548A, 61750 Maçka/Trabzon",
+          "phone": "+90 547 457 61 61",
+          "priceLevel": 2,
+          "latitude": 40.8406455,
+          "longitude": 39.6404114,
+          "mapsUrl": "https://maps.google.com/?cid=11181495218757175353",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-sumela-et-balik-kofte-hotel-restaurant",
+          "name": "Sümela Et Balık Köfte Hotel Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Köfte",
+            "Balık"
+          ],
+          "rating": 4.8,
+          "reviewCount": 410,
+          "address": "Öğütlü, Trabzon Gümüşhane Yolu No:19, 61770 Maçka/Trabzon",
+          "phone": "+90 507 363 12 80",
+          "priceLevel": 2,
+          "latitude": 40.8733137,
+          "longitude": 39.684122099999996,
+          "mapsUrl": "https://maps.google.com/?cid=3467723122484597860",
           "photoUrl": null,
           "note": null
         },
@@ -27424,6 +28986,24 @@
           "note": null
         },
         {
+          "id": "trabzon-sefdumanoglu-golbasi-restaurant",
+          "name": "Şefdumanoğlu Gölbaşı Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 122,
+          "address": "Orta, handonez küme evleri no 10, 61300 Düzköy/Trabzon",
+          "phone": "+90 536 918 21 63",
+          "priceLevel": 2,
+          "latitude": 40.835698199999996,
+          "longitude": 39.4212835,
+          "mapsUrl": "https://maps.google.com/?cid=5351289004170228673",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "trabzon-has-katik-doner",
           "name": "Has Katık Döner",
           "category": "Restoran",
@@ -27438,6 +29018,42 @@
           "latitude": 40.9608463,
           "longitude": 39.9719489,
           "mapsUrl": "https://maps.google.com/?cid=12183588077385377827",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-haci-sekerin-yeri",
+          "name": "Hacı Şekerin Yeri",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.8,
+          "reviewCount": 64,
+          "address": "Çayırbağı, Unnamed Road, Çayırbağı Zeliha, 61380 Düzköy/Trabzon",
+          "phone": "+90 530 929 26 39",
+          "priceLevel": null,
+          "latitude": 40.8057108,
+          "longitude": 39.323856299999996,
+          "mapsUrl": "https://maps.google.com/?cid=11088847579163770902",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-yilmaz-usta-doner-ve-yemek-salonu",
+          "name": "Yılmaz Usta Döner ve Yemek Salonu",
+          "category": "Restoran",
+          "tags": [
+            "Döner"
+          ],
+          "rating": 4.8,
+          "reviewCount": 25,
+          "address": "Sulaklı, Atatürk Blv. No:10B, 61830 Of/Trabzon",
+          "phone": "+90 462 771 58 54",
+          "priceLevel": 2,
+          "latitude": 40.947709499999995,
+          "longitude": 40.268481099999995,
+          "mapsUrl": "https://maps.google.com/?cid=13303130252479457535",
           "photoUrl": null,
           "note": null
         },
@@ -27532,6 +29148,42 @@
           "note": null
         },
         {
+          "id": "trabzon-abalu-osmanin-yeri",
+          "name": "Abalu Osmanın Yeri",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 602,
+          "address": "Doğancı, 61670 Şalpazarı/Trabzon",
+          "phone": "+90 462 896 79 31",
+          "priceLevel": 2,
+          "latitude": 40.8892285,
+          "longitude": 39.206486600000005,
+          "mapsUrl": "https://maps.google.com/?cid=5945565434366335275",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-maide-trabzon",
+          "name": "Maide Trabzon",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 601,
+          "address": "Sancak, Adnan Kahveci Cd. No:22/3 A, 61250 Yomra/Trabzon",
+          "phone": "+90 530 840 06 61",
+          "priceLevel": 2,
+          "latitude": 40.956871799999995,
+          "longitude": 39.8536377,
+          "mapsUrl": "https://maps.google.com/?cid=13340031559860630619",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "trabzon-kalyoncu-kebap-restaurant",
           "name": "Kalyoncu Kebap & Restaurant",
           "category": "Restoran",
@@ -27546,6 +29198,60 @@
           "latitude": 41.005431699999995,
           "longitude": 39.7264941,
           "mapsUrl": "https://maps.google.com/?cid=2999501789937083717",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-uzungol-cay-evi",
+          "name": "UZUNGÖL ÇAY EVİ",
+          "category": "Aile restoranı",
+          "tags": [
+            "Aile restoranı"
+          ],
+          "rating": 4.7,
+          "reviewCount": 342,
+          "address": "Uzungöl, İnönü Cd. No:92/A, 61940 Çaykara/Trabzon",
+          "phone": "+90 549 553 41 61",
+          "priceLevel": null,
+          "latitude": 40.6196421,
+          "longitude": 40.2821266,
+          "mapsUrl": "https://maps.google.com/?cid=8586102819373477777",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-izzet-baba",
+          "name": "İzzet Baba",
+          "category": "Aile restoranı",
+          "tags": [
+            "Aile restoranı"
+          ],
+          "rating": 4.7,
+          "reviewCount": 320,
+          "address": "Orta, Hasan Tahsin Kırali Cd. No:68, 61600 Sürmene/Trabzon",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 40.9113884,
+          "longitude": 40.1285228,
+          "mapsUrl": "https://maps.google.com/?cid=1632203646662589728",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-antepli-ejder-usta",
+          "name": "Antepli Ejder Usta",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 163,
+          "address": "Gürsel, Sancak, Hükümet Cd. No: 72\\D, 61250 Yomra/Trabzon",
+          "phone": "+90 462 999 10 45",
+          "priceLevel": 2,
+          "latitude": 40.955892899999995,
+          "longitude": 39.860667299999996,
+          "mapsUrl": "https://maps.google.com/?cid=5762500623880620692",
           "photoUrl": null,
           "note": null
         },
@@ -27586,6 +29292,24 @@
           "note": null
         },
         {
+          "id": "trabzon-korza-restoran",
+          "name": "Korza Restoran",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.7,
+          "reviewCount": 138,
+          "address": "Orta, Atatürk Caddesi No:61, 61390 Düzköy/Trabzon",
+          "phone": "+90 536 022 23 99",
+          "priceLevel": 2,
+          "latitude": 40.8738476,
+          "longitude": 39.4261676,
+          "mapsUrl": "https://maps.google.com/?cid=10869399267659720874",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "trabzon-sevgi-mutfagi",
           "name": "Sevgi Mutfağı",
           "category": "Restoran",
@@ -27600,6 +29324,24 @@
           "latitude": 41.002714399999995,
           "longitude": 39.7025438,
           "mapsUrl": "https://maps.google.com/?cid=14510444152215297898",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-gurgendag-yaylasi-zirve-lokantasi",
+          "name": "Gürgendağ Yaylası Zirve Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.7,
+          "reviewCount": 99,
+          "address": "Unnamed Road, Gürgendağ, 61390 Düzköy/Trabzon",
+          "phone": "+90 536 258 29 13",
+          "priceLevel": null,
+          "latitude": 40.824656499999996,
+          "longitude": 39.4063589,
+          "mapsUrl": "https://maps.google.com/?cid=622132914290480899",
           "photoUrl": null,
           "note": null
         },
@@ -27622,6 +29364,24 @@
           "note": null
         },
         {
+          "id": "trabzon-atlantik-ocakbasi",
+          "name": "Atlantik Ocakbaşı",
+          "category": "Restoran",
+          "tags": [
+            "Kebap"
+          ],
+          "rating": 4.6,
+          "reviewCount": 3023,
+          "address": "Kaşüstü, Devlet Karayolu Caddesi No: 40, 61290 Yomra/Trabzon",
+          "phone": "+90 462 411 01 01",
+          "priceLevel": null,
+          "latitude": 40.9632274,
+          "longitude": 39.839134,
+          "mapsUrl": "https://maps.google.com/?cid=7250113095856083418",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "trabzon-yoroz-kofte-balik-tir-dinlenme-tesisleri",
           "name": "YOROZ KÕFTE BALIK TIR DİNLENME TESİSLERİ",
           "category": "Restoran",
@@ -27636,6 +29396,24 @@
           "latitude": 41.1052158,
           "longitude": 39.425094,
           "mapsUrl": "https://maps.google.com/?cid=1556463454446159888",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-vadi-et-mangal-restoran",
+          "name": "Vadi Et&Mangal Restoran",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 418,
+          "address": "Işıklı, 61940 Çaykara/Trabzon",
+          "phone": null,
+          "priceLevel": 2,
+          "latitude": 40.7161896,
+          "longitude": 40.2325558,
+          "mapsUrl": "https://maps.google.com/?cid=11675545473259943745",
           "photoUrl": null,
           "note": null
         },
@@ -27713,6 +29491,24 @@
           "note": null
         },
         {
+          "id": "trabzon-gokturk-restorant",
+          "name": "GÖKTÜRK RESTORANT",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 78,
+          "address": "Çal Camili, şehit felatun caddesi no:2, 61390 Düzköy/Trabzon",
+          "phone": null,
+          "priceLevel": 1,
+          "latitude": 40.8654211,
+          "longitude": 39.3796027,
+          "mapsUrl": "https://maps.google.com/?cid=8669682720294537593",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "trabzon-usta-eller-doner",
           "name": "Usta Eller Döner",
           "category": "Türk restoranı",
@@ -27727,6 +29523,24 @@
           "latitude": 40.9885465,
           "longitude": 39.7278595,
           "mapsUrl": "https://maps.google.com/?cid=11008132211988026034",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-eyup-un-hani",
+          "name": "Eyüp'ün Hanı",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 51,
+          "address": "Taflancık, 61450 Hayrat/Trabzon",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 40.8321348,
+          "longitude": 40.3882105,
+          "mapsUrl": "https://maps.google.com/?cid=2540890673865021175",
           "photoUrl": null,
           "note": null
         },
@@ -27763,6 +29577,42 @@
           "latitude": 41.005818399999995,
           "longitude": 39.7294596,
           "mapsUrl": "https://maps.google.com/?cid=13797370288982629427",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-ziyafet-cig-kofte-hayrat",
+          "name": "Ziyafet Çiğ Köfte Hayrat",
+          "category": "Türk restoranı",
+          "tags": [
+            "Köfte"
+          ],
+          "rating": 4.6,
+          "reviewCount": 11,
+          "address": "Merkez, Dere Cd. No:20/A, 61140 Hayrat/Trabzon",
+          "phone": "+90 555 157 98 48",
+          "priceLevel": null,
+          "latitude": 40.8894995,
+          "longitude": 40.3678588,
+          "mapsUrl": "https://maps.google.com/?cid=12507825538132294387",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-koprubasi-merkez-ekmek-firini",
+          "name": "Köprübaşı Merkez Ekmek Fırını",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.6,
+          "reviewCount": 5,
+          "address": "Akpınar, 61630 Köprübaşı/Trabzon, Türkiye",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 40.80809,
+          "longitude": 40.123709999999996,
+          "mapsUrl": "https://maps.google.com/?cid=2586996273352888229",
           "photoUrl": null,
           "note": null
         },
@@ -27817,6 +29667,78 @@
           "latitude": 40.9589353,
           "longitude": 39.8517352,
           "mapsUrl": "https://maps.google.com/?cid=4260862264704378069",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-chef-ulubatli-steak-enver-usta",
+          "name": "Chef Ulubatlı Steak Enver Usta",
+          "category": "Restoran",
+          "tags": [
+            "Et"
+          ],
+          "rating": 4.5,
+          "reviewCount": 1759,
+          "address": "Kaşüstü, Vali Recep Yazıcıoğlu Cd, 61290 Yomra/Trabzon",
+          "phone": "+90 532 691 80 61",
+          "priceLevel": null,
+          "latitude": 40.963653199999996,
+          "longitude": 39.8378684,
+          "mapsUrl": "https://maps.google.com/?cid=11842983746060550980",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-kayadibi-sakli-bahce-restoran",
+          "name": "Kayadibi Saklı Bahçe Restoran",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.5,
+          "reviewCount": 1152,
+          "address": "Yeşilyurt, 61750 Maçka/Trabzon",
+          "phone": "+90 546 807 00 61",
+          "priceLevel": 2,
+          "latitude": 40.8189835,
+          "longitude": 39.6112129,
+          "mapsUrl": "https://maps.google.com/?cid=10759316161198299210",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-zigana-kral-sofrasi-yusuf-un-yeri",
+          "name": "Zigana Kral Sofrası ( YUSUF'un YERİ )",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.5,
+          "reviewCount": 752,
+          "address": "Başar, Trabzon Gümüşhane Yolu No: 267, 61750 Maçka/Trabzon",
+          "phone": "+90 538 700 93 46",
+          "priceLevel": 2,
+          "latitude": 40.7084677,
+          "longitude": 39.4962143,
+          "mapsUrl": "https://maps.google.com/?cid=4245829549122628511",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-derekenari",
+          "name": "Derekenarı مطعم",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.5,
+          "reviewCount": 268,
+          "address": "Şişli, 61830 Hayrat/Trabzon",
+          "phone": "+90 462 783 61 96",
+          "priceLevel": 2,
+          "latitude": 40.9155225,
+          "longitude": 40.348835,
+          "mapsUrl": "https://maps.google.com/?cid=6883616480231238318",
           "photoUrl": null,
           "note": null
         },
@@ -27929,6 +29851,42 @@
           "note": null
         },
         {
+          "id": "trabzon-muhcuoglu-ekmek-firini",
+          "name": "Muhcuoğlu Ekmek Fırını",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.5,
+          "reviewCount": 26,
+          "address": "Kireç, 61670 Şalpazarı/Trabzon, Türkiye",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 40.9421094,
+          "longitude": 39.1930075,
+          "mapsUrl": "https://maps.google.com/?cid=9350090156039623980",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-kaya-restaurant",
+          "name": "Kaya Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.5,
+          "reviewCount": 24,
+          "address": "Hamzalı, Geçitli Köyü Yolu, 61450 Hayrat/Trabzon",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 40.8463911,
+          "longitude": 40.3632041,
+          "mapsUrl": "https://maps.google.com/?cid=12407364477041353578",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "trabzon-genc-esnaf",
           "name": "Genç Esnaf",
           "category": "Restoran",
@@ -27979,6 +29937,60 @@
           "latitude": 41.002108799999995,
           "longitude": 39.5651808,
           "mapsUrl": "https://maps.google.com/?cid=13715610935714260625",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-isikli-kale-alabalik-motel",
+          "name": "Işıklı Kale Alabalık & Motel",
+          "category": "Restoran",
+          "tags": [
+            "Balık"
+          ],
+          "rating": 4.4,
+          "reviewCount": 488,
+          "address": "Işıklı, 61940 Çaykara/Trabzon",
+          "phone": "+90 546 900 97 20",
+          "priceLevel": null,
+          "latitude": 40.7443905,
+          "longitude": 40.2484451,
+          "mapsUrl": "https://maps.google.com/?cid=15917633366783459187",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-lezzet-restaurant",
+          "name": "Lezzet Restaurant",
+          "category": "Restoran",
+          "tags": [
+            "Et"
+          ],
+          "rating": 4.4,
+          "reviewCount": 312,
+          "address": "Unnamed Road, Demirkapı/, Işıklı, 61940 Çaykara/Trabzon",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 40.5669148,
+          "longitude": 40.4070679,
+          "mapsUrl": "https://maps.google.com/?cid=5738247501716935272",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-kozdegirmen-restaurant-yomra",
+          "name": "Kozdeğirmen Restaurant Yomra",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.4,
+          "reviewCount": 292,
+          "address": "Kömürcüler Köyü Yeni Camii yanı, Kömürcü, 61250 Yomra/Trabzon",
+          "phone": "+90 530 248 58 26",
+          "priceLevel": 2,
+          "latitude": 40.90405700000001,
+          "longitude": 39.8643235,
+          "mapsUrl": "https://maps.google.com/?cid=6559260992374715091",
           "photoUrl": null,
           "note": null
         },
@@ -28110,6 +30122,24 @@
           "note": null
         },
         {
+          "id": "trabzon-macuka-restoran-isletmeciligi-anonim-sirketi",
+          "name": "Maçuka Restoran İşletmeciliği Anonim Şirketi",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.3,
+          "reviewCount": 1355,
+          "address": "Mataracı, çarşı küme evler No;6/2, 61750 Maçka/Trabzon",
+          "phone": "+90 533 433 66 50",
+          "priceLevel": 2,
+          "latitude": 40.84229870000001,
+          "longitude": 39.641768899999995,
+          "mapsUrl": "https://maps.google.com/?cid=12039753137108130322",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "trabzon-kalamis-restoran",
           "name": "Kalamış Restoran",
           "category": "Restoran",
@@ -28182,6 +30212,24 @@
           "note": null
         },
         {
+          "id": "trabzon-konak-pide-salonu",
+          "name": "Konak Pide Salonu",
+          "category": "Orta Doğu Restoranı",
+          "tags": [
+            "Lahmacun & Pide"
+          ],
+          "rating": 4.3,
+          "reviewCount": 104,
+          "address": "Kaleönü, Özkürtün Cad No:21/A, 61500 Tonya/Trabzon",
+          "phone": "+90 462 881 36 27",
+          "priceLevel": 2,
+          "latitude": 40.8845449,
+          "longitude": 39.2905066,
+          "mapsUrl": "https://maps.google.com/?cid=13878497603498633568",
+          "photoUrl": null,
+          "note": null
+        },
+        {
           "id": "trabzon-besikduzu-mavi-kiyi-kofte-balik-ersin-usta",
           "name": "Beşikdüzü Mavi Kıyı Köfte Balık (Ersin Usta)",
           "category": "Restoran",
@@ -28215,6 +30263,42 @@
           "latitude": 40.9539584,
           "longitude": 39.9331546,
           "mapsUrl": "https://maps.google.com/?cid=7874936319741206657",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-bahtiyar-in-yeri",
+          "name": "Bahtiyar'ın Yeri",
+          "category": "Restoran",
+          "tags": [
+            "Lokanta"
+          ],
+          "rating": 4.3,
+          "reviewCount": 23,
+          "address": "Kalınçam, 61500 Tonya/Trabzon",
+          "phone": null,
+          "priceLevel": null,
+          "latitude": 40.78693150000001,
+          "longitude": 39.2660275,
+          "mapsUrl": "https://maps.google.com/?cid=16837530103408783877",
+          "photoUrl": null,
+          "note": null
+        },
+        {
+          "id": "trabzon-merkez-lokantasi",
+          "name": "Merkez Lokantası",
+          "category": "Restoran",
+          "tags": [
+            "Sulu Yemek"
+          ],
+          "rating": 4.3,
+          "reviewCount": 19,
+          "address": "Kemaliye, 14 Şubat Kurtuluş Cd. No:54, 61400 Vakfıkebir/Trabzon",
+          "phone": "+90 462 841 30 01",
+          "priceLevel": 2,
+          "latitude": 41.0471855,
+          "longitude": 39.2786687,
+          "mapsUrl": "https://maps.google.com/?cid=17638148714754916324",
           "photoUrl": null,
           "note": null
         }
